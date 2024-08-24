@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Name=ConnectionStrings:BaseReservation" Microsoft.EntityFrameworkCore.SqlServer -d -c BaseReservationContext --context-dir Data -o Models -p ../BaseReservation.Infrastructure

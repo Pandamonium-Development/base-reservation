@@ -1,0 +1,1 @@
+Data Source={server};Initial Catalog={DataBase};Persist Security Info=True;User ID={User};Password={Password};TrustServerCertificate=True
