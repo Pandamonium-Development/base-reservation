@@ -12,5 +12,5 @@ public interface IRepositoryTokenMaster
 
     Task<TokenMaster?> FindByTokenAsync(string token);
 
-    Task<bool> ExistsTokenMaster(string token);
+    Task<bool> ExistsTokenMasterAsync(string token);
 }

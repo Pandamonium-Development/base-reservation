@@ -7,6 +7,11 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryReservaPregunta(BaseReservationContext context) : IRepositoryReservaPregunta
 {
+    /// <summary>
+    /// Get reservation's question with specific id
+    /// </summary>
+    /// <param name="id">Id to look for</param>
+    /// <returns>ReservaPregunta if founded, it not, false</returns>
     public async Task<ReservaPregunta?> FindByIdAsync(int id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Producto))!.FindPrimaryKey()!.Properties[0];
@@ -16,8 +21,11 @@ public class RepositoryReservaPregunta(BaseReservationContext context) : IReposi
             .FirstOrDefaultAsync(a => EF.Property<short>(a, keyProperty.Name) == id);
     }
 
-
-    public async Task<ICollection<ReservaPregunta>> ListAsync()
+    /// <summary>
+    /// Get list of all questions reservation
+    /// </summary>
+    /// <returns>ICollection of ReservaPregunta</returns>
+    public async Task<ICollection<ReservaPregunta>> ListAllAsync()
     {
         var collection = await context.Set<ReservaPregunta>()
             .Include(a => a.IdReservaNavigation)

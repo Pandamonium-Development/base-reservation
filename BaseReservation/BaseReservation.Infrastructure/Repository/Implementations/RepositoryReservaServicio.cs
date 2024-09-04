@@ -2,17 +2,22 @@
 using BaseReservation.Infrastructure.Models;
 using BaseReservation.Infrastructure.Repository.Interfaces;
 using Azure;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Repository.Implementations;
 
-public class RepositoryReservaServicio(BaseReservationContext context) : IRepositoryReservaServicio
+public class RepositoryReservaServicio(BaseReservationContext context) : IRepositoryDetalleReserva
 {
-    public async Task<bool> CreateReservaServicioAsync(int idReserva, IEnumerable<ReservaServicio> reservaServicios)
+    /// <summary>
+    /// Create multiple details reservation
+    /// </summary>
+    /// <param name="idReserva">Reservation id</param>
+    /// <param name="detallesReserva">List of detail reservation</param>
+    /// <returns>True if were added, if not, false</returns>
+    public async Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<DetalleReserva> detallesReserva)
     {
         var result = true;
-        var reservasExistentes = await GetServiciosByReservaAsync(idReserva);
+        var reservasExistentes = await ListAllByReservaAsync(idReserva);
 
         var executionStrategy = context.Database.CreateExecutionStrategy();
 
@@ -21,7 +26,7 @@ public class RepositoryReservaServicio(BaseReservationContext context) : IReposi
             using var transaccion = await context.Database.BeginTransactionAsync();
             try
             {
-                context.ReservaServicios.RemoveRange(reservasExistentes);
+                context.DetalleReservas.RemoveRange(reservasExistentes);
                 var rowsAffected = await context.SaveChangesAsync();
 
                 if (rowsAffected == 0 && reservasExistentes.Count != 0)
@@ -31,7 +36,7 @@ public class RepositoryReservaServicio(BaseReservationContext context) : IReposi
                 }
                 else
                 {
-                    context.ReservaServicios.AddRange(reservaServicios);
+                    context.DetalleReservas.AddRange(detallesReserva);
                     rowsAffected = await context.SaveChangesAsync();
 
                     if (rowsAffected == 0)
@@ -56,18 +61,28 @@ public class RepositoryReservaServicio(BaseReservationContext context) : IReposi
 
     }
 
-    public async Task<ReservaServicio?> GetReservaServicioByIdAsync(int id)
+    /// <summary>
+    /// Get detail reservation with specific id
+    /// </summary>
+    /// <param name="id">Id to look for</param>
+    /// <returns>DetalleReserva if founded, otherwise null</returns>
+    public async Task<DetalleReserva?> FindByIdAsync(int id)
     {
-        var keyProperty = context.Model.FindEntityType(typeof(ReservaServicio))!.FindPrimaryKey()!.Properties[0];
-        return await context.Set<ReservaServicio>()
+        var keyProperty = context.Model.FindEntityType(typeof(DetalleReserva))!.FindPrimaryKey()!.Properties[0];
+        return await context.Set<DetalleReserva>()
                 .Include(m => m.IdReservaNavigation)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(a => EF.Property<short>(a, keyProperty.Name) == id);
     }
 
-    public async Task<ICollection<ReservaServicio>> GetServiciosByReservaAsync(int idReserva)
+    /// <summary>
+    /// Get list of all details reservation
+    /// </summary>
+    /// <param name="idReserva">Reservation id</param>
+    /// <returns>ICollection of DetalleReserva</returns>
+    public async Task<ICollection<DetalleReserva>> ListAllByReservaAsync(int idReserva)
     {
-        var collection = await context.Set<ReservaServicio>()
+        var collection = await context.Set<DetalleReserva>()
          .Include(m => m.IdServicioNavigation)
          .AsNoTracking()
          .Where(m => m.IdReserva == idReserva)

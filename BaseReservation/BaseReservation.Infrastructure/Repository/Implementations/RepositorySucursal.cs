@@ -7,15 +7,24 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositorySucursal(BaseReservationContext context) : IRepositorySucursal
 {
+    /// <summary>
+    /// Create branch
+    /// </summary>
+    /// <param name="sucursal">Branch model to be added</param>
+    /// <returns>Sucursal</returns>
     public async Task<Sucursal> CreateSucursalAsync(Sucursal sucursal)
     {
         var result = context.Sucursals.Add(sucursal);
-        //aplica en la BD
         await context.SaveChangesAsync();
-        //Refleja la entidad
+
         return result.Entity;
     }
 
+    /// <summary>
+    /// Update branch
+    /// </summary>
+    /// <param name="sucursal">Branch model to be updated</param>
+    /// <returns>Sucursal</returns>
     public async Task<Sucursal> UpdateSucursalAsync(Sucursal sucursal)
     {
         context.Sucursals.Update(sucursal);
@@ -26,6 +35,11 @@ public class RepositorySucursal(BaseReservationContext context) : IRepositorySuc
         return response!;
     }
 
+    /// <summary>
+    /// Get branch with specific id
+    /// </summary>
+    /// <param name="id">Id to look for</param>
+    /// <returns>Sucursal if founded, otherwise null</returns>
     public async Task<Sucursal?> FindByIdAsync(byte id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Sucursal))!.FindPrimaryKey()!.Properties[0];
@@ -42,7 +56,12 @@ public class RepositorySucursal(BaseReservationContext context) : IRepositorySuc
             .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id);
     }
 
-    public async Task<bool> ExisteSucursal(byte id)
+    /// <summary>
+    /// Validate if exists branch with specific id
+    /// </summary>
+    /// <param name="id">Id to look for</param>
+    /// <returns>True if exists, if not, false</returns>
+    public async Task<bool> ExistsSucursalAsync(byte id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Sucursal))!.FindPrimaryKey()!.Properties[0];
 
@@ -51,7 +70,11 @@ public class RepositorySucursal(BaseReservationContext context) : IRepositorySuc
             .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id) != null;
     }
 
-    public async Task<ICollection<Sucursal>> ListAsync()
+    /// <summary>
+    /// Get list of all branches
+    /// </summary>
+    /// <returns>ICollection of Sucursal</returns>
+    public async Task<ICollection<Sucursal>> ListAllAsync()
     {
         var collection = await context.Set<Sucursal>()
             .AsNoTracking()
@@ -63,7 +86,12 @@ public class RepositorySucursal(BaseReservationContext context) : IRepositorySuc
         return collection;
     }
 
-    public async Task<ICollection<Sucursal>> ListAsync(string rol)
+    /// <summary>
+    /// Get list of all branches by role
+    /// </summary>
+    /// <param name="rol">Role to look for</param>
+    /// <returns>ICollection of Sucursal</returns>
+    public async Task<ICollection<Sucursal>> ListAllByRoleAsync(string rol)
     {
         var usuarioSucursales = await context.Set<UsuarioSucursal>().AsNoTracking()
                .Include(m => m.IdUsuarioNavigation)

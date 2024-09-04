@@ -9,7 +9,7 @@ public interface IRepositorySucursalHorario
 
     Task<SucursalHorario?> FindByIdAsync(short id);
 
-    Task<SucursalHorario?> FindByDiaAsync(byte idSucursal, DiaSemana dia);
+    Task<SucursalHorario?> FindByDiaSemanaAsync(byte idSucursal, DiaSemana dia);
 
     Task<bool> CreateSucursalHorariosAsync(byte idSucursal, IEnumerable<SucursalHorario> sucursalHorarios);
 }

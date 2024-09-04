@@ -4,7 +4,7 @@ namespace BaseReservation.Infrastructure.Repository.Interfaces;
 
 public interface IRepositoryServicio
 {
-    Task<ICollection<Servicio>> ListAsync();
+    Task<ICollection<Servicio>> ListAllAsync();
 
     Task<Servicio?> FindByIdAsync(byte id);
 

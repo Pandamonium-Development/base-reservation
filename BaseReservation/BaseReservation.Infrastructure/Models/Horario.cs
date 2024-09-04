@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BaseReservation.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Models;
@@ -12,7 +13,7 @@ public partial class Horario
     [Key]
     public short Id { get; set; }
 
-    public string Dia { get; set; } = null!;
+    public DiaSemana Dia { get; set; }
 
     public TimeOnly HoraInicio { get; set; }
 
