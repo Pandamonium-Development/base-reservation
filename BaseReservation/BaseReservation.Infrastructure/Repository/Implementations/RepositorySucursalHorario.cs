@@ -9,10 +9,16 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositorySucursalHorario(BaseReservationContext context) : IRepositorySucursalHorario
 {
+    /// <summary>
+    /// Create multiple branch schedule
+    /// </summary>
+    /// <param name="idSucursal">Branch id</param>
+    /// <param name="sucursalHorarios">List of branch schedules</param>
+    /// <returns>True if all were added, if not, false</returns>
     public async Task<bool> CreateSucursalHorariosAsync(byte idSucursal, IEnumerable<SucursalHorario> sucursalHorarios)
     {
         var result = true;
-        var sucursalHorariosExistentes = await GetHorariosBySucursalAsync(idSucursal);
+        var sucursalHorariosExistentes = await ListAllBySucursalAsync(idSucursal);
 
         var executionStrategy = context.Database.CreateExecutionStrategy();
 
@@ -21,7 +27,7 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
             using var transaccion = await context.Database.BeginTransactionAsync();
             try
             {
-                RemoverBloqueos(sucursalHorariosExistentes.Select(m => m.SucursalHorarioBloqueos));
+                RemoveBlocks(sucursalHorariosExistentes.Select(m => m.SucursalHorarioBloqueos));
                 context.SucursalHorarios.RemoveRange(sucursalHorariosExistentes);
                 var rowsAffected = await context.SaveChangesAsync();
 
@@ -32,7 +38,7 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
                 }
                 else
                 {
-                    ReordenarBloqueos(sucursalHorariosExistentes, sucursalHorarios);
+                    ReorganizeBlocks(sucursalHorariosExistentes, sucursalHorarios);
                     context.SucursalHorarios.AddRange(sucursalHorarios);
                     rowsAffected = await context.SaveChangesAsync();
 
@@ -57,7 +63,12 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
         return result;
     }
 
-    public async Task<ICollection<SucursalHorario>> GetHorariosBySucursalAsync(byte idSucursal)
+    /// <summary>
+    /// Get list of all branch schedules by branch
+    /// </summary>
+    /// <param name="idSucursal">Branch id</param>
+    /// <returns>ICollection of SucursalHorario</returns>
+    public async Task<ICollection<SucursalHorario>> ListAllBySucursalAsync(byte idSucursal)
     {
         var collection = await context.Set<SucursalHorario>()
            .AsNoTracking()
@@ -68,7 +79,13 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
         return collection;
     }
 
-    public async Task<SucursalHorario?> GetHorarioBySucursalByDiaAsync(byte idSucursal, DiaSemana dia)
+    /// <summary>
+    /// Get branch schedule by specific day of week
+    /// </summary>
+    /// <param name="idSucursal">Branch id</param>
+    /// <param name="dia">Day of week</param>
+    /// <returns>SucursalHorario if found, otherwise null</returns>
+    public async Task<SucursalHorario?> FindByDiaSemanaAsync(byte idSucursal, DiaSemana dia)
     {
         var horarioSucursal = await context.Set<SucursalHorario>()
           .AsNoTracking()
@@ -78,7 +95,12 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
         return horarioSucursal;
     }
 
-    public async Task<SucursalHorario?> GetSucursalHorarioByIdAsync(short id)
+    /// <summary>
+    /// Get branch schedule by id
+    /// </summary>
+    /// <param name="id">Id to look for</param>
+    /// <returns>SucursalHorario if found, otherwise null</returns>
+    public async Task<SucursalHorario?> FindByIdAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(SucursalHorario))!.FindPrimaryKey()!.Properties[0];
         return await context.Set<SucursalHorario>()
@@ -89,7 +111,11 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
                 .FirstOrDefaultAsync(a => EF.Property<short>(a, keyProperty.Name) == id);
     }
 
-    private void RemoverBloqueos(IEnumerable<ICollection<SucursalHorarioBloqueo>> bloqueosExistentes)
+    /// <summary>
+    /// Remove all the existings branch schedule blocks
+    /// </summary>
+    /// <param name="bloqueosExistentes">List of branch schedule blocks to be removed</param>
+    private void RemoveBlocks(IEnumerable<ICollection<SucursalHorarioBloqueo>> bloqueosExistentes)
     {
         foreach (var horarioExistente in bloqueosExistentes)
         {
@@ -97,7 +123,12 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
         }
     }
 
-    private void ReordenarBloqueos(ICollection<SucursalHorario> sucursalHorariosExistentes, IEnumerable<SucursalHorario> sucursalHorarios)
+    /// <summary>
+    /// Reorganize branch schedule blocks
+    /// </summary>
+    /// <param name="sucursalHorariosExistentes">List of existing branch schedule blocks</param>
+    /// <param name="sucursalHorarios">List of the new branch schedules that will be receiving existing branch schedules blocks</param>
+    private void ReorganizeBlocks(ICollection<SucursalHorario> sucursalHorariosExistentes, IEnumerable<SucursalHorario> sucursalHorarios)
     {
         foreach (var item in sucursalHorarios)
         {

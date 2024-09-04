@@ -8,10 +8,16 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryUsuarioSucursal(BaseReservationContext context) : IRepositoryUsuarioSucursal
 {
-    public async Task<bool> AsignarEncargados(byte idSucursal, IEnumerable<UsuarioSucursal> usuariosSucursal)
+    /// <summary>
+    /// Assign users to a branch
+    /// </summary>
+    /// <param name="idSucursal">Branch id</param>
+    /// <param name="usuariosSucursal">List of users to be assign</param>
+    /// <returns>True if all users were added correctly, if not, false</returns>
+    public async Task<bool> AssignUsuariosAsync(byte idSucursal, IEnumerable<UsuarioSucursal> usuariosSucursal)
     {
         var result = true;
-        var usuariosSucursalExistentes = await ObtenerUsuariosSucursal(idSucursal);
+        var usuariosSucursalExistentes = await ListAllBySucursalAsync(idSucursal);
 
         var executionStrategy = context.Database.CreateExecutionStrategy();
 
@@ -54,7 +60,12 @@ public class RepositoryUsuarioSucursal(BaseReservationContext context) : IReposi
         return result;
     }
 
-    public async Task<IEnumerable<UsuarioSucursal>> ObtenerUsuariosSucursal(byte idSucursal)
+    /// <summary>
+    /// Get list of all user by a branch
+    /// </summary>
+    /// <param name="idSucursal">Branch id to filter</param>
+    /// <returns>ICollection of UsuarioSucursal</returns>
+    public async Task<ICollection<UsuarioSucursal>> ListAllBySucursalAsync(byte idSucursal)
     {
         var collection = await context.Set<UsuarioSucursal>()
            .AsNoTracking()
