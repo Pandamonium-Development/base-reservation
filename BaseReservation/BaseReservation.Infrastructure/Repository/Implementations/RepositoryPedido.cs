@@ -17,7 +17,7 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
     /// </summary>
     /// <param name="pedido">The pedido entity to be created.</param>
     /// <param name="reserva">The reserva entity to be created.</param>
-    /// <returns></returns>
+    /// <returns>Pedido</returns>
     /// <exception cref="RequestFailedException"></exception>
     public async Task<Pedido> CreatePedidoAsync(Pedido pedido, Reserva reserva)
     {
@@ -66,7 +66,7 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
     /// Checks if a Pedido with the specified ID exists.
     /// </summary>
     /// <param name="id">The unique identifier of the Pedido</param>
-    /// <returns></returns>
+    /// <returns>True if exists, if not, false</returns>
     public async Task<bool> ExistsPedidoAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Pedido))!.FindPrimaryKey()!.Properties[0];
@@ -81,7 +81,7 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
     /// Impuesto, Sucursal, and DetallePedidos.
     /// </summary>
     /// <param name="id">The unique identifier of the Pedido.</param>
-    /// <returns></returns>
+    /// <returns>Pedido if founded, otherwise null</returns>
     public async Task<Pedido?> FindByIdAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Pedido))!.FindPrimaryKey()!.Properties[0];
@@ -102,7 +102,7 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
     /// <summary>
     /// Retrieves all Pedidos with their associated TipoPago entities.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>ICollection of Pedido</returns>
     public async Task<ICollection<Pedido>> ListAllAsync()
     {
         var collection = await context.Set<Pedido>()

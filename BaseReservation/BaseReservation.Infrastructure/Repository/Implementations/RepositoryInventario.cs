@@ -11,7 +11,7 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
     /// Create a new Inventory.
     /// </summary>
     /// <param name="inventario">The Inventory entity to be added.</param>
-    /// <returns></returns>
+    /// <returns>Inventario</returns>
     public async Task<Inventario> CreateInventarioAsync(Inventario inventario)
     {
         var result = context.Inventarios.Add(inventario);
@@ -23,7 +23,7 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
     /// Delete an Inventory by setting its "Activo" property to false
     /// </summary>
     /// <param name="id">The unique identifier of the Inventory to delete.</param>
-    /// <returns></returns>
+    /// <returns>A boolean indicating whether the operation was successful.</returns>
     public async Task<bool> DeleteInventarioAsync(short id)
     {
         var inventario = await FindByIdAsync(id);
@@ -39,7 +39,7 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
     /// Checks if an active Inventory with the specified identifier exists.
     /// </summary>
     /// <param name="id">The unique identifier of the Inventory</param>
-    /// <returns></returns>
+    /// <returns>True if exists, if not, false</returns>
     public async Task<bool> ExistsInventarioAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Inventario))!.FindPrimaryKey()!.Properties[0];
@@ -53,7 +53,7 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
     /// Finds an active Inventory by its unique identifier, including related Inventory Products.
     /// </summary>
     /// <param name="id">The Inventory entity if found. </param>
-    /// <returns></returns>
+    /// <returns>Inventario if founded, otherwise null</returns>
     public async Task<Inventario?> FindByIdAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Inventario))!.FindPrimaryKey()!.Properties[0];
@@ -66,7 +66,7 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
     /// <summary>
     /// Lists all active Inventory entities.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>ICollection of Iventario</returns>
     public async Task<ICollection<Inventario>> ListAllAsync()
     {
         var collection = await context.Set<Inventario>()
@@ -80,7 +80,7 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
     /// Lists all active Inventory entities for a specific branch.
     /// </summary>
     /// <param name="idSucursal"></param>
-    /// <returns></returns>
+    /// <returns>ICollection of Iventario</returns>
     public async Task<ICollection<Inventario>> ListAllBySucursalAsync(byte idSucursal)
     {
         var collection = await context.Set<Inventario>()
@@ -94,7 +94,7 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
     /// Updates an existing Inventory
     /// </summary>
     /// <param name="inventario"> The Inventory entity to update.</param>
-    /// <returns></returns>
+    /// <returns>Inventario</returns>
     public async Task<Inventario> UpdateInventarioAsync(Inventario inventario)
     {
         context.Inventarios.Update(inventario);

@@ -12,7 +12,7 @@ public class RepositoryInventarioProductoMovimiento(BaseReservationContext conte
     /// Creates a new InventarioProductoMovimiento and updates the related InventarioProducto based on the movement type.
     /// </summary>
     /// <param name="inventarioProductoMovimiento">The InventarioProductoMovimiento entity to be added.</param>
-    /// <returns></returns>
+    /// <returns>InventarioProductoMovimiento</returns>
     /// <exception cref="RequestFailedException"></exception>
     public async Task<bool> CreateInventarioMovimientoProductoAsync(InventarioProductoMovimiento inventarioProductoMovimiento)
     {
@@ -67,7 +67,7 @@ public class RepositoryInventarioProductoMovimiento(BaseReservationContext conte
     /// Lists all InventarioProductoMovimiento entities associated with a specific Inventario.
     /// </summary>
     /// <param name="idInventario"> The unique identifier of the Inventario.</param>
-    /// <returns></returns>
+    /// <returns>ICollection of InventarioProductoMovimiento</returns>
     public async Task<ICollection<InventarioProductoMovimiento>> ListAllByInventarioAsync(short idInventario)
     {
         var collection = await context.Set<InventarioProductoMovimiento>()
@@ -87,7 +87,7 @@ public class RepositoryInventarioProductoMovimiento(BaseReservationContext conte
     /// Lists all InventarioProductoMovimiento entities associated with a specific Producto.
     /// </summary>
     /// <param name="idProducto">The unique identifier of the Producto.</param>
-    /// <returns></returns>
+    /// <returns>ICollection of InventarioProductoMovimiento</returns>
     public async Task<ICollection<InventarioProductoMovimiento>> ListAllByProductoAsync(short idProducto)
     {
         var collection = await context.Set<InventarioProductoMovimiento>()

@@ -11,7 +11,7 @@ public class RepositoryProducto(BaseReservationContext context) : IRepositoryPro
     /// Creates a new Producto entity in the database.
     /// </summary>
     /// <param name="producto">The Producto entity to be created.</param>
-    /// <returns></returns>
+    /// <returns>Producto</returns>
     public async Task<Producto> CreateProductoAsync(Producto producto)
     {
         var result = context.Productos.Add(producto);
@@ -23,7 +23,7 @@ public class RepositoryProducto(BaseReservationContext context) : IRepositoryPro
     /// Updates an existing Producto entity in the database.
     /// </summary>
     /// <param name="producto">The Producto entity with update information.</param>
-    /// <returns></returns>
+    /// <returns>Producto</returns>
     public async Task<Producto> UpdateProductoAsync(Producto producto)
     {
         context.Productos.Update(producto);
@@ -36,7 +36,7 @@ public class RepositoryProducto(BaseReservationContext context) : IRepositoryPro
     /// Retrieves a Producto entity by its ID, including related UnidadMedida and Categoria entities.
     /// </summary>
     /// <param name="id">The unique identifier of the Producto.</param>
-    /// <returns></returns>
+    /// <returns>Producto if founded, otherwise null</returns>
     public async Task<Producto?> FindByIdAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Producto))!.FindPrimaryKey()!.Properties[0];
@@ -53,7 +53,7 @@ public class RepositoryProducto(BaseReservationContext context) : IRepositoryPro
     /// </summary>
     /// <param name="excludeProductosInventario">Whether to exclude products that are in a specific Inventario.  </param>
     /// <param name="idInventario"></param>
-    /// <returns></returns>
+    /// <returns>ICollection of Producto</returns>
     public async Task<ICollection<Producto>> ListAllAsync(bool excludeProductosInventario = false, short idInventario = 0)
     {
         if (!excludeProductosInventario)
@@ -77,7 +77,7 @@ public class RepositoryProducto(BaseReservationContext context) : IRepositoryPro
     /// Checks if a Producto with the specified ID exists.
     /// </summary>
     /// <param name="id"> The unique identifier of the Producto.</param>
-    /// <returns></returns>
+    /// <returns>True if exists, if not, false</returns>
     public async Task<bool> ExistsProductoAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Producto))!.FindPrimaryKey()!.Properties[0];

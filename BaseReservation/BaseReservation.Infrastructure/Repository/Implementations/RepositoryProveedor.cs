@@ -11,7 +11,7 @@ public class RepositoryProveedor(BaseReservationContext context) : IRepositoryPr
     /// Creates a new Proveedor entity in the database.
     /// </summary>
     /// <param name="proveedor">The Proveedor entity to be created.</param>
-    /// <returns></returns>
+    /// <returns>Proveedor</returns>
     public async Task<Proveedor> CreateProveedorAsync(Proveedor proveedor)
     {
         var result = context.Proveedors.Add(proveedor);
@@ -24,7 +24,7 @@ public class RepositoryProveedor(BaseReservationContext context) : IRepositoryPr
     /// Marks a Proveedor entity as inactive instead of deleting it from the database.
     /// </summary>
     /// <param name="id">The unique identifier of the Proveedor to be marked as inactive.</param>
-    /// <returns></returns>
+    /// <returns>The unique identifier of the Inventory to delete.</</returns>
     public async Task<bool> DeleteProveedorAsync(byte id)
     {
         var proveedor = await FindByIdAsync(id);
@@ -40,7 +40,7 @@ public class RepositoryProveedor(BaseReservationContext context) : IRepositoryPr
     /// Checks if a Proveedor with the specified ID exists and is active.
     /// </summary>
     /// <param name="id">The unique identifier of the Proveedor.</param>
-    /// <returns></returns>
+    /// <returns>True if exists, if not, false</returns>
     public async Task<bool> ExistsProveedorAsync(byte id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Proveedor))!.FindPrimaryKey()!.Properties[0];
@@ -54,7 +54,7 @@ public class RepositoryProveedor(BaseReservationContext context) : IRepositoryPr
     ///  Retrieves a Proveedor entity by its ID, including related Contactos and location entities.
     /// </summary>
     /// <param name="id"></param>
-    /// <returns></returns>
+    /// <returns>Proveedor if founded, otherwise null</returns>
     public async Task<Proveedor?> FindByIdAsync(byte id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Proveedor))!.FindPrimaryKey()!.Properties[0];
@@ -70,7 +70,7 @@ public class RepositoryProveedor(BaseReservationContext context) : IRepositoryPr
     /// <summary>
     /// Retrieves all active Proveedor entities, including their related location entities.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>ICollection of Proveedor</returns>
     public async Task<ICollection<Proveedor>> ListAllAsync()
     {
         var collection = await context.Set<Proveedor>()
@@ -86,14 +86,14 @@ public class RepositoryProveedor(BaseReservationContext context) : IRepositoryPr
     /// <summary>
     /// Retrieves all active Proveedor entities as an IQueryable for deferred execution.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>An IQueryable of active Proveedor entities.</returns>
     public IQueryable<Proveedor> ListAllQueryable() => context.Set<Proveedor>().Where(m => m.Activo).AsNoTracking();
 
     /// <summary>
     /// Updates an existing Proveedor entity in the database.
     /// </summary>
     /// <param name="proveedor">The Proveedor entity with updated information.</param>
-    /// <returns></returns>
+    /// <returns>Proveedor</returns>
     public async Task<Proveedor> UpdateProveedorAsync(Proveedor proveedor)
     {
         context.Proveedors.Update(proveedor);

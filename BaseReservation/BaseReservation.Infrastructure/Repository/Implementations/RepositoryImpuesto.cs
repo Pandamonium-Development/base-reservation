@@ -10,6 +10,6 @@ public class RepositoryImpuesto(BaseReservationContext context) : IRepositoryImp
     /// <summary>
     /// Lists all Tax entities
     /// </summary>
-    /// <returns></returns>
+    /// <returns>ICollection of Impuesto</returns>
     public async Task<ICollection<Impuesto>> ListAllAsync() => await context.Set<Impuesto>().AsNoTracking().ToListAsync();
 }

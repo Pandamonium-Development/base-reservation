@@ -11,7 +11,7 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
     /// Creates a new Schedule
     /// </summary>
     /// <param name="horario">The Schedule entity to be added.</param>
-    /// <returns></returns>
+    /// <returns>Horario</returns>
     public async Task<Horario> CreateHorarioAsync(Horario horario)
     {
         var result = context.Horarios.Add(horario);
@@ -23,7 +23,7 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
     /// Updates an existing Schedule.
     /// </summary>
     /// <param name="horario">The Shedule entity to update.</param>
-    /// <returns></returns>
+    /// <returns>Horario</returns>
     public async Task<Horario> UpdateHorarioAsync(Horario horario)
     {
         context.Horarios.Update(horario);
@@ -38,7 +38,7 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
     /// Finds a Schedule by its unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the Schedule.</param>
-    /// <returns></returns>
+    /// <returns>Horario if founded, otherwise null</returns>
     public async Task<Horario?> FindByIdAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Horario))!.FindPrimaryKey()!.Properties[0];
@@ -50,7 +50,7 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
     /// <summary>
     /// Lists all Schedules.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>ICollection of Horario</returns>
     public async Task<ICollection<Horario>> ListAllAsync()
     {
         var collection = await context.Set<Horario>()
@@ -63,7 +63,7 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
     /// Checks if a Schedule with the specified identifier exists.
     /// </summary>
     /// <param name="id">The unique identifier of the Schedule</param>
-    /// <returns></returns>
+    /// <returns>True if exists, if not, false</returns>
     public async Task<bool> ExistsHorarioAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Horario))!.FindPrimaryKey()!.Properties[0];
