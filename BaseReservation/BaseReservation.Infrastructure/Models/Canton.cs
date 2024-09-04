@@ -23,5 +23,5 @@ public partial class Canton
 
     [ForeignKey("IdProvincia")]
     [InverseProperty("Cantons")]
-    public virtual Provincium IdProvinciaNavigation { get; set; } = null!;
+    public virtual Provincia IdProvinciaNavigation { get; set; } = null!;
 }
