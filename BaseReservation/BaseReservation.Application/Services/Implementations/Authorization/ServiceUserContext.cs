@@ -3,7 +3,7 @@ using BaseReservation.Application.ResponseDTOs.Authentication;
 using BaseReservation.Application.Services.Interfaces.Authorization;
 using Microsoft.AspNetCore.Http;
 
-namespace ArtInk.Application.Services.Implementations.Authorization;
+namespace BaseReservation.Application.Services.Implementations.Authorization;
 
 public class ServiceUserContext(IHttpContextAccessor httpContextAccessor) : IServiceUserContext
 {

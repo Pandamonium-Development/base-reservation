@@ -4,7 +4,7 @@ using BaseReservation.Application.Services.Interfaces.Authorization;
 using BaseReservation.Infrastructure.Repository.Interfaces;
 using AutoMapper;
 
-namespace ArtInk.Application.Services.Implementations.Authorization;
+namespace BaseReservation.Application.Services.Implementations.Authorization;
 
 public class ServiceUserAuthorization(IServiceUserContext serviceUserContext, IRepositoryUsuario repositoryUsuario, IMapper mapper) : IServiceUserAuthorization
 {

@@ -1,4 +1,4 @@
-namespace ArtInk.Application.RequestDTOs;
+namespace BaseReservation.Application.RequestDTOs;
 
 public class RequestUserLoginDto
 {

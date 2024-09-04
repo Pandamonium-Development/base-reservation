@@ -1,4 +1,4 @@
-﻿using ArtInk.Infraestructure.Enums;
+﻿using BaseReservation.Infrastructure.Enums;
 
 namespace BaseReservation.Application.RequestDTOs;
 
