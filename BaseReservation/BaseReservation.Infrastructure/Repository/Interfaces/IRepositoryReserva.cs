@@ -18,6 +18,6 @@ public interface IRepositoryReserva
 
     Task<Reserva?> FindByIdAsync(int id);
 
-    Task<bool> ExistsReserva(int id);
+    Task<bool> ExistsReservaAsync(int id);
 
 }

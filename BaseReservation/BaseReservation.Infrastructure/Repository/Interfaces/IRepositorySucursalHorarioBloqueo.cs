@@ -4,11 +4,11 @@ namespace BaseReservation.Infrastructure.Repository.Interfaces;
 
 public interface IRepositorySucursalHorarioBloqueo
 {
-    Task<SucursalHorarioBloqueo> CreateSucursalHorarioBloqueolAsync(SucursalHorarioBloqueo bloqueo);
+    Task<SucursalHorarioBloqueo> CreateSucursalHorarioBloqueoAsync(SucursalHorarioBloqueo sucursalHorarioBloqueo);
 
-    Task<bool> CreateSucursalHorarioBloqueolAsync(short idSucursalHorario, IEnumerable<SucursalHorarioBloqueo> bloqueo);
+    Task<bool> CreateSucursalHorarioBloqueoAsync(short idSucursalHorario, IEnumerable<SucursalHorarioBloqueo> sucursalHorarioBloqueos);
 
-    Task<SucursalHorarioBloqueo> UpdateSucursalHorarioBloqueolAsync(SucursalHorarioBloqueo bloqueo);
+    Task<SucursalHorarioBloqueo> UpdateSucursalHorarioBloqueoAsync(SucursalHorarioBloqueo sucursalHorarioBloqueo);
 
     Task<ICollection<SucursalHorarioBloqueo>> ListAllBySucursalHorarioAsync(short idSucursalHorario);
 
@@ -16,5 +16,5 @@ public interface IRepositorySucursalHorarioBloqueo
 
     Task<SucursalHorarioBloqueo?> FindByIdAsync(long id);
 
-    Task<bool> ExistsHorarioBloqueoAsync(long id);
+    Task<bool> ExistsSucursalHorarioBloqueoAsync(long id);
 }

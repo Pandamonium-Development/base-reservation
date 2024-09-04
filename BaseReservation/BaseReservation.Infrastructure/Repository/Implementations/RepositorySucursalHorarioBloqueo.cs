@@ -8,19 +8,29 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositorySucursalHorarioBloqueo(BaseReservationContext context) : IRepositorySucursalHorarioBloqueo
 {
-    public async Task<SucursalHorarioBloqueo> CreateSucursalHorarioBloqueolAsync(SucursalHorarioBloqueo bloqueo)
+    /// <summary>
+    /// Create a branch schedule block
+    /// </summary>
+    /// <param name="sucursalHorarioBloqueo">Branch schedule block model to be added</param>
+    /// <returns>SucursalHorarioBloqueo</returns>
+    public async Task<SucursalHorarioBloqueo> CreateSucursalHorarioBloqueoAsync(SucursalHorarioBloqueo sucursalHorarioBloqueo)
     {
-        var result = context.SucursalHorarioBloqueos.Add(bloqueo);
-        //aplica en la BD
+        var result = context.SucursalHorarioBloqueos.Add(sucursalHorarioBloqueo);
         await context.SaveChangesAsync();
-        //Refleja la entidad
+
         return result.Entity;
     }
 
-    public async Task<bool> CreateSucursalHorarioBloqueolAsync(short idSucursalHorario, IEnumerable<SucursalHorarioBloqueo> bloqueo)
+    /// <summary>
+    /// Create multiple schedule branch blocks
+    /// </summary>
+    /// <param name="idSucursalHorario">Branch schedule id</param>
+    /// <param name="sucursalHorarioBloqueos">List of schedule branch blocks to be added</param>
+    /// <returns>True if all items were saved, if not, false</returns>
+    public async Task<bool> CreateSucursalHorarioBloqueoAsync(short idSucursalHorario, IEnumerable<SucursalHorarioBloqueo> sucursalHorarioBloqueos)
     {
         var result = true;
-        var bloqueosExistentes = await GetSucursalHorarioBloqueosBySucursalHorarioAsync(idSucursalHorario);
+        var bloqueosExistentes = await ListAllBySucursalHorarioAsync(idSucursalHorario);
 
         var executionStrategy = context.Database.CreateExecutionStrategy();
 
@@ -39,7 +49,7 @@ public class RepositorySucursalHorarioBloqueo(BaseReservationContext context) : 
                 }
                 else
                 {
-                    context.SucursalHorarioBloqueos.AddRange(bloqueo);
+                    context.SucursalHorarioBloqueos.AddRange(sucursalHorarioBloqueos);
                     rowsAffected = await context.SaveChangesAsync();
 
                     if (rowsAffected == 0)
@@ -64,7 +74,12 @@ public class RepositorySucursalHorarioBloqueo(BaseReservationContext context) : 
         return result;
     }
 
-    public async Task<bool> ExisteHorarioBloqueo(long id)
+    /// <summary>
+    /// Validate if exists branch schedule block
+    /// </summary>
+    /// <param name="id">Branch schedule block Id</param>
+    /// <returns>True if exists, if not, false</returns>
+    public async Task<bool> ExistsSucursalHorarioBloqueoAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(SucursalHorarioBloqueo))!.FindPrimaryKey()!.Properties[0];
 
@@ -73,6 +88,11 @@ public class RepositorySucursalHorarioBloqueo(BaseReservationContext context) : 
             .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id) != null;
     }
 
+    /// <summary>
+    /// Get branch schedule block with specific id
+    /// </summary>
+    /// <param name="id">Branch schedule block id</param>
+    /// <returns>SucursalHorarioBloqueo</returns>
     public async Task<SucursalHorarioBloqueo?> FindByIdAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(SucursalHorarioBloqueo))!.FindPrimaryKey()!.Properties[0];
@@ -82,7 +102,12 @@ public class RepositorySucursalHorarioBloqueo(BaseReservationContext context) : 
             .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id);
     }
 
-    public async Task<ICollection<SucursalHorarioBloqueo>> GetSucursalHorarioBloqueosBySucursalAsync(byte idSucursal)
+    /// <summary>
+    /// Get list of all branch schedule blocks by branch
+    /// </summary>
+    /// <param name="idSucursal">Branch id</param>
+    /// <returns>ICollection of SucursalHorarioBloqueo</returns>
+    public async Task<ICollection<SucursalHorarioBloqueo>> ListAllBySucursalAsync(byte idSucursal)
     {
         var collection = await context.Set<SucursalHorarioBloqueo>()
          .Include(m => m.IdSucursalHorarioNavigation)
@@ -93,7 +118,12 @@ public class RepositorySucursalHorarioBloqueo(BaseReservationContext context) : 
         return collection;
     }
 
-    public async Task<ICollection<SucursalHorarioBloqueo>> GetSucursalHorarioBloqueosBySucursalHorarioAsync(short idSucursalHorario)
+    /// <summary>
+    /// Get list of all branch schedule blocks by branch schedule
+    /// </summary>
+    /// <param name="idSucursalHorario">Branch schedule id</param>
+    /// <returns>ICollection of SucursalHorarioBloqueo</returns>
+    public async Task<ICollection<SucursalHorarioBloqueo>> ListAllBySucursalHorarioAsync(short idSucursalHorario)
     {
         var collection = await context.Set<SucursalHorarioBloqueo>()
          .Where(a => a.IdSucursalHorario == idSucursalHorario)
@@ -102,13 +132,18 @@ public class RepositorySucursalHorarioBloqueo(BaseReservationContext context) : 
         return collection;
     }
 
-    public async Task<SucursalHorarioBloqueo> UpdateSucursalHorarioBloqueolAsync(SucursalHorarioBloqueo bloqueo)
+    /// <summary>
+    /// Update branch schedule block
+    /// </summary>
+    /// <param name="sucursalHorarioBloqueo">Branch schedule block model to be added</param>
+    /// <returns>SucursalHorarioBloqueo</returns>
+    public async Task<SucursalHorarioBloqueo> UpdateSucursalHorarioBloqueoAsync(SucursalHorarioBloqueo sucursalHorarioBloqueo)
     {
-        context.SucursalHorarioBloqueos.Update(bloqueo);
+        context.SucursalHorarioBloqueos.Update(sucursalHorarioBloqueo);
 
         await context.SaveChangesAsync();
 
-        var response = await FindByIdAsync(bloqueo.Id);
+        var response = await FindByIdAsync(sucursalHorarioBloqueo.Id);
         return response!;
     }
 }
