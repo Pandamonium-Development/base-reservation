@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Models;
 
-public partial class Categorium
+[Table("Categoria")]
+public partial class Categoria
 {
     [Key]
     public byte Id { get; set; }

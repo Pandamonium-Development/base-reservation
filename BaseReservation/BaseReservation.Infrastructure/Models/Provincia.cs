@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Models;
 
-public partial class Provincium
+[Table("Provincia")]
+public partial class Provincia
 {
     [Key]
     public byte Id { get; set; }

@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Models;
 
-public partial class UnidadMedidum
+[Table("UnidadMedida")]
+public partial class UnidadMedida
 {
     [Key]
     public byte Id { get; set; }

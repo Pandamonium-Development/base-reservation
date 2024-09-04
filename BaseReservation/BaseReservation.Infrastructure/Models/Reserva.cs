@@ -58,5 +58,5 @@ public partial class Reserva
     public virtual ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
 
     [InverseProperty("IdReservaNavigation")]
-    public virtual ICollection<ReservaPreguntum> ReservaPregunta { get; set; } = new List<ReservaPreguntum>();
+    public virtual ICollection<ReservaPregunta> ReservaPregunta { get; set; } = new List<ReservaPregunta>();
 }

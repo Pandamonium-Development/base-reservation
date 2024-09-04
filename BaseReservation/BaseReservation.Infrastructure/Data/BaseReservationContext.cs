@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Collections.Generic;
+﻿using System.Data;
 using BaseReservation.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -9,9 +7,12 @@ namespace BaseReservation.Infrastructure.Data;
 
 public partial class BaseReservationContext(DbContextOptions<BaseReservationContext> options) : DbContext(options)
 {
+    const string FECHACREACIONNAME = "FechaCreacion";
+    const string FECHAMODIFICACIONNAME = "FechaModificacion";
+
     public virtual DbSet<Canton> Cantons { get; set; }
 
-    public virtual DbSet<Categorium> Categoria { get; set; }
+    public virtual DbSet<Categoria> Categoria { get; set; }
 
     public virtual DbSet<Cliente> Clientes { get; set; }
 
@@ -53,11 +54,11 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
 
     public virtual DbSet<Proveedor> Proveedors { get; set; }
 
-    public virtual DbSet<Provincium> Provincia { get; set; }
+    public virtual DbSet<Provincia> Provincia { get; set; }
 
     public virtual DbSet<Reserva> Reservas { get; set; }
 
-    public virtual DbSet<ReservaPreguntum> ReservaPregunta { get; set; }
+    public virtual DbSet<ReservaPregunta> ReservaPregunta { get; set; }
 
     public virtual DbSet<Rol> Rols { get; set; }
 
@@ -77,7 +78,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
 
     public virtual DbSet<TokenMaster> TokenMasters { get; set; }
 
-    public virtual DbSet<UnidadMedidum> UnidadMedida { get; set; }
+    public virtual DbSet<UnidadMedida> UnidadMedida { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
@@ -96,7 +97,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
                 .HasConstraintName("FK_Canton_Provincia");
         });
 
-        modelBuilder.Entity<Categorium>(entity =>
+        modelBuilder.Entity<Categoria>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
         });
@@ -302,7 +303,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
                 .HasConstraintName("FK_Proveedor_Distrito");
         });
 
-        modelBuilder.Entity<Provincium>(entity =>
+        modelBuilder.Entity<Provincia>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
         });
@@ -323,7 +324,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
                 .HasConstraintName("FK_Reserva_Sucursal");
         });
 
-        modelBuilder.Entity<ReservaPreguntum>(entity =>
+        modelBuilder.Entity<ReservaPregunta>(entity =>
         {
             entity.Property(e => e.Activo).HasDefaultValue(true);
 
@@ -406,7 +407,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
                 .HasConstraintName("FK_TokenMaster_Usuario");
         });
 
-        modelBuilder.Entity<UnidadMedidum>(entity =>
+        modelBuilder.Entity<UnidadMedida>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Simbolo).IsFixedLength();
@@ -455,7 +456,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
     public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken)
     {
         OnBeforeSaving();
-        return await base.SaveChangesAsync(acceptAllChangesOnSuccess);
+        return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 
     private void OnBeforeSaving()
@@ -465,58 +466,61 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
 
     private void DefaultProperties()
     {
-        DateTime FechaCreacion = DateTime.Now;
-        DateTime FechaModificacion = DateTime.Now;
-        const bool Activo = true;
+        string usuarioCreacionName = "UsuarioCreacion";
+        string usuarioModificacionName = "UsuarioModificacion";
+
+        DateTime fechaCreacion = DateTime.Now;
+        DateTime fechaModificacion = DateTime.Now;
 
         foreach (var entry in ChangeTracker.Entries())
         {
-            string UsuarioCreacion = string.Empty;
-            string UsuarioModificacion = null!;
-            if(entry.Entity.GetType().GetProperty("UsuarioCreacion") != null) UsuarioCreacion = entry.Property("UsuarioCreacion").CurrentValue!.ToString()!;
-            if(entry.Entity.GetType().GetProperty("UsuarioModificacion") != null)
+            string usuarioCreacion = string.Empty;
+            string usuarioModificacion = null!;
+            if (entry.Entity.GetType().GetProperty(usuarioCreacionName) != null) usuarioCreacion = entry.Property(usuarioCreacionName).CurrentValue!.ToString()!;
+            if (entry.Entity.GetType().GetProperty(usuarioModificacionName) != null)
             {
-                var modificacion = entry.Property("UsuarioModificacion").CurrentValue;
-                if (modificacion != null) UsuarioModificacion = modificacion.ToString()!;
+                var modificacion = entry.Property(usuarioModificacionName).CurrentValue;
+                if (modificacion != null) usuarioModificacion = modificacion.ToString()!;
             }
 
             if (entry.State == EntityState.Added)
             {
-                GenerateAdded(entry, UsuarioCreacion, UsuarioModificacion, FechaCreacion, FechaModificacion, Activo);
+                GenerateAdded(entry, usuarioCreacionName, usuarioCreacion, usuarioModificacionName, fechaCreacion);
             }
             else
             {
-                GenerateModified(entry, UsuarioCreacion, UsuarioModificacion, FechaCreacion, FechaModificacion);
+                GenerateModified(entry, usuarioCreacionName, usuarioModificacionName, usuarioModificacion, fechaModificacion);
             }
         }
     }
 
-    private void GenerateAdded(EntityEntry entry, string usuarioCreacion, string usuarioModificacion, DateTime fechaCreacion, DateTime fechaModificacion, bool activo)
+    private void GenerateAdded(EntityEntry entry, string usuarioCreacionName, string usuarioCreacion, string usuarioModificacionName, DateTime fechaCreacion)
     {
+        string activoName = "Activo";
 
-        if (entry.Entity.GetType().GetProperty(nameof(fechaCreacion)) != null && entry.Property(nameof(fechaCreacion)).CurrentValue != null) entry.Property(nameof(fechaCreacion)).CurrentValue = fechaCreacion;
-        if (entry.Entity.GetType().GetProperty(nameof(activo)) != null && !(bool)entry.Property(nameof(activo)).CurrentValue!) entry.Property(nameof(activo)).CurrentValue = activo;
+        if (entry.Entity.GetType().GetProperty(FECHACREACIONNAME) != null && entry.Property(FECHACREACIONNAME).CurrentValue != null) entry.Property(FECHACREACIONNAME).CurrentValue = fechaCreacion;
+        if (entry.Entity.GetType().GetProperty(activoName) != null && !(bool)entry.Property(activoName).CurrentValue!) entry.Property(activoName).CurrentValue = true;
 
-        if (entry.Entity.GetType().GetProperty(nameof(usuarioCreacion)) != null && entry.Property(nameof(usuarioModificacion)).CurrentValue != null)
+        if (entry.Entity.GetType().GetProperty(usuarioCreacionName) != null && entry.Property(usuarioModificacionName).CurrentValue != null)
         {
-            entry.Property(nameof(usuarioCreacion)).CurrentValue = entry.Property(nameof(usuarioModificacion)).CurrentValue;
-            entry.Property(nameof(usuarioModificacion)).CurrentValue = null;
+            entry.Property(usuarioCreacionName).CurrentValue = entry.Property(usuarioModificacionName).CurrentValue;
+            entry.Property(usuarioModificacionName).CurrentValue = null;
         }
 
-        if (entry.Entity.GetType().GetProperty(nameof(usuarioCreacion)) != null) entry.Property(nameof(usuarioCreacion)).CurrentValue = usuarioCreacion;
-        if (entry.Entity.GetType().GetProperty(nameof(fechaModificacion)) != null) entry.Property(nameof(fechaModificacion)).IsModified = false;
-        if (entry.Entity.GetType().GetProperty(nameof(usuarioModificacion)) != null) entry.Property(nameof(usuarioModificacion)).IsModified = false;
+        if (entry.Entity.GetType().GetProperty(usuarioCreacionName) != null) entry.Property(usuarioCreacionName).CurrentValue = usuarioCreacion;
+        if (entry.Entity.GetType().GetProperty(FECHAMODIFICACIONNAME) != null) entry.Property(FECHAMODIFICACIONNAME).IsModified = false;
+        if (entry.Entity.GetType().GetProperty(usuarioModificacionName) != null) entry.Property(usuarioModificacionName).IsModified = false;
     }
 
-    private void GenerateModified(EntityEntry entry, string usuarioCreacion, string usuarioModificacion, DateTime fechaCreacion, DateTime fechaModificacion)
+    private void GenerateModified(EntityEntry entry, string usuarioCreacionName, string usuarioModificacionName, string usuarioModificacion, DateTime fechaModificacion)
     {
         if (entry.State == EntityState.Modified)
         {
-            if (entry.Entity.GetType().GetProperty(nameof(fechaModificacion)) != null) entry.Property(nameof(fechaModificacion)).CurrentValue = fechaModificacion;
+            if (entry.Entity.GetType().GetProperty(FECHAMODIFICACIONNAME) != null) entry.Property(FECHAMODIFICACIONNAME).CurrentValue = fechaModificacion;
 
-            if (entry.Entity.GetType().GetProperty(nameof(usuarioModificacion)) != null) entry.Property(nameof(usuarioModificacion)).CurrentValue = usuarioModificacion;
-            if (entry.Entity.GetType().GetProperty(nameof(fechaCreacion)) != null) entry.Property(nameof(fechaCreacion)).IsModified = false;
-            if (entry.Entity.GetType().GetProperty(nameof(usuarioCreacion)) != null) entry.Property(nameof(usuarioCreacion)).IsModified = false;
+            if (entry.Entity.GetType().GetProperty(usuarioModificacionName) != null) entry.Property(usuarioModificacionName).CurrentValue = usuarioModificacion;
+            if (entry.Entity.GetType().GetProperty(FECHACREACIONNAME) != null) entry.Property(FECHACREACIONNAME).IsModified = false;
+            if (entry.Entity.GetType().GetProperty(usuarioCreacionName) != null) entry.Property(usuarioCreacionName).IsModified = false;
         }
     }
 }

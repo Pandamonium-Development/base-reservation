@@ -6,8 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Models;
 
+[Table("ReservaPregunta")]
 [Index("IdReserva", Name = "IX_ReservaPregunta_IdReserva")]
-public partial class ReservaPreguntum
+public partial class ReservaPregunta
 {
     [Key]
     public int Id { get; set; }
