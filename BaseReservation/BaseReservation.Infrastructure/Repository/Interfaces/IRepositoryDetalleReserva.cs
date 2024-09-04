@@ -8,6 +8,6 @@ namespace BaseReservation.Infrastructure.Repository.Interfaces
 
         Task<DetalleReserva?> FindByIdAsync(int id);
 
-        Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<DetalleReserva> detalleReserva);
+        Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<DetalleReserva> detallesReserva);
     }
 }

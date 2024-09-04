@@ -66,6 +66,19 @@ public class RepositoryReserva(BaseReservationContext context) : IRepositoryRese
             .FirstOrDefaultAsync(a => EF.Property<int>(a, keyProperty.Name) == id) != null;
     }
 
+
+    /// <summary>
+    /// Get list of all reservations
+    /// </summary>
+    /// <returns>ICollection of Reserva</returns>
+    public async Task<ICollection<Reserva>> ListAllAsync()
+    {
+        var collection = await context.Set<Reserva>()
+            .AsNoTracking()
+            .ToListAsync();
+        return collection;
+    }
+
     /// <summary>
     /// Get list of all reservations by branch and date
     /// </summary>
@@ -77,18 +90,6 @@ public class RepositoryReserva(BaseReservationContext context) : IRepositoryRese
         var collection = await context.Set<Reserva>()
             .AsNoTracking()
             .Where(m => m.IdSucursal == idSucursal && m.Fecha == dia)
-            .ToListAsync();
-        return collection;
-    }
-
-    /// <summary>
-    /// Get list of all reservations
-    /// </summary>
-    /// <returns>ICollection of Reserva</returns>
-    public async Task<ICollection<Reserva>> ListAllAsync()
-    {
-        var collection = await context.Set<Reserva>()
-            .AsNoTracking()
             .ToListAsync();
         return collection;
     }
