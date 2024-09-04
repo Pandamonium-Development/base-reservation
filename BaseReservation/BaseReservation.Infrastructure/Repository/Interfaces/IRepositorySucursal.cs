@@ -10,7 +10,7 @@ public interface IRepositorySucursal
 
     Task<ICollection<Sucursal>> ListAllAsync();
 
-    Task<ICollection<Sucursal>> ListAllByRolAsync(string rol);
+    Task<ICollection<Sucursal>> ListAllByRoleAsync(string rol);
 
     Task<Sucursal?> FindByIdAsync(byte id);
 

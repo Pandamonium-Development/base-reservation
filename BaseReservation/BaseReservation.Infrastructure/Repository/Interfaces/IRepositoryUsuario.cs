@@ -6,13 +6,13 @@ public interface IRepositoryUsuario
 {
     Task<ICollection<Usuario>> ListAllAsync();
 
-    Task<ICollection<Usuario>> ListAllByRolAsync(byte idRol);
+    Task<ICollection<Usuario>> ListAllByRoleAsync(byte idRol);
 
     Task<bool> IsAvailableAsync(short id, byte idSucursalAsignacion);
 
     Task<Usuario?> FindByIdAsync(short id);
 
-    Task<bool> ExistsByIdAsync(short id);
+    Task<bool> ExistsUsuarioAsync(short id);
 
     Task<Usuario?> FindByEmailAsync(string correoElectronico);
 

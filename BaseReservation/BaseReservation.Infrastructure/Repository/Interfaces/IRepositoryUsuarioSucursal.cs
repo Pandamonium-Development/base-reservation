@@ -4,7 +4,7 @@ namespace BaseReservation.Infrastructure.Repository.Interfaces;
 
 public interface IRepositoryUsuarioSucursal
 {
-    Task<bool> AssignUsersAsync(byte idSucursal, IEnumerable<UsuarioSucursal> usuariosSucursal);
+    Task<bool> AssignUsuariosAsync(byte idSucursal, IEnumerable<UsuarioSucursal> usuariosSucursal);
 
-    Task<IEnumerable<UsuarioSucursal>> ListAllBySucursalAsync(byte idSucursal);
+    Task<ICollection<UsuarioSucursal>> ListAllBySucursalAsync(byte idSucursal);
 }
