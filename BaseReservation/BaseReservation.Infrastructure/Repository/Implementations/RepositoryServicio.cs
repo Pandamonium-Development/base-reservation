@@ -10,13 +10,11 @@ public class RepositoryServicio(BaseReservationContext context) : IRepositorySer
     public async Task<Servicio> CreateServicioAsync(Servicio servicio)
     {
         var result = context.Servicios.Add(servicio);
-        //aplica en la BD
         await context.SaveChangesAsync();
-        //Refleja la entidad
         return result.Entity;
     }
 
-    public async Task<bool> ExisteServicio(byte id)
+    public async Task<bool> ExistsServicioAsync(byte id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Servicio))!.FindPrimaryKey()!.Properties[0];
 

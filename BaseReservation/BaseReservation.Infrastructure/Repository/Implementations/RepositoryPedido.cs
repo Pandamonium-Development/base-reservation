@@ -11,6 +11,14 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedido
 {
+    /// <summary>
+    /// Creates a new Pedido and updates the associated Reserva within a trasaction. 
+    /// If either operation fails, the transaction is rolled back.
+    /// </summary>
+    /// <param name="pedido">The pedido entity to be created.</param>
+    /// <param name="reserva">The reserva entity to be created.</param>
+    /// <returns></returns>
+    /// <exception cref="RequestFailedException"></exception>
     public async Task<Pedido> CreatePedidoAsync(Pedido pedido, Reserva reserva)
     {
         Pedido result = null!;
@@ -27,7 +35,7 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
                 if (filasAfectadas == 0)
                 {
                     await transaccion.RollbackAsync();
-                    throw (new Exception("No se ha podido guardar el pedido") as SqlException)!;
+                    throw (new Exception("No se ha podido guardar el pedido.") as SqlException)!;
                 }
 
                 context.Reservas.Update(reserva);
@@ -37,7 +45,7 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
                 if (filasAfectadas == 0)
                 {
                     await transaccion.RollbackAsync();
-                    throw (new Exception("No se ha podido actualizar la reserva") as SqlException)!;
+                    throw (new Exception("No se ha podido actualizar la reserva.") as SqlException)!;
                 }
 
                 result = tracking.Entity;
@@ -54,7 +62,12 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
         return result;
     }
 
-    public async Task<bool> ExisteFacturaAsync(long id)
+    /// <summary>
+    /// Checks if a Pedido with the specified ID exists.
+    /// </summary>
+    /// <param name="id">The unique identifier of the Pedido</param>
+    /// <returns></returns>
+    public async Task<bool> ExistsPedidoAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Pedido))!.FindPrimaryKey()!.Properties[0];
 
@@ -63,6 +76,12 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
             .FirstOrDefaultAsync(a => EF.Property<long>(a, keyProperty.Name) == id) != null;
     }
 
+    /// <summary>
+    /// Retrieves a Pedido by its ID, including related entities such as Cliente, TipoPago,
+    /// Impuesto, Sucursal, and DetallePedidos.
+    /// </summary>
+    /// <param name="id">The unique identifier of the Pedido.</param>
+    /// <returns></returns>
     public async Task<Pedido?> FindByIdAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Pedido))!.FindPrimaryKey()!.Properties[0];
@@ -80,8 +99,11 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
             .AsNoTracking()
             .FirstOrDefaultAsync(a => EF.Property<long>(a, keyProperty.Name) == id);
     }
-
-    public async Task<ICollection<Pedido>> ListAsync()
+    /// <summary>
+    /// Retrieves all Pedidos with their associated TipoPago entities.
+    /// </summary>
+    /// <returns></returns>
+    public async Task<ICollection<Pedido>> ListAllAsync()
     {
         var collection = await context.Set<Pedido>()
             .Include(a => a.IdTipoPagoNavigation)

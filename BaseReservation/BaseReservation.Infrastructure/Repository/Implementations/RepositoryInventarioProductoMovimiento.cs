@@ -8,7 +8,13 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryInventarioProductoMovimiento(BaseReservationContext context, IRepositoryInventarioProducto repositoryInventarioProducto) : IRepositoryInventarioProductoMovimiento
 {
-    public async Task<bool> AgregarInventarioMovimientoProducto(InventarioProductoMovimiento inventarioProductoMovimiento)
+    /// <summary>
+    /// Creates a new InventarioProductoMovimiento and updates the related InventarioProducto based on the movement type.
+    /// </summary>
+    /// <param name="inventarioProductoMovimiento">The InventarioProductoMovimiento entity to be added.</param>
+    /// <returns></returns>
+    /// <exception cref="RequestFailedException"></exception>
+    public async Task<bool> CreateInventarioMovimientoProductoAsync(InventarioProductoMovimiento inventarioProductoMovimiento)
     {
         var result = true;
         var executionStrategy = context.Database.CreateExecutionStrategy();
@@ -28,10 +34,10 @@ public class RepositoryInventarioProductoMovimiento(BaseReservationContext conte
                 }
                 else
                 {
-                    var inventarioProducto = await repositoryInventarioProducto.GetInventarioProductoById(inventarioProductoMovimiento.IdInventarioProducto);
+                    var inventarioProducto = await repositoryInventarioProducto.FindByIdAsync(inventarioProductoMovimiento.IdInventarioProducto);
                     inventarioProducto!.Disponible += inventarioProductoMovimiento.TipoMovimiento == Enums.TipoMovimientoInventario.Salida ? inventarioProductoMovimiento.Cantidad * -1 : inventarioProductoMovimiento.Cantidad * 1;
 
-                    context.InventarioProducto.Update(inventarioProducto);
+                    context.InventarioProductos.Update(inventarioProducto);
                     rowsAffected = await context.SaveChangesAsync();
 
                     if (rowsAffected == 0)
@@ -57,7 +63,12 @@ public class RepositoryInventarioProductoMovimiento(BaseReservationContext conte
         return result;
     }
 
-    public async Task<ICollection<InventarioProductoMovimiento>> ObtenerMovimientosInventarioByInventario(short idInventario)
+    /// <summary>
+    /// Lists all InventarioProductoMovimiento entities associated with a specific Inventario.
+    /// </summary>
+    /// <param name="idInventario"> The unique identifier of the Inventario.</param>
+    /// <returns></returns>
+    public async Task<ICollection<InventarioProductoMovimiento>> ListAllByInventarioAsync(short idInventario)
     {
         var collection = await context.Set<InventarioProductoMovimiento>()
             .AsNoTracking()
@@ -72,7 +83,12 @@ public class RepositoryInventarioProductoMovimiento(BaseReservationContext conte
         return collection;
     }
 
-    public async Task<ICollection<InventarioProductoMovimiento>> ObtenerMovimientosInventarioByProducto(short idProducto)
+    /// <summary>
+    /// Lists all InventarioProductoMovimiento entities associated with a specific Producto.
+    /// </summary>
+    /// <param name="idProducto">The unique identifier of the Producto.</param>
+    /// <returns></returns>
+    public async Task<ICollection<InventarioProductoMovimiento>> ListAllByProductoAsync(short idProducto)
     {
         var collection = await context.Set<InventarioProductoMovimiento>()
             .AsNoTracking()
