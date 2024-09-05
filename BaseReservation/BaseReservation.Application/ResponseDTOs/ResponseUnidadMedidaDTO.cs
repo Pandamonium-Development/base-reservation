@@ -1,6 +1,6 @@
 ﻿namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseUnidadMedidaDTO
+public record ResponseUnidadMedidaDto
 {
     public byte Id { get; set; }
 
@@ -8,5 +8,5 @@ public record ResponseUnidadMedidaDTO
 
     public string Simbolo { get; set; } = null!;
 
-    public virtual ICollection<ResponseProductoDTO> Productos { get; set; } = new List<ResponseProductoDTO>();
+    public virtual ICollection<ResponseProductoDto> Productos { get; set; } = new List<ResponseProductoDto>();
 }

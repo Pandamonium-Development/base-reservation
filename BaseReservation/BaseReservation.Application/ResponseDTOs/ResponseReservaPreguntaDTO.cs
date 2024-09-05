@@ -2,7 +2,7 @@ using BaseReservation.Application.ResponseDTOs.Base;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseReservaPreguntaDTO : BaseEntity
+public record ResponseReservaPreguntaDto : BaseEntity
 {
     public int Id { get; set; }
 
@@ -14,5 +14,5 @@ public record ResponseReservaPreguntaDTO : BaseEntity
 
     public string? Respuesta { get; set; }
 
-    public virtual ResponseReservaDTO Reserva { get; set; } = null!;
+    public virtual ResponseReservaDto Reserva { get; set; } = null!;
 }

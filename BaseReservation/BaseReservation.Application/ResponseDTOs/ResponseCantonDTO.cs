@@ -15,5 +15,5 @@ public record ResponseCantonDTO
 
     public virtual ICollection<ResponseDistritoDTO> Distritos { get; set; } = new List<ResponseDistritoDTO>();
 
-    public virtual ResponseProvinciaDTO Provincia { get; set; } = null!;
+    public virtual ResponseProvinciaDto Provincia { get; set; } = null!;
 }

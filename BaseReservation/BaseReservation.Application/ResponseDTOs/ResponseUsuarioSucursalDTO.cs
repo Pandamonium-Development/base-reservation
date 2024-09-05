@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseUsuarioSucursalDTO
+public record ResponseUsuarioSucursalDto
 {
     public short Id { get; set; }
 
@@ -8,7 +8,7 @@ public record ResponseUsuarioSucursalDTO
 
     public byte IdSucursal { get; set; }
 
-    public virtual ResponseSucursalDTO Sucursal { get; set; } = null!;
+    public virtual ResponseSucursalDto Sucursal { get; set; } = null!;
 
-    public virtual ResponseUsuarioDTO Usuario { get; set; } = null!;
+    public virtual ResponseUsuarioDto Usuario { get; set; } = null!;
 }

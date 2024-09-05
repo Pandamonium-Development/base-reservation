@@ -2,7 +2,7 @@ using BaseReservation.Application.ResponseDTOs.Base;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseRolDTO : BaseEntity
+public record ResponseRolDto : BaseEntity
 {
     public byte Id { get; set; }
 
@@ -12,5 +12,5 @@ public record ResponseRolDTO : BaseEntity
 
     public bool Activo { get; set; }
 
-    public virtual ICollection<ResponseUsuarioDTO> Usuarios { get; set; } = new List<ResponseUsuarioDTO>();
+    public virtual ICollection<ResponseUsuarioDto> Usuarios { get; set; } = new List<ResponseUsuarioDto>();
 }

@@ -18,5 +18,5 @@ public record ResponseContactoDTO : BaseEntity
 
     public bool Activo { get; set; }
 
-    public virtual ResponseProveedorDTO Proveedor { get; set; } = null!;
+    public virtual ResponseProveedorDto Proveedor { get; set; } = null!;
 }

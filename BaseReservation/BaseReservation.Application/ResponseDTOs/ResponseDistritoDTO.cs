@@ -12,9 +12,9 @@ public record ResponseDistritoDTO
 
     public virtual ResponseCantonDTO Canton { get; set; } = null!;
 
-    public virtual ICollection<ResponseProveedorDTO> Proveedores { get; set; } = new List<ResponseProveedorDTO>();
+    public virtual ICollection<ResponseProveedorDto> Proveedores { get; set; } = new List<ResponseProveedorDto>();
 
-    public virtual ICollection<ResponseSucursalDTO> Sucursales { get; set; } = new List<ResponseSucursalDTO>();
+    public virtual ICollection<ResponseSucursalDto> Sucursales { get; set; } = new List<ResponseSucursalDto>();
 
-    public virtual ICollection<ResponseUsuarioDTO> Usuarios { get; set; } = new List<ResponseUsuarioDTO>();
+    public virtual ICollection<ResponseUsuarioDto> Usuarios { get; set; } = new List<ResponseUsuarioDto>();
 }

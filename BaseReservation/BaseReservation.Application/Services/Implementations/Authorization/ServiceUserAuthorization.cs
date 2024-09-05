@@ -8,10 +8,10 @@ namespace BaseReservation.Application.Services.Implementations.Authorization;
 
 public class ServiceUserAuthorization(IServiceUserContext serviceUserContext, IRepositoryUsuario repositoryUsuario, IMapper mapper) : IServiceUserAuthorization
 {
-    public async Task<ResponseUsuarioDTO> GetLoggedUser()
+    public async Task<ResponseUsuarioDto> GetLoggedUser()
     {
         var usuario = await repositoryUsuario.FindByEmailAsync(serviceUserContext.UserId!);
         var user = usuario ?? throw new NotFoundException("No existe el usuario");
-        return mapper.Map<ResponseUsuarioDTO>(user);
+        return mapper.Map<ResponseUsuarioDto>(user);
     }
 }

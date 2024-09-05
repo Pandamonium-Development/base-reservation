@@ -1,6 +1,6 @@
 ﻿namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseSucursalFeriadoDTO
+public record ResponseSucursalFeriadoDto
 {
     public short Id { get; set; }
 
@@ -14,5 +14,5 @@ public record ResponseSucursalFeriadoDTO
 
     public virtual ResponseFeriadoDTO Feriado { get; set; } = null!;
 
-    public virtual ResponseSucursalDTO Sucursal { get; set; } = null!;
+    public virtual ResponseSucursalDto Sucursal { get; set; } = null!;
 }

@@ -37,7 +37,7 @@ public record ResponseFacturaDTO : BaseEntity
 
     public virtual ResponseImpuestoDTO Impuesto { get; set; } = null!;
 
-    public virtual ResponseTipoPagoDTO TipoPago { get; set; } = null!;
+    public virtual ResponseTipoPagoDto TipoPago { get; set; } = null!;
 
     public virtual ResponsePedidoDTO? Pedido { get; set; } = null!;
 

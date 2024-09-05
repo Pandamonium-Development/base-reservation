@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseProvinciaDTO
+public record ResponseProvinciaDto
 {
     public byte Id { get; set; }
 

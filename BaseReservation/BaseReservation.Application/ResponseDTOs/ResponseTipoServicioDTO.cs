@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseTipoServicioDTO
+public record ResponseTipoServicioDto
 {
     public byte Id { get; set; }
 
@@ -8,5 +8,5 @@ public record ResponseTipoServicioDTO
 
     public TimeOnly Duracion { get; set; }
 
-    public virtual ICollection<ResponseServicioDTO> Servicios { get; set; } = new List<ResponseServicioDTO>();
+    public virtual ICollection<ResponseServicioDto> Servicios { get; set; } = new List<ResponseServicioDto>();
 }

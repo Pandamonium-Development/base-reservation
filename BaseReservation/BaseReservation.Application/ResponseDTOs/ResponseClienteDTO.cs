@@ -22,7 +22,7 @@ public record ResponseClienteDTO : BaseEntity
 
     public virtual ICollection<ResponseFacturaDTO> Facturas { get; set; } = new List<ResponseFacturaDTO>();
 
-    public virtual ICollection<ResponseReservaDTO> Reservas { get; set; } = new List<ResponseReservaDTO>();
+    public virtual ICollection<ResponseReservaDto> Reservas { get; set; } = new List<ResponseReservaDto>();
 
     public virtual ResponseDistritoDTO Distrito { get; set; } = null!;
 }
