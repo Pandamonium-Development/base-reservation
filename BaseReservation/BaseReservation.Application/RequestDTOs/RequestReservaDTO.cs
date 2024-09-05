@@ -22,5 +22,5 @@ public record RequestReservaDto: RequestBaseDto
 
     public List<RequestReservaPreguntaDto> ReservaPregunta { get; set; } = null!;
 
-    public List<RequestReservaServicioDto> ReservaServicios { get; set; } = null!;
+    public List<RequestDetalleReservaDto> DetalleReservas { get; set; } = null!;
 }

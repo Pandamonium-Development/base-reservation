@@ -22,5 +22,5 @@ public record ResponseServicioDto : BaseEntity
 
     public virtual ResponseTipoServicioDto TipoServicio { get; set; } = null!;
 
-    public virtual ICollection<ResponseReservaServicioDto> ReservaServicios { get; set; } = new List<ResponseReservaServicioDto>();
+    public virtual ICollection<ResponseDetalleReservaDto> DetalleReservas { get; set; } = new List<ResponseDetalleReservaDto>();
 }

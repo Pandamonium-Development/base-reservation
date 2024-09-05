@@ -14,7 +14,6 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Configuration\Authentication\" />
-      <Folder Include="Configuration\Pagination\" />
       <Folder Include="Validations\" />
     </ItemGroup>
     <ItemGroup>

@@ -51,8 +51,9 @@ public class ModelToDtoApplicationProfile : Profile
         CreateMap<Horario, ResponseHorarioDto>();
         CreateMap<Distrito, ResponseDistritoDto>()
             .ForMember(dest => dest.Canton, inp => inp.MapFrom(ori => ori.IdCantonNavigation));
-        CreateMap<ReservaServicio, ResponseReservaServicioDto>()
+        CreateMap<DetalleReserva, ResponseDetalleReservaDto>()
             .ForMember(dest => dest.Reserva, inp => inp.MapFrom(ori => ori.IdReservaNavigation))
+            .ForMember(dest => dest.Producto, inp => inp.MapFrom(ori => ori.IdProductoNavigation))
             .ForMember(dest => dest.Servicio, inp => inp.MapFrom(ori => ori.IdServicioNavigation));
         CreateMap<Servicio, ResponseServicioDto>()
             .ForMember(dest => dest.TipoServicio, inp => inp.MapFrom(ori => ori.IdTipoServicioNavigation));

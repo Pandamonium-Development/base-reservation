@@ -6,7 +6,6 @@ using BaseReservation.Infrastructure.Models;
 using BaseReservation.Application.ResponseDTOs.Base;
 using BaseReservation.Application.ValueResolvers;
 
-
 namespace BaseReservation.Application.Profiles;
 
 public class MiscApplicationProfile : Profile
@@ -31,7 +30,7 @@ public class MiscApplicationProfile : Profile
         CreateMap<ResponseReservaPreguntaDto, ReservaPregunta>()
             .IncludeBase<BaseEntity, BaseModel>();
 
-        CreateMap<ResponseReservaServicioDto, ReservaServicio>();
+        CreateMap<ResponseDetalleReservaDto, DetalleReserva>();
 
         CreateMap<ResponsePedidoDto, Pedido>()
             .IncludeBase<BaseEntity, BaseModel>();
