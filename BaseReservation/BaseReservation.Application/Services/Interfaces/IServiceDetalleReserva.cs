@@ -1,6 +1,5 @@
 ﻿using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Infrastructure.Models;
 
 namespace BaseReservation.Application.Services.Interfaces;
 
