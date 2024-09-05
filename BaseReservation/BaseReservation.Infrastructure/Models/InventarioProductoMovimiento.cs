@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BaseReservation.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Models;
@@ -15,7 +16,7 @@ public partial class InventarioProductoMovimiento
 
     public long IdInventarioProducto { get; set; }
 
-    public string TipoMovimiento { get; set; } = null!;
+    public TipoMovimientoInventario TipoMovimiento { get; set; }
 
     [Column(TypeName = "decimal(18, 2)")]
     public decimal Cantidad { get; set; }
