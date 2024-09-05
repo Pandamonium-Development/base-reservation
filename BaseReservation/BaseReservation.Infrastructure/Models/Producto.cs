@@ -65,11 +65,11 @@ public partial class Producto
 
     [ForeignKey("IdCategoria")]
     [InverseProperty("Productos")]
-    public virtual Categorium IdCategoriaNavigation { get; set; } = null!;
+    public virtual Categoria IdCategoriaNavigation { get; set; } = null!;
 
     [ForeignKey("IdUnidadMedida")]
     [InverseProperty("Productos")]
-    public virtual UnidadMedidum IdUnidadMedidaNavigation { get; set; } = null!;
+    public virtual UnidadMedida IdUnidadMedidaNavigation { get; set; } = null!;
 
     [InverseProperty("IdProductoNavigation")]
     public virtual ICollection<InventarioProducto> InventarioProductos { get; set; } = new List<InventarioProducto>();

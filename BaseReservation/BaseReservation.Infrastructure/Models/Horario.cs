@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BaseReservation.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Models;
