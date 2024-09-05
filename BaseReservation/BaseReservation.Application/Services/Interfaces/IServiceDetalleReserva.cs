@@ -1,14 +1,14 @@
-﻿using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
+﻿using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Infrastructure.Models;
 
-namespace BaseReservation.Application.Services.Interfaces
+namespace BaseReservation.Application.Services.Interfaces;
+
+public interface IServiceDetalleReserva
 {
-    public interface IServiceDetalleReserva
-    {
-        Task<ICollection<ResponseReservaServicioDto>> ListAllByReservaAsync(int idReserva);
+    Task<ICollection<ResponseDetalleReservaDto>> ListAllByReservaAsync(int idReserva);
 
-        Task<ResponseReservaServicioDto?> FindByIdAsync(int id);
+    Task<ResponseDetalleReservaDto?> FindByIdAsync(int id);
 
-        Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<RequestReservaServicioDto> reservaServicios);
-    }
+    Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<RequestDetalleReservaDto> detallesReservaDto);
 }
