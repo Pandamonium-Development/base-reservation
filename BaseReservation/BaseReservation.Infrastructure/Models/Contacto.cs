@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +6,7 @@ namespace BaseReservation.Infrastructure.Models;
 
 [Table("Contacto")]
 [Index("IdProveedor", Name = "IX_Contacto_IdProveedor")]
-public partial class Contacto
+public partial class Contacto : BaseModel
 {
     [Key]
     public short Id { get; set; }
@@ -27,18 +25,6 @@ public partial class Contacto
     public byte IdProveedor { get; set; }
 
     public bool Activo { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
-
-    [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
-
-    [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
-
-    [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
 
     [ForeignKey("IdProveedor")]
     [InverseProperty("Contactos")]

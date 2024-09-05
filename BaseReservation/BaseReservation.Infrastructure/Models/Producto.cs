@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +7,7 @@ namespace BaseReservation.Infrastructure.Models;
 [Table("Producto")]
 [Index("IdCategoria", Name = "IX_Producto_IdCategoria")]
 [Index("IdUnidadMedida", Name = "IX_Producto_IdUnidadMedida")]
-public partial class Producto
+public partial class Producto : BaseModel
 {
     [Key]
     public short Id { get; set; }
@@ -35,18 +33,6 @@ public partial class Producto
     public byte IdUnidadMedida { get; set; }
 
     public bool Activo { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
-
-    [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
-
-    [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
-
-    [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
 
     [InverseProperty("IdProductoNavigation")]
     public virtual ICollection<DetalleFacturaProducto> DetalleFacturaProductos { get; set; } = new List<DetalleFacturaProducto>();

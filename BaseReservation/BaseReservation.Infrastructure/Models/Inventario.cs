@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BaseReservation.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Models;
 
 [Table("Inventario")]
 [Index("IdSucursal", Name = "IX_Inventario_IdSucursal")]
-public partial class Inventario
+public partial class Inventario : BaseModel
 {
     [Key]
     public short Id { get; set; }
@@ -17,21 +16,9 @@ public partial class Inventario
 
     public string Nombre { get; set; } = null!;
 
-    public string TipoInventario { get; set; } = null!;
+    public TipoInventario TipoInventario { get; set; }
 
     public bool Activo { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
-
-    [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
-
-    [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
-
-    [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
 
     [ForeignKey("IdSucursal")]
     [InverseProperty("Inventarios")]

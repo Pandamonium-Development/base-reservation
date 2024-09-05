@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using BaseReservation.Infrastructure.Enums;
 
 namespace BaseReservation.Infrastructure.Models;
 
 [Table("Feriado")]
-public partial class Feriado
+public partial class Feriado : BaseModel
 {
     [Key]
     public byte Id { get; set; }
@@ -16,23 +14,11 @@ public partial class Feriado
     public string Nombre { get; set; } = null!;
 
     [StringLength(25)]
-    public string Mes { get; set; } = null!;
+    public Mes Mes { get; set; }
 
     public byte Dia { get; set; }
 
     public bool Activo { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
-
-    [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
-
-    [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
-
-    [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
 
     [InverseProperty("IdFeriadoNavigation")]
     public virtual ICollection<SucursalFeriado> SucursalFeriados { get; set; } = new List<SucursalFeriado>();

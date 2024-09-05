@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +6,7 @@ namespace BaseReservation.Infrastructure.Models;
 
 [Table("Servicio")]
 [Index("IdTipoServicio", Name = "IX_Servicio_IdTipoServicio")]
-public partial class Servicio
+public partial class Servicio : BaseModel
 {
     [Key]
     public byte Id { get; set; }
@@ -28,18 +26,6 @@ public partial class Servicio
     public string? Observacion { get; set; }
 
     public bool Activo { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
-
-    [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
-
-    [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
-
-    [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
 
     [InverseProperty("IdServicioNavigation")]
     public virtual ICollection<DetalleFactura> DetalleFacturas { get; set; } = new List<DetalleFactura>();

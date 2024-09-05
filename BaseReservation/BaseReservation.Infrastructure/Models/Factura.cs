@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +10,7 @@ namespace BaseReservation.Infrastructure.Models;
 [Index("IdPedido", Name = "IX_Factura_IdPedido")]
 [Index("IdSucursal", Name = "IX_Factura_IdSucursal")]
 [Index("IdTipoPago", Name = "IX_Factura_IdTipoPago")]
-public partial class Factura
+public partial class Factura : BaseModel
 {
     [Key]
     public long Id { get; set; }
@@ -45,18 +43,6 @@ public partial class Factura
 
     [Column(TypeName = "money")]
     public decimal MontoTotal { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
-
-    [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
-
-    [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
-
-    [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
 
     [InverseProperty("IdFacturaNavigation")]
     public virtual ICollection<DetalleFactura> DetalleFacturas { get; set; } = new List<DetalleFactura>();

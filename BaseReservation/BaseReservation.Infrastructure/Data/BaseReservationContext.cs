@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using BaseReservation.Infrastructure.Enums;
 using BaseReservation.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -206,6 +207,8 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
 
         modelBuilder.Entity<Feriado>(entity =>
         {
+            entity.Property(e => e.Mes).HasConversion(x => x.ToString(), y => (Mes)Enum.Parse(typeof(Mes), y));
+
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Activo).HasDefaultValue(true);
         });
@@ -218,6 +221,8 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
         modelBuilder.Entity<Horario>(entity =>
         {
             entity.Property(e => e.Activo).HasDefaultValue(true);
+
+            entity.Property(a => a.Dia).HasConversion(m => m.ToString(), b => (DiaSemana)Enum.Parse(typeof(DiaSemana), b));
         });
 
         modelBuilder.Entity<Impuesto>(entity =>
@@ -227,8 +232,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
 
         modelBuilder.Entity<Inventario>(entity =>
         {
-            entity.Property(e => e.Nombre).HasDefaultValue("");
-            entity.Property(e => e.TipoInventario).HasDefaultValue("");
+            entity.Property(a => a.TipoInventario).HasConversion(m => m.ToString(), b => (TipoInventario)Enum.Parse(typeof(TipoInventario), b));
 
             entity.HasOne(d => d.IdSucursalNavigation).WithMany(p => p.Inventarios)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -248,6 +252,8 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
 
         modelBuilder.Entity<InventarioProductoMovimiento>(entity =>
         {
+            entity.Property(a => a.TipoMovimiento).HasConversion(m => m.ToString(), b => (TipoMovimientoInventario)Enum.Parse(typeof(TipoMovimientoInventario), b));
+
             entity.HasOne(d => d.IdInventarioProductoNavigation).WithMany(p => p.InventarioProductoMovimientos)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_InventarioProductoMovimiento_InventarioProducto");
