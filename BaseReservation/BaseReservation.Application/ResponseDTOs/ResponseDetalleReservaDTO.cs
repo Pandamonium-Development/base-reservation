@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseReservaServicioDto
+public record ResponseDetalleReservaDto
 {
     public int Id { get; set; }
 
