@@ -10,9 +10,9 @@ namespace BaseReservation.Application.Services.Interfaces
 {
     public interface IServiceSucursalHorarioBloqueo
     {
-        Task<ICollection<ResponseSucursalHorarioBloqueoDto>> GetSucursalHorarioBloqueosBySucursalHorarioAsync(short idSucursalHorario);
+        Task<ICollection<ResponseSucursalHorarioBloqueoDto>> ListAllBySucursalHorarioAsync(short idSucursalHorario);
 
-        Task<ResponseSucursalHorarioBloqueoDto> GetSucursalHorarioBloqueosByIdAsync(long id);
+        Task<ResponseSucursalHorarioBloqueoDto> FindByIdAsync(long id);
 
         Task<ResponseSucursalHorarioBloqueoDto> CreateSucursalHorarioBloqueoAsync(RequestSucursalHorarioBloqueoDto bloqueoDTO);
 

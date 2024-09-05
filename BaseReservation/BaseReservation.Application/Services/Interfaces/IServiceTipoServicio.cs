@@ -4,7 +4,7 @@ namespace BaseReservation.Application.Services.Interfaces;
 
 public interface IServiceTipoServicio
 {
-    Task<ICollection<ResponseTipoServicioDto>> ListAsync();
+    Task<ICollection<ResponseTipoServicioDto>> ListAllAsync();
 
     Task<ResponseTipoServicioDto> FindByIdAsync(byte id);
 }

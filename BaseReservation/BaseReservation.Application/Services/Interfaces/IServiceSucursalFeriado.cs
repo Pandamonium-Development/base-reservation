@@ -5,9 +5,9 @@ namespace BaseReservation.Application.Services.Interfaces;
 
 public interface IServiceSucursalFeriado
 {
-    Task<ICollection<ResponseSucursalFeriadoDto>> GetFeriadosBySucursalAsync(byte idSucursal, short? anno);
+    Task<ICollection<ResponseSucursalFeriadoDto>> ListAllBySucursalAsync(byte idSucursal, short? anno);
 
-    Task<ResponseSucursalFeriadoDto?> GetSucursalFeriadoByIdAsync(short id);
+    Task<ResponseSucursalFeriadoDto?> FindByIdAsync(short id);
 
     Task<bool> CreateSucursalFeriadosAsync(byte idSucursal, IEnumerable<RequestSucursalFeriadoDto> sucursalFeriados);
 }

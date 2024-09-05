@@ -4,5 +4,5 @@ namespace BaseReservation.Application.Services.Interfaces;
 
 public interface IServiceUsuarioSucursal
 {
-    Task<bool> AssignEncargados(byte idSucursal, IEnumerable<RequestUsuarioSucursalDto> usuariosSucursalDto);
+    Task<bool> AssignEncargadosAsync(byte idSucursal, IEnumerable<RequestUsuarioSucursalDto> usuariosSucursalDto);
 }

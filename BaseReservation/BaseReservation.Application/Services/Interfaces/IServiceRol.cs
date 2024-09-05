@@ -4,7 +4,7 @@ namespace BaseReservation.Application.Services.Interfaces;
 
 public interface IServiceRol
 {
-    Task<ICollection<ResponseRolDto>> ListAsync();
+    Task<ICollection<ResponseRolDto>> ListAllAsync();
 
     Task<ResponseRolDto> FindByIdAsync(byte id);
 }

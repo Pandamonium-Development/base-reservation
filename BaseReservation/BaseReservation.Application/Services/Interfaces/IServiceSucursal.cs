@@ -5,9 +5,9 @@ namespace BaseReservation.Application.Services.Interfaces;
 
 public interface IServiceSucursal
 {
-    Task<ICollection<ResponseSucursalDto>> ListAsync();
+    Task<ICollection<ResponseSucursalDto>> ListAllAsync();
 
-    Task<ICollection<ResponseSucursalDto>> ListByRolAsync();
+    Task<ICollection<ResponseSucursalDto>> ListAllByRolAsync();
 
     Task<ResponseSucursalDto> FindByIdAsync(byte id);
 

@@ -4,7 +4,7 @@ namespace BaseReservation.Application.Services.Interfaces;
 
 public interface IServiceUnidadMedida
 {
-    Task<ICollection<ResponseUnidadMedidaDto>> ListAsync();
+    Task<ICollection<ResponseUnidadMedidaDto>> ListAllAsync();
 
     Task<ResponseUnidadMedidaDto> FindByIdAsync(byte id);
 }

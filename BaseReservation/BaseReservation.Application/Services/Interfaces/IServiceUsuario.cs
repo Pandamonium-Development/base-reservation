@@ -5,9 +5,9 @@ namespace BaseReservation.Application.Services.Interfaces;
 
 public interface IServiceUsuario
 {
-    Task<ICollection<ResponseUsuarioDto>> ListAsync(string? rol = null);
+    Task<ICollection<ResponseUsuarioDto>> ListAllAsync(string? rol = null);
 
     Task<ResponseUsuarioDto> FindByIdAsync(short id);
 
-    Task<bool> FreeAssignmentSucursal(short id, byte idSucursalAsignacion);
+    Task<bool> FreeAssignmentSucursalAsync(short id, byte idSucursalAsignacion);
 }
