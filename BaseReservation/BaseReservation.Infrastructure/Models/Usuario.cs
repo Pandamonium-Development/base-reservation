@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +8,7 @@ namespace BaseReservation.Infrastructure.Models;
 [Index("IdDistrito", Name = "IX_Usuario_IdDistrito")]
 [Index("IdGenero", Name = "IX_Usuario_IdGenero")]
 [Index("IdRol", Name = "IX_Usuario_IdRol")]
-public partial class Usuario
+public partial class Usuario : BaseModel
 {
     [Key]
     public short Id { get; set; }
@@ -48,18 +46,6 @@ public partial class Usuario
     public string? UrlFoto { get; set; }
 
     public byte IdRol { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
-
-    [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
-
-    [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
-
-    [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
 
     [ForeignKey("IdDistrito")]
     [InverseProperty("Usuarios")]

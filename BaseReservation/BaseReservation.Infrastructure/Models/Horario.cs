@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BaseReservation.Infrastructure.Enums;
-using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Models;
 
 [Table("Horario")]
-public partial class Horario
+public partial class Horario : BaseModel
 {
     [Key]
     public short Id { get; set; }
@@ -20,18 +17,6 @@ public partial class Horario
     public TimeOnly HoraFin { get; set; }
 
     public bool Activo { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
-
-    [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
-
-    [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
-
-    [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
 
     [InverseProperty("IdHorarioNavigation")]
     public virtual ICollection<SucursalHorario> SucursalHorarios { get; set; } = new List<SucursalHorario>();

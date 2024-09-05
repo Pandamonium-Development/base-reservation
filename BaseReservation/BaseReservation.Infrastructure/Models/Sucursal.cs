@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +6,7 @@ namespace BaseReservation.Infrastructure.Models;
 
 [Table("Sucursal")]
 [Index("IdDistrito", Name = "IX_Sucursal_IdDistrito")]
-public partial class Sucursal
+public partial class Sucursal : BaseModel
 {
     [Key]
     public byte Id { get; set; }
@@ -30,18 +28,6 @@ public partial class Sucursal
     public string? DireccionExacta { get; set; }
 
     public bool Activo { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
-
-    [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
-
-    [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
-
-    [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
 
     [InverseProperty("IdSucursalNavigation")]
     public virtual ICollection<Factura> Facturas { get; set; } = new List<Factura>();
