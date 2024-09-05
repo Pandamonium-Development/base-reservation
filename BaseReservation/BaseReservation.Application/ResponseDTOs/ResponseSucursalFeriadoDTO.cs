@@ -12,7 +12,7 @@ public record ResponseSucursalFeriadoDTO
 
     public short Anno { get; set; }
 
-    public virtual ResponseFeriadoDTO Feriado { get; set; } = null!;
+    public virtual ResponseFeriadoDto Feriado { get; set; } = null!;
 
     public virtual ResponseSucursalDTO Sucursal { get; set; } = null!;
 }

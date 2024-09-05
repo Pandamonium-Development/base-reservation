@@ -22,11 +22,11 @@ public record ResponseReservaDTO : BaseEntity
 
     public virtual ResponseSucursalDTO Sucursal { get; set; } = null!;
 
-    public virtual ResponseClienteDTO Cliente { get; set; } = null!;
+    public virtual ResponseClienteDto Cliente { get; set; } = null!;
 
     public virtual ICollection<ResponseReservaPreguntaDTO> ReservaPregunta { get; set; } = new List<ResponseReservaPreguntaDTO>();
 
     public virtual ICollection<ResponseReservaServicioDTO> ReservaServicios { get; set; } = new List<ResponseReservaServicioDTO>();
 
-    public virtual ICollection<ResponsePedidoDTO> Pedidos { get; set; } = new List<ResponsePedidoDTO>();
+    public virtual ICollection<ResponsePedidoDto> Pedidos { get; set; } = new List<ResponsePedidoDto>();
 }

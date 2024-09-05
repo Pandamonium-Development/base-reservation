@@ -8,5 +8,5 @@ public record ResponseTipoPagoDTO
 
     public int Referencia { get; set; }
 
-    public virtual ICollection<ResponseFacturaDTO> Facturas { get; set; } = new List<ResponseFacturaDTO>();
+    public virtual ICollection<ResponseFacturaDto> Facturas { get; set; } = new List<ResponseFacturaDto>();
 }

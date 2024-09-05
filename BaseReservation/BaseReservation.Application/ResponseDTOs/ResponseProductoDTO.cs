@@ -22,13 +22,13 @@ public record ResponseProductoDTO : BaseEntity
 
     public bool Activo { get; set; }
 
-    public virtual ICollection<ResponseDetalleFacturaProductoDTO> DetalleFacturaProductos { get; set; } = new List<ResponseDetalleFacturaProductoDTO>();
+    public virtual ICollection<ResponseDetalleFacturaProductoDto> DetalleFacturaProductos { get; set; } = new List<ResponseDetalleFacturaProductoDto>();
 
-    public virtual ResponseCategoriaDTO Categoria { get; set; } = null!;
+    public virtual ResponseCategoriaDto Categoria { get; set; } = null!;
 
     public virtual ResponseUnidadMedidaDTO UnidadMedida { get; set; } = null!;
 
-    public virtual ICollection<ResponseInventarioDTO> Inventarios { get; set; } = new List<ResponseInventarioDTO>();
+    public virtual ICollection<ResponseInventarioDto> Inventarios { get; set; } = new List<ResponseInventarioDto>();
 
     public virtual ICollection<ResponseInventarioProductoDto> InventarioProductos { get; set; } = new List<ResponseInventarioProductoDto>();
 }

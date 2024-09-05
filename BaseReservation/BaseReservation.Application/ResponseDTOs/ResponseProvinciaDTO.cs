@@ -6,5 +6,5 @@ public record ResponseProvinciaDTO
 
     public string Nombre { get; set; } = null!;
 
-    public virtual ICollection<ResponseCantonDTO> Cantons { get; set; } = new List<ResponseCantonDTO>();
+    public virtual ICollection<ResponseCantonDto> Cantons { get; set; } = new List<ResponseCantonDto>();
 }

@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseDetalleFacturaProductoDTO
+public record ResponseDetalleFacturaProductoDto
 {
     public long Id { get; set; }
 
@@ -14,7 +14,7 @@ public record ResponseDetalleFacturaProductoDTO
 
     public decimal Cantidad { get; set; }
 
-    public virtual ResponseDetalleFacturaDTO DetalleFactura { get; set; } = null!;
+    public virtual ResponseDetalleFacturaDto DetalleFactura { get; set; } = null!;
 
     public virtual ResponseProductoDTO Producto { get; set; } = null!;
 }

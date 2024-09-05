@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseImpuestoDTO
+public record ResponseImpuestoDto
 {
     public byte Id { get; set; }
 
@@ -8,5 +8,5 @@ public record ResponseImpuestoDTO
 
     public decimal Porcentaje { get; set; }
 
-    public virtual ICollection<ResponseFacturaDTO> Facturas { get; set; } = new List<ResponseFacturaDTO>();
+    public virtual ICollection<ResponseFacturaDto> Facturas { get; set; } = new List<ResponseFacturaDto>();
 }

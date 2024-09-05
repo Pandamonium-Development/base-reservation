@@ -8,7 +8,7 @@ public record ResponseSucursalHorarioDTO
 
     public short IdHorario { get; set; }
 
-    public virtual ResponseHorarioDTO Horario { get; set; } = null!;
+    public virtual ResponseHorarioDto Horario { get; set; } = null!;
 
     public virtual ResponseSucursalDTO Sucursal { get; set; } = null!;
 

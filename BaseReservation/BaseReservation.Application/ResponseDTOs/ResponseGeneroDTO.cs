@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseGeneroDTO
+public record ResponseGeneroDto
 {
     public byte Id { get; set; }
 

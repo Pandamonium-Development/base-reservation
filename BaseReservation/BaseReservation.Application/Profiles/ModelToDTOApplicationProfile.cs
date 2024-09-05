@@ -15,16 +15,16 @@ public class ModelToDtoApplicationProfile :Profile
         CreateMap<Producto, ResponseProductoDTO>()
             .ForMember(dest => dest.UnidadMedida, inp => inp.MapFrom(ori => ori.IdUnidadMedidaNavigation))
             .ForMember(dest => dest.Categoria, inp => inp.MapFrom(ori => ori.IdCategoriaNavigation));
-        CreateMap<Categoria, ResponseCategoriaDTO>();
+        CreateMap<Categoria, ResponseCategoriaDto>();
         CreateMap<UnidadMedida, ResponseUnidadMedidaDTO>();
         CreateMap<Rol, ResponseRolDTO>();
-        CreateMap<Factura, ResponseFacturaDTO>()
+        CreateMap<Factura, ResponseFacturaDto>()
             .ForMember(dest => dest.Cliente, inp => inp.MapFrom(ori => ori.IdClienteNavigation))
             .ForMember(dest => dest.TipoPago, inp => inp.MapFrom(ori => ori.IdTipoPagoNavigation))
             .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation))
             .ForMember(dest => dest.Impuesto, inp => inp.MapFrom(ori => ori.IdImpuestoNavigation))
             .ForMember(dest => dest.Pedido, inp => inp.MapFrom(ori => ori.IdPedidoNavigation));
-        CreateMap<Pedido, ResponsePedidoDTO>()
+        CreateMap<Pedido, ResponsePedidoDto>()
            .ForMember(dest => dest.Cliente, inp => inp.MapFrom(ori => ori.IdClienteNavigation))
            .ForMember(dest => dest.TipoPago, inp => inp.MapFrom(ori => ori.IdTipoPagoNavigation))
            .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation))
@@ -32,7 +32,7 @@ public class ModelToDtoApplicationProfile :Profile
            .ForMember(dest => dest.Reserva, inp => inp.MapFrom(ori => ori.IdReservaNavigation));
         CreateMap<Sucursal, ResponseSucursalDTO>()
             .ForMember(dest => dest.Distrito, inp => inp.MapFrom(ori => ori.IdDistritoNavigation));
-        CreateMap<Inventario, ResponseInventarioDTO>();
+        CreateMap<Inventario, ResponseInventarioDto>();
         CreateMap<UsuarioSucursal, ResponseUsuarioSucursalDTO>()
             .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation))
             .ForMember(dest => dest.Usuario, inp => inp.MapFrom(ori => ori.IdUsuarioNavigation));
@@ -49,8 +49,8 @@ public class ModelToDtoApplicationProfile :Profile
             .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation));
         CreateMap<SucursalHorarioBloqueo, ResponseSucursalHorarioBloqueoDTO>()
             .ForMember(dest => dest.SucursalHorario, inp => inp.MapFrom(ori => ori.IdSucursalHorarioNavigation));
-        CreateMap<Horario, ResponseHorarioDTO>();
-        CreateMap<Distrito, ResponseDistritoDTO>()
+        CreateMap<Horario, ResponseHorarioDto>();
+        CreateMap<Distrito, ResponseDistritoDto>()
             .ForMember(dest => dest.Canton, inp => inp.MapFrom(ori => ori.IdCantonNavigation));
         CreateMap<ReservaServicio, ResponseReservaServicioDTO>()
             .ForMember(dest => dest.Reserva, inp => inp.MapFrom(ori => ori.IdReservaNavigation))
@@ -58,26 +58,26 @@ public class ModelToDtoApplicationProfile :Profile
         CreateMap<Servicio, ResponseServicioDTO>()
             .ForMember(dest => dest.TipoServicio, inp => inp.MapFrom(ori => ori.IdTipoServicioNavigation));
         CreateMap<TipoServicio, ResponseTipoServicioDTO>();
-        CreateMap<Canton, ResponseCantonDTO>()
+        CreateMap<Canton, ResponseCantonDto>()
             .ForMember(dest => dest.Provincia, inp => inp.MapFrom(ori => ori.IdProvinciaNavigation));
-        CreateMap<Contacto, ResponseContactoDTO>()
+        CreateMap<Contacto, ResponseContactoDto>()
             .ForMember(dest => dest.Proveedor, inp => inp.MapFrom(ori => ori.IdProveedorNavigation));
-        CreateMap<DetalleFactura, ResponseDetalleFacturaDTO>()
+        CreateMap<DetalleFactura, ResponseDetalleFacturaDto>()
             .ForMember(dest => dest.Factura, inp => inp.MapFrom(ori => ori.IdFacturaNavigation))
             .ForMember(dest => dest.Servicio, inp => inp.MapFrom(ori => ori.IdServicioNavigation));
-        CreateMap<DetallePedido, ResponseDetallePedidoDTO>()
+        CreateMap<DetallePedido, ResponseDetallePedidoDto>()
             .ForMember(dest => dest.Pedido, inp => inp.MapFrom(ori => ori.IdPedidoNavigation))
             .ForMember(dest => dest.Servicio, inp => inp.MapFrom(ori => ori.IdServicioNavigation));
-        CreateMap<DetalleFacturaProducto, ResponseDetalleFacturaProductoDTO>()
+        CreateMap<DetalleFacturaProducto, ResponseDetalleFacturaProductoDto>()
             .ForMember(dest => dest.DetalleFactura, inp => inp.MapFrom(ori => ori.IdDetalleFacturaNavigation))
             .ForMember(dest => dest.Producto, inp => inp.MapFrom(ori => ori.IdProductoNavigation));
-        CreateMap<DetallePedidoProducto, ResponseDetallePedidoProductoDTO>()
+        CreateMap<DetallePedidoProducto, ResponseDetallePedidoProductoDto>()
             .ForMember(dest => dest.DetallePedido, inp => inp.MapFrom(ori => ori.IdDetallePedidoNavigation))
             .ForMember(dest => dest.Producto, inp => inp.MapFrom(ori => ori.IdProductoNavigation));
-        CreateMap<Feriado, ResponseFeriadoDTO>();
-        CreateMap<Genero, ResponseGeneroDTO>();
-        CreateMap<Impuesto, ResponseImpuestoDTO>();
-        CreateMap<Inventario, ResponseInventarioDTO>()
+        CreateMap<Feriado, ResponseFeriadoDto>();
+        CreateMap<Genero, ResponseGeneroDto>();
+        CreateMap<Impuesto, ResponseImpuestoDto>();
+        CreateMap<Inventario, ResponseInventarioDto>()
             .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation));
         CreateMap<InventarioProducto, ResponseInventarioProductoDto>()
             .ForMember(dest => dest.Inventario, inp => inp.MapFrom(ori => ori.IdInventarioNavigation))
@@ -90,7 +90,7 @@ public class ModelToDtoApplicationProfile :Profile
         CreateMap<UsuarioSucursal, ResponseUsuarioSucursalDTO>()
              .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation))
              .ForMember(dest => dest.Usuario, inp => inp.MapFrom(ori => ori.IdUsuarioNavigation));
-        CreateMap<Cliente, ResponseClienteDTO>()
+        CreateMap<Cliente, ResponseClienteDto>()
               .ForMember(dest => dest.Distrito, inp => inp.MapFrom(ori => ori.IdDistritoNavigation));
         CreateMap<InventarioProductoMovimiento, ResponseInventarioProductoMovimientoDto>()
             .ForMember(dest => dest.InventarioProducto, inp => inp.MapFrom(ori => ori.IdInventarioProductoNavigation));

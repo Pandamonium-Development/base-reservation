@@ -2,7 +2,7 @@
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponsePedidoDTO : BaseEntity
+public record ResponsePedidoDto : BaseEntity
 {
     public long Id { get; set; }
 
@@ -32,11 +32,11 @@ public record ResponsePedidoDTO : BaseEntity
 
     public byte IdSucursal { get; set; }
 
-    public virtual ICollection<ResponseDetallePedidoDTO> DetallePedidos { get; set; } = new List<ResponseDetallePedidoDTO>();
+    public virtual ICollection<ResponseDetallePedidoDto> DetallePedidos { get; set; } = new List<ResponseDetallePedidoDto>();
 
-    public virtual ResponseClienteDTO Cliente { get; set; } = null!;
+    public virtual ResponseClienteDto Cliente { get; set; } = null!;
 
-    public virtual ResponseImpuestoDTO Impuesto { get; set; } = null!;
+    public virtual ResponseImpuestoDto Impuesto { get; set; } = null!;
 
     public virtual ResponseTipoPagoDTO TipoPago { get; set; } = null!;
 

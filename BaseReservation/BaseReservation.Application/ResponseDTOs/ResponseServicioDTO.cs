@@ -18,7 +18,7 @@ public record ResponseServicioDTO : BaseEntity
 
     public bool Activo { get; set; }
 
-    public virtual ICollection<ResponseDetalleFacturaDTO> DetalleFacturas { get; set; } = new List<ResponseDetalleFacturaDTO>();
+    public virtual ICollection<ResponseDetalleFacturaDto> DetalleFacturas { get; set; } = new List<ResponseDetalleFacturaDto>();
 
     public virtual ResponseTipoServicioDTO TipoServicio { get; set; } = null!;
 

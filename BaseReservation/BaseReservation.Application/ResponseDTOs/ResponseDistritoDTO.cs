@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseDistritoDTO
+public record ResponseDistritoDto
 {
     public short Id { get; set; }
 
@@ -8,9 +8,9 @@ public record ResponseDistritoDTO
 
     public byte IdCanton { get; set; }
 
-    public virtual ICollection<ResponseClienteDTO> Clientes { get; set; } = new List<ResponseClienteDTO>();
+    public virtual ICollection<ResponseClienteDto> Clientes { get; set; } = new List<ResponseClienteDto>();
 
-    public virtual ResponseCantonDTO Canton { get; set; } = null!;
+    public virtual ResponseCantonDto Canton { get; set; } = null!;
 
     public virtual ICollection<ResponseProveedorDTO> Proveedores { get; set; } = new List<ResponseProveedorDTO>();
 

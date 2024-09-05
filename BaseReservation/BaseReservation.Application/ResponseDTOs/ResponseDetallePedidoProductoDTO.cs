@@ -2,7 +2,7 @@
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseDetallePedidoProductoDTO
+public record ResponseDetallePedidoProductoDto
 {
     public long Id { get; set; }
 
@@ -14,7 +14,7 @@ public record ResponseDetallePedidoProductoDTO
 
     public decimal Cantidad { get; set; }
 
-    public virtual ResponseDetallePedidoDTO DetallePedido { get; set; } = null!;
+    public virtual ResponseDetallePedidoDto DetallePedido { get; set; } = null!;
 
     public virtual ResponseProductoDTO Producto { get; set; } = null!;
 }

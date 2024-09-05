@@ -22,7 +22,7 @@ public record ResponseProveedorDTO : BaseEntity
 
     public bool Activo { get; set; }
 
-    public virtual ICollection<ResponseContactoDTO> Contactos { get; set; } = new List<ResponseContactoDTO>();
+    public virtual ICollection<ResponseContactoDto> Contactos { get; set; } = new List<ResponseContactoDto>();
 
-    public virtual ResponseDistritoDTO Distrito { get; set; } = null!;
+    public virtual ResponseDistritoDto Distrito { get; set; } = null!;
 }

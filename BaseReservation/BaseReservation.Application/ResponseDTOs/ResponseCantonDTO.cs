@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseCantonDTO
+public record ResponseCantonDto
 {
     public byte Id { get; set; }
 
@@ -13,7 +13,7 @@ public record ResponseCantonDTO
 
     public byte IdProvincia { get; set; }
 
-    public virtual ICollection<ResponseDistritoDTO> Distritos { get; set; } = new List<ResponseDistritoDTO>();
+    public virtual ICollection<ResponseDistritoDto> Distritos { get; set; } = new List<ResponseDistritoDto>();
 
     public virtual ResponseProvinciaDTO Provincia { get; set; } = null!;
 }

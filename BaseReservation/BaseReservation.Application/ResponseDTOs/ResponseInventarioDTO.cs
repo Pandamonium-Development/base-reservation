@@ -4,7 +4,7 @@ using BaseReservation.Application.ResponseDTOs.Enums;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseInventarioDTO : BaseEntity
+public record ResponseInventarioDto : BaseEntity
 {
     public short Id { get; set; }
 

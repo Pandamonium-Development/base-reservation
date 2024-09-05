@@ -22,7 +22,7 @@ public partial class ResponseInventarioProductoDto
 
     public string? UsuarioModificacion { get; set; }
 
-    public virtual ResponseInventarioDTO Inventario { get; set; } = null!;
+    public virtual ResponseInventarioDto Inventario { get; set; } = null!;
 
     public virtual ResponseProductoDTO Producto { get; set; } = null!;
 }

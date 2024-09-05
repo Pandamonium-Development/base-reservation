@@ -2,7 +2,7 @@ using BaseReservation.Application.ResponseDTOs.Base;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseClienteDTO : BaseEntity
+public record ResponseClienteDto : BaseEntity
 {
     public short Id { get; set; }
 
@@ -20,9 +20,9 @@ public record ResponseClienteDTO : BaseEntity
 
     public bool Activo { get; set; }
 
-    public virtual ICollection<ResponseFacturaDTO> Facturas { get; set; } = new List<ResponseFacturaDTO>();
+    public virtual ICollection<ResponseFacturaDto> Facturas { get; set; } = new List<ResponseFacturaDto>();
 
     public virtual ICollection<ResponseReservaDTO> Reservas { get; set; } = new List<ResponseReservaDTO>();
 
-    public virtual ResponseDistritoDTO Distrito { get; set; } = null!;
+    public virtual ResponseDistritoDto Distrito { get; set; } = null!;
 }

@@ -3,7 +3,7 @@ using BaseReservation.Infrastructure.Models;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseFacturaDTO : BaseEntity
+public record ResponseFacturaDto : BaseEntity
 {
     public long Id { get; set; }
 
@@ -31,15 +31,15 @@ public record ResponseFacturaDTO : BaseEntity
 
     public byte IdSucursal { get; set; }
 
-    public virtual ICollection<ResponseDetalleFacturaDTO> DetalleFacturas { get; set; } = new List<ResponseDetalleFacturaDTO>();
+    public virtual ICollection<ResponseDetalleFacturaDto> DetalleFacturas { get; set; } = new List<ResponseDetalleFacturaDto>();
 
-    public virtual ResponseClienteDTO Cliente { get; set; } = null!;
+    public virtual ResponseClienteDto Cliente { get; set; } = null!;
 
-    public virtual ResponseImpuestoDTO Impuesto { get; set; } = null!;
+    public virtual ResponseImpuestoDto Impuesto { get; set; } = null!;
 
     public virtual ResponseTipoPagoDTO TipoPago { get; set; } = null!;
 
-    public virtual ResponsePedidoDTO? Pedido { get; set; } = null!;
+    public virtual ResponsePedidoDto? Pedido { get; set; } = null!;
 
     public virtual Sucursal Sucursal { get; set; } = null!;
 }

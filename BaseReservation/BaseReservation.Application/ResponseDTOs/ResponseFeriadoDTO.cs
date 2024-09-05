@@ -3,7 +3,7 @@ using BaseReservation.Application.ResponseDTOs.Enums;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseFeriadoDTO : BaseEntity
+public record ResponseFeriadoDto : BaseEntity
 {
     public byte Id { get; set; }
 

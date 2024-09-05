@@ -2,7 +2,7 @@
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseCategoriaDTO : BaseEntity
+public record ResponseCategoriaDto : BaseEntity
 {
     public byte Id { get; set; }
 

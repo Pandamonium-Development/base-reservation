@@ -3,7 +3,7 @@ using BaseReservation.Infrastructure.Enums;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseHorarioDTO : BaseEntity
+public record ResponseHorarioDto : BaseEntity
 {
     public short Id { get; set; }
 

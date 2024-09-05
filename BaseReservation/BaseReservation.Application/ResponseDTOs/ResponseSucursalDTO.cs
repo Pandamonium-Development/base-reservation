@@ -20,9 +20,9 @@ public record ResponseSucursalDTO : BaseEntity
 
     public bool Activo { get; set; }
 
-    public virtual ResponseDistritoDTO? Distrito { get; set; } = null!;
+    public virtual ResponseDistritoDto? Distrito { get; set; } = null!;
 
-    public virtual ICollection<ResponseInventarioDTO> Inventarios { get; set; } = new List<ResponseInventarioDTO>();
+    public virtual ICollection<ResponseInventarioDto> Inventarios { get; set; } = new List<ResponseInventarioDto>();
 
     public virtual ICollection<ResponseSucursalHorarioDTO> SucursalHorarios { get; set; } = new List<ResponseSucursalHorarioDTO>();
 
@@ -32,7 +32,7 @@ public record ResponseSucursalDTO : BaseEntity
 
     public virtual ICollection<ResponseReservaDTO> Reservas { get; set; } = new List<ResponseReservaDTO>();
 
-    public virtual ICollection<ResponsePedidoDTO> Pedidos { get; set; } = new List<ResponsePedidoDTO>();
+    public virtual ICollection<ResponsePedidoDto> Pedidos { get; set; } = new List<ResponsePedidoDto>();
 
-    public virtual ICollection<ResponseFacturaDTO> Facturas { get; set; } = new List<ResponseFacturaDTO>();
+    public virtual ICollection<ResponseFacturaDto> Facturas { get; set; } = new List<ResponseFacturaDto>();
 }

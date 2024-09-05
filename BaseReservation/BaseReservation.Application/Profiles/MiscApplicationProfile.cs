@@ -33,15 +33,15 @@ public class MiscApplicationProfile : Profile
 
         CreateMap<ResponseReservaServicioDTO, ReservaServicio>();
 
-        CreateMap<ResponsePedidoDTO, Pedido>()
+        CreateMap<ResponsePedidoDto, Pedido>()
             .IncludeBase<BaseEntity, BaseModel>();
 
-        CreateMap<ResponseDetallePedidoDTO, DetallePedido>();
+        CreateMap<ResponseDetallePedidoDto, DetallePedido>();
 
-        CreateMap<ResponseClienteDTO, Cliente>()
+        CreateMap<ResponseClienteDto, Cliente>()
             .IncludeBase<BaseEntity, BaseModel>();
 
-        CreateMap<ResponseImpuestoDTO, Impuesto>();
+        CreateMap<ResponseImpuestoDto, Impuesto>();
         CreateMap<ResponseTipoPagoDTO, TipoPago>();
 
         CreateMap<ResponseSucursalDTO, Sucursal>()

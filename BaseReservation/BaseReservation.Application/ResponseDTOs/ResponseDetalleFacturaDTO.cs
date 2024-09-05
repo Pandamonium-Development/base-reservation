@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseDetalleFacturaDTO
+public record ResponseDetalleFacturaDto
 {
     public long Id { get; set; }
 
@@ -20,9 +20,9 @@ public record ResponseDetalleFacturaDTO
 
     public decimal MontoTotal { get; set; }
 
-    public virtual ICollection<ResponseDetalleFacturaProductoDTO> DetalleFacturaProductos { get; set; } = new List<ResponseDetalleFacturaProductoDTO>();
+    public virtual ICollection<ResponseDetalleFacturaProductoDto> DetalleFacturaProductos { get; set; } = new List<ResponseDetalleFacturaProductoDto>();
 
-    public virtual ResponseFacturaDTO Factura { get; set; } = null!;
+    public virtual ResponseFacturaDto Factura { get; set; } = null!;
 
     public virtual ResponseServicioDTO? Servicio { get; set; } = null!;
 }

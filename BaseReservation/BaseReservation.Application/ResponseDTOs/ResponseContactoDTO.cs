@@ -2,7 +2,7 @@ using BaseReservation.Application.ResponseDTOs.Base;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseContactoDTO : BaseEntity
+public record ResponseContactoDto : BaseEntity
 {
     public short Id { get; set; }
 
