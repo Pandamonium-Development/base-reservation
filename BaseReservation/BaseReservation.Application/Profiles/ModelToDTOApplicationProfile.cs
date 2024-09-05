@@ -32,7 +32,7 @@ public class ModelToDtoApplicationProfile :Profile
            .ForMember(dest => dest.Reserva, inp => inp.MapFrom(ori => ori.IdReservaNavigation));
         CreateMap<Sucursal, ResponseSucursalDto>()
             .ForMember(dest => dest.Distrito, inp => inp.MapFrom(ori => ori.IdDistritoNavigation));
-        CreateMap<UsuarioSucursal, ResponseUsuarioSucursalDto>()
+        CreateMap<UsuarioSucursal, ResponseUsuarioSucursalDto>();
         CreateMap<Inventario, ResponseInventarioDto>();
             .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation))
             .ForMember(dest => dest.Usuario, inp => inp.MapFrom(ori => ori.IdUsuarioNavigation));
