@@ -7,6 +7,11 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryInventario(BaseReservationContext context) : IRepositoryInventario
 {
+    /// <summary>
+    /// Create a new Inventory.
+    /// </summary>
+    /// <param name="inventario">The Inventory entity to be added.</param>
+    /// <returns>Inventario</returns>
     public async Task<Inventario> CreateInventarioAsync(Inventario inventario)
     {
         var result = context.Inventarios.Add(inventario);
@@ -14,6 +19,11 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
         return result.Entity;
     }
 
+    /// <summary>
+    /// Delete an Inventory by setting its "Activo" property to false
+    /// </summary>
+    /// <param name="id">The unique identifier of the Inventory to delete.</param>
+    /// <returns>A boolean indicating whether the operation was successful.</returns>
     public async Task<bool> DeleteInventarioAsync(short id)
     {
         var inventario = await FindByIdAsync(id);
@@ -25,7 +35,12 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
         return rowsAffected > 0;
     }
 
-    public async Task<bool> ExisteInventario(short id)
+    /// <summary>
+    /// Checks if an active Inventory with the specified identifier exists.
+    /// </summary>
+    /// <param name="id">The unique identifier of the Inventory</param>
+    /// <returns>True if exists, if not, false</returns>
+    public async Task<bool> ExistsInventarioAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Inventario))!.FindPrimaryKey()!.Properties[0];
 
@@ -34,6 +49,11 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
             .FirstOrDefaultAsync(a => EF.Property<short>(a, keyProperty.Name) == id && a.Activo) != null;
     }
 
+    /// <summary>
+    /// Finds an active Inventory by its unique identifier, including related Inventory Products.
+    /// </summary>
+    /// <param name="id">The Inventory entity if found. </param>
+    /// <returns>Inventario if founded, otherwise null</returns>
     public async Task<Inventario?> FindByIdAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Inventario))!.FindPrimaryKey()!.Properties[0];
@@ -43,7 +63,11 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
             .FirstOrDefaultAsync(a => EF.Property<short>(a, keyProperty.Name) == id && a.Activo);
     }
 
-    public async Task<ICollection<Inventario>> ListAsync()
+    /// <summary>
+    /// Lists all active Inventory entities.
+    /// </summary>
+    /// <returns>ICollection of Iventario</returns>
+    public async Task<ICollection<Inventario>> ListAllAsync()
     {
         var collection = await context.Set<Inventario>()
             .Where(a => a.Activo)
@@ -52,7 +76,12 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
         return collection;
     }
 
-    public async Task<ICollection<Inventario>> ListAsync(byte idSucursal)
+    /// <summary>
+    /// Lists all active Inventory entities for a specific branch.
+    /// </summary>
+    /// <param name="idSucursal"></param>
+    /// <returns>ICollection of Iventario</returns>
+    public async Task<ICollection<Inventario>> ListAllBySucursalAsync(byte idSucursal)
     {
         var collection = await context.Set<Inventario>()
             .Where(m => m.IdSucursal == idSucursal && m.Activo)
@@ -61,6 +90,11 @@ public class RepositoryInventario(BaseReservationContext context) : IRepositoryI
         return collection;
     }
 
+    /// <summary>
+    /// Updates an existing Inventory
+    /// </summary>
+    /// <param name="inventario"> The Inventory entity to update.</param>
+    /// <returns>Inventario</returns>
     public async Task<Inventario> UpdateInventarioAsync(Inventario inventario)
     {
         context.Inventarios.Update(inventario);
