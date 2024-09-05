@@ -38,9 +38,9 @@ public record ResponsePedidoDto : BaseEntity
 
     public virtual ResponseImpuestoDto Impuesto { get; set; } = null!;
 
-    public virtual ResponseTipoPagoDTO TipoPago { get; set; } = null!;
+    public virtual ResponseTipoPagoDto TipoPago { get; set; } = null!;
 
-    public virtual ResponseReservaDTO Reserva { get; set; } = null!;
+    public virtual ResponseReservaDto Reserva { get; set; } = null!;
 
-    public virtual ResponseSucursalDTO Sucursal { get; set; } = null!;
+    public virtual ResponseSucursalDto Sucursal { get; set; } = null!;
 }

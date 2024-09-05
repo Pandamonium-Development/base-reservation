@@ -25,13 +25,13 @@ public class MiscApplicationProfile : Profile
                 opts.MapFrom<CurrentUserIdResolverBaseEntityModify>();
             });
 
-        CreateMap<ResponseReservaDTO, Reserva>()
+        CreateMap<ResponseReservaDto, Reserva>()
             .IncludeBase<BaseEntity, BaseModel>();
 
-        CreateMap<ResponseReservaPreguntaDTO, ReservaPregunta>()
+        CreateMap<ResponseReservaPreguntaDto, ReservaPregunta>()
             .IncludeBase<BaseEntity, BaseModel>();
 
-        CreateMap<ResponseReservaServicioDTO, ReservaServicio>();
+        CreateMap<ResponseReservaServicioDto, ReservaServicio>();
 
         CreateMap<ResponsePedidoDto, Pedido>()
             .IncludeBase<BaseEntity, BaseModel>();
@@ -40,11 +40,11 @@ public class MiscApplicationProfile : Profile
 
         CreateMap<ResponseClienteDto, Cliente>()
             .IncludeBase<BaseEntity, BaseModel>();
-
+   
+        CreateMap<ResponseTipoPagoDto, TipoPago>();
         CreateMap<ResponseImpuestoDto, Impuesto>();
-        CreateMap<ResponseTipoPagoDTO, TipoPago>();
 
-        CreateMap<ResponseSucursalDTO, Sucursal>()
+        CreateMap<ResponseSucursalDto, Sucursal>()
             .IncludeBase<BaseEntity, BaseModel>();
     }
 }

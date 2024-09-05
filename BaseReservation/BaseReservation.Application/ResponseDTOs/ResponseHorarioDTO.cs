@@ -13,5 +13,5 @@ public record ResponseHorarioDto : BaseEntity
 
     public TimeOnly HoraFin { get; set; }
 
-    public virtual ICollection<ResponseSucursalHorarioDTO> SucursalHorarios { get; set; } = new List<ResponseSucursalHorarioDTO>();
+    public virtual ICollection<ResponseSucursalHorarioDto> SucursalHorarios { get; set; } = new List<ResponseSucursalHorarioDto>();
 }

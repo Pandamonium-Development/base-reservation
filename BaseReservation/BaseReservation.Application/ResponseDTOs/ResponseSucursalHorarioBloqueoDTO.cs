@@ -1,6 +1,6 @@
 ﻿namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseSucursalHorarioBloqueoDTO
+public record ResponseSucursalHorarioBloqueoDto
 {
     public long Id { get; set; }
 
@@ -12,5 +12,5 @@ public record ResponseSucursalHorarioBloqueoDTO
 
     public bool Activo { get; set; }
 
-    public virtual ResponseSucursalHorarioDTO SucursalHorario { get; set; } = null!;
+    public virtual ResponseSucursalHorarioDto SucursalHorario { get; set; } = null!;
 }

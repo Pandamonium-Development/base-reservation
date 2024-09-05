@@ -2,7 +2,7 @@ using BaseReservation.Application.ResponseDTOs.Base;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseProveedorDTO : BaseEntity
+public record ResponseProveedorDto : BaseEntity
 {
     public byte Id { get; set; }
 

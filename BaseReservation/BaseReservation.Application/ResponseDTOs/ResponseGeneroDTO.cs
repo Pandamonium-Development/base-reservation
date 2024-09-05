@@ -6,5 +6,5 @@ public record ResponseGeneroDto
 
     public string Nombre { get; set; } = null!;
 
-    public virtual ICollection<ResponseUsuarioDTO> Usuarios { get; set; } = new List<ResponseUsuarioDTO>();
+    public virtual ICollection<ResponseUsuarioDto> Usuarios { get; set; } = new List<ResponseUsuarioDto>();
 }

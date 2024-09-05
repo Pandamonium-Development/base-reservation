@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseReservaServicioDTO
+public record ResponseReservaServicioDto
 {
     public int Id { get; set; }
 
@@ -8,7 +8,7 @@ public record ResponseReservaServicioDTO
 
     public byte IdServicio { get; set; }
 
-    public virtual ResponseReservaDTO Reserva { get; set; } = null!;
+    public virtual ResponseReservaDto Reserva { get; set; } = null!;
 
-    public virtual ResponseServicioDTO Servicio { get; set; } = null!;
+    public virtual ResponseServicioDto Servicio { get; set; } = null!;
 }

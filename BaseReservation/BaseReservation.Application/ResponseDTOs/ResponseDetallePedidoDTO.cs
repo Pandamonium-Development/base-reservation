@@ -24,5 +24,5 @@ public record ResponseDetallePedidoDto
 
     public virtual ResponsePedidoDto Pedido { get; set; } = null!;
 
-    public virtual ResponseServicioDTO Servicio { get; set; } = null!;
+    public virtual ResponseServicioDto Servicio { get; set; } = null!;
 }

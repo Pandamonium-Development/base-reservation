@@ -4,5 +4,5 @@ namespace BaseReservation.Application.Services.Interfaces.Authorization;
 
 public interface IServiceUserAuthorization
 {
-    Task<ResponseUsuarioDTO> GetLoggedUser();
+    Task<ResponseUsuarioDto> GetLoggedUser();
 }

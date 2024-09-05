@@ -15,5 +15,5 @@ public record ResponseFeriadoDto : BaseEntity
 
     public byte Dia { get; set; }
 
-    public virtual ICollection<ResponseSucursalFeriadoDTO> SucursalFeriados { get; set; } = new List<ResponseSucursalFeriadoDTO>();
+    public virtual ICollection<ResponseSucursalFeriadoDto> SucursalFeriados { get; set; } = new List<ResponseSucursalFeriadoDto>();
 }

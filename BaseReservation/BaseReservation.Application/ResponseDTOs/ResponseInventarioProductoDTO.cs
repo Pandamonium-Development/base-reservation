@@ -24,5 +24,5 @@ public partial class ResponseInventarioProductoDto
 
     public virtual ResponseInventarioDto Inventario { get; set; } = null!;
 
-    public virtual ResponseProductoDTO Producto { get; set; } = null!;
+    public virtual ResponseProductoDto Producto { get; set; } = null!;
 }

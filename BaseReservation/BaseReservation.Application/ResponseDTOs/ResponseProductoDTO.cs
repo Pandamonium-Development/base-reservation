@@ -2,7 +2,7 @@
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseProductoDTO : BaseEntity
+public record ResponseProductoDto : BaseEntity
 {
     public short Id { get; set; }
 
@@ -26,7 +26,7 @@ public record ResponseProductoDTO : BaseEntity
 
     public virtual ResponseCategoriaDto Categoria { get; set; } = null!;
 
-    public virtual ResponseUnidadMedidaDTO UnidadMedida { get; set; } = null!;
+    public virtual ResponseUnidadMedidaDto UnidadMedida { get; set; } = null!;
 
     public virtual ICollection<ResponseInventarioDto> Inventarios { get; set; } = new List<ResponseInventarioDto>();
 

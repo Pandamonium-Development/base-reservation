@@ -10,5 +10,5 @@ public record ResponseCategoriaDto : BaseEntity
 
     public string Nombre { get; set; } = null!;
 
-    public virtual ICollection<ResponseProductoDTO> Productos { get; set; } = new List<ResponseProductoDTO>();
+    public virtual ICollection<ResponseProductoDto> Productos { get; set; } = new List<ResponseProductoDto>();
 }

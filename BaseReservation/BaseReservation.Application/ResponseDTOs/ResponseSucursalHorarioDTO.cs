@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseSucursalHorarioDTO
+public record ResponseSucursalHorarioDto
 {
     public short Id { get; set; }
 
@@ -10,7 +10,7 @@ public record ResponseSucursalHorarioDTO
 
     public virtual ResponseHorarioDto Horario { get; set; } = null!;
 
-    public virtual ResponseSucursalDTO Sucursal { get; set; } = null!;
+    public virtual ResponseSucursalDto Sucursal { get; set; } = null!;
 
-    public virtual ICollection<ResponseSucursalHorarioBloqueoDTO> SucursalHorarioBloqueos { get; set; } = new List<ResponseSucursalHorarioBloqueoDTO>();
+    public virtual ICollection<ResponseSucursalHorarioBloqueoDto> SucursalHorarioBloqueos { get; set; } = new List<ResponseSucursalHorarioBloqueoDto>();
 }

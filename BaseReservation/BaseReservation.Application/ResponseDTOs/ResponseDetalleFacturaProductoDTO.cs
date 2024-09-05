@@ -16,5 +16,5 @@ public record ResponseDetalleFacturaProductoDto
 
     public virtual ResponseDetalleFacturaDto DetalleFactura { get; set; } = null!;
 
-    public virtual ResponseProductoDTO Producto { get; set; } = null!;
+    public virtual ResponseProductoDto Producto { get; set; } = null!;
 }

@@ -2,7 +2,7 @@ using BaseReservation.Application.ResponseDTOs.Base;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseSucursalDTO : BaseEntity
+public record ResponseSucursalDto : BaseEntity
 {
     public byte Id { get; set; }
 
@@ -24,13 +24,13 @@ public record ResponseSucursalDTO : BaseEntity
 
     public virtual ICollection<ResponseInventarioDto> Inventarios { get; set; } = new List<ResponseInventarioDto>();
 
-    public virtual ICollection<ResponseSucursalHorarioDTO> SucursalHorarios { get; set; } = new List<ResponseSucursalHorarioDTO>();
+    public virtual ICollection<ResponseSucursalHorarioDto> SucursalHorarios { get; set; } = new List<ResponseSucursalHorarioDto>();
 
-    public virtual ICollection<ResponseUsuarioSucursalDTO> UsuarioSucursals { get; set; } = new List<ResponseUsuarioSucursalDTO>();
+    public virtual ICollection<ResponseUsuarioSucursalDto> UsuarioSucursals { get; set; } = new List<ResponseUsuarioSucursalDto>();
 
-    public virtual ICollection<ResponseSucursalFeriadoDTO> SucursalFeriados { get; set; } = new List<ResponseSucursalFeriadoDTO>();
+    public virtual ICollection<ResponseSucursalFeriadoDto> SucursalFeriados { get; set; } = new List<ResponseSucursalFeriadoDto>();
 
-    public virtual ICollection<ResponseReservaDTO> Reservas { get; set; } = new List<ResponseReservaDTO>();
+    public virtual ICollection<ResponseReservaDto> Reservas { get; set; } = new List<ResponseReservaDto>();
 
     public virtual ICollection<ResponsePedidoDto> Pedidos { get; set; } = new List<ResponsePedidoDto>();
 

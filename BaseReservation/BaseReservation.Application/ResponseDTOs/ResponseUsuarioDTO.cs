@@ -3,7 +3,7 @@ using BaseReservation.Infrastructure.Models;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseUsuarioDTO : BaseEntity
+public record ResponseUsuarioDto : BaseEntity
 {
     public short Id { get; set; }
 

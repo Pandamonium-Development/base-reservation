@@ -17,7 +17,7 @@ public record ResponseInventarioDto : BaseEntity
 
     public bool Activo { get; set; }
 
-    public virtual ResponseSucursalDTO Sucursal { get; set; } = null!;
+    public virtual ResponseSucursalDto Sucursal { get; set; } = null!;
 
     public virtual ICollection<ResponseInventarioProductoDto> InventarioProductos { get; set; } = new List<ResponseInventarioProductoDto>();
 }
