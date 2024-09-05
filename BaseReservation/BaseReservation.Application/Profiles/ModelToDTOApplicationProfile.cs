@@ -4,7 +4,7 @@ using AutoMapper;
 
 namespace BaseReservation.Application.Profiles;
 
-public class ModelToDtoApplicationProfile :Profile
+public class ModelToDtoApplicationProfile : Profile
 {
     public ModelToDtoApplicationProfile()
     {
@@ -33,9 +33,8 @@ public class ModelToDtoApplicationProfile :Profile
         CreateMap<Sucursal, ResponseSucursalDto>()
             .ForMember(dest => dest.Distrito, inp => inp.MapFrom(ori => ori.IdDistritoNavigation));
         CreateMap<UsuarioSucursal, ResponseUsuarioSucursalDto>();
-        CreateMap<Inventario, ResponseInventarioDto>();
-            .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation))
-            .ForMember(dest => dest.Usuario, inp => inp.MapFrom(ori => ori.IdUsuarioNavigation));
+        CreateMap<Inventario, ResponseInventarioDto>()
+            .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation));
         CreateMap<SucursalFeriado, ResponseSucursalFeriadoDto>()
              .ForMember(dest => dest.Feriado, inp => inp.MapFrom(ori => ori.IdFeriadoNavigation))
              .ForMember(dest => dest.Sucursal, inp => inp.MapFrom(ori => ori.IdSucursalNavigation));
