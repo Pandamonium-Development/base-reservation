@@ -44,7 +44,7 @@ public class RepositoryReserva(BaseReservationContext context) : IRepositoryRese
         var keyProperty = context.Model.FindEntityType(typeof(Reserva))!.FindPrimaryKey()!.Properties[0];
         return await context.Set<Reserva>()
             .Include(a => a.DetalleReservas)
-            .ThenInclude(a => a.IdServicioNavigation)
+            .ThenInclude(a => a.IdServicioNavigation!)/*TO DO*/
             .ThenInclude(a => a.IdTipoServicioNavigation)
             .Include(a => a.IdSucursalNavigation)
             .Include(a => a.ReservaPregunta)

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BaseReservation.Application.Comunes;
 
-public abstract class BaseException : ApplicationException
+public abstract class BaseException : Exception
 {
     public abstract LogLevel LogLevel { get; set; }
 

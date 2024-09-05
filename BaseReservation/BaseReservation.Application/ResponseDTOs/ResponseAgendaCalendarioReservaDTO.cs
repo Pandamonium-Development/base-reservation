@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.ResponseDTOs;
 
-public class ResponseAgendaCalendarioReservaDTO
+public record ResponseAgendaCalendarioReservaDto
 {
     public string Title { get; set; } = null!;
 

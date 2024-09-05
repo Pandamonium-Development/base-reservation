@@ -91,7 +91,7 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
             .Include(a => a.IdImpuestoNavigation)
             .Include(a => a.IdSucursalNavigation)
             .Include(a => a.DetallePedidos)
-            .ThenInclude(a => a.IdServicioNavigation)
+            .ThenInclude(a => a.IdServicioNavigation!) /*TO DO*/
             .ThenInclude(a => a.IdTipoServicioNavigation)
             .Include(a => a.DetallePedidos)
             .ThenInclude(a => a.DetallePedidoProductos)
