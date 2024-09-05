@@ -6,5 +6,7 @@ public record RequestDetalleReservaDto
 
     public int IdReserva { get; set; }
 
-    public byte IdServicio { get; set; }
+    public byte? IdServicio { get; set; }
+
+    public short? IdProducto { get; set; }
 }

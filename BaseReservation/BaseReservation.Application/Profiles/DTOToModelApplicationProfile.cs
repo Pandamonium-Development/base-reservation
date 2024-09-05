@@ -66,7 +66,7 @@ public class DtoToModelApplicationProfile : Profile
         CreateMap<RequestSucursalFeriadoDto, SucursalFeriado>();
         CreateMap<RequestDetalleFacturaDto,  DetalleFactura>();
         CreateMap<RequestDetallePedidoDto, DetallePedido>();
-        CreateMap<RequestReservaServicioDto, ReservaServicio>();
+        CreateMap<RequestDetalleReservaDto, DetalleReserva>();
         CreateMap<RequestUsuarioSucursalDto, UsuarioSucursal>();
     }
 }

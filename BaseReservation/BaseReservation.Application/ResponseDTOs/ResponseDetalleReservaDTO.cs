@@ -6,9 +6,13 @@ public record ResponseDetalleReservaDto
 
     public int IdReserva { get; set; }
 
-    public byte IdServicio { get; set; }
+    public byte? IdServicio { get; set; }
+
+    public short? IdProducto { get; set; }
 
     public virtual ResponseReservaDto Reserva { get; set; } = null!;
 
-    public virtual ResponseServicioDto Servicio { get; set; } = null!;
+    public virtual ResponseServicioDto? Servicio { get; set; } 
+
+    public virtual ResponseProductoDto? Producto { get; set; }
 }
