@@ -7,13 +7,13 @@ public interface IServiceInventario
 {
     Task<ICollection<ResponseInventarioDto>> ListAllAsync();
 
-    Task<ICollection<ResponseInventarioDto>> ListAllAsync(byte idSucursal);
+    Task<ICollection<ResponseInventarioDto>> ListAllBySucursalAsync(byte idSucursal);
 
     Task<ResponseInventarioDto> FindByIdAsync(short id);
 
-    Task<ResponseInventarioDto> CreateInventarioAsync(byte idSucursal, RequestInventarioDto productoDTO);
+    Task<ResponseInventarioDto> CreateInventarioAsync(byte idSucursal, RequestInventarioDto inventarioDto);
 
-    Task<ResponseInventarioDto> UpdateInventarioAsync(byte idSucursal, short id, RequestInventarioDto productoDTO);
+    Task<ResponseInventarioDto> UpdateInventarioAsync(byte idSucursal, short id, RequestInventarioDto inventarioDto);
 
     Task<bool> DeleteInventarioAsync(short id);
 }

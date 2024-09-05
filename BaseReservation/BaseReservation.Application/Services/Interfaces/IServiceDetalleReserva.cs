@@ -9,5 +9,5 @@ public interface IServiceDetalleReserva
 
     Task<ResponseDetalleReservaDto?> FindByIdAsync(int id);
 
-    Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<RequestDetalleReservaDto> detallesReservaDto);
+    Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<RequestDetalleReservaDto> detallesReserva);
 }
