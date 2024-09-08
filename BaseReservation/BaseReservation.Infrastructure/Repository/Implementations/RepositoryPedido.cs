@@ -11,14 +11,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedido
 {
-    /// <summary>
-    /// Creates a new Pedido and updates the associated Reserva within a trasaction. 
-    /// If either operation fails, the transaction is rolled back.
-    /// </summary>
-    /// <param name="pedido">The pedido entity to be created.</param>
-    /// <param name="reserva">The reserva entity to be created.</param>
-    /// <returns>Pedido</returns>
-    /// <exception cref="RequestFailedException"></exception>
+    /// <inheritdoc />
     public async Task<Pedido> CreatePedidoAsync(Pedido pedido, Reserva reserva)
     {
         Pedido result = null!;
@@ -62,11 +55,7 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
         return result;
     }
 
-    /// <summary>
-    /// Checks if a Pedido with the specified ID exists.
-    /// </summary>
-    /// <param name="id">The unique identifier of the Pedido</param>
-    /// <returns>True if exists, if not, false</returns>
+    /// <inheritdoc />
     public async Task<bool> ExistsPedidoAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Pedido))!.FindPrimaryKey()!.Properties[0];
@@ -76,12 +65,7 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
             .FirstOrDefaultAsync(a => EF.Property<long>(a, keyProperty.Name) == id) != null;
     }
 
-    /// <summary>
-    /// Retrieves a Pedido by its ID, including related entities such as Cliente, TipoPago,
-    /// Impuesto, Sucursal, and DetallePedidos.
-    /// </summary>
-    /// <param name="id">The unique identifier of the Pedido.</param>
-    /// <returns>Pedido if founded, otherwise null</returns>
+    /// <inheritdoc />
     public async Task<Pedido?> FindByIdAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Pedido))!.FindPrimaryKey()!.Properties[0];
@@ -99,10 +83,8 @@ public class RepositoryPedido(BaseReservationContext context) : IRepositoryPedid
             .AsNoTracking()
             .FirstOrDefaultAsync(a => EF.Property<long>(a, keyProperty.Name) == id);
     }
-    /// <summary>
-    /// Retrieves all Pedidos with their associated TipoPago entities.
-    /// </summary>
-    /// <returns>ICollection of Pedido</returns>
+
+    /// <inheritdoc />
     public async Task<ICollection<Pedido>> ListAllAsync()
     {
         var collection = await context.Set<Pedido>()

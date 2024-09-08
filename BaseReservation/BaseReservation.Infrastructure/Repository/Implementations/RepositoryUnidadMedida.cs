@@ -7,20 +7,13 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryUnidadMedida(BaseReservationContext context) : IRepositoryUnidadMedida
 {
-    /// <summary>
-    /// Get unit of measure with specific id
-    /// </summary>
-    /// <param name="id">Unit of measure id</param>
-    /// <returns>Unit of measure if founded, otherwise null</returns>
+    /// <inheritdoc />
     public async Task<UnidadMedida?> FindByIdAsync(byte id)
     {
         return await context.Set<UnidadMedida>().FindAsync(id);
     }
 
-    /// <summary>
-    /// Get list of all of units of measure 
-    /// </summary>
-    /// <returns>ICollection of UnidadMedida</returns>
+    /// <inheritdoc />
     public async Task<ICollection<UnidadMedida>> ListAllAsync()
     {
         //AsQueryable hace el acceso más sencillo

@@ -7,11 +7,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryTokenMaster(BaseReservationContext context) : IRepositoryTokenMaster
 {
-    /// <summary>
-    /// Create the token of an user to provide access
-    /// </summary>
-    /// <param name="tokenMaster">TokenMaster model to be added</param>
-    /// <returns>TokenMaster</returns>
+    /// <inheritdoc />
     public async Task<TokenMaster> CreateTokenMasterAsync(TokenMaster tokenMaster)
     {
         var result = context.TokenMasters.Add(tokenMaster);
@@ -20,11 +16,7 @@ public class RepositoryTokenMaster(BaseReservationContext context) : IRepository
         return result.Entity;
     }
 
-    /// <summary>
-    /// Validate if the token already exists
-    /// </summary>
-    /// <param name="token">Token value</param>
-    /// <returns>True if exists, if not, false</returns>
+    /// <inheritdoc />
     public async Task<bool> ExistsTokenMasterAsync(string token)
     {
         return await context.Set<TokenMaster>()
@@ -32,11 +24,7 @@ public class RepositoryTokenMaster(BaseReservationContext context) : IRepository
             .FirstOrDefaultAsync(a => a.Token == token) != null;
     }
 
-    /// <summary>
-    /// Get token with specific id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>TokenMaster if founded, otherwise null</returns>
+    /// <inheritdoc />
     public async Task<TokenMaster?> FindByIdAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(TokenMaster))!.FindPrimaryKey()!.Properties[0];
@@ -46,11 +34,7 @@ public class RepositoryTokenMaster(BaseReservationContext context) : IRepository
             .FirstOrDefaultAsync(a => EF.Property<long>(a, keyProperty.Name) == id);
     }
 
-    /// <summary>
-    /// Get token with specific token value
-    /// </summary>
-    /// <param name="token">Token to look for</param>
-    /// <returns>TokenMaster if founded, otherwise null</returns>
+    /// <inheritdoc />
     public async Task<TokenMaster?> FindByTokenAsync(string token)
     {
         return await context.Set<TokenMaster>()
@@ -58,11 +42,7 @@ public class RepositoryTokenMaster(BaseReservationContext context) : IRepository
             .FirstOrDefaultAsync(a => a.Token == token);
     }
 
-    /// <summary>
-    /// Update a token
-    /// </summary>
-    /// <param name="tokenMaster">TokenMaster model to be updated</param>
-    /// <returns>TokenMaster</returns>
+    /// <inheritdoc />
     public async Task<TokenMaster> UpdateTokenMasterAsync(TokenMaster tokenMaster)
     {
         context.TokenMasters.Update(tokenMaster);

@@ -8,12 +8,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryInventarioProductoMovimiento(BaseReservationContext context, IRepositoryInventarioProducto repositoryInventarioProducto) : IRepositoryInventarioProductoMovimiento
 {
-    /// <summary>
-    /// Creates a new InventarioProductoMovimiento and updates the related InventarioProducto based on the movement type.
-    /// </summary>
-    /// <param name="inventarioProductoMovimiento">The InventarioProductoMovimiento entity to be added.</param>
-    /// <returns>InventarioProductoMovimiento</returns>
-    /// <exception cref="RequestFailedException"></exception>
+    /// <inheritdoc />
     public async Task<bool> CreateInventarioMovimientoProductoAsync(InventarioProductoMovimiento inventarioProductoMovimiento)
     {
         var result = true;
@@ -63,11 +58,7 @@ public class RepositoryInventarioProductoMovimiento(BaseReservationContext conte
         return result;
     }
 
-    /// <summary>
-    /// Lists all InventarioProductoMovimiento entities associated with a specific Inventario.
-    /// </summary>
-    /// <param name="idInventario"> The unique identifier of the Inventario.</param>
-    /// <returns>ICollection of InventarioProductoMovimiento</returns>
+    /// <inheritdoc />
     public async Task<ICollection<InventarioProductoMovimiento>> ListAllByInventarioAsync(short idInventario)
     {
         var collection = await context.Set<InventarioProductoMovimiento>()
@@ -83,11 +74,7 @@ public class RepositoryInventarioProductoMovimiento(BaseReservationContext conte
         return collection;
     }
 
-    /// <summary>
-    /// Lists all InventarioProductoMovimiento entities associated with a specific Producto.
-    /// </summary>
-    /// <param name="idProducto">The unique identifier of the Producto.</param>
-    /// <returns>ICollection of InventarioProductoMovimiento</returns>
+    /// <inheritdoc />
     public async Task<ICollection<InventarioProductoMovimiento>> ListAllByProductoAsync(short idProducto)
     {
         var collection = await context.Set<InventarioProductoMovimiento>()

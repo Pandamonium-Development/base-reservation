@@ -8,6 +8,7 @@ namespace BaseReservation.Application.Services.Implementations.Authorization;
 
 public class ServiceUserAuthorization(IServiceUserContext serviceUserContext, IRepositoryUsuario repositoryUsuario, IMapper mapper) : IServiceUserAuthorization
 {
+    /// <inheritdoc />
     public async Task<ResponseUsuarioDto> GetLoggedUser()
     {
         var usuario = await repositoryUsuario.FindByEmailAsync(serviceUserContext.UserId!);

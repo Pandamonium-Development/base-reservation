@@ -13,11 +13,7 @@ namespace BaseReservation.Application.Services.Implementations;
 public class ServiceInventarioProductoMovimiento(IRepositoryInventarioProductoMovimiento repository, IRepositoryInventarioProducto repositoryInventarioProducto,
                                                 IMapper mapper, IValidator<InventarioProductoMovimiento> inventarioProductoMovimientoValidator) : IServiceInventarioProductoMovimiento
 {
-    /// <summary>
-    /// Create inventory product movement
-    /// </summary>
-    /// <param name="inventarioProductoMovimientoDto">Inventory product movement to be added</param>
-    /// <returns>bool</returns>
+    /// <inheritdoc />
     public async Task<bool> CreateInventarioMovimientoProductoAsync(RequestInventarioProductoMovimientoDto inventarioProductoMovimientoDto)
     {
         var inventarioProductoMovimiento = await ValidateInventarioProductoMovimientoAsync(inventarioProductoMovimientoDto);
@@ -43,11 +39,7 @@ public class ServiceInventarioProductoMovimiento(IRepositoryInventarioProductoMo
         return result;
     }
 
-    /// <summary>
-    /// Get list of all inventory product movements by inventory
-    /// </summary>
-    /// <param name="idInventario">Inventory id</param>
-    /// <returns>ICollection of ResponseInventarioProductoMovimientoDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseInventarioProductoMovimientoDto>> ListAllByInventarioAsync(short idInventario)
     {
         var list = await repository.ListAllByInventarioAsync(idInventario);
@@ -56,11 +48,7 @@ public class ServiceInventarioProductoMovimiento(IRepositoryInventarioProductoMo
         return collection;
     }
 
-    /// <summary>
-    /// Get list of all inventory product movements by product
-    /// </summary>
-    /// <param name="idProducto">Product id</param>
-    /// <returns>ICollection of ResponseInventarioProductoMovimientoDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseInventarioProductoMovimientoDto>> ListAllByProductoAsync(short idProducto)
     {
         var list = await repository.ListAllByProductoAsync(idProducto);

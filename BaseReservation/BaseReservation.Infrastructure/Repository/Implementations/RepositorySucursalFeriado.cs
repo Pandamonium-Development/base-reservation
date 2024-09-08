@@ -8,12 +8,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositorySucursalFeriado(BaseReservationContext context) : IRepositorySucursalFeriado
 {
-    /// <summary>
-    /// Create branch holidays
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="sucursalFeriados">List of branch holidays to be added</param>
-    /// <returns>True if all were added, if not, false</returns>
+    /// <inheritdoc />
     public async Task<bool> CreateSucursalFeriadosAsync(byte idSucursal, IEnumerable<SucursalFeriado> sucursalFeriados)
     {
         var result = true;
@@ -62,11 +57,7 @@ public class RepositorySucursalFeriado(BaseReservationContext context) : IReposi
         return result;
     }
 
-    /// <summary>
-    /// Get list of all branch holidays by branch
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <returns>ICollection of SucursalFeriado</returns>
+    /// <inheritdoc />
     public async Task<ICollection<SucursalFeriado>> ListAllBySucursalAsync(byte idSucursal)
     {
         var collection = await context.Set<SucursalFeriado>()
@@ -78,12 +69,7 @@ public class RepositorySucursalFeriado(BaseReservationContext context) : IReposi
         return collection;
     }
 
-    /// <summary>
-    /// Get list of all branch holidays by branch and year
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="anno">Year to look for</param>
-    /// <returns>ICollection of SucursalFeriado</returns>
+    /// <inheritdoc />
     public async Task<ICollection<SucursalFeriado>> ListAllBySucursalAsync(byte idSucursal, short anno)
     {
         var collection = await context.Set<SucursalFeriado>()
@@ -95,13 +81,7 @@ public class RepositorySucursalFeriado(BaseReservationContext context) : IReposi
         return collection;
     }
 
-    /// <summary>
-    /// Get list of all branch holidays by branch, start date and end date
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="fechaInicio">Start date to filter</param>
-    /// <param name="fechaFin">End date to filter</param>
-    /// <returns>ICollection of SucursalFeriado</returns>
+    /// <inheritdoc />
     public async Task<ICollection<SucursalFeriado>> ListAllBySucursalAsync(byte idSucursal, DateOnly fechaInicio, DateOnly fechaFin)
     {
         var collection = await context.Set<SucursalFeriado>()
@@ -113,11 +93,7 @@ public class RepositorySucursalFeriado(BaseReservationContext context) : IReposi
         return collection;
     }
 
-    /// <summary>
-    /// Get list of branch holiday with specific id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>SucursalFeriado if founded, otherwise null</returns>
+    /// <inheritdoc />
     public async Task<SucursalFeriado?> FindByIdAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(SucursalFeriado))!.FindPrimaryKey()!.Properties[0];

@@ -9,12 +9,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryFactura(BaseReservationContext context) : IRepositoryFactura
 {
-    /// <summary>
-    /// Create a new invoice
-    /// </summary>
-    /// <param name="factura">Invoice model to be add</param>
-    /// <param name="pedido">Order to be updated if invoice comes from an order</param>
-    /// <returns>Factura</returns>
+    /// <inheritdoc />
     public async Task<Factura> CreateAsync(Factura factura, Pedido? pedido)
     {
         Factura result = null!;
@@ -60,11 +55,7 @@ public class RepositoryFactura(BaseReservationContext context) : IRepositoryFact
         return result;
     }
 
-    /// <summary>
-    /// Get exact invoice according to id, if not, get null
-    /// </summary>
-    /// <param name="id">Id number</param>
-    /// <returns>Factura</returns>
+    /// <inheritdoc />
     public async Task<Factura?> FindByIdAsync(long id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Factura))!.FindPrimaryKey()!.Properties[0];
@@ -82,10 +73,7 @@ public class RepositoryFactura(BaseReservationContext context) : IRepositoryFact
             .FirstOrDefaultAsync(a => EF.Property<long>(a, keyProperty.Name) == id);
     }
 
-    /// <summary>
-    /// Get list of all existing invoices
-    /// </summary>
-    /// <returns>ICollection of Factura</returns>
+    /// <inheritdoc />
     public async Task<ICollection<Factura>> ListAllAsync()
     {
         var collection = await context.Set<Factura>()
