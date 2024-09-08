@@ -9,12 +9,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositorySucursalHorario(BaseReservationContext context) : IRepositorySucursalHorario
 {
-    /// <summary>
-    /// Create multiple branch schedule
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="sucursalHorarios">List of branch schedules</param>
-    /// <returns>True if all were added, if not, false</returns>
+    /// <inheritdoc />
     public async Task<bool> CreateSucursalHorariosAsync(byte idSucursal, IEnumerable<SucursalHorario> sucursalHorarios)
     {
         var result = true;
@@ -63,11 +58,7 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
         return result;
     }
 
-    /// <summary>
-    /// Get list of all branch schedules by branch
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <returns>ICollection of SucursalHorario</returns>
+    /// <inheritdoc />
     public async Task<ICollection<SucursalHorario>> ListAllBySucursalAsync(byte idSucursal)
     {
         var collection = await context.Set<SucursalHorario>()
@@ -79,12 +70,7 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
         return collection;
     }
 
-    /// <summary>
-    /// Get branch schedule by specific day of week
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="dia">Day of week</param>
-    /// <returns>SucursalHorario if found, otherwise null</returns>
+    /// <inheritdoc />
     public async Task<SucursalHorario?> FindByDiaSemanaAsync(byte idSucursal, DiaSemana dia)
     {
         var horarioSucursal = await context.Set<SucursalHorario>()
@@ -95,11 +81,7 @@ public class RepositorySucursalHorario(BaseReservationContext context) : IReposi
         return horarioSucursal;
     }
 
-    /// <summary>
-    /// Get branch schedule by id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>SucursalHorario if found, otherwise null</returns>
+    /// <inheritdoc />
     public async Task<SucursalHorario?> FindByIdAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(SucursalHorario))!.FindPrimaryKey()!.Properties[0];

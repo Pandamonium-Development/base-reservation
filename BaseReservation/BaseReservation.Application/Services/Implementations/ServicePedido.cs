@@ -12,11 +12,7 @@ namespace BaseReservation.Application.Services.Implementations;
 public class ServicePedido(IRepositoryPedido repository, IRepositoryReserva repositoryReserva, IServiceReserva serviceReserva,
                             IMapper mapper, IValidator<Pedido> pedidoValidator) : IServicePedido
 {
-    /// <summary>
-    /// Create order
-    /// </summary>
-    /// <param name="pedidoDto">Order request model to be added</param>
-    /// <returns>ResponsePedidoDto</returns>
+    /// <inheritdoc />
     public async Task<ResponsePedidoDto> CreatePedidoAsync(RequestPedidoDto pedidoDto)
     {
         var pedido = await ValidatePedidoAsync(pedidoDto);
@@ -32,11 +28,7 @@ public class ServicePedido(IRepositoryPedido repository, IRepositoryReserva repo
         return mapper.Map<ResponsePedidoDto>(result);
     }
 
-    /// <summary>
-    /// Get Order by Id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>ResponsePedidoDto</returns>
+    /// <inheritdoc />
     public async Task<ResponsePedidoDto> FindByIdAsync(long id)
     {
         var pedido = await repository.FindByIdAsync(id);
@@ -45,10 +37,7 @@ public class ServicePedido(IRepositoryPedido repository, IRepositoryReserva repo
         return mapper.Map<ResponsePedidoDto>(pedido);
     }
 
-    /// <summary>
-    /// Get list of all orders
-    /// </summary>
-    /// <returns>ICollection of ResponsePedidoDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponsePedidoDto>> ListAllAsync()
     {
         var list = await repository.ListAllAsync();

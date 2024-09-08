@@ -8,11 +8,7 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceReservaPregunta(IRepositoryReservaPregunta repository, IMapper mapper) : IServiceReservaPregunta
 {
-    /// <summary>
-    /// Get reservation question with specific id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>ResponseReservaPreguntaDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseReservaPreguntaDto> FindByIdAsync(int id)
     {
         var reserva = await repository.FindByIdAsync(id);
@@ -21,10 +17,7 @@ public class ServiceReservaPregunta(IRepositoryReservaPregunta repository, IMapp
         return mapper.Map<ResponseReservaPreguntaDto>(reserva);
     }
 
-    /// <summary>
-    /// Get list of all reservations questions
-    /// </summary>
-    /// <returns>ICollection of ResponseReservaPreguntaDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseReservaPreguntaDto>> ListAllAsync()
     {
         var list = await repository.ListAllAsync();

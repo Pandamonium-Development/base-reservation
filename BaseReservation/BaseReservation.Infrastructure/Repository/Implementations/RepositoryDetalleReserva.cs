@@ -8,12 +8,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryReservaServicio(BaseReservationContext context) : IRepositoryDetalleReserva
 {
-    /// <summary>
-    /// Create multiple details reservation
-    /// </summary>
-    /// <param name="idReserva">Reservation id</param>
-    /// <param name="detallesReserva">List of detail reservation</param>
-    /// <returns>True if were added, if not, false</returns>
+    /// <inheritdoc />
     public async Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<DetalleReserva> detallesReserva)
     {
         var result = true;
@@ -61,11 +56,7 @@ public class RepositoryReservaServicio(BaseReservationContext context) : IReposi
 
     }
 
-    /// <summary>
-    /// Get detail reservation with specific id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>DetalleReserva if founded, otherwise null</returns>
+    /// <inheritdoc />
     public async Task<DetalleReserva?> FindByIdAsync(int id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(DetalleReserva))!.FindPrimaryKey()!.Properties[0];
@@ -75,11 +66,7 @@ public class RepositoryReservaServicio(BaseReservationContext context) : IReposi
                 .FirstOrDefaultAsync(a => EF.Property<short>(a, keyProperty.Name) == id);
     }
 
-    /// <summary>
-    /// Get list of all details reservation
-    /// </summary>
-    /// <param name="idReserva">Reservation id</param>
-    /// <returns>ICollection of DetalleReserva</returns>
+    /// <inheritdoc />
     public async Task<ICollection<DetalleReserva>> ListAllByReservaAsync(int idReserva)
     {
         var collection = await context.Set<DetalleReserva>()

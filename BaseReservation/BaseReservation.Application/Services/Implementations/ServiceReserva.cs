@@ -20,11 +20,7 @@ public class ServiceReserva(IRepositoryReserva repository, IRepositorySucursalHo
 {
     const string formatoFecha = "yyyy-MM-dd";
 
-    /// <summary>
-    /// Create reservation
-    /// </summary>
-    /// <param name="reservaDTO">Reservation request model to be added</param>
-    /// <returns>ResponseReservaDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseReservaDto> CreateReservaAsync(RequestReservaDto reservaDTO)
     {
         var reserva = await ValidateReservaAsync(reservaDTO);
@@ -35,12 +31,7 @@ public class ServiceReserva(IRepositoryReserva repository, IRepositorySucursalHo
         return mapper.Map<ResponseReservaDto>(result);
     }
 
-    /// <summary>
-    /// Update reservation
-    /// </summary>
-    /// <param name="id">Reservation id</param>
-    /// <param name="reservaDTO">Reservation request model to be updated</param>
-    /// <returns>ResponseReservaDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseReservaDto> UpdateReservaAsync(int id, RequestReservaDto reservaDTO)
     {
         if (!await repository.ExistsReservaAsync(id)) throw new NotFoundException("Reserva no encontrada.");
@@ -52,11 +43,7 @@ public class ServiceReserva(IRepositoryReserva repository, IRepositorySucursalHo
         return mapper.Map<ResponseReservaDto>(result);
     }
 
-    /// <summary>
-    /// Get reservation with specific id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>ResponseReservaDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseReservaDto> FindByIdAsync(int id)
     {
         var reserva = await repository.FindByIdAsync(id);
@@ -65,10 +52,7 @@ public class ServiceReserva(IRepositoryReserva repository, IRepositorySucursalHo
         return mapper.Map<ResponseReservaDto>(reserva);
     }
 
-    /// <summary>
-    /// Get list of all reservations
-    /// </summary>
-    /// <returns>ICollection of ResponseReservaDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseReservaDto>> ListAllAsync()
     {
         var list = await repository.ListAllAsync();
@@ -77,13 +61,7 @@ public class ServiceReserva(IRepositoryReserva repository, IRepositorySucursalHo
         return collection;
     }
 
-    /// <summary>
-    /// Get list of all reservations by branch in agenda mode 
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="startDate">Start date</param>
-    /// <param name="endDate">End date</param>
-    /// <returns>ICollection of ResponseAgendaCalendarioReservaDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseAgendaCalendarioReservaDto>> ListAllBySucursalAsync(byte idSucursal, DateOnly? startDate, DateOnly? endDate)
     {
         var list = startDate == null || endDate == null ? await repository.ListAllBySucursalAsync(idSucursal) : await repository.ListAllBySucursalAsync(idSucursal, startDate.Value, endDate.Value);
@@ -110,24 +88,7 @@ public class ServiceReserva(IRepositoryReserva repository, IRepositorySucursalHo
         return agendaCalendario;
     }
 
-    /// <summary>
-    /// Validate reservation
-    /// </summary>
-    /// <param name="reservaDTO">Reservation request model to be added/updated</param>
-    /// <returns>Reserva</returns>
-    private async Task<Reserva> ValidateReservaAsync(RequestReservaDto reservaDTO)
-    {
-        var reserva = mapper.Map<Reserva>(reservaDTO);
-        await reservaValidator.ValidateAndThrowAsync(reserva);
-        return reserva;
-    }
-
-    /// <summary>
-    /// Get list of all reservations by branch and week day
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="date">Date to filter</param>
-    /// <returns>ICollection of ResponseReservaDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseReservaDto>> ListAllBySucursalDiaAsync(byte idSucursal, DateOnly date)
     {
         var list = await repository.ListAllBySucursalAsync(idSucursal, date);
@@ -136,12 +97,7 @@ public class ServiceReserva(IRepositoryReserva repository, IRepositorySucursalHo
         return collection;
     }
 
-    /// <summary>
-    /// Get list of times with schedules availabilities base on branch and date
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="date">Date filter</param>
-    /// <returns>ICollection of TimeOnly</returns>
+    /// <inheritdoc />
     public async Task<ICollection<TimeOnly>> ScheduleAvailabilityBySucursalAsync(byte idSucursal, DateOnly date)
     {
         var nombreDiaSemana = DateHourManipulation.GetDayWeekCultureCostaRica(date);
@@ -163,6 +119,18 @@ public class ServiceReserva(IRepositoryReserva repository, IRepositorySucursalHo
         rangoHorario = rangoHorario.Except(reservas.Select(a => a.Hora)).ToList();
 
         return rangoHorario;
+    }
+
+    /// <summary>
+    /// Validate reservation
+    /// </summary>
+    /// <param name="reservaDTO">Reservation request model to be added/updated</param>
+    /// <returns>Reserva</returns>
+    private async Task<Reserva> ValidateReservaAsync(RequestReservaDto reservaDTO)
+    {
+        var reserva = mapper.Map<Reserva>(reservaDTO);
+        await reservaValidator.ValidateAndThrowAsync(reserva);
+        return reserva;
     }
 
     /// <summary>

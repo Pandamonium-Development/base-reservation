@@ -11,12 +11,7 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceInventario(IRepositoryInventario repository, IMapper mapper, IValidator<Inventario> inventarioValidator) : IServiceInventario
 {
-    /// <summary>
-    /// Create inventario
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="inventarioDto">Inventory model request to be added</param>
-    /// <returns>ResponseInventarioDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseInventarioDto> CreateInventarioAsync(byte idSucursal, RequestInventarioDto inventarioDto)
     {
         var inventario = await ValidateInventarioAsync(inventarioDto);
@@ -28,11 +23,7 @@ public class ServiceInventario(IRepositoryInventario repository, IMapper mapper,
         return mapper.Map<ResponseInventarioDto>(result);
     }
 
-    /// <summary>
-    /// Delete inventory
-    /// </summary>
-    /// <param name="id">Inventory id to be deleted</param>
-    /// <returns>True if was deleted successfully, if not, false</returns>
+    /// <inheritdoc />
     public async Task<bool> DeleteInventarioAsync(short id)
     {
         if (!await repository.ExistsInventarioAsync(id)) throw new NotFoundException("Inventario no encontrada.");
@@ -43,11 +34,7 @@ public class ServiceInventario(IRepositoryInventario repository, IMapper mapper,
         return await repository.DeleteInventarioAsync(id);
     }
 
-    /// <summary>
-    /// Finds Inventory by its unique identifier
-    /// </summary>
-    /// <param name="id">The Inventory entity id</param>
-    /// <returns>ResponseInventarioDto if founded, otherwise null</returns>
+    /// <inheritdoc />
     public async Task<ResponseInventarioDto> FindByIdAsync(short id)
     {
         var inventario = await repository.FindByIdAsync(id);
@@ -56,10 +43,7 @@ public class ServiceInventario(IRepositoryInventario repository, IMapper mapper,
         return mapper.Map<ResponseInventarioDto>(inventario);
     }
 
-    /// <summary>
-    /// Get list of all inventories
-    /// </summary>
-    /// <returns>ICollection of ResponseInventarioDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseInventarioDto>> ListAllAsync()
     {
         var list = await repository.ListAllAsync();
@@ -68,11 +52,7 @@ public class ServiceInventario(IRepositoryInventario repository, IMapper mapper,
         return collection;
     }
 
-    /// <summary>
-    /// Get list of all inventories by branch
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <returns>ICollection of ResponseInventarioDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseInventarioDto>> ListAllBySucursalAsync(byte idSucursal)
     {
         var list = await repository.ListAllBySucursalAsync(idSucursal);
@@ -81,13 +61,7 @@ public class ServiceInventario(IRepositoryInventario repository, IMapper mapper,
         return collection;
     }
 
-    /// <summary>
-    /// Update existing inventarory
-    /// </summary>
-    /// <param name="idSucursal">Branch id</param>
-    /// <param name="id">Inventary id</param>
-    /// <param name="inventarioDto">Inventory model request to be updated</param>
-    /// <returns>ResponseInventarioDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseInventarioDto> UpdateInventarioAsync(byte idSucursal, short id, RequestInventarioDto inventarioDto)
     {
         if (!await repository.ExistsInventarioAsync(id)) throw new NotFoundException("Inventario no encontrada.");

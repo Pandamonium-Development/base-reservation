@@ -13,11 +13,7 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceProveedor(IRepositoryProveedor repository, IMapper mapper, IValidator<Proveedor> proveedorValidator) : IServiceProveedor
 {
-    /// <summary>
-    /// Create vendor
-    /// </summary>
-    /// <param name="proveedorDto">Vendor request model to be added</param>
-    /// <returns>ResponseProveedorDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseProveedorDto> CreateProveedorAsync(RequestProveedorDto proveedorDto)
     {
         var proveedor = await ValidateProveedorAsync(proveedorDto);
@@ -27,11 +23,7 @@ public class ServiceProveedor(IRepositoryProveedor repository, IMapper mapper, I
         return mapper.Map<ResponseProveedorDto>(result);
     }
 
-    /// <summary>
-    /// Delete existing vendor
-    /// </summary>
-    /// <param name="id">Vendor id</param>
-    /// <returns>bool</returns>
+    /// <inheritdoc />
     public async Task<bool> DeleteProveedorsyncAsync(byte id)
     {
         if (!await repository.ExistsProveedorAsync(id)) throw new NotFoundException("Proveedor no encontrada.");
@@ -39,11 +31,7 @@ public class ServiceProveedor(IRepositoryProveedor repository, IMapper mapper, I
         return await repository.DeleteProveedorAsync(id);
     }
 
-    /// <summary>
-    /// Get vendor with specific id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>ResponseProveedorDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseProveedorDto> FindByIdAsync(byte id)
     {
         var proveedor = await repository.FindByIdAsync(id);
@@ -52,21 +40,14 @@ public class ServiceProveedor(IRepositoryProveedor repository, IMapper mapper, I
         return mapper.Map<ResponseProveedorDto>(proveedor);
     }
 
-    /// <summary>
-    /// Get list of all vendors
-    /// </summary>
-    /// <returns>ICollection of ResponseProveedorDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseProveedorDto>> ListAllAsync()
     {
         var proveedores = await repository.ListAllAsync();
         return mapper.Map<ICollection<ResponseProveedorDto>>(proveedores);
     }
 
-    /// <summary>
-    /// Get list of all vendors paginated
-    /// </summary>
-    /// <param name="paginationParameters">Pagination paramets options</param>
-    /// <returns>PagedList of ResponseProveedorDto</returns>
+    /// <inheritdoc />
     public async Task<PagedList<ResponseProveedorDto>> ListAllAsync(PaginationParameters paginationParameters)
     {
         var query = repository.ListAllQueryable();
@@ -77,12 +58,7 @@ public class ServiceProveedor(IRepositoryProveedor repository, IMapper mapper, I
         return PagedList<ResponseProveedorDto>.ToPagedList(proveedores.ToList(), count, paginationParameters.PageNumber, paginationParameters.PageSize);
     }
 
-    /// <summary>
-    /// Update vendor
-    /// </summary>
-    /// <param name="id">Vendor id</param>
-    /// <param name="proveedorDto">Vendor request model to be updated</param>
-    /// <returns>ResponseProveedorDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseProveedorDto> UpdateProveedorsync(byte id, RequestProveedorDto proveedorDto)
     {
         if (!await repository.ExistsProveedorAsync(id)) throw new NotFoundException("Proveedor no encontrada.");

@@ -12,11 +12,7 @@ namespace BaseReservation.Application.Services.Implementations;
 public class ServiceInventarioProducto(IRepositoryInventarioProducto repository, IMapper mapper,
                                     IValidator<InventarioProducto> inventarioProductoValidator) : IServiceInventarioProducto
 {
-    /// <summary>
-    /// Create inventory product
-    /// </summary>
-    /// <param name="inventarioProductoDto">Inventary product request model to be added</param>
-    /// <returns>ResponseInventarioProductoDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseInventarioProductoDto> CreateProductoInventarioAsync(RequestInventarioProductoDto inventarioProductoDto)
     {
         var inventarioProducto = await ValidateInventarioProductoAsync(inventarioProductoDto);
@@ -27,11 +23,7 @@ public class ServiceInventarioProducto(IRepositoryInventarioProducto repository,
         return mapper.Map<ResponseInventarioProductoDto>(result);
     }
 
-    /// <summary>
-    /// Create inventory products
-    /// </summary>
-    /// <param name="inventarioProductosDto">List of Inventary product request model to be added</param>
-    /// <returns>bool</returns>
+    /// <inheritdoc />
     public async Task<bool> CreateProductoInventarioAsync(IEnumerable<RequestInventarioProductoDto> inventarioProductosDto)
     {
         var inventarioProductos = await ValidateInventarioProductoAsync(inventarioProductosDto);
@@ -41,11 +33,7 @@ public class ServiceInventarioProducto(IRepositoryInventarioProducto repository,
         return result;
     }
 
-    /// <summary>
-    /// Get inventory product with specific id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>ResponseInventarioProductoDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseInventarioProductoDto> FindByIdAsync(long id)
     {
         var inventarioProducto = await repository.FindByIdAsync(id);
@@ -54,11 +42,7 @@ public class ServiceInventarioProducto(IRepositoryInventarioProducto repository,
         return mapper.Map<ResponseInventarioProductoDto>(inventarioProducto);
     }
 
-    /// <summary>
-    /// Get list of all inventory product by inventory
-    /// </summary>
-    /// <param name="idInventario">Inventory id</param>
-    /// <returns>ICollection of ResponseInventarioProductoDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseInventarioProductoDto>> ListAllByInventarioAsync(short idInventario)
     {
         var list = await repository.ListAllByInventarioAsync(idInventario);
@@ -67,11 +51,7 @@ public class ServiceInventarioProducto(IRepositoryInventarioProducto repository,
         return collection;
     }
 
-    /// <summary>
-    /// Get list of all inventory product by product
-    /// </summary>
-    /// <param name="idProducto">Product id</param>
-    /// <returns>ICollection of ResponseInventarioProductoDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseInventarioProductoDto>> ListAllByProductoAsync(short idProducto)
     {
         var list = await repository.ListAllByProductoAsync(idProducto);
@@ -80,12 +60,7 @@ public class ServiceInventarioProducto(IRepositoryInventarioProducto repository,
         return collection;
     }
 
-    /// <summary>
-    /// Update inventory product
-    /// </summary>
-    /// <param name="idInventarioProducto">Inventory Product id</param>
-    /// <param name="inventarioProductoDto">Inventary product request model to be updated</param>
-    /// <returns>ResponseInventarioProductoDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseInventarioProductoDto> UpdateProductoInventarioAsync(long idInventarioProducto, RequestInventarioProductoDto inventarioProductoDto)
     {
         if (!await repository.ExistsInventarioProductoAsync(idInventarioProducto)) throw new NotFoundException("Inventario producto no encontrada.");

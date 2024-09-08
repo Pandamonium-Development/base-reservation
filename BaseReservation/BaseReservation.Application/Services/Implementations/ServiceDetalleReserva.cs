@@ -2,7 +2,6 @@
 using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Application.Validations;
 using BaseReservation.Infrastructure.Models;
 using BaseReservation.Infrastructure.Repository.Interfaces;
 using AutoMapper;
@@ -10,15 +9,10 @@ using FluentValidation;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceDetalleServicio(IRepositoryDetalleReserva repository, IMapper mapper,
+public class ServiceDetalleReserva(IRepositoryDetalleReserva repository, IMapper mapper,
                                     IValidator<DetalleReserva> reservaServicioValidator) : IServiceDetalleReserva
 {
-    /// <summary>
-    /// Create reservation details
-    /// </summary>
-    /// <param name="idReserva">Branch id</param>
-    /// <param name="detallesReserva">List of reservation detail model to be added</param>
-    /// <returns>bool</returns>
+    /// <inheritdoc />
     public async Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<RequestDetalleReservaDto> detallesReserva)
     {
         var servicios = await ValidateDetalleReservaAsync(idReserva, detallesReserva);
@@ -29,11 +23,7 @@ public class ServiceDetalleServicio(IRepositoryDetalleReserva repository, IMappe
         return result;
     }
 
-    /// <summary>
-    /// Get reservation detail with specific id
-    /// </summary>
-    /// <param name="id">Id to look for</param>
-    /// <returns>ResponseDetalleReservaDto</returns>
+    /// <inheritdoc />
     public async Task<ResponseDetalleReservaDto?> FindByIdAsync(int id)
     {
         var reservaServicio = await repository.FindByIdAsync(id);
@@ -42,11 +32,7 @@ public class ServiceDetalleServicio(IRepositoryDetalleReserva repository, IMappe
         return mapper.Map<ResponseDetalleReservaDto>(reservaServicio);
     }
 
-    /// <summary>
-    /// Get list of all reservation details by branch
-    /// </summary>
-    /// <param name="idReserva">Branch id</param>
-    /// <returns>ICollection of ResponseDetalleReservaDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseDetalleReservaDto>> ListAllByReservaAsync(int idReserva)
     {
         var list = await repository.ListAllByReservaAsync(idReserva);
