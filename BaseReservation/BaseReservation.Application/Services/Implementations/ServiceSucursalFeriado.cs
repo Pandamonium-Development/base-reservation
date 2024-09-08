@@ -9,9 +9,10 @@ using FluentValidation;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceSucursalFeriado(IRepositorySucursalFeriado repository, IMapper mapper, 
+public class ServiceSucursalFeriado(IRepositorySucursalFeriado repository, IMapper mapper,
                                     IValidator<SucursalFeriado> sucursalFeriadoValidator) : IServiceSucursalFeriado
 {
+    /// <inheritdoc />
     public async Task<bool> CreateSucursalFeriadosAsync(byte idSucursal, IEnumerable<RequestSucursalFeriadoDto> sucursalFeriados)
     {
         var feriados = await ValidateFeriados(idSucursal, sucursalFeriados);
@@ -22,7 +23,8 @@ public class ServiceSucursalFeriado(IRepositorySucursalFeriado repository, IMapp
         return result;
     }
 
-    public async Task<ResponseSucursalFeriadoDto?> FindByIdAsync(short id)
+    /// <inheritdoc />
+    public async Task<ResponseSucursalFeriadoDto> FindByIdAsync(short id)
     {
         var sucursalFeriado = await repository.FindByIdAsync(id);
         if (sucursalFeriado == null) throw new NotFoundException("Feriado en sucursal no encontrado.");
@@ -30,6 +32,7 @@ public class ServiceSucursalFeriado(IRepositorySucursalFeriado repository, IMapp
         return mapper.Map<ResponseSucursalFeriadoDto>(sucursalFeriado);
     }
 
+    /// <inheritdoc />
     public async Task<ICollection<ResponseSucursalFeriadoDto>> ListAllBySucursalAsync(byte idSucursal, short? anno)
     {
         var list = anno == null ? await repository.ListAllBySucursalAsync(idSucursal) :
@@ -39,6 +42,7 @@ public class ServiceSucursalFeriado(IRepositorySucursalFeriado repository, IMapp
         return collection;
     }
 
+    /// <inheritdoc />
     private async Task<IEnumerable<SucursalFeriado>> ValidateFeriados(byte idSucursal, IEnumerable<RequestSucursalFeriadoDto> sucursalFeriados)
     {
         var feriados = mapper.Map<List<SucursalFeriado>>(sucursalFeriados);

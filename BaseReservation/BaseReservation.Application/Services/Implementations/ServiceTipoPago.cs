@@ -7,6 +7,7 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceTipoPago(IRepositoryTipoPago repository, IMapper mapper) : IServiceTipoPago
 {
+    /// <inheritdoc />
     public async Task<ICollection<ResponseTipoPagoDto>> ListAllAsync()
     {
         var coleccion = await repository.ListAllAsync();

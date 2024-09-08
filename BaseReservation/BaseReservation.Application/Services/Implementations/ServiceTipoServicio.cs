@@ -7,6 +7,7 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceTipoServicio(IRepositoryTipoServicio repository, IMapper mapper) : IServiceTipoServicio
 {
+    /// <inheritdoc />
     public async Task<ResponseTipoServicioDto> FindByIdAsync(byte id)
     {
         var tipoServicio = await repository.FindByIdAsync(id);
@@ -15,6 +16,7 @@ public class ServiceTipoServicio(IRepositoryTipoServicio repository, IMapper map
         return mapper.Map<ResponseTipoServicioDto>(tipoServicio);
     }
 
+    /// <inheritdoc />
     public async Task<ICollection<ResponseTipoServicioDto>> ListAllAsync()
     {
         var list = await repository.ListAllAsync();

@@ -12,6 +12,7 @@ namespace BaseReservation.Application.Services.Implementations;
 public class ServiceSucursalHorario(IRepositorySucursalHorario repository, IMapper mapper,
                                     IValidator<SucursalHorario> sucursalHorarioValidator) : IServiceSucursalHorario
 {
+    /// <inheritdoc />
     public async Task<bool> CreateSucursalHorarioAsync(byte idSucursal, IEnumerable<RequestSucursalHorarioDto> sucursalHorarios)
     {
         var horarios = await ValidateHorarios(idSucursal, sucursalHorarios);
@@ -22,6 +23,7 @@ public class ServiceSucursalHorario(IRepositorySucursalHorario repository, IMapp
         return result;
     }
 
+    /// <inheritdoc />
     public async Task<ResponseSucursalHorarioDto?> FindByIdAsync(short id)
     {
         var sucursalHorario = await repository.FindByIdAsync(id);
@@ -30,6 +32,7 @@ public class ServiceSucursalHorario(IRepositorySucursalHorario repository, IMapp
         return mapper.Map<ResponseSucursalHorarioDto>(sucursalHorario);
     }
 
+    /// <inheritdoc />
     public async Task<ICollection<ResponseSucursalHorarioDto>> ListAllBySucursalAsync(byte idSucursal)
     {
         var list = await repository.ListAllBySucursalAsync(idSucursal);
@@ -39,6 +42,12 @@ public class ServiceSucursalHorario(IRepositorySucursalHorario repository, IMapp
         return collection;
     }
 
+    /// <summary>
+    /// Validate schedules
+    /// </summary>
+    /// <param name="idSucursal">Branch id to recevice schedules that need to be validated</param>
+    /// <param name="sucursalHorarios">List of Branch's schedules request that need validation</param>
+    /// <returns>IEnumerable of SucursalHorario</returns>
     private async Task<IEnumerable<SucursalHorario>> ValidateHorarios(byte idSucursal, IEnumerable<RequestSucursalHorarioDto> sucursalHorarios)
     {
         var horariosExistentes = mapper.Map<List<SucursalHorario>>(sucursalHorarios);

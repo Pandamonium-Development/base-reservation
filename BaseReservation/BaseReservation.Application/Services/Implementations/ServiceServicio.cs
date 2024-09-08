@@ -7,50 +7,56 @@ using BaseReservation.Infrastructure.Repository.Interfaces;
 using AutoMapper;
 using FluentValidation;
 
-namespace BaseReservation.Application.Services.Implementations
-{
-    public class ServiceServicio(IRepositoryServicio repository, IMapper mapper,
+namespace BaseReservation.Application.Services.Implementations;
+
+public class ServiceServicio(IRepositoryServicio repository, IMapper mapper,
                                 IValidator<Servicio> servicioValidator) : IServiceServicio
+{
+    /// <inheritdoc />
+    public async Task<ResponseServicioDto> CreateServicioAsync(RequestServicioDto servicio)
     {
-        public async Task<ResponseServicioDto> CreateServicioAsync(RequestServicioDto servicio)
-        {
-            var result = await repository.CreateServicioAsync(mapper.Map<Servicio>(servicio));
-            if (result == null) throw new NotFoundException("Servicio no creado.");
-            return mapper.Map<ResponseServicioDto>(result);
-        }
+        var result = await repository.CreateServicioAsync(mapper.Map<Servicio>(servicio));
+        if (result == null) throw new NotFoundException("Servicio no creado.");
 
-        public async Task<ResponseServicioDto> FindByIdAsync(byte id)
-        {
-            var servicio = await repository.FindByIdAsync(id);
-            if (servicio == null) throw new NotFoundException("Servicio no encontrado.");
+        return mapper.Map<ResponseServicioDto>(result);
+    }
 
-            return mapper.Map<ResponseServicioDto>(servicio);
-        }
+    /// <inheritdoc />
+    public async Task<ResponseServicioDto> FindByIdAsync(byte id)
+    {
+        var servicio = await repository.FindByIdAsync(id);
+        if (servicio == null) throw new NotFoundException("Servicio no encontrado.");
 
-        public async Task<ICollection<ResponseServicioDto>> ListALLAsync()
-        {
-            var list = await repository.ListAllAsync();
-            var collection = mapper.Map<ICollection<ResponseServicioDto>>(list);
+        return mapper.Map<ResponseServicioDto>(servicio);
+    }
 
-            return collection;
-        }
+    /// <inheritdoc />
+    public async Task<ICollection<ResponseServicioDto>> ListAllAsync()
+    {
+        var list = await repository.ListAllAsync();
+        var collection = mapper.Map<ICollection<ResponseServicioDto>>(list);
 
-        public async Task<ResponseServicioDto> UpdateServicioAsync(byte id, RequestServicioDto servicioDTO)
-        {
-            if (!await repository.ExistsServicioAsync(id)) throw new NotFoundException("Servicio no encontrado.");
+        return collection;
+    }
 
-            var sucursal = await ValidateServicio(servicioDTO);
-            sucursal.Id = id;
-            var result = await repository.UpdateServicioAsync(sucursal);
+    /// <inheritdoc />
+    public async Task<ResponseServicioDto> UpdateServicioAsync(byte id, RequestServicioDto servicioDTO)
+    {
+        if (!await repository.ExistsServicioAsync(id)) throw new NotFoundException("Servicio no encontrado.");
 
-            return mapper.Map<ResponseServicioDto>(result);
-        }
+        var sucursal = await ValidateServicio(servicioDTO);
+        sucursal.Id = id;
+        var result = await repository.UpdateServicioAsync(sucursal);
 
-        private async Task<Servicio> ValidateServicio(RequestServicioDto servicioDTO)
-        {
-            var servicio = mapper.Map<Servicio>(servicioDTO);
-            await servicioValidator.ValidateAndThrowAsync(servicio);
-            return servicio;
-        }
+        return mapper.Map<ResponseServicioDto>(result);
+    }
+
+    /// <inheritdoc />
+    private async Task<Servicio> ValidateServicio(RequestServicioDto servicioDTO)
+    {
+        var servicio = mapper.Map<Servicio>(servicioDTO);
+        await servicioValidator.ValidateAndThrowAsync(servicio);
+
+        return servicio;
     }
 }

@@ -12,6 +12,7 @@ namespace BaseReservation.Application.Services.Implementations;
 public class ServiceSucursalHorarioBloqueo(IRepositorySucursalHorarioBloqueo repository,
                                                  IValidator<SucursalHorarioBloqueo> bloqueoValidator, IMapper mapper) : IServiceSucursalHorarioBloqueo
 {
+    /// <inheritdoc />
     public async Task<ResponseSucursalHorarioBloqueoDto> CreateSucursalHorarioBloqueoAsync(RequestSucursalHorarioBloqueoDto bloqueoDTO)
     {
         var bloqueo = await ValidateSucursalHorarioBloqueo(bloqueoDTO);
@@ -22,6 +23,7 @@ public class ServiceSucursalHorarioBloqueo(IRepositorySucursalHorarioBloqueo rep
         return mapper.Map<ResponseSucursalHorarioBloqueoDto>(result);
     }
 
+    /// <inheritdoc />
     public async Task<bool> CreateSucursalHorarioBloqueoAsync(short idSucursalHorario, IEnumerable<RequestSucursalHorarioBloqueoDto> bloqueos)
     {
         var bloqueosGuardar = await ValidateSucursalHorarioBloqueo(idSucursalHorario, bloqueos);
@@ -32,6 +34,7 @@ public class ServiceSucursalHorarioBloqueo(IRepositorySucursalHorarioBloqueo rep
         return result;
     }
 
+    /// <inheritdoc />
     public async Task<ResponseSucursalHorarioBloqueoDto> FindByIdAsync(long id)
     {
         var bloqueo = await repository.FindByIdAsync(id);
@@ -40,6 +43,7 @@ public class ServiceSucursalHorarioBloqueo(IRepositorySucursalHorarioBloqueo rep
         return mapper.Map<ResponseSucursalHorarioBloqueoDto>(bloqueo);
     }
 
+    /// <inheritdoc />
     public async Task<ICollection<ResponseSucursalHorarioBloqueoDto>> ListAllBySucursalHorarioAsync(short idSucursalHorario)
     {
         var bloqueos = await repository.ListAllBySucursalHorarioAsync(idSucursalHorario);
@@ -47,6 +51,7 @@ public class ServiceSucursalHorarioBloqueo(IRepositorySucursalHorarioBloqueo rep
         return mapper.Map<ICollection<ResponseSucursalHorarioBloqueoDto>>(bloqueos);
     }
 
+    /// <inheritdoc />
     public async Task<ResponseSucursalHorarioBloqueoDto> UpdateSucursalHorarioBloqueoAsync(long id, RequestSucursalHorarioBloqueoDto bloqueoDTO)
     {
         if (!await repository.ExistsSucursalHorarioBloqueoAsync(id)) throw new NotFoundException("Horario bloqueo no encontrada.");
@@ -58,6 +63,7 @@ public class ServiceSucursalHorarioBloqueo(IRepositorySucursalHorarioBloqueo rep
         return mapper.Map<ResponseSucursalHorarioBloqueoDto>(result);
     }
 
+    /// <inheritdoc />
     private async Task<SucursalHorarioBloqueo> ValidateSucursalHorarioBloqueo(RequestSucursalHorarioBloqueoDto bloqueolDTO)
     {
         var bloqueo = mapper.Map<SucursalHorarioBloqueo>(bloqueolDTO);
@@ -65,6 +71,12 @@ public class ServiceSucursalHorarioBloqueo(IRepositorySucursalHorarioBloqueo rep
         return bloqueo;
     }
 
+    /// <summary>
+    /// Validate branch schedule's blocks
+    /// </summary>
+    /// <param name="idSucursalHorario">Branch schedule id that receive blocks</param>
+    /// <param name="bloqueoDtos">List of branch schedule's blocks request model will be validated</param>
+    /// <returns>IEnumerable of SucursalHorarioBloqueo</returns>
     private async Task<IEnumerable<SucursalHorarioBloqueo>> ValidateSucursalHorarioBloqueo(short idSucursalHorario, IEnumerable<RequestSucursalHorarioBloqueoDto> bloqueoDtos)
     {
         var bloqueos = mapper.Map<List<SucursalHorarioBloqueo>>(bloqueoDtos);

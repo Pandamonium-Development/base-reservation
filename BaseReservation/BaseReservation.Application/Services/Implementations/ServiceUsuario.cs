@@ -9,6 +9,7 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceUsuario(IRepositoryUsuario repository, IRepositorySucursal repositorySucursal, IMapper mapper) : IServiceUsuario
 {
+    /// <inheritdoc />
     public async Task<ResponseUsuarioDto> FindByIdAsync(short id)
     {
         var usuario = await repository.FindByIdAsync(id);
@@ -17,6 +18,7 @@ public class ServiceUsuario(IRepositoryUsuario repository, IRepositorySucursal r
         return mapper.Map<ResponseUsuarioDto>(usuario);
     }
 
+    /// <inheritdoc />
     public async Task<bool> FreeAssignmentSucursalAsync(short id, byte idSucursalAsignacion)
     {
         var usuario = await repository.ExistsUsuarioAsync(id);
@@ -28,6 +30,7 @@ public class ServiceUsuario(IRepositoryUsuario repository, IRepositorySucursal r
         return await repository.IsAvailableAsync(id, idSucursalAsignacion);
     }
 
+    /// <inheritdoc />
     public async Task<ICollection<ResponseUsuarioDto>> ListAllAsync(string? rol = null)
     {
         if (rol == null)
@@ -44,5 +47,4 @@ public class ServiceUsuario(IRepositoryUsuario repository, IRepositorySucursal r
 
         return collection;
     }
-
 }

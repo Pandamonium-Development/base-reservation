@@ -8,6 +8,7 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceUnidadMedida(IRepositoryUnidadMedida repository, IMapper mapper) : IServiceUnidadMedida
 {
+    /// <inheritdoc />
     public async Task<ResponseUnidadMedidaDto> FindByIdAsync(byte id)
     {
         var unidad = await repository.FindByIdAsync(id);
@@ -16,6 +17,7 @@ public class ServiceUnidadMedida(IRepositoryUnidadMedida repository, IMapper map
         return mapper.Map<ResponseUnidadMedidaDto>(unidad);
     }
 
+    /// <inheritdoc />
     public async Task<ICollection<ResponseUnidadMedidaDto>> ListAllAsync()
     {
         var list = await repository.ListAllAsync();

@@ -13,6 +13,7 @@ namespace BaseReservation.Application.Services.Implementations;
 public class ServiceSucursal(IRepositorySucursal repository, IMapper mapper,
                                 IValidator<Sucursal> sucursalValidator, IServiceUserAuthorization serviceUserAuthorization) : IServiceSucursal
 {
+    /// <inheritdoc />
     public async Task<ResponseSucursalDto> CreateSucursalAsync(RequestSucursalDto sucursalDTO)
     {
         var sucursal = await ValidateSucursal(sucursalDTO);
@@ -23,6 +24,7 @@ public class ServiceSucursal(IRepositorySucursal repository, IMapper mapper,
         return mapper.Map<ResponseSucursalDto>(result);
     }
 
+    /// <inheritdoc />
     public async Task<ResponseSucursalDto> UpdateSucursalAsync(byte id, RequestSucursalDto sucursalDTO)
     {
         if (!await repository.ExistsSucursalAsync(id)) throw new NotFoundException("Sucursal no encontrada.");
@@ -34,6 +36,7 @@ public class ServiceSucursal(IRepositorySucursal repository, IMapper mapper,
         return mapper.Map<ResponseSucursalDto>(result);
     }
 
+    /// <inheritdoc />
     public async Task<ResponseSucursalDto> FindByIdAsync(byte id)
     {
         var sucursal = await repository.FindByIdAsync(id);
@@ -42,6 +45,7 @@ public class ServiceSucursal(IRepositorySucursal repository, IMapper mapper,
         return mapper.Map<ResponseSucursalDto>(sucursal);
     }
 
+    /// <inheritdoc />
     public async Task<ICollection<ResponseSucursalDto>> ListAllAsync()
     {
         var list = await repository.ListAllAsync();
@@ -50,6 +54,7 @@ public class ServiceSucursal(IRepositorySucursal repository, IMapper mapper,
         return collection;
     }
 
+    /// <inheritdoc />
     private async Task<Sucursal> ValidateSucursal(RequestSucursalDto sucursalDTO)
     {
         var sucursal = mapper.Map<Sucursal>(sucursalDTO);
@@ -57,6 +62,7 @@ public class ServiceSucursal(IRepositorySucursal repository, IMapper mapper,
         return sucursal;
     }
 
+    /// <inheritdoc />
     public async Task<ICollection<ResponseSucursalDto>> ListAllByRolAsync()
     {
         var usuario = await serviceUserAuthorization.GetLoggedUser();
