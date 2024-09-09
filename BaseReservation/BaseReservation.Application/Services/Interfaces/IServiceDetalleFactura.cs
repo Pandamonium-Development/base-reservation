@@ -4,7 +4,17 @@ namespace BaseReservation.Application.Services.Interfaces;
 
 public interface IServiceDetalleFactura
 {
-   Task<ResponseDetalleFacturaDto?> FindByIdAsync(long idFactura, long id);
+    /// <summary>
+    ///  Finds a invoice detail by its unique ID.
+    /// </summary>
+    /// <param name="id">The ID of the invoice detail to retrieve.</param>
+    /// <returns>ResponseDetalleFacturaDto</returns>
+    Task<ResponseDetalleFacturaDto> FindByIdAsync(long id);
 
-   Task<ICollection<ResponseDetalleFacturaDto>> ListAllByFacturaAsync(long idFactura);
+    /// <summary>
+    /// Retrieves a list of all details by invoice.
+    /// </summary>
+    /// <param name="idFactura">The identifier of the invoice</param>
+    /// <returns>ICollection of ResponseDetalleFacturaDto</returns>
+    Task<ICollection<ResponseDetalleFacturaDto>> ListAllByFacturaAsync(long idFactura);
 }

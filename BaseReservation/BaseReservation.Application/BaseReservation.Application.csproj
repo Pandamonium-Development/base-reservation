@@ -23,7 +23,7 @@
         <Folder Include="Validations\" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\BaseReservation.Infrastructure\BaseReservation.Infrastructure.csproj" />
-        <ProjectReference Include="..\BaseReservation.Utils\BaseReservation.Utils.csproj" />
+      <ProjectReference Include="..\BaseReservation.Infrastructure\BaseReservation.Infrastructure.csproj" />
+      <ProjectReference Include="..\BaseReservation.Utils\BaseReservation.Utils.csproj" />
     </ItemGroup>
 </Project>
