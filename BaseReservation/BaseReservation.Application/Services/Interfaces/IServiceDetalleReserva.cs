@@ -7,7 +7,7 @@ public interface IServiceDetalleReserva
 {
     Task<ICollection<ResponseDetalleReservaDto>> ListAllByReservaAsync(int idReserva);
 
-    Task<ResponseDetalleReservaDto?> FindByIdAsync(int id);
+    Task<ResponseDetalleReservaDto> FindByIdAsync(int id);
 
     Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<RequestDetalleReservaDto> detallesReservaDto);
 }

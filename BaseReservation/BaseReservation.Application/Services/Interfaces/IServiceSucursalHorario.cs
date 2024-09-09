@@ -7,7 +7,7 @@ namespace BaseReservation.Application.Services.Interfaces
     {
         Task<ICollection<ResponseSucursalHorarioDto>> GetHorariosBySucursalAsync(byte idSucursal);
 
-        Task<ResponseSucursalHorarioDto?> GetSucursalHorarioByIdAsync(short id);
+        Task<ResponseSucursalHorarioDto> GetSucursalHorarioByIdAsync(short id);
 
         Task<bool> CreateSucursalHorarioAsync(byte idSucursal, IEnumerable<RequestSucursalHorarioDto> sucursalHorarios);
     }

@@ -8,7 +8,8 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceDetalleFactura(IRepositoryDetalleFactura repository, IMapper mapper) : IServiceDetalleFactura
 {
-    public async Task<ResponseDetalleFacturaDto?> FindByIdAsync(long id)
+    /// <inheritdoc />
+    public async Task<ResponseDetalleFacturaDto> FindByIdAsync(long id)
     {
         var detalleFactura = await repository.FindByIdAsync(id);
         if (detalleFactura == null) throw new NotFoundException("Detalle Factura no encontrada.");
@@ -16,6 +17,7 @@ public class ServiceDetalleFactura(IRepositoryDetalleFactura repository, IMapper
         return mapper.Map<ResponseDetalleFacturaDto>(detalleFactura);
     }
 
+    /// <inheritdoc />
     public async Task<ICollection<ResponseDetalleFacturaDto>> ListAllByFacturaAsync(long idFactura)
     {
         var list = await repository.ListAllByFacturaAsync(idFactura);

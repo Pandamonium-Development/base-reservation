@@ -8,12 +8,7 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceCategoria(IRepositoryCategoria repository, IMapper mapper) : IServiceCategoria
 {
-    /// <summary>
-    /// Finds a category by its unique ID.
-    /// </summary>
-    /// <param name="id">The ID of the category to retrieve.</param>
-    /// <returns>ResponseCategoriaDto</returns>
-    /// <exception cref="NotFoundException">Thrown when no category is found with the specified ID.</exception>
+    /// <inheritdoc />
     public async Task<ResponseCategoriaDto> FindByIdAsync(byte id)
     {
         var categoria = await repository.FindByIdAsync(id);
@@ -22,10 +17,7 @@ public class ServiceCategoria(IRepositoryCategoria repository, IMapper mapper) :
         return mapper.Map<ResponseCategoriaDto>(categoria);
     }
 
-    /// <summary>
-    /// Retrieves a list of all categories
-    /// </summary>
-    /// <returns>ICollection of ResponseCategoriaDto</returns>
+    /// <inheritdoc />
     public async Task<ICollection<ResponseCategoriaDto>> ListAllAsync()
     {
         var list = await repository.ListAllAsync();
