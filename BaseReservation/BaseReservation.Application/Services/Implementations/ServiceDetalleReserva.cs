@@ -10,7 +10,7 @@ using FluentValidation;
 namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceDetalleReserva(IRepositoryDetalleReserva repository, IMapper mapper,
-                                    IValidator<DetalleReserva> reservaServicioValidator) : IServiceDetalleReserva
+                                    IValidator<DetalleReserva> detalleReservaValidator) : IServiceDetalleReserva
 {
     /// <inheritdoc />
     public async Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<RequestDetalleReservaDto> detallesReserva)
@@ -53,7 +53,7 @@ public class ServiceDetalleReserva(IRepositoryDetalleReserva repository, IMapper
         foreach (var item in serviciosExistentes)
         {
             item.IdReserva = idReserva;
-            await reservaServicioValidator.ValidateAndThrowAsync(item);
+            await detalleReservaValidator.ValidateAndThrowAsync(item);
         }
         return serviciosExistentes;
     }
