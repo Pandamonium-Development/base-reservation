@@ -7,11 +7,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 
 public class RepositoryDistrito(BaseReservationContext context) : IRepositoryDistrito
 {
-    /// <summary>
-    /// Get exact district detail according to id, if not, get null
-    /// </summary>
-    /// <param name="id">Id number</param>
-    /// <returns>Distrito</returns>
+    /// <inheritdoc />
     public async Task<Distrito?> FindByIdAsync(byte id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Distrito))!.FindPrimaryKey()!.Properties[0];
@@ -22,11 +18,7 @@ public class RepositoryDistrito(BaseReservationContext context) : IRepositoryDis
                     .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id);
     }
 
-    /// <summary>
-    /// Get list of districts base on a parent State
-    /// </summary>
-    /// <param name="idCanton">Id state parent</param>
-    /// <returns>ICollection of Distrito</returns>
+    /// <inheritdoc />
     public async Task<ICollection<Distrito>> ListAllByCantonAsync(byte idCanton)
     {
         var collection = await context.Set<Distrito>()

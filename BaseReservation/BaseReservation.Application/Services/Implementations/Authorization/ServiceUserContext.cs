@@ -7,6 +7,7 @@ namespace BaseReservation.Application.Services.Implementations.Authorization;
 
 public class ServiceUserContext(IHttpContextAccessor httpContextAccessor) : IServiceUserContext
 {
+    /// <inheritdoc />
     public string? UserId
     {
         get
