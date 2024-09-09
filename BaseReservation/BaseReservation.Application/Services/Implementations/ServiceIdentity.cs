@@ -128,7 +128,7 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
         var validatedToken = GetPrincipalFromToken(token);
         if (validatedToken == null) return new AuthenticationResult { Errors = new[] { "Token Inválido" } };
 
-        var expiryDateTimeUtc = DateTime.UnixEpoch;
+        var expiryDateTimeUtc = DateTime.UnixEpoch
             .AddSeconds(long.Parse(validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Exp).Value));
 
         if (expiryDateTimeUtc > DateTime.UtcNow) return new AuthenticationResult { Errors = new[] { "Token aun no ha expirado" } };
