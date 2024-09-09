@@ -13,9 +13,9 @@ public class ServiceHorario(IRepositoryHorario repository, IMapper mapper,
                             IValidator<Horario> horarioValidator) : IServiceHorario
 {
     /// <inheritdoc />
-    public async Task<ResponseHorarioDto> CreateHorarioAsync(RequestHorarioDto horarioDTO)
+    public async Task<ResponseHorarioDto> CreateHorarioAsync(RequestHorarioDto horarioDto)
     {
-        var horario = await ValidarHorario(horarioDTO);
+        var horario = await ValidarHorario(horarioDto);
 
         var result = await repository.CreateHorarioAsync(horario);
         if (result == null) throw new NotFoundException("Horario no se ha creado.");
