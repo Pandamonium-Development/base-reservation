@@ -7,7 +7,7 @@ namespace BaseReservation.Application.Services.Interfaces;
 public interface IServiceFeriado
 {
     /// <summary>
-    ///  Creates a new ResponseFeriadoDto
+    ///  Creates a new holiday
     /// </summary>
     /// <param name="feriadoDTO">The data transfer object containing the information of the Factura to create</param>
     /// <returns>RequestFeriadoDto</returns>
@@ -31,9 +31,9 @@ public interface IServiceFeriado
     Task<ResponseFeriadoDto> FindByIdAsync(byte id);
 
     /// <summary>
-    /// ICollection of ResponseFeriadoDto
+    /// Get a list of all holidays
     /// </summary>
-    /// <returns>ResponseFeriadoDto</returns>
+    /// <returns>ICollection of ResponseFeriadoDto</returns>
     Task<ICollection<ResponseFeriadoDto>> ListAllAsync();
 
     /// <summary>

@@ -13,7 +13,7 @@ public interface IServiceCategoria
     Task<ICollection<ResponseCategoriaDto>> ListAllAsync();
 
     /// <summary>
-    /// Retrieves a list of all categories
+    /// Get a list of all categories
     /// </summary>
     /// <returns>ICollection of ResponseCategoriaDto</returns>
     Task<ResponseCategoriaDto> FindByIdAsync(byte id);

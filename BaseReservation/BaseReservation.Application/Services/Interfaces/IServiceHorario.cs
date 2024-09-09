@@ -1,39 +1,35 @@
 ﻿using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Infrastructure.Models;
 
 namespace BaseReservation.Application.Services.Interfaces;
 
 public interface IServiceHorario
 {
     /// <summary>
-    ///  Creates a new ResponseHorarioDto 
+    ///  Creates a new schedule
     /// </summary>
-    /// <param name="horarioDTO"></param>
-    /// <returns></returns>
-    /// <exception cref="NotFoundException"></exception>
+    /// <param name="horarioDTO">Schedule request model to be added</param>
+    /// <returns>ResponseHorarioDto</returns>
     Task<ResponseHorarioDto> CreateHorarioAsync(RequestHorarioDto horarioDto);
 
     /// <summary>
-    /// Updates an existing ResponseHorarioDto
+    /// Updates an existing schedule
     /// </summary>
-    /// <param name="id"></param>
-    /// <param name="horarioDTO"></param>
-    /// <returns></returns>
-    /// <exception cref="NotFoundException"></exception>
+    /// <param name="id">Schedule id to identity record</param>
+    /// <param name="horarioDTO">Schedule request model to be updated</param>
+    /// <returns>ResponseHorarioDto</returns>
     Task<ResponseHorarioDto> UpdateHorarioAsync(short id, RequestHorarioDto horarioDto);
 
     /// <summary>
-    /// Lists all ResponseHorarioDto.
+    /// Get list of all ResponseHorarioDto.
     /// </summary>
     /// <returns>ICollection of ResponseHorarioDto</returns>
     Task<ICollection<ResponseHorarioDto>> ListAllAsync();
 
     /// <summary>
-    ///Finds a ResponseHorarioDto by its unique identifier
+    /// Finds a schedule by its unique identifier
     /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// <exception cref="NotFoundException"></exception>
+    /// <param name="id">Id to look for</param>
+    /// <returns>ResponseHorarioDto</returns>
     Task<ResponseHorarioDto> FindByIdAsync(short id);
 }

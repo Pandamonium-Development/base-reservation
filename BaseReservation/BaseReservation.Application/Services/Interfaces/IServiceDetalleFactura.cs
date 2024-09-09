@@ -5,17 +5,16 @@ namespace BaseReservation.Application.Services.Interfaces;
 public interface IServiceDetalleFactura
 {
     /// <summary>
-    ///  Finds a DetalleFactura by its unique ID.
+    ///  Finds a invoice detail by its unique ID.
     /// </summary>
-    /// <param name="id">The ID of the DetalleFactura to retrieve.</param>
+    /// <param name="id">The ID of the invoice detail to retrieve.</param>
     /// <returns>ResponseDetalleFacturaDto</returns>
-    /// <exception cref="NotFoundException"></exception>
     Task<ResponseDetalleFacturaDto> FindByIdAsync(long id);
 
     /// <summary>
-    /// Retrieves a list of all Facturas.
+    /// Retrieves a list of all details by invoice.
     /// </summary>
-    /// <param name="idFactura">The identifier of the Factura</param>
+    /// <param name="idFactura">The identifier of the invoice</param>
     /// <returns>ICollection of ResponseDetalleFacturaDto</returns>
     Task<ICollection<ResponseDetalleFacturaDto>> ListAllByFacturaAsync(long idFactura);
 }

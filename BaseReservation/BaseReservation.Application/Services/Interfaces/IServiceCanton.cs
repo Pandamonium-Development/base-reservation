@@ -2,7 +2,7 @@
 
 namespace BaseReservation.Application.Services.Interfaces;
 
-public  interface IServiceCanton
+public interface IServiceCanton
 {
     /// <summary>
     /// Retrieves a list of all cantons by the given province ID.
