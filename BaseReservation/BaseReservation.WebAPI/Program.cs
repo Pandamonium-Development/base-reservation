@@ -6,6 +6,7 @@ using Newtonsoft.Json.Converters;
 using BaseReservation.Utils.Converter;
 using BaseReservation.WebAPI.Authorization;
 using BaseReservation.WebAPI.Swagger;
+using Serilog;
 
 var BaseReservationSpecificOrigins = "_BaseReservationSpecificOrigins";
 
@@ -68,6 +69,9 @@ builder.Services.AddCors(options =>
                       });
 });
 
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 
 var app = builder.Build();
 
@@ -82,7 +86,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// var logger = app.Services.GetRequiredService<ILogger<Program>>();
-// app.ConfigureExceptionHandler(logger);
+app.UseSerilogRequestLogging();
+
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+app.ConfigureExceptionHandler(logger);
 
 await app.RunAsync();

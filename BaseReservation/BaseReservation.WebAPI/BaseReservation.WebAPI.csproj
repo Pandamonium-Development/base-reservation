@@ -7,23 +7,17 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore"
-                          Version="6.7.3" />
-        <PackageReference Include="Asp.Versioning.Mvc"
-                          Version="8.1.0" />
-        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer"
-                          Version="8.1.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson"
-                          Version="8.0.8" />
-        <PackageReference Include="MicroElements.Swashbuckle.FluentValidation"
-                          Version="6.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design"
-                          Version="8.0.8">
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+        <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
+        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.8" />
+        <PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="6.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft"
-                          Version="6.7.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.7.3" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\BaseReservation.Infrastructure\BaseReservation.Infrastructure.csproj" />
