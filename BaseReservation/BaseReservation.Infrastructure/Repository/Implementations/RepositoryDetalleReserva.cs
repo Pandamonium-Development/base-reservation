@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Repository.Implementations;
 
-public class RepositoryReservaServicio(BaseReservationContext context) : IRepositoryDetalleReserva
+public class RepositoryDetalleReserva(BaseReservationContext context) : IRepositoryDetalleReserva
 {
     /// <inheritdoc />
     public async Task<bool> CreateDetalleReservaAsync(int idReserva, IEnumerable<DetalleReserva> detallesReserva)
