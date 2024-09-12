@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BaseReservation.WebAPI.Controllers;
 
+/// <summary>
+/// Controller in charge of service calls
+/// </summary>
 [ApiController]
 [BaseReservationAuthorize]
 [ApiVersion("1.0")]

@@ -5,7 +5,6 @@ namespace BaseReservation.WebAPI.Authorization;
 /// <summary>
 /// Claim finder class
 /// </summary>
-/// <typeparam name="Claim">List of claims passed on default constructor</typeparam>
 public class ClaimFinder(IEnumerable<Claim> claims)
 {
     /// <summary>
