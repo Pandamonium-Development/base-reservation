@@ -9,7 +9,7 @@ public interface IServiceInventario
     /// Get list of all inventories
     /// </summary>
     /// <returns>ICollection of ResponseInventarioDto</returns>
-    Task<ICollection<ResponseInventarioDto>> ListAllAsync();
+    Task<ICollection<ResponseInventarioDto>> ListAllAsync(byte idSucursal);
 
     /// <summary>
     /// Get list of all inventories by branch
