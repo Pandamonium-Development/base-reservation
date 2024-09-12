@@ -14,8 +14,16 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BaseReservation.WebAPI.Configuration;
 
+/// <summary>
+/// Authentication extension class
+/// </summary>
 public static class AuthenticationExtension
 {
+    /// <summary>
+    /// Configure authentication JWT
+    /// </summary>
+    /// <param name="services">Service collection</param>
+    /// <param name="configuration">Configuration settings</param>
     public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
         var authenticationConfigurationSection = configuration.GetSection("AuthenticationConfiguration");

@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace BaseReservation.WebAPI.Converter;
 
+/// <summary>
+/// Converter class to accept string as date only
+/// </summary>
 public class DateOnlyConverter : JsonConverter<DateOnly>
 {
     private const string Format = "yyyy-MM-dd";

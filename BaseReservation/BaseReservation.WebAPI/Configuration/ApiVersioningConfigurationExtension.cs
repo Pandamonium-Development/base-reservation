@@ -2,6 +2,9 @@ using Asp.Versioning;
 
 namespace BaseReservation.WebAPI.Configuration;
 
+/// <summary>
+/// Api versioning configuration extension clas
+/// </summary>
 public static class ApiVersioningConfigurationExtension
 {
     /// <summary>
