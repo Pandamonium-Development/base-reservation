@@ -33,21 +33,6 @@ public class ReservaController(IServiceReserva serviceReserva) : ControllerBase
     }
 
     /// <summary>
-    /// Get list of all reservations by branch
-    /// </summary>
-    /// <param name="idReserva">Branch id</param>
-    /// <returns>IActionResult</returns>
-    [HttpGet("{idReserva}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseReservaDto))]
-    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetReservaByIdAsync(int idReserva)
-    {
-        var reservation = await serviceReserva.FindByIdAsync(idReserva);
-        return StatusCode(StatusCodes.Status200OK, reservation);
-    }
-
-    /// <summary>
     /// Get list of all reservations by branch with filter option with start date and end date
     /// </summary>
     /// <param name="idSucursal">Branch id</param>
@@ -62,6 +47,21 @@ public class ReservaController(IServiceReserva serviceReserva) : ControllerBase
     {
         var reservations = await serviceReserva.ListAllBySucursalAsync(idSucursal, fechaInicio, fechaFin);
         return StatusCode(StatusCodes.Status200OK, reservations);
+    }
+
+    /// <summary>
+    /// Get list of all reservations by branch
+    /// </summary>
+    /// <param name="idReserva">Branch id</param>
+    /// <returns>IActionResult</returns>
+    [HttpGet("{idReserva}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseReservaDto))]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
+    public async Task<IActionResult> GetReservaByIdAsync(int idReserva)
+    {
+        var reservation = await serviceReserva.FindByIdAsync(idReserva);
+        return StatusCode(StatusCodes.Status200OK, reservation);
     }
 
     /// <summary>
