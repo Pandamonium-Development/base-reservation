@@ -28,8 +28,8 @@ public class ReservaController(IServiceReserva serviceReserva) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetAllReservasAsync()
     {
-        var reservas = await serviceReserva.ListAllAsync();
-        return StatusCode(StatusCodes.Status200OK, reservas);
+        var reservations = await serviceReserva.ListAllAsync();
+        return StatusCode(StatusCodes.Status200OK, reservations);
     }
 
     /// <summary>
@@ -43,8 +43,8 @@ public class ReservaController(IServiceReserva serviceReserva) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetReservaByIdAsync(int idReserva)
     {
-        var reserva = await serviceReserva.FindByIdAsync(idReserva);
-        return StatusCode(StatusCodes.Status200OK, reserva);
+        var reservation = await serviceReserva.FindByIdAsync(idReserva);
+        return StatusCode(StatusCodes.Status200OK, reservation);
     }
 
     /// <summary>
@@ -60,8 +60,8 @@ public class ReservaController(IServiceReserva serviceReserva) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetAllReservasAsync(byte idSucursal, [FromQuery] DateOnly? fechaInicio, [FromQuery] DateOnly? fechaFin)
     {
-        var reserva = await serviceReserva.ListAllBySucursalAsync(idSucursal, fechaInicio, fechaFin);
-        return StatusCode(StatusCodes.Status200OK, reserva);
+        var reservations = await serviceReserva.ListAllBySucursalAsync(idSucursal, fechaInicio, fechaFin);
+        return StatusCode(StatusCodes.Status200OK, reservations);
     }
 
     /// <summary>
@@ -76,8 +76,8 @@ public class ReservaController(IServiceReserva serviceReserva) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> ScheduleAvailabilityBySucursalAsync(byte idSucursal, DateTime dia)
     {
-        var reserva = await serviceReserva.ScheduleAvailabilityBySucursalAsync(idSucursal, new DateOnly(dia.Year, dia.Month, dia.Day));
-        return StatusCode(StatusCodes.Status200OK, reserva);
+        var availablesHours = await serviceReserva.ScheduleAvailabilityBySucursalAsync(idSucursal, new DateOnly(dia.Year, dia.Month, dia.Day));
+        return StatusCode(StatusCodes.Status200OK, availablesHours);
     }
 
     /// <summary>

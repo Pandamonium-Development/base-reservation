@@ -27,8 +27,8 @@ public class ReservaPreguntaController(IServiceReservaPregunta serviceReservaPre
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetAllReservasPreguntasAsync()
     {
-        var reservas = await serviceReservaPregunta.ListAllAsync();
-        return StatusCode(StatusCodes.Status200OK, reservas);
+        var questions = await serviceReservaPregunta.ListAllAsync();
+        return StatusCode(StatusCodes.Status200OK, questions);
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ public class ReservaPreguntaController(IServiceReservaPregunta serviceReservaPre
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetReservaPreguntaByIdAsync(int idReservaPregunta)
     {
-        var reservaPregunta = await serviceReservaPregunta.FindByIdAsync(idReservaPregunta);
-        return StatusCode(StatusCodes.Status200OK, reservaPregunta);
+        var reservationQuestions = await serviceReservaPregunta.FindByIdAsync(idReservaPregunta);
+        return StatusCode(StatusCodes.Status200OK, reservationQuestions);
     }
 }

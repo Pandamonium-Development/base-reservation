@@ -28,8 +28,8 @@ public class ServicioController(IServiceServicio serviceServicio) : ControllerBa
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetAllServiciosAsync()
     {
-        var servicios = await serviceServicio.ListAllAsync();
-        return StatusCode(StatusCodes.Status200OK, servicios);
+        var services = await serviceServicio.ListAllAsync();
+        return StatusCode(StatusCodes.Status200OK, services);
     }
 
     /// <summary>
@@ -43,8 +43,8 @@ public class ServicioController(IServiceServicio serviceServicio) : ControllerBa
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetServicioByIdAsync(byte idServicio)
     {
-        var servicio = await serviceServicio.FindByIdAsync(idServicio);
-        return StatusCode(StatusCodes.Status200OK, servicio);
+        var service = await serviceServicio.FindByIdAsync(idServicio);
+        return StatusCode(StatusCodes.Status200OK, service);
     }
 
     /// <summary>

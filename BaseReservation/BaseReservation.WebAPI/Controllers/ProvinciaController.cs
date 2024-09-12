@@ -25,8 +25,8 @@ public class ProvinciaController(IServiceProvincia serviceProvincia) : Controlle
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetAllProvinciasAsync()
     {
-        var provincias = await serviceProvincia.ListAllAsync();
-        return StatusCode(StatusCodes.Status200OK, provincias);
+        var provinces = await serviceProvincia.ListAllAsync();
+        return StatusCode(StatusCodes.Status200OK, provinces);
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public class ProvinciaController(IServiceProvincia serviceProvincia) : Controlle
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetProvinciaByIdAsync(byte idProvincia)
     {
-        var provincia = await serviceProvincia.FindByIdAsync(idProvincia);
-        return StatusCode(StatusCodes.Status200OK, provincia);
+        var province = await serviceProvincia.FindByIdAsync(idProvincia);
+        return StatusCode(StatusCodes.Status200OK, province);
     }
 }
