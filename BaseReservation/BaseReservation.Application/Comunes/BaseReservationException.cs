@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 namespace BaseReservation.Application.Comunes;
 
 [Serializable]
-public class BaseReservationException: BaseException
+public class BaseReservationException : BaseException
 {
     public override LogLevel LogLevel { get; set; } = LogLevel.Information;
 

@@ -4,6 +4,9 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 namespace BaseReservation.WebAPI.Swagger;
 
+/// <summary>
+/// Swagger configuration class extension
+/// </summary>
 public static class SwaggerConfiguration
 {
     /// <summary>

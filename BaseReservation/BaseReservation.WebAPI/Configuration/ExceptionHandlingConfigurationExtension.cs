@@ -5,8 +5,16 @@ using Microsoft.AspNetCore.Diagnostics;
 
 namespace BaseReservation.WebAPI.Configuration;
 
+/// <summary>
+/// Exception handling configuration extension class
+/// </summary>
 public static class ExceptionHandlingConfigurationExtension
 {
+    /// <summary>
+    /// Configuration exception handler extension to catch errors
+    /// </summary>
+    /// <param name="app">Application builder</param>
+    /// <param name="logger">App log</param>
     public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILogger logger)
     {
         app.UseExceptionHandler(appError =>
@@ -25,6 +33,11 @@ public static class ExceptionHandlingConfigurationExtension
         });
     }
 
+    /// <summary>
+    /// Get details of the error catched
+    /// </summary>
+    /// <param name="exception">Exception handler feature</param>
+    /// <returns>ErrorDetailsBaseReservation</returns>
     private static ErrorDetailsBaseReservation GetErrorDetails(IExceptionHandlerFeature exception)
     {
         HttpStatusCode httpStatusCode;

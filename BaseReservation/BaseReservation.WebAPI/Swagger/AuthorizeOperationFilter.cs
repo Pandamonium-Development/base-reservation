@@ -6,6 +6,9 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace BaseReservation.WebAPI.Swagger;
 
+/// <summary>
+/// Authorize Operation filter class
+/// </summary>
 public class AuthorizeOperationFilter : IOperationFilter
 {
     private static OpenApiSecurityScheme BearerSchema = new OpenApiSecurityScheme
@@ -13,6 +16,11 @@ public class AuthorizeOperationFilter : IOperationFilter
         Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
     };
 
+    /// <summary>
+    /// Apply authorization filter option
+    /// </summary>
+    /// <param name="operation">Open api operation</param>
+    /// <param name="context">Operation context</param>
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
         var authorizeAttributeOnMethod = context.MethodInfo.GetCustomAttributes<BaseReservationAuthorizeAttribute>().Any();

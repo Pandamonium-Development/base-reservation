@@ -4,6 +4,9 @@ using FluentValidation.AspNetCore;
 
 namespace BaseReservation.WebAPI.Configuration;
 
+/// <summary>
+/// Fluent validation configuration extension class
+/// </summary>
 public static class FluentValidationConfiguration
 {
     /// <summary>
