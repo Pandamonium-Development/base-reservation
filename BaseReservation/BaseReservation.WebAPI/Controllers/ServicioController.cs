@@ -59,7 +59,6 @@ public class ServicioController(IServiceServicio serviceServicio) : ControllerBa
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> CreateServicioAsync([FromBody] RequestServicioDto servicio)
     {
-        //retorna una excepçión is es nulo
         ArgumentNullException.ThrowIfNull(servicio);
         var result = await serviceServicio.CreateServicioAsync(servicio);
         return StatusCode(StatusCodes.Status201Created, result);
@@ -79,7 +78,6 @@ public class ServicioController(IServiceServicio serviceServicio) : ControllerBa
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> UpdateServicioAsync(byte idServicio, [FromBody] RequestServicioDto servicio)
     {
-        //retorna una excepçión is es nulo
         ArgumentNullException.ThrowIfNull(servicio);
         var result = await serviceServicio.UpdateServicioAsync(idServicio, servicio);
         return StatusCode(StatusCodes.Status200OK, result);
