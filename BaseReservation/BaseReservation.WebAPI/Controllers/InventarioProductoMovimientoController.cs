@@ -25,7 +25,7 @@ public class InventarioProductoMovimientoController(IServiceInventarioProductoMo
     /// Creates a new inventory product movement record.
     /// </summary>
     /// <param name="inventarioProductoMovimientoDto">The inventory product movement data to be created.</param>
-    /// <returns>The details of the created inventory product movement.</returns
+    /// <returns>The details of the created inventory product movement.</returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseInventarioProductoMovimientoDto))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ErrorDetailsBaseReservation))]
@@ -42,8 +42,7 @@ public class InventarioProductoMovimientoController(IServiceInventarioProductoMo
     /// Retrieves all inventory product movements for a given inventory.
     /// </summary>
     /// <param name="idInventario">The ID of the inventory.</param>
-    /// <returns>A list of inventory product movements for the specified inventory.</returns>rio"></param>
-    /// <returns></returns>
+    /// <returns>A list of inventory product movements for the specified inventory.</returns>
     [HttpGet("~/api/Inventario/{idInventario}/Movimientos")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseInventarioProductoMovimientoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]

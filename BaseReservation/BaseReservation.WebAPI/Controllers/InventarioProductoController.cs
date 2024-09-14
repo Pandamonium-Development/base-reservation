@@ -82,7 +82,7 @@ public class InventarioProductoController(IServiceInventarioProducto serviceInve
     /// <summary>
     /// Creates multiple inventory products in bulk.
     /// </summary>
-    /// <param name="inventarioProductos">A collection of inventory product data to be created.</param>
+    /// <param name="inventarioProducto">A collection of inventory product data to be created.</param>
     /// <returns>A boolean indicating whether the creation was successful.</returns>
     [HttpPost("Bulk")]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(bool))]
