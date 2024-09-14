@@ -5,6 +5,9 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace BaseReservation.WebAPI.Swagger;
 
+/// <summary>
+/// Class for swagger option configuration
+/// </summary>
 public class SwaggerOptionConfiguration(IApiVersionDescriptionProvider apiVersionDescriptionProvider) : IConfigureNamedOptions<SwaggerGenOptions>
 {
     /// <summary>

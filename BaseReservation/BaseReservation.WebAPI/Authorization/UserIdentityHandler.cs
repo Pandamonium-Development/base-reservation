@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BaseReservation.WebAPI.Authorization;
 
+/// <summary>
+/// User identity hanlder class
+/// </summary>
 public class UserIdentityHandler : AuthorizationHandler<IdentifiedUser>
 {
     /// <summary>

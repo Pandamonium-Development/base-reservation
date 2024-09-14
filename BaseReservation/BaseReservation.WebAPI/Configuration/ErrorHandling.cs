@@ -2,6 +2,9 @@ using System.Text;
 
 namespace BaseReservation.WebAPI.Configuration;
 
+/// <summary>
+/// Error handling configuration class
+/// </summary>
 public static class ErrorHandling
 {
     /// <summary>
