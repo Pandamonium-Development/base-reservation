@@ -31,6 +31,7 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
     {
         var keyProperty = context.Model.FindEntityType(typeof(Horario))!.FindPrimaryKey()!.Properties[0];
         return await context.Set<Horario>()
+            .Include(x => x.SucursalHorarios)
             .AsNoTracking()
             .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id);
     }
@@ -52,5 +53,17 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
         return await context.Set<Horario>()
             .AsNoTracking()
             .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id) != null;
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> DeleteHorarioAsync(short id)
+    {
+        var schedule = await FindByIdAsync(id);
+        schedule!.Activo = false;
+
+        context.Horarios.Update(schedule);
+
+        var rowsAffected = await context.SaveChangesAsync();
+        return rowsAffected > 0;
     }
 }

@@ -15,9 +15,9 @@ public class ServiceHorario(IRepositoryHorario repository, IMapper mapper,
     /// <inheritdoc />
     public async Task<ResponseHorarioDto> CreateHorarioAsync(RequestHorarioDto horarioDto)
     {
-        var horario = await ValidarHorario(horarioDto);
+        var schedule = await ValidarHorario(horarioDto);
 
-        var result = await repository.CreateHorarioAsync(horario);
+        var result = await repository.CreateHorarioAsync(schedule);
         if (result == null) throw new NotFoundException("Horario no se ha creado.");
 
         return mapper.Map<ResponseHorarioDto>(result);
@@ -28,9 +28,9 @@ public class ServiceHorario(IRepositoryHorario repository, IMapper mapper,
     {
         if (!await repository.ExistsHorarioAsync(id)) throw new NotFoundException("Horario no encontrado.");
 
-        var horario = await ValidarHorario(horarioDto);
-        horario.Id = id;
-        var result = await repository.UpdateHorarioAsync(horario);
+        var schedule = await ValidarHorario(horarioDto);
+        schedule.Id = id;
+        var result = await repository.UpdateHorarioAsync(schedule);
 
         return mapper.Map<ResponseHorarioDto>(result);
     }
@@ -38,10 +38,10 @@ public class ServiceHorario(IRepositoryHorario repository, IMapper mapper,
     /// <inheritdoc />
     public async Task<ResponseHorarioDto> FindByIdAsync(short id)
     {
-        var horario = await repository.FindByIdAsync(id);
-        if (horario == null) throw new NotFoundException("Horario no encontrada.");
+        var schedule = await repository.FindByIdAsync(id);
+        if (schedule == null) throw new NotFoundException("Horario no encontrada.");
 
-        return mapper.Map<ResponseHorarioDto>(horario);
+        return mapper.Map<ResponseHorarioDto>(schedule);
     }
 
     /// <inheritdoc />
@@ -51,6 +51,18 @@ public class ServiceHorario(IRepositoryHorario repository, IMapper mapper,
         var collection = mapper.Map<ICollection<ResponseHorarioDto>>(list);
 
         return collection;
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> DeleteHorarioAsync(short id)
+    {
+        var schedule = await repository.FindByIdAsync(id);
+        if (schedule == null) throw new NotFoundException("Horario no encontrada.");
+
+        if (schedule.SucursalHorarios.Count > 0) throw new BaseReservationException("Horario no encontrada.");
+
+        var result = await repository.DeleteHorarioAsync(id);
+        return result;
     }
 
     /// <summary>
