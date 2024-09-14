@@ -30,7 +30,7 @@ public class InventarioController(IServiceInventario serviceInventario) : Contro
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> GetAllInventariosAsync(byte idSucursal)
     {
-        var inventories = await serviceInventario.ListAllAsync(idSucursal);
+        var inventories = await serviceInventario.ListAllBySucursalAsync(idSucursal);
         return StatusCode(StatusCodes.Status200OK, inventories);
     }
 
