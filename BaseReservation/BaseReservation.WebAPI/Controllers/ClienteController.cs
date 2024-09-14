@@ -26,7 +26,7 @@ public class ClienteController(IServiceCliente serviceCliente) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseClienteDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> ListAllAsync()
     {
         var customers = await serviceCliente.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, customers);

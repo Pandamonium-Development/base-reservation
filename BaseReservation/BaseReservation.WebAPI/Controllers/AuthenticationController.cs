@@ -41,13 +41,13 @@ public class AuthenticationController(IServiceIdentity serviceIdentity) : Contro
     /// </summary>
     /// <param name="request">The token refresh request.</param>
     /// <returns>An action result with the new authentication token or an error.</returns>
-    [Route("refresh")]
+    [Route("refreshToken")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AuthenticationResult))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> Refresh([FromBody] TokenModel request)
+    public async Task<IActionResult> RefreshTokenAsync([FromBody] TokenModel request)
     {
         var refreshToken = await serviceIdentity.RefreshTokenAsync(request);
         return StatusCode(StatusCodes.Status200OK, refreshToken);

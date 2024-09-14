@@ -75,7 +75,7 @@ public class ProveedorController(IServiceProveedor serviceProveedor) : Controlle
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseProveedorDto))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> CreateServicioAsync([FromBody] RequestProveedorDto proveedor)
+    public async Task<IActionResult> CreateProveedorAsync([FromBody] RequestProveedorDto proveedor)
     {
         ArgumentNullException.ThrowIfNull(proveedor);
         var supplier = await serviceProveedor.CreateProveedorAsync(proveedor);
@@ -93,7 +93,7 @@ public class ProveedorController(IServiceProveedor serviceProveedor) : Controlle
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> UpdateServicioAsync(byte idProveedor, [FromBody] RequestProveedorDto proveedor)
+    public async Task<IActionResult> UpdateProveedorsync(byte idProveedor, [FromBody] RequestProveedorDto proveedor)
     {
         ArgumentNullException.ThrowIfNull(proveedor);
         var supplier = await serviceProveedor.UpdateProveedorsync(idProveedor, proveedor);
@@ -109,7 +109,7 @@ public class ProveedorController(IServiceProveedor serviceProveedor) : Controlle
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> DeleteFeriado(byte idProveedor)
+    public async Task<IActionResult> DeleteProveedorsyncAsync(byte idProveedor)
     {
         var supplier = await serviceProveedor.DeleteProveedorsyncAsync(idProveedor);
         return StatusCode(StatusCodes.Status200OK, supplier);

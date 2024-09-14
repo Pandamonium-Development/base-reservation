@@ -28,7 +28,7 @@ public class PedidoController(IServicePedido servicePedido) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponsePedidoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetAllPedidosAsync()
     {
         var inventories = await servicePedido.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, inventories);
@@ -58,7 +58,7 @@ public class PedidoController(IServicePedido servicePedido) : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponsePedidoDto))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> CreateProductoAsync([FromBody] RequestPedidoDto pedido)
+    public async Task<IActionResult> CreatePedidoAsync([FromBody] RequestPedidoDto pedido)
     {
         ArgumentNullException.ThrowIfNull(pedido);
         var result = await servicePedido.CreatePedidoAsync(pedido);

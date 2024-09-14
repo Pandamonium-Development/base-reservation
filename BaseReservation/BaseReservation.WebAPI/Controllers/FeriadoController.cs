@@ -93,7 +93,7 @@ public class FeriadoController(IServiceFeriado serviceFeriado) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseFeriadoDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> DeleteFeriado(byte idFeriado)
+    public async Task<IActionResult> DeleteFeriadoAsync(byte idFeriado)
     {
         var holiday = await serviceFeriado.DeleteFeriadoAsync(idFeriado);
         return StatusCode(StatusCodes.Status200OK, holiday);
