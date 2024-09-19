@@ -32,4 +32,11 @@ public interface IServiceHorario
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseHorarioDto</returns>
     Task<ResponseHorarioDto> FindByIdAsync(short id);
+
+    /// <summary>
+    /// Delete existing schedule
+    /// </summary>
+    /// <param name="id">Schedule id to look for</param>
+    /// <returns>bool</returns>
+    Task<bool> DeleteHorarioAsync(short id);
 }
