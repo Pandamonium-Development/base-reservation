@@ -27,10 +27,10 @@ public class FeriadoController(IServiceFeriado serviceFeriado) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseFeriadoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllFeriadosAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
-        var branches = await serviceFeriado.ListAllAsync();
-        return StatusCode(StatusCodes.Status200OK, branches);
+        var holidays = await serviceFeriado.ListAllAsync();
+        return StatusCode(StatusCodes.Status200OK, holidays);
     }
 
     /// <summary>
@@ -42,10 +42,10 @@ public class FeriadoController(IServiceFeriado serviceFeriado) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseFeriadoDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetFeriadoByIdAsync(byte idFeriado)
+    public async Task<IActionResult> FindByIdAsync(byte idFeriado)
     {
-        var feriado = await serviceFeriado.FindByIdAsync(idFeriado);
-        return StatusCode(StatusCodes.Status200OK, feriado);
+        var holiday = await serviceFeriado.FindByIdAsync(idFeriado);
+        return StatusCode(StatusCodes.Status200OK, holiday);
     }
 
     /// <summary>
@@ -59,7 +59,6 @@ public class FeriadoController(IServiceFeriado serviceFeriado) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> CreateFeriadoAsync([FromBody] RequestFeriadoDto holiday)
     {
-        //retorna una excepçión is es nulo
         ArgumentNullException.ThrowIfNull(holiday);
         var result = await serviceFeriado.CreateFeriadoAsync(holiday);
         return StatusCode(StatusCodes.Status201Created, result);
@@ -78,7 +77,6 @@ public class FeriadoController(IServiceFeriado serviceFeriado) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> UpdateFeriadoAsync(byte idFeriado, [FromBody] RequestFeriadoDto holiday)
     {
-        //retorna una excepçión is es nulo
         ArgumentNullException.ThrowIfNull(holiday);
         var result = await serviceFeriado.UpdateFeriadoAsync(idFeriado, holiday);
         return StatusCode(StatusCodes.Status200OK, result);

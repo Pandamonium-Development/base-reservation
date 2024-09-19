@@ -25,7 +25,7 @@ public class UsuarioController(IServiceUsuario serviceUsuario) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseUsuarioDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllUsersAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
         var users = await serviceUsuario.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, users);
@@ -39,7 +39,7 @@ public class UsuarioController(IServiceUsuario serviceUsuario) : ControllerBase
     [HttpGet("~/api/[controller]/ByRol/{rol}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseUsuarioDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllUsersByRolAsync(string rol)
+    public async Task<IActionResult> ListAllAsync(string rol)
     {
         var users = await serviceUsuario.ListAllAsync(rol);
         return StatusCode(StatusCodes.Status200OK, users);
@@ -55,7 +55,7 @@ public class UsuarioController(IServiceUsuario serviceUsuario) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> ValidarLibreAsignacionSucursalAsync(short id, byte idSucursal)
+    public async Task<IActionResult> FreeAssignmentSucursalAsync(short id, byte idSucursal)
     {
         var available = await serviceUsuario.FreeAssignmentSucursalAsync(id, idSucursal);
         return StatusCode(StatusCodes.Status200OK, available);

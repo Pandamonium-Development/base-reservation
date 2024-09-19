@@ -28,10 +28,10 @@ public class DetalleFacturaController(IServiceDetalleFactura serviceDetalleFactu
     [HttpGet("~/api/Factura/{idFactura}/[controller]")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseDetalleFacturaDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllDetalleFacturaByFacturaAsync(long idFactura)
+    public async Task<IActionResult> ListAllByFacturaAsync(long idFactura)
     {
-        var detailInvoices = await serviceDetalleFactura.ListAllByFacturaAsync(idFactura);
-        return StatusCode(StatusCodes.Status200OK, detailInvoices);
+        var detailInvoice = await serviceDetalleFactura.ListAllByFacturaAsync(idFactura);
+        return StatusCode(StatusCodes.Status200OK, detailInvoice);
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ public class DetalleFacturaController(IServiceDetalleFactura serviceDetalleFactu
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseDetalleFacturaDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetDetalleFacturaByIdAsync( long idDetalleFactura)
+    public async Task<IActionResult> FindByIdAsync(long idDetalleFactura)
     {
         var detailInvoices = await serviceDetalleFactura.FindByIdAsync(idDetalleFactura);
         return StatusCode(StatusCodes.Status200OK, detailInvoices);
