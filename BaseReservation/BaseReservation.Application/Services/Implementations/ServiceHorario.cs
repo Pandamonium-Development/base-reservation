@@ -59,7 +59,7 @@ public class ServiceHorario(IRepositoryHorario repository, IMapper mapper,
         var schedule = await repository.FindByIdAsync(id);
         if (schedule == null) throw new NotFoundException("Horario no encontrada.");
 
-        if (schedule.SucursalHorarios.Count > 0) throw new BaseReservationException("Horario no encontrada.");
+        if (schedule.SucursalHorarios.Count > 0) throw new BaseReservationException("Horario asignado en sucursales.");
 
         var result = await repository.DeleteHorarioAsync(id);
         return result;

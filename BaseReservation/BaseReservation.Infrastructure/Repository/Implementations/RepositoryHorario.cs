@@ -33,7 +33,7 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
         return await context.Set<Horario>()
             .Include(x => x.SucursalHorarios)
             .AsNoTracking()
-            .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id);
+            .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id && a.Activo);
     }
 
     /// <inheritdoc />
@@ -41,6 +41,7 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
     {
         var collection = await context.Set<Horario>()
                .AsNoTracking()
+               .Where(m => m.Activo)
                .ToListAsync();
         return collection;
     }
@@ -52,7 +53,7 @@ public class RepositoryHorario(BaseReservationContext context) : IRepositoryHora
 
         return await context.Set<Horario>()
             .AsNoTracking()
-            .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id) != null;
+            .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id && a.Activo) != null;
     }
 
     /// <inheritdoc />
