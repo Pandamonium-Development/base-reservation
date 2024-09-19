@@ -27,7 +27,7 @@ public class UsuarioSucursalController(IServiceUsuarioSucursal serviceUsuarioSuc
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> AssignBranchUsers(byte idSucursal, [FromBody] IEnumerable<RequestUsuarioSucursalDto> usuarioSucursalDto)
+    public async Task<IActionResult> CreateUsuarioSucursalAsync(byte idSucursal, [FromBody] IEnumerable<RequestUsuarioSucursalDto> usuarioSucursalDto)
     {
         ArgumentNullException.ThrowIfNull(usuarioSucursalDto);
         var result = await serviceUsuarioSucursal.CreateUsuarioSucursalAsync(idSucursal, usuarioSucursalDto);

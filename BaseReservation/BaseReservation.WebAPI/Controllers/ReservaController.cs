@@ -26,7 +26,7 @@ public class ReservaController(IServiceReserva serviceReserva) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseReservaDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllReservasAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
         var reservations = await serviceReserva.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, reservations);
@@ -43,7 +43,7 @@ public class ReservaController(IServiceReserva serviceReserva) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ICollection<ResponseAgendaCalendarioReservaDto>>))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllReservasAsync(byte idSucursal, [FromQuery] DateOnly? fechaInicio, [FromQuery] DateOnly? fechaFin)
+    public async Task<IActionResult> ListAllBySucursalAsync(byte idSucursal, [FromQuery] DateOnly? fechaInicio, [FromQuery] DateOnly? fechaFin)
     {
         var reservations = await serviceReserva.ListAllBySucursalAsync(idSucursal, fechaInicio, fechaFin);
         return StatusCode(StatusCodes.Status200OK, reservations);
@@ -58,7 +58,7 @@ public class ReservaController(IServiceReserva serviceReserva) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseReservaDto))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetReservaByIdAsync(int idReserva)
+    public async Task<IActionResult> FindByIdAsync(int idReserva)
     {
         var reservation = await serviceReserva.FindByIdAsync(idReserva);
         return StatusCode(StatusCodes.Status200OK, reservation);

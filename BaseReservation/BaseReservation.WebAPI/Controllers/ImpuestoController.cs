@@ -27,7 +27,7 @@ public class ImpuestoController(IServiceImpuesto serviceImpuesto) : ControllerBa
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseImpuestoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetImpuestos()
+    public async Task<IActionResult> ListAllAsync()
     {
         var taxes = await serviceImpuesto.ListAllAsync();
         return Ok(taxes);
