@@ -8,7 +8,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 public class RepositoryServicio(BaseReservationContext context) : IRepositoryServicio
 {
     /// <inheritdoc />
-    public async Task<Servicio> CreateServicioAsync(Servicio servicio)
+    public async Task<Servicio> CreateServiceAsync(Servicio servicio)
     {
         var result = context.Servicios.Add(servicio);
         await context.SaveChangesAsync();
@@ -17,7 +17,19 @@ public class RepositoryServicio(BaseReservationContext context) : IRepositorySer
     }
 
     /// <inheritdoc />
-    public async Task<bool> ExistsServicioAsync(byte id)
+    public async Task<bool> DeleteServiceAsync(byte id)
+    {
+        var service = await FindByIdAsync(id);
+        service!.Activo = false;
+
+        context.Servicios.Update(service);
+
+        var rowsAffected = await context.SaveChangesAsync();
+        return rowsAffected > 0;
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> ExistsServiceAsync(byte id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Servicio))!.FindPrimaryKey()!.Properties[0];
 
@@ -43,7 +55,7 @@ public class RepositoryServicio(BaseReservationContext context) : IRepositorySer
     }
 
     /// <inheritdoc />
-    public async Task<Servicio> UpdateServicioAsync(Servicio servicio)
+    public async Task<Servicio> UpdateServiceAsync(Servicio servicio)
     {
         context.Servicios.Update(servicio);
 
