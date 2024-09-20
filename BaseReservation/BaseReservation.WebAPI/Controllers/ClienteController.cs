@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Application.Services.Implementations;
 using BaseReservation.Application.Services.Interfaces;
 using BaseReservation.WebAPI.Configuration;
 using Microsoft.AspNetCore.Authorization;
@@ -30,5 +31,35 @@ public class ClienteController(IServiceCliente serviceCliente) : ControllerBase
     {
         var customers = await serviceCliente.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, customers);
+    }
+
+    /// <summary>
+    /// Deletes a customer by its ID.
+    /// </summary>
+    /// <param name="idCostumer">The ID of the holiday to delete.</param>
+    /// <returns>The deleted holiday.</returns>
+    [HttpDelete("{idCostumer}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseClienteDto))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
+    public async Task<IActionResult> DeleteCustomerAsync(byte idCostumer)
+    {
+        var customer = await serviceCliente.DeleteCustomerAsync(idCostumer);
+        return StatusCode(StatusCodes.Status200OK, customer);
+    }
+
+    /// <summary>
+    /// Retrieves a specific customer by its ID.
+    /// </summary>
+    /// <param name="idCostumer">The ID of the customer.</param>
+    /// <returns>The details of the specified customer.</returns>
+    [HttpGet("{idCostumer}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseClienteDto))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
+    public async Task<IActionResult> GetCustomerByIdAsync(short idCostumer)
+    {
+        var customer = await serviceCliente.FindByIdAsync(idCostumer);
+        return StatusCode(StatusCodes.Status200OK, customer);
     }
 }
