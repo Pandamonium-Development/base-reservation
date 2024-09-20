@@ -11,27 +11,28 @@ using FluentValidation;
 namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceSucursal(IRepositorySucursal repository, IMapper mapper,
-                                IValidator<Sucursal> sucursalValidator, IServiceUserAuthorization serviceUserAuthorization) : IServiceSucursal
+                            IValidator<Sucursal> branchValidator, 
+                            IServiceUserAuthorization serviceUserAuthorization) : IServiceSucursal
 {
     /// <inheritdoc />
-    public async Task<ResponseSucursalDto> CreateSucursalAsync(RequestSucursalDto sucursalDTO)
+    public async Task<ResponseSucursalDto> CreateBranchAsync(RequestSucursalDto branchDTO)
     {
-        var sucursal = await ValidateSucursal(sucursalDTO);
+        var branch = await ValidateBranch(branchDTO);
 
-        var result = await repository.CreateSucursalAsync(sucursal);
+        var result = await repository.CreateBranchAsync(branch);
         if (result == null) throw new NotFoundException("Sucursal no se ha creado.");
 
         return mapper.Map<ResponseSucursalDto>(result);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseSucursalDto> UpdateSucursalAsync(byte id, RequestSucursalDto sucursalDTO)
+    public async Task<ResponseSucursalDto> UpdateBranchAsync(byte id, RequestSucursalDto branchDTO)
     {
-        if (!await repository.ExistsSucursalAsync(id)) throw new NotFoundException("Sucursal no encontrada.");
+        if (!await repository.ExistsBranchAsync(id)) throw new NotFoundException("Sucursal no encontrada.");
 
-        var sucursal = await ValidateSucursal(sucursalDTO);
-        sucursal.Id = id;
-        var result = await repository.UpdateSucursalAsync(sucursal);
+        var branch = await ValidateBranch(branchDTO);
+        branch.Id = id;
+        var result = await repository.UpdateBranchAsync(branch);
 
         return mapper.Map<ResponseSucursalDto>(result);
     }
@@ -39,10 +40,10 @@ public class ServiceSucursal(IRepositorySucursal repository, IMapper mapper,
     /// <inheritdoc />
     public async Task<ResponseSucursalDto> FindByIdAsync(byte id)
     {
-        var sucursal = await repository.FindByIdAsync(id);
-        if (sucursal == null) throw new NotFoundException("Sucursal no encontrada.");
+        var branch = await repository.FindByIdAsync(id);
+        if (branch == null) throw new NotFoundException("Sucursal no encontrada.");
 
-        return mapper.Map<ResponseSucursalDto>(sucursal);
+        return mapper.Map<ResponseSucursalDto>(branch);
     }
 
     /// <inheritdoc />
@@ -55,21 +56,28 @@ public class ServiceSucursal(IRepositorySucursal repository, IMapper mapper,
     }
 
     /// <inheritdoc />
-    private async Task<Sucursal> ValidateSucursal(RequestSucursalDto sucursalDTO)
+    private async Task<Sucursal> ValidateBranch(RequestSucursalDto branchDTO)
     {
-        var sucursal = mapper.Map<Sucursal>(sucursalDTO);
-        await sucursalValidator.ValidateAndThrowAsync(sucursal);
-        return sucursal;
+        var branch = mapper.Map<Sucursal>(branchDTO);
+        await branchValidator.ValidateAndThrowAsync(branch);
+        return branch;
     }
 
     /// <inheritdoc />
     public async Task<ICollection<ResponseSucursalDto>> ListAllByRolAsync()
     {
-        var usuario = await serviceUserAuthorization.GetLoggedUser();
+        var user = await serviceUserAuthorization.GetLoggedUser();
 
-        var list = await repository.ListAllByRoleAsync(usuario.Rol.Descripcion);
+        var list = await repository.ListAllByRoleAsync(user.Rol.Descripcion);
         var collection = mapper.Map<ICollection<ResponseSucursalDto>>(list);
 
         return collection;
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> DeleteBranchAsync(byte id)
+    {
+        if (!await repository.ExistsBranchAsync(id)) throw new NotFoundException("Sucursal no encontrada.");
+        return await repository.DeleteBranchAsync(id);
     }
 }

@@ -27,15 +27,22 @@ public interface IServiceSucursal
     /// <summary>
     /// Create branch
     /// </summary>
-    /// <param name="sucursalDTO">Request branch model to be addded</param>
+    /// <param name="branchDTO">Request branch model to be addded</param>
     /// <returns>ResponseSucursalDto</returns>
-    Task<ResponseSucursalDto> CreateSucursalAsync(RequestSucursalDto sucursalDTO);
+    Task<ResponseSucursalDto> CreateBranchAsync(RequestSucursalDto branchDTO);
 
     /// <summary>
     /// Update branch
     /// </summary>
     /// <param name="id">Id to identify record</param>
-    /// <param name="sucursalDTO">Request branch model to be updated</param>
+    /// <param name="branchDTO">Request branch model to be updated</param>
     /// <returns>ResponseSucursalDto</returns>
-    Task<ResponseSucursalDto> UpdateSucursalAsync(byte id, RequestSucursalDto sucursalDTO);
+    Task<ResponseSucursalDto> UpdateBranchAsync(byte id, RequestSucursalDto branchDTO);
+
+    /// <summary>
+    /// Deletes a branch based on the provided Id.
+    /// </summary>
+    /// <param name="id">Id of the branch to delete.</param>
+    /// <returns>True if successful, otherwise false.</returns>
+    Task<bool> DeleteBranchAsync(byte id);
 }
