@@ -23,13 +23,20 @@ public interface IServiceServicio
     /// </summary>
     /// <param name="servicio">Request servide model to be added</param>
     /// <returns>ResponseServicioDto</returns>
-    Task<ResponseServicioDto> CreateServicioAsync(RequestServicioDto servicio);
+    Task<ResponseServicioDto> CreateServiceAsync(RequestServicioDto servicio);
 
     /// <summary>
     /// Update a service
     /// </summary>
     /// <param name="id">Id to identify record</param>
-    /// <param name="servicioDTO">Request service model to be updated</param>
+    /// <param name="serviceDto">Request service model to be updated</param>
     /// <returns>ResponseServicioDto</returns>
-    Task<ResponseServicioDto> UpdateServicioAsync(byte id, RequestServicioDto servicioDTO);
+    Task<ResponseServicioDto> UpdateServiceAsync(byte id, RequestServicioDto serviceDto);
+
+    /// <summary>
+    /// Deletes a service based on the provided Id.
+    /// </summary>
+    /// <param name="id">Id of the service to delete.</param>
+    /// <returns>True if successful, otherwise false.</returns>
+    Task<bool> DeleteServiceAsync(byte id);
 }
