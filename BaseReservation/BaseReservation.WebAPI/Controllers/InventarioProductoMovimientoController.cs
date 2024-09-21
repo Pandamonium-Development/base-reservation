@@ -31,7 +31,7 @@ public class InventarioProductoMovimientoController(IServiceInventarioProductoMo
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> CreateInventarioAsync([FromBody] RequestInventarioProductoMovimientoDto inventarioProductoMovimientoDto)
+    public async Task<IActionResult> CreateInventarioMovimientoProductoAsync([FromBody] RequestInventarioProductoMovimientoDto inventarioProductoMovimientoDto)
     {
         ArgumentNullException.ThrowIfNull(inventarioProductoMovimientoDto);
         var inventory = await serviceInventarioProductoMovimiento.CreateInventarioMovimientoProductoAsync(inventarioProductoMovimientoDto);
@@ -46,7 +46,7 @@ public class InventarioProductoMovimientoController(IServiceInventarioProductoMo
     [HttpGet("~/api/Inventario/{idInventario}/Movimientos")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseInventarioProductoMovimientoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllMovimientosInventarioByInventarioAsync(short idInventario)
+    public async Task<IActionResult> ListAllByInventarioAsync(short idInventario)
     {
         var inventories = await serviceInventarioProductoMovimiento.ListAllByInventarioAsync(idInventario);
         return StatusCode(StatusCodes.Status200OK, inventories);
@@ -60,7 +60,7 @@ public class InventarioProductoMovimientoController(IServiceInventarioProductoMo
     [HttpGet("~/api/Producto/{idProducto}/Movimientos")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseInventarioProductoMovimientoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllMovimientosInventarioByProductoAsync(short idProducto)
+    public async Task<IActionResult> ListAllByProductoAsync(short idProducto)
     {
         var inventories = await serviceInventarioProductoMovimiento.ListAllByProductoAsync(idProducto);
         return StatusCode(StatusCodes.Status200OK, inventories);

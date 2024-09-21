@@ -30,7 +30,7 @@ public class ProveedorController(IServiceProveedor serviceProveedor) : Controlle
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseProveedorDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllProveedoresAsync([FromQuery] PaginationParameters? paginationParameters = null)
+    public async Task<IActionResult> ListAllAsync([FromQuery] PaginationParameters? paginationParameters = null)
     {
         if (!paginationParameters!.Paginated) return StatusCode(StatusCodes.Status200OK, await serviceProveedor.ListAllAsync());
 
@@ -60,7 +60,7 @@ public class ProveedorController(IServiceProveedor serviceProveedor) : Controlle
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseProveedorDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetProveedorByIdAsync(byte idProveedor)
+    public async Task<IActionResult> FindByIdAsync(byte idProveedor)
     {
         var supplier = await serviceProveedor.FindByIdAsync(idProveedor);
         return StatusCode(StatusCodes.Status200OK, supplier);
