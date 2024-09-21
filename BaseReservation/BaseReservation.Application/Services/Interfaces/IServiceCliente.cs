@@ -9,7 +9,7 @@ public interface IServiceCliente
     /// <summary>
     /// Get list of all existing customer.
     /// </summary>
-    /// <returns>ICollection of Categoria.</returns>
+    /// <returns>ICollection of ResponseClienteDto.</returns>
     Task<ICollection<ResponseClienteDto>> ListAllAsync();
 
     /// <summary>

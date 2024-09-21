@@ -1,22 +1,17 @@
 ﻿using AutoMapper;
 using BaseReservation.Application.Comunes;
-using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Application.Validations;
-using BaseReservation.Infrastructure.Models;
 using BaseReservation.Infrastructure.Repository.Interfaces;
-using FluentValidation;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceCliente(IRepositoryCliente repository, IMapper mapper, 
-                            IValidator<Cliente> customerValidator) : IServiceCliente
+public class ServiceCliente(IRepositoryCliente repository, IMapper mapper) : IServiceCliente
 {
     /// <inheritdoc />
     public async Task<bool> DeleteCustomerAsync(short id)
     {
-        if (!await repository.ExisteCustomerAsync(id)) throw new NotFoundException("Cliente no encontrado.");
+        if (!await repository.ExistsCustomerAsync(id)) throw new NotFoundException("Cliente no encontrado.");
         return await repository.DeleteCustomerAsync(id);
     }
 
@@ -32,7 +27,7 @@ public class ServiceCliente(IRepositoryCliente repository, IMapper mapper,
     /// <inheritdoc />
     public async Task<ICollection<ResponseClienteDto>> ListAllAsync()
     {
-        var clientes = await repository.ListAllAsync();
-        return mapper.Map<ICollection<ResponseClienteDto>>(clientes);
+        var customers = await repository.ListAllAsync();
+        return mapper.Map<ICollection<ResponseClienteDto>>(customers);
     }
 }

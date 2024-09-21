@@ -36,5 +36,5 @@ public interface IRepositoryCliente
     /// </summary>
     /// <param name="id">The Id of the customer.</param>
     /// <returns>True if customer exist, otherwise false.</returns>
-    Task<bool> ExisteCustomerAsync(short id);
+    Task<bool> ExistsCustomerAsync(short id);
 }

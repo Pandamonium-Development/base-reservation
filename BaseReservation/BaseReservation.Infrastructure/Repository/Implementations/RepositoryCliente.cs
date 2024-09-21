@@ -31,7 +31,7 @@ public class RepositoryCliente(BaseReservationContext context) : IRepositoryClie
     }
 
     /// <inheritdoc />
-    public async Task<bool> ExisteCustomerAsync(short id)
+    public async Task<bool> ExistsCustomerAsync(short id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Cliente))!.FindPrimaryKey()!.Properties[0];
 
