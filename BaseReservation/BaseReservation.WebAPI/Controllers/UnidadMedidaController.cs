@@ -24,7 +24,7 @@ public class UnidadMedidaController(IServiceUnidadMedida serviceUnidadMedida) : 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseUnidadMedidaDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllUnidadMedidasAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
         var unitsMeasure = await serviceUnidadMedida.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, unitsMeasure);

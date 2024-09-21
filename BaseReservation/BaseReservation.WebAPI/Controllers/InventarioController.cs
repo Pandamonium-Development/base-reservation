@@ -28,7 +28,7 @@ public class InventarioController(IServiceInventario serviceInventario) : Contro
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseInventarioDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllInventariosAsync(byte idSucursal)
+    public async Task<IActionResult> ListAllBySucursalAsync(byte idSucursal)
     {
         var inventories = await serviceInventario.ListAllBySucursalAsync(idSucursal);
         return StatusCode(StatusCodes.Status200OK, inventories);
@@ -43,7 +43,7 @@ public class InventarioController(IServiceInventario serviceInventario) : Contro
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseInventarioDto))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetInventarioByIdAsync(short idInventario)
+    public async Task<IActionResult> FindByIdAsync(short idInventario)
     {
         var inventory = await serviceInventario.FindByIdAsync(idInventario);
         return StatusCode(StatusCodes.Status200OK, inventory);

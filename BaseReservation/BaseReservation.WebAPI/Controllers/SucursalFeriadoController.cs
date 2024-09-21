@@ -27,7 +27,7 @@ public class SucursalFeriadoController(IServiceSucursalFeriado serviceSucursalFe
     [HttpGet("~/api/Sucursal/{idSucursal}/Feriado")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseSucursalFeriadoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllFeriadosSucursaleAsync(byte idSucursal, [FromQuery] short? anno)
+    public async Task<IActionResult> ListAllBySucursalAsync(byte idSucursal, [FromQuery] short? anno)
     {
         short? yearSeach = null;
         if (anno != null) yearSeach = anno == 0 ? (short)DateTime.Now.Year : anno.Value;
@@ -44,7 +44,7 @@ public class SucursalFeriadoController(IServiceSucursalFeriado serviceSucursalFe
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseSucursalFeriadoDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetFeriadoSucursalByIdAsync(short idSucursalFeriado)
+    public async Task<IActionResult> FindByIdAsync(short idSucursalFeriado)
     {
         var branchHolidays = await serviceSucursalFeriado.FindByIdAsync(idSucursalFeriado);
         return StatusCode(StatusCodes.Status200OK, branchHolidays);

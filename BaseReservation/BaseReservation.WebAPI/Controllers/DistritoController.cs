@@ -28,7 +28,7 @@ public class DistritoController(IServiceDistrito serviceDistrito) : ControllerBa
     [HttpGet("~/api/Canton/{idCanton}/Distrito")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseDistritoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllDistritosByCantonAsync(byte idCanton)
+    public async Task<IActionResult> ListAllByCantonAsync(byte idCanton)
     {
         var districts = await serviceDistrito.ListAllByCantonAsync(idCanton);
         return StatusCode(StatusCodes.Status200OK, districts);
@@ -43,7 +43,7 @@ public class DistritoController(IServiceDistrito serviceDistrito) : ControllerBa
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseDistritoDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetDistritoAsync(byte id)
+    public async Task<IActionResult> FindByIdAsync(byte id)
     {
         var districts = await serviceDistrito.FindByIdAsync(id);
         return StatusCode(StatusCodes.Status200OK, districts);

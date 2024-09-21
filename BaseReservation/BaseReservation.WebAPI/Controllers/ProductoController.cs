@@ -29,7 +29,7 @@ public class ProductoController(IServiceProducto serviceProducto) : ControllerBa
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseProductoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllProductosAsync([FromQuery] bool excludeProductosInventario = false, [FromQuery] short idInventario = 0)
+    public async Task<IActionResult> ListAllAsync([FromQuery] bool excludeProductosInventario = false, [FromQuery] short idInventario = 0)
     {
         var products = await serviceProducto.ListAllAsync(excludeProductosInventario, idInventario);
         return StatusCode(StatusCodes.Status200OK, products);
@@ -44,7 +44,7 @@ public class ProductoController(IServiceProducto serviceProducto) : ControllerBa
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseProductoDto))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetProductoByIdAsync(short idProducto)
+    public async Task<IActionResult> FindByIdAsync(short idProducto)
     {
         var product = await serviceProducto.FindByIdAsync(idProducto);
         return StatusCode(StatusCodes.Status200OK, product);

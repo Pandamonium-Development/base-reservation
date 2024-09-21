@@ -12,7 +12,7 @@ public interface IServiceFactura
     /// <param name="facturaDto">The data transfer object containing the information of the Factura to create</param>
     /// <returns>RequestFacturaDto</returns>
     /// <exception cref="NotFoundException"></exception>
-    Task<ResponseFacturaDto> CreateAsync(RequestFacturaDto facturaDto);
+    Task<ResponseFacturaDto> CreateFacturaAsync(RequestFacturaDto facturaDto);
 
     /// <summary>
     /// Get list of all invoices

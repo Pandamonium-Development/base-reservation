@@ -37,4 +37,11 @@ public interface IRepositoryHorario
     /// <param name="id">The unique identifier of the Schedule</param>
     /// <returns>True if exists, if not, false</returns>
     Task<bool> ExistsHorarioAsync(short id);
+
+    /// <summary>
+    /// Delete existing schedule
+    /// </summary>
+    /// <param name="id">Schedule id to look for</param>
+    /// <returns>bool</returns>
+    Task<bool> DeleteHorarioAsync(short id);
 }

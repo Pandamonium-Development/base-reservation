@@ -24,7 +24,7 @@ public class RolController(IServiceRol serviceRol) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseRolDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllRolesAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
         var roles = await serviceRol.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, roles);

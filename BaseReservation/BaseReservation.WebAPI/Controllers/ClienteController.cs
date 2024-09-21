@@ -21,7 +21,7 @@ namespace BaseReservation.WebAPI.Controllers;
 public class ClienteController(IServiceCliente serviceCliente) : ControllerBase
 {
     /// <summary>
-    /// Retrieves a list of all clients.
+    /// Retrieves a list of all customers.
     /// </summary>
     /// <returns>A list of all clients.</returns>
     [HttpGet]
