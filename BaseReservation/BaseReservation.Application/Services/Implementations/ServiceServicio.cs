@@ -47,11 +47,11 @@ public class ServiceServicio(IRepositoryServicio repository, IMapper mapper,
     }
 
     /// <inheritdoc />
-    public async Task<ResponseServicioDto> UpdateServiceAsync(byte id, RequestServicioDto serviceDTO)
+    public async Task<ResponseServicioDto> UpdateServiceAsync(byte id, RequestServicioDto serviceDto)
     {
         if (!await repository.ExistsServiceAsync(id)) throw new NotFoundException("Servicio no encontrado.");
 
-        var service = await ValidateService(serviceDTO);
+        var service = await ValidateService(serviceDto);
         service.Id = id;
         var result = await repository.UpdateServiceAsync(service);
 
@@ -59,9 +59,9 @@ public class ServiceServicio(IRepositoryServicio repository, IMapper mapper,
     }
 
     /// <inheritdoc />
-    private async Task<Servicio> ValidateService(RequestServicioDto serviceDTO)
+    private async Task<Servicio> ValidateService(RequestServicioDto serviceDto)
     {
-        var service = mapper.Map<Servicio>(serviceDTO);
+        var service = mapper.Map<Servicio>(serviceDto);
         await serviceValidator.ValidateAndThrowAsync(service);
 
         return service;

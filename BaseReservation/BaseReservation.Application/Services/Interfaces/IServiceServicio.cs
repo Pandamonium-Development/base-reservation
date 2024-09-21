@@ -29,9 +29,9 @@ public interface IServiceServicio
     /// Update a service
     /// </summary>
     /// <param name="id">Id to identify record</param>
-    /// <param name="servicioDTO">Request service model to be updated</param>
+    /// <param name="serviceDto">Request service model to be updated</param>
     /// <returns>ResponseServicioDto</returns>
-    Task<ResponseServicioDto> UpdateServiceAsync(byte id, RequestServicioDto servicioDTO);
+    Task<ResponseServicioDto> UpdateServiceAsync(byte id, RequestServicioDto serviceDto);
 
     /// <summary>
     /// Deletes a service based on the provided Id.
