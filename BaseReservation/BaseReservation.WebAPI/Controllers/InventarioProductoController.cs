@@ -29,7 +29,7 @@ public class InventarioProductoController(IServiceInventarioProducto serviceInve
     [HttpGet("{idInventarioProducto}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseInventarioProductoDto))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllInventarioProductosByInventarioAsync(long idInventarioProducto)
+    public async Task<IActionResult> FindByIdAsync(long idInventarioProducto)
     {
         var inventoryProducts = await serviceInventarioProducto.FindByIdAsync(idInventarioProducto);
         return StatusCode(StatusCodes.Status200OK, inventoryProducts);
@@ -43,7 +43,7 @@ public class InventarioProductoController(IServiceInventarioProducto serviceInve
     [HttpGet("~/api/Inventario/{idInventario}/Productos")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseInventarioProductoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllInventarioProductosByInventarioAsync(short idInventario)
+    public async Task<IActionResult> ListAllByInventarioAsync(short idInventario)
     {
         var inventoryProducts = await serviceInventarioProducto.ListAllByInventarioAsync(idInventario);
         return StatusCode(StatusCodes.Status200OK, inventoryProducts);
@@ -57,7 +57,7 @@ public class InventarioProductoController(IServiceInventarioProducto serviceInve
     [HttpGet("~/api/Producto/{idProducto}/Inventarios")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseInventarioProductoDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllInventarioProductosByProductoAsync(short idProducto)
+    public async Task<IActionResult> ListAllByProductoAsync(short idProducto)
     {
         var inventoryProducts = await serviceInventarioProducto.ListAllByProductoAsync(idProducto);
         return StatusCode(StatusCodes.Status200OK, inventoryProducts);
@@ -88,7 +88,7 @@ public class InventarioProductoController(IServiceInventarioProducto serviceInve
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> CreateInventarioProductosAsync([FromBody] IEnumerable<RequestInventarioProductoDto> inventarioProducto)
+    public async Task<IActionResult> CreateProductoInventarioAsync([FromBody] IEnumerable<RequestInventarioProductoDto> inventarioProducto)
     {
         ArgumentNullException.ThrowIfNull(inventarioProducto);
         var inventoryProducts = await serviceInventarioProducto.CreateProductoInventarioAsync(inventarioProducto);
@@ -106,7 +106,7 @@ public class InventarioProductoController(IServiceInventarioProducto serviceInve
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> UpdateInvetarioAsync(long idInventarioProducto, [FromBody] RequestInventarioProductoDto inventarioProducto)
+    public async Task<IActionResult> UpdateProductoInventarioAsync(long idInventarioProducto, [FromBody] RequestInventarioProductoDto inventarioProducto)
     {
         ArgumentNullException.ThrowIfNull(inventarioProducto);
         var inventoryProducts = await serviceInventarioProducto.UpdateProductoInventarioAsync(idInventarioProducto, inventarioProducto);

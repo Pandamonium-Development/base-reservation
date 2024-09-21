@@ -24,7 +24,7 @@ public class TipoServicioController(IServiceTipoServicio serviceTipoServicio) : 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseTipoServicioDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllTipoServiciosAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
         var serviceTypes = await serviceTipoServicio.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, serviceTypes);

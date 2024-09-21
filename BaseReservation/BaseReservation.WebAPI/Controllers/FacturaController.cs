@@ -28,10 +28,10 @@ public class FacturaController(IServiceFactura serviceFactura) : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseFacturaDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllFacturasAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
-        var facturas = await serviceFactura.ListAllAsync();
-        return StatusCode(StatusCodes.Status200OK, facturas);
+        var invoices = await serviceFactura.ListAllAsync();
+        return StatusCode(StatusCodes.Status200OK, invoices);
     }
 
     /// <summary>
@@ -43,10 +43,10 @@ public class FacturaController(IServiceFactura serviceFactura) : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseFacturaDto))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetFacturaByIdAsync(long idFactura)
+    public async Task<IActionResult> FindByIdAsync(long idFactura)
     {
-        var factura = await serviceFactura.FindByIdAsync(idFactura);
-        return StatusCode(StatusCodes.Status200OK, factura);
+        var invoice = await serviceFactura.FindByIdAsync(idFactura);
+        return StatusCode(StatusCodes.Status200OK, invoice);
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public class FacturaController(IServiceFactura serviceFactura) : ControllerBase
     public async Task<IActionResult> CreateFacturaAsync([FromBody] RequestFacturaDto factura)
     {
         ArgumentNullException.ThrowIfNull(factura);
-        var result = await serviceFactura.CreateAsync(factura);
+        var result = await serviceFactura.CreateFacturaAsync(factura);
         return StatusCode(StatusCodes.Status201Created, result);
     }
 }

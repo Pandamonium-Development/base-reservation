@@ -27,7 +27,7 @@ public class SucursalHorarioController(IServiceSucursalHorario serviceSucursalHo
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseSucursalHorarioDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetSucursalHorarioByIdAsync(short idSucursalHorario)
+    public async Task<IActionResult> FindByIdAsync(short idSucursalHorario)
     {
         var schedule = await serviceSucursalHorario.FindByIdAsync(idSucursalHorario);
         return StatusCode(StatusCodes.Status200OK, schedule);
@@ -42,7 +42,7 @@ public class SucursalHorarioController(IServiceSucursalHorario serviceSucursalHo
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseSucursalHorarioDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetHorariosBySucursalAsync(byte idSucursal)
+    public async Task<IActionResult> ListAllBySucursalAsync(byte idSucursal)
     {
         var schedules = await serviceSucursalHorario.ListAllBySucursalAsync(idSucursal);
         return StatusCode(StatusCodes.Status200OK, schedules);

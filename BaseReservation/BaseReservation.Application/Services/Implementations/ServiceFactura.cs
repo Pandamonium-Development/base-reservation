@@ -13,7 +13,7 @@ public class ServiceFactura(IRepositoryFactura repository, IRepositoryPedido rep
                             IMapper mapper, IValidator<Factura> facturaValidator) : IServiceFactura
 {
     /// <inheritdoc />
-    public async Task<ResponseFacturaDto> CreateAsync(RequestFacturaDto facturaDto)
+    public async Task<ResponseFacturaDto> CreateFacturaAsync(RequestFacturaDto facturaDto)
     {
         var factura = await ValidarFactura(facturaDto);
 

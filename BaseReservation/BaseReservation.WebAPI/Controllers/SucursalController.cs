@@ -28,7 +28,7 @@ public class SucursalController(IServiceSucursal serviceBranch) : ControllerBase
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseSucursalDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllBranchesAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
         var branches = await serviceBranch.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, branches);
@@ -41,7 +41,7 @@ public class SucursalController(IServiceSucursal serviceBranch) : ControllerBase
     [HttpGet("ByRol")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ResponseSucursalDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllBranchesByRolAsync()
+    public async Task<IActionResult> ListAllByRolAsync()
     {
         var branch = await serviceBranch.ListAllByRolAsync();
         return StatusCode(StatusCodes.Status200OK, branch);
@@ -56,7 +56,7 @@ public class SucursalController(IServiceSucursal serviceBranch) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseSucursalDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetBranchlByIdAsync(byte idBranch)
+    public async Task<IActionResult> FindByIdAsync(byte idSucursal)
     {
         var branch = await serviceBranch.FindByIdAsync(idBranch);
         return StatusCode(StatusCodes.Status200OK, branch);
@@ -74,9 +74,8 @@ public class SucursalController(IServiceSucursal serviceBranch) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> CreateSucursalAsync([FromBody] RequestSucursalDto branch)
     {
-        //retorna una excepçión is es nulo
-        ArgumentNullException.ThrowIfNull(branch);
-        var result = await serviceBranch.CreateBranchAsync(branch);
+        ArgumentNullException.ThrowIfNull(sucursal);
+        var result = await serviceSucursal.CreateSucursalAsync(sucursal);
         return StatusCode(StatusCodes.Status201Created, result);
     }
 

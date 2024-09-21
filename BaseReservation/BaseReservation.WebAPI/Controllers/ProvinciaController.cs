@@ -23,7 +23,7 @@ public class ProvinciaController(IServiceProvincia serviceProvincia) : Controlle
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseProvinciaDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllProvinciasAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
         var provinces = await serviceProvincia.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, provinces);
@@ -38,7 +38,7 @@ public class ProvinciaController(IServiceProvincia serviceProvincia) : Controlle
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseProvinciaDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetProvinciaByIdAsync(byte idProvincia)
+    public async Task<IActionResult> FindByIdAsync(byte idProvincia)
     {
         var province = await serviceProvincia.FindByIdAsync(idProvincia);
         return StatusCode(StatusCodes.Status200OK, province);

@@ -29,7 +29,7 @@ public class HorarioController(IServiceHorario serviceHorario) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseHorarioDto>))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllHorariosAsync()
+    public async Task<IActionResult> ListAllAsync()
     {
         var schedules = await serviceHorario.ListAllAsync();
         return StatusCode(StatusCodes.Status200OK, schedules);
@@ -44,7 +44,7 @@ public class HorarioController(IServiceHorario serviceHorario) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseHorarioDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetHorarioByIdAsync(short idHorario)
+    public async Task<IActionResult> FindByIdAsync(short idHorario)
     {
         var schedule = await serviceHorario.FindByIdAsync(idHorario);
         return StatusCode(StatusCodes.Status200OK, schedule);
@@ -79,9 +79,24 @@ public class HorarioController(IServiceHorario serviceHorario) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> UpdateHorarioAsync(short idHorario, [FromBody] RequestHorarioDto horario)
     {
-        //retorna una excepçión is es nulo
         ArgumentNullException.ThrowIfNull(horario);
         var schedule = await serviceHorario.UpdateHorarioAsync(idHorario, horario);
         return StatusCode(StatusCodes.Status200OK, schedule);
+    }
+
+    /// <summary>
+    /// Deletes a specific schedule by its ID.
+    /// </summary>
+    /// <param name="idHorario">The ID of the schedule to delete.</param>
+    /// <returns>IActionResult</returns>
+    [HttpDelete("~/api/[controller]/{idHorario}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ErrorDetailsBaseReservation))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
+    public async Task<IActionResult> DeleteHorarioAsync(short idHorario)
+    {
+        var result = await serviceHorario.DeleteHorarioAsync(idHorario);
+        return StatusCode(StatusCodes.Status200OK, result);
     }
 }
