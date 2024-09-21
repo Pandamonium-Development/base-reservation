@@ -7,16 +7,16 @@ public interface IRepositorySucursal
     /// <summary>
     /// Create branch
     /// </summary>
-    /// <param name="sucursal">Branch model to be added</param>
+    /// <param name="branch">Branch model to be added</param>
     /// <returns>Sucursal</returns>
-    Task<Sucursal> CreateSucursalAsync(Sucursal sucursal);
+    Task<Sucursal> CreateBranchAsync(Sucursal branch);
 
     /// <summary>
     /// Update branch
     /// </summary>
-    /// <param name="sucursal">Branch model to be updated</param>
+    /// <param name="branch">Branch model to be updated</param>
     /// <returns>Sucursal</returns>
-    Task<Sucursal> UpdateSucursalAsync(Sucursal sucursal);
+    Task<Sucursal> UpdateBranchAsync(Sucursal branch);
 
     /// <summary>
     /// Get list of all branches
@@ -43,5 +43,12 @@ public interface IRepositorySucursal
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>True if exists, if not, false</returns>
-    Task<bool> ExistsSucursalAsync(byte id);
+    Task<bool> ExistsBranchAsync(byte id);
+
+    /// <summary>
+    /// Deletes a branch based on the provided Id.
+    /// </summary>
+    /// <param name="id">Id of the branch to delete.</param>
+    /// <returns>True if successful, otherwise false.</returns>
+    Task<bool> DeleteBranchAsync(byte id);
 }

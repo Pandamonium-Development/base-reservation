@@ -8,22 +8,22 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 public class RepositorySucursal(BaseReservationContext context) : IRepositorySucursal
 {
     /// <inheritdoc />
-    public async Task<Sucursal> CreateSucursalAsync(Sucursal sucursal)
+    public async Task<Sucursal> CreateBranchAsync(Sucursal branch)
     {
-        var result = context.Sucursals.Add(sucursal);
+        var result = context.Sucursals.Add(branch);
         await context.SaveChangesAsync();
 
         return result.Entity;
     }
 
     /// <inheritdoc />
-    public async Task<Sucursal> UpdateSucursalAsync(Sucursal sucursal)
+    public async Task<Sucursal> UpdateBranchAsync(Sucursal branch)
     {
-        context.Sucursals.Update(sucursal);
+        context.Sucursals.Update(branch);
 
         await context.SaveChangesAsync();
 
-        var response = await FindByIdAsync(sucursal.Id);
+        var response = await FindByIdAsync(branch.Id);
         return response!;
     }
 
@@ -45,7 +45,7 @@ public class RepositorySucursal(BaseReservationContext context) : IRepositorySuc
     }
 
     /// <inheritdoc />
-    public async Task<bool> ExistsSucursalAsync(byte id)
+    public async Task<bool> ExistsBranchAsync(byte id)
     {
         var keyProperty = context.Model.FindEntityType(typeof(Sucursal))!.FindPrimaryKey()!.Properties[0];
 
@@ -87,5 +87,17 @@ public class RepositorySucursal(BaseReservationContext context) : IRepositorySuc
             .AsNoTracking()
             .ToListAsync();
         return collection;
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> DeleteBranchAsync(byte id)
+    {
+        var branch = await FindByIdAsync(id);
+        branch!.Activo = false;
+
+        context.Sucursals.Update(branch);
+
+        var rowsAffected = await context.SaveChangesAsync();
+        return rowsAffected > 0;
     }
 }
