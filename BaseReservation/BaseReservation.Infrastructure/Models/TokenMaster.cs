@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BaseReservation.Infrastructure.Models;
 
 [Table("TokenMaster")]
-[Index("IdUsuario", Name = "IX_TokenMaster_IdUsuario")]
+[Index("UserId", Name = "IX_TokenMaster_UserId")]
 public partial class TokenMaster
 {
     [Key]
@@ -18,16 +18,16 @@ public partial class TokenMaster
     public string JwtId { get; set; } = null!;
 
     [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime FechaVencimiento { get; set; }
+    public DateTime ExpireAt { get; set; }
 
-    public bool Utilizado { get; set; }
+    public bool Used { get; set; }
 
-    public short IdUsuario { get; set; }
+    public short UserId { get; set; }
 
-    [ForeignKey("IdUsuario")]
+    [ForeignKey("UserId")]
     [InverseProperty("TokenMasters")]
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public virtual User UserIdNavigation { get; set; } = null!;
 }

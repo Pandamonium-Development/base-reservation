@@ -7,9 +7,9 @@ public interface IRepositoryCanton
     /// <summary>
     /// Get list of states base on a parent province
     /// </summary>
-    /// <param name="idProvincia">Id province parent</param>
+    /// <param name="provinceId">Id province parent</param>
     /// <returns>ICollection of Canton </returns> 
-    Task<ICollection<Canton>> ListAllByProvinciaAsync(byte idProvincia);
+    Task<ICollection<Canton>> ListAllByProvinceAsync(byte provinceId);
 
     /// <summary>
     /// Get exact state according to id, if not, get null

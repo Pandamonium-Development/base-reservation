@@ -5,21 +5,21 @@ using Microsoft.EntityFrameworkCore;
 namespace BaseReservation.Infrastructure.Models;
 
 [Table("Canton")]
-[Index("IdProvincia", Name = "IX_Canton_IdProvincia")]
+[Index("ProvinceId", Name = "IX_Canton_ProvinceId")]
 public partial class Canton
 {
     [Key]
     public byte Id { get; set; }
 
     [StringLength(50)]
-    public string Nombre { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public byte IdProvincia { get; set; }
+    public byte ProvinceId { get; set; }
 
     [InverseProperty("IdCantonNavigation")]
-    public virtual ICollection<Distrito> Distritos { get; set; } = new List<Distrito>();
+    public virtual ICollection<District> Districts { get; set; } = new List<District>();
 
-    [ForeignKey("IdProvincia")]
+    [ForeignKey("ProvinceId")]
     [InverseProperty("Cantons")]
-    public virtual Provincia IdProvinciaNavigation { get; set; } = null!;
+    public virtual Province ProvinceIdNavigation { get; set; } = null!;
 }
