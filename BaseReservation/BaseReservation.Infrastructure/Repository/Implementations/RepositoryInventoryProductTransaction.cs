@@ -74,7 +74,7 @@ public class RepositoryInventoryProductTransaction(BaseReservationContext contex
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<InventoryProductTransaction>> ListAllByProductAsync(short inventoryId)
+    public async Task<ICollection<InventoryProductTransaction>> ListAllByProductAsync(short productId)
     {
         var collection = await context.Set<InventoryProductTransaction>()
             .AsNoTracking()
@@ -82,7 +82,7 @@ public class RepositoryInventoryProductTransaction(BaseReservationContext contex
             .ThenInclude(m => m.ProductIdNavigation)
             .Include(m => m.InventoryProductIdNavigation)
             .ThenInclude(m => m.InventoryIdNavigation)
-            .Where(m => m.InventoryProductIdNavigation.ProductId == inventoryId)
+            .Where(m => m.InventoryProductIdNavigation.ProductId == productId)
             .AsNoTracking()
             .ToListAsync();
 
