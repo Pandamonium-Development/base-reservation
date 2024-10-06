@@ -6,14 +6,14 @@ namespace BaseReservation.Infrastructure.Models;
 public class BaseModel
 {
     [Column(TypeName = "datetime")]
-    public DateTime FechaCreacion { get; set; }
+    public DateTime Created { get; set; }
 
     [StringLength(70)]
-    public string UsuarioCreacion { get; set; } = null!;
+    public string CreatedBy { get; set; } = null!;
 
     [Column(TypeName = "datetime")]
-    public DateTime? FechaModificacion { get; set; }
+    public DateTime? Updated { get; set; }
 
     [StringLength(70)]
-    public string? UsuarioModificacion { get; set; }
+    public string? UpdatedBy { get; set; }
 }

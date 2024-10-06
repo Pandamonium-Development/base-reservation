@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BaseReservation.Application.Comunes;
+using BaseReservation.Application.Common;
 using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Application.Services.Interfaces;
 using BaseReservation.Infrastructure.Repository.Interfaces;
@@ -9,9 +9,9 @@ namespace BaseReservation.Application.Services.Implementations;
 public class ServiceCanton(IRepositoryCanton repository, IMapper mapper) : IServiceCanton
 {
     /// <inheritdoc />
-    public async Task<ICollection<ResponseCantonDto>> ListAllByProvinciaAsync(byte idProvincia)
+    public async Task<ICollection<ResponseCantonDto>> ListAllByProvinceAsync(byte provinceId)
     {
-        var list = await repository.ListAllByProvinciaAsync(idProvincia);
+        var list = await repository.ListAllByProvinceAsync(provinceId);
         var collection = mapper.Map<ICollection<ResponseCantonDto>>(list);
 
         return collection;

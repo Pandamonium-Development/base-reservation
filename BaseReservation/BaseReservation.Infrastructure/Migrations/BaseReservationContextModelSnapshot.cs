@@ -22,6 +22,147 @@ namespace BaseReservation.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Branch", b =>
+                {
+                    b.Property<byte>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<short>("DistrictId")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<int>("Telephone")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "DistrictId" }, "IX_Branch_DistrictId");
+
+                    b.ToTable("Branch");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchHoliday", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+
+                    b.Property<byte>("BranchId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<byte>("HolidayId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<short>("Year")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "BranchId" }, "IX_BranchHoliday_BranchId");
+
+                    b.HasIndex(new[] { "HolidayId" }, "IX_BranchHoliday_HolidayId");
+
+                    b.ToTable("BranchHoliday");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchSchedule", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+
+                    b.Property<byte>("BranchId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<short>("ScheduleId")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "BranchId" }, "IX_BranchSchedule_BranchId");
+
+                    b.HasIndex(new[] { "ScheduleId" }, "IX_BranchSchedule_ScheduleId");
+
+                    b.ToTable("BranchSchedule");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchScheduleBlock", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<short>("BranchScheduleId")
+                        .HasColumnType("smallint");
+
+                    b.Property<TimeOnly>("EndHour")
+                        .HasColumnType("time");
+
+                    b.Property<TimeOnly>("StartHour")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "BranchScheduleId" }, "IX_BranchScheduleBlock_BranchSchedule");
+
+                    b.ToTable("BranchScheduleBlock");
+                });
+
             modelBuilder.Entity("BaseReservation.Infrastructure.Models.Canton", b =>
                 {
                     b.Property<byte>("Id")
@@ -30,22 +171,22 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
-                    b.Property<byte>("IdProvincia")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<byte>("ProvinceId")
+                        .HasColumnType("tinyint");
+
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdProvincia" }, "IX_Canton_IdProvincia");
+                    b.HasIndex(new[] { "ProvinceId" }, "IX_Canton_ProvinceId");
 
                     b.ToTable("Canton");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Categoria", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Category", b =>
                 {
                     b.Property<byte>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,37 +194,37 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
-                    b.Property<string>("Codigo")
+                    b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("UsuarioCreacion")
+                    b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categoria");
+                    b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Cliente", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Contact", b =>
                 {
                     b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,289 +232,115 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
 
-                    b.Property<bool>("Activo")
+                    b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Apellidos")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("CorreoElectronico")
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("DireccionExacta")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<int>("Telephone")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<byte>("VendorId")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "VendorId" }, "IX_Contact_VendorId");
+
+                    b.ToTable("Contact");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Customer", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("Address")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<short>("IdDistrito")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("Nombre")
+                    b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<int>("Telefono")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)")
-                        .HasDefaultValue("");
-
-                    b.Property<string>("UsuarioModificacion")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "IdDistrito" }, "IX_Cliente_IdDistrito");
-
-                    b.ToTable("Cliente");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Contacto", b =>
-                {
-                    b.Property<short>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<short>("DistrictId")
                         .HasColumnType("smallint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
-
-                    b.Property<bool>("Activo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("Apellidos")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<string>("CorreoElectronico")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte>("IdProveedor")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Nombre")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<int>("Telefono")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsuarioCreacion")
+                    b.Property<string>("LastName")
                         .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<int>("Telephone")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<string>("UsuarioModificacion")
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdProveedor" }, "IX_Contacto_IdProveedor");
+                    b.HasIndex(new[] { "DistrictId" }, "IX_Customer_DistrictId");
 
-                    b.ToTable("Contacto");
+                    b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetalleFactura", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<short>("Cantidad")
-                        .HasColumnType("smallint");
-
-                    b.Property<long>("IdFactura")
-                        .HasColumnType("bigint");
-
-                    b.Property<short?>("IdProducto")
-                        .HasColumnType("smallint");
-
-                    b.Property<byte?>("IdServicio")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("MontoImpuesto")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("MontoSubtotal")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("MontoTotal")
-                        .HasColumnType("money");
-
-                    b.Property<byte>("NumeroLinea")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("TarifaServicio")
-                        .HasColumnType("money");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdProducto");
-
-                    b.HasIndex(new[] { "IdFactura" }, "IX_DetalleFactura_IdFactura");
-
-                    b.HasIndex(new[] { "IdServicio" }, "IX_DetalleFactura_IdServicio");
-
-                    b.ToTable("DetalleFactura");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetalleFacturaProducto", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<decimal>("Cantidad")
-                        .HasColumnType("decimal(6, 2)");
-
-                    b.Property<long>("IdDetalleFactura")
-                        .HasColumnType("bigint");
-
-                    b.Property<short>("IdProducto")
-                        .HasColumnType("smallint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "IdDetalleFactura" }, "IX_DetalleFacturaProducto_IdDetalleFactura");
-
-                    b.HasIndex(new[] { "IdProducto" }, "IX_DetalleFacturaProducto_IdProducto");
-
-                    b.ToTable("DetalleFacturaProducto");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetallePedido", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<short>("Cantidad")
-                        .HasColumnType("smallint");
-
-                    b.Property<long>("IdPedido")
-                        .HasColumnType("bigint");
-
-                    b.Property<short?>("IdProducto")
-                        .HasColumnType("smallint");
-
-                    b.Property<byte?>("IdServicio")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("MontoImpuesto")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("MontoSubtotal")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("MontoTotal")
-                        .HasColumnType("money");
-
-                    b.Property<byte>("NumeroLinea")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("TarifaServicio")
-                        .HasColumnType("money");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdProducto");
-
-                    b.HasIndex(new[] { "IdPedido" }, "IX_DetallePedido_IdPedido");
-
-                    b.HasIndex(new[] { "IdServicio" }, "IX_DetallePedido_IdServicio");
-
-                    b.ToTable("DetallePedido");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetallePedidoProducto", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<decimal>("Cantidad")
-                        .HasColumnType("decimal(6, 2)");
-
-                    b.Property<long>("IdDetallePedido")
-                        .HasColumnType("bigint");
-
-                    b.Property<short>("IdProducto")
-                        .HasColumnType("smallint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "IdDetallePedido" }, "IX_DetallePedidoProducto_IdDetallePedido");
-
-                    b.HasIndex(new[] { "IdProducto" }, "IX_DetallePedidoProducto_IdProducto");
-
-                    b.ToTable("DetallePedidoProducto");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetalleReserva", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<short?>("IdProducto")
-                        .HasColumnType("smallint");
-
-                    b.Property<int>("IdReserva")
-                        .HasColumnType("int");
-
-                    b.Property<byte?>("IdServicio")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdProducto");
-
-                    b.HasIndex(new[] { "IdReserva" }, "IX_ReservaServicio_IdReserva");
-
-                    b.HasIndex(new[] { "IdServicio" }, "IX_ReservaServicio_IdServicio");
-
-                    b.ToTable("DetalleReserva");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Distrito", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.District", b =>
                 {
                     b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
@@ -381,113 +348,22 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
 
-                    b.Property<byte>("IdCanton")
+                    b.Property<byte>("CantonId")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdCanton" }, "IX_Distrito_IdCanton");
+                    b.HasIndex(new[] { "CantonId" }, "IX_District_CantonId");
 
-                    b.ToTable("Distrito");
+                    b.ToTable("District");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.EstadoPedido", b =>
-                {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EstadoPedido");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Factura", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<short>("Consecutivo")
-                        .HasColumnType("smallint");
-
-                    b.Property<DateOnly>("Fecha")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<short>("IdCliente")
-                        .HasColumnType("smallint");
-
-                    b.Property<byte>("IdImpuesto")
-                        .HasColumnType("tinyint");
-
-                    b.Property<long?>("IdPedido")
-                        .HasColumnType("bigint");
-
-                    b.Property<byte>("IdSucursal")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("IdTipoPago")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("MontoImpuesto")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("MontoTotal")
-                        .HasColumnType("money");
-
-                    b.Property<string>("NombreCliente")
-                        .IsRequired()
-                        .HasMaxLength(160)
-                        .HasColumnType("nvarchar(160)");
-
-                    b.Property<decimal>("PorcentajeImpuesto")
-                        .HasColumnType("decimal(5, 2)");
-
-                    b.Property<decimal>("SubTotal")
-                        .HasColumnType("money");
-
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.Property<string>("UsuarioModificacion")
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "IdCliente" }, "IX_Factura_IdCliente");
-
-                    b.HasIndex(new[] { "IdImpuesto" }, "IX_Factura_IdImpuesto");
-
-                    b.HasIndex(new[] { "IdPedido" }, "IX_Factura_IdPedido");
-
-                    b.HasIndex(new[] { "IdSucursal" }, "IX_Factura_IdSucursal");
-
-                    b.HasIndex(new[] { "IdTipoPago" }, "IX_Factura_IdTipoPago");
-
-                    b.ToTable("Factura");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Feriado", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Gender", b =>
                 {
                     b.Property<byte>("Id")
                         .ValueGeneratedOnAdd()
@@ -495,63 +371,63 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
-                    b.Property<bool>("Activo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<byte>("Dia")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Mes")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<string>("Nombre")
+                    b.HasKey("Id");
+
+                    b.ToTable("Gender");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Holiday", b =>
+                {
+                    b.Property<byte>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<byte>("Day")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("Month")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Feriado");
+                    b.ToTable("Holiday");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Genero", b =>
-                {
-                    b.Property<byte>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Genero");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Horario", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Inventory", b =>
                 {
                     b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
@@ -559,107 +435,43 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
 
-                    b.Property<bool>("Activo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("Dia")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<TimeOnly>("HoraFin")
-                        .HasColumnType("time");
-
-                    b.Property<TimeOnly>("HoraInicio")
-                        .HasColumnType("time");
-
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.Property<string>("UsuarioModificacion")
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Horario");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Impuesto", b =>
-                {
-                    b.Property<byte>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<decimal>("Porcentaje")
-                        .HasColumnType("decimal(5, 2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Impuesto");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Inventario", b =>
-                {
-                    b.Property<short>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
-
-                    b.Property<bool>("Activo")
+                    b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte>("IdSucursal")
+                    b.Property<byte>("BranchId")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("TipoInventario")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsuarioCreacion")
+                    b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeInventory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdSucursal" }, "IX_Inventario_IdSucursal");
+                    b.HasIndex(new[] { "BranchId" }, "IX_Inventory_BranchId");
 
-                    b.ToTable("Inventario");
+                    b.ToTable("Inventory");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventarioProducto", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProduct", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -667,46 +479,51 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<decimal>("Disponible")
+                    b.Property<decimal>("Assignable")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<short>("IdInventario")
-                        .HasColumnType("smallint");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<short>("IdProducto")
                         .HasColumnType("smallint");
 
-                    b.Property<decimal>("Maxima")
+                    b.Property<short>("InventoryId")
+                        .HasColumnType("smallint");
+
+                    b.Property<decimal>("Maximum")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.Property<decimal>("Minima")
+                    b.Property<decimal>("Mininum")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                    b.Property<short>("ProductId")
+                        .HasColumnType("smallint");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdInventario" }, "IX_InventarioProducto_IdInventario");
+                    b.HasIndex("IdProducto");
 
-                    b.HasIndex(new[] { "IdProducto" }, "IX_InventarioProducto_IdProducto");
+                    b.HasIndex(new[] { "InventoryId" }, "IX_InventoryProduct_InventoryId");
 
-                    b.ToTable("InventarioProducto");
+                    b.HasIndex(new[] { "ProductId" }, "IX_InventoryProduct_ProductId");
+
+                    b.ToTable("InventoryProduct");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventarioProductoMovimiento", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProductTransaction", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -714,39 +531,39 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<decimal>("Cantidad")
-                        .HasColumnType("decimal(18, 2)");
-
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
-                    b.Property<long>("IdInventarioProducto")
+                    b.Property<long>("InventoryProductId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("TipoMovimiento")
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("TransactionType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdInventarioProducto" }, "IX_InventarioProductoMovimiento_IdInventarioProducto");
+                    b.HasIndex(new[] { "InventoryProductId" }, "IX_InventoryProductTransaction_InventoryProductId");
 
-                    b.ToTable("InventarioProductoMovimiento");
+                    b.ToTable("InventoryProductTransaction");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Pedido", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Invoice", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -754,80 +571,323 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<short>("Consecutivo")
-                        .HasColumnType("smallint");
+                    b.Property<byte>("BranchId")
+                        .HasColumnType("tinyint");
 
-                    b.Property<DateOnly>("Fecha")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
-                    b.Property<short>("IdCliente")
+                    b.Property<short>("CustomerId")
                         .HasColumnType("smallint");
 
-                    b.Property<byte>("IdEstadoPedido")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("IdImpuesto")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("IdReserva")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("IdSucursal")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("IdTipoPago")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("MontoImpuesto")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("MontoTotal")
-                        .HasColumnType("money");
-
-                    b.Property<string>("NombreCliente")
+                    b.Property<string>("CustomerName")
                         .IsRequired()
                         .HasMaxLength(160)
                         .HasColumnType("nvarchar(160)");
 
-                    b.Property<decimal>("PorcentajeImpuesto")
-                        .HasColumnType("decimal(5, 2)");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<short>("Number")
+                        .HasColumnType("smallint");
+
+                    b.Property<long?>("OrderId")
+                        .HasColumnType("bigint");
+
+                    b.Property<byte>("PaymentTypeId")
+                        .HasColumnType("tinyint");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("money");
 
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                    b.Property<decimal>("Tax")
+                        .HasColumnType("money");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<byte>("TaxId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("TaxRate")
+                        .HasColumnType("decimal(5, 2)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("money");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdEstadoPedido");
+                    b.HasIndex(new[] { "BranchId" }, "IX_Invoice_BranchId");
 
-                    b.HasIndex(new[] { "IdCliente" }, "IX_Pedido_IdCliente");
+                    b.HasIndex(new[] { "CustomerId" }, "IX_Invoice_CustomerId");
 
-                    b.HasIndex(new[] { "IdImpuesto" }, "IX_Pedido_IdImpuesto");
+                    b.HasIndex(new[] { "OrderId" }, "IX_Invoice_OrderId");
 
-                    b.HasIndex(new[] { "IdReserva" }, "IX_Pedido_IdReserva");
+                    b.HasIndex(new[] { "PaymentTypeId" }, "IX_Invoice_PaymentTypeId");
 
-                    b.HasIndex(new[] { "IdSucursal" }, "IX_Pedido_IdSucursal");
+                    b.HasIndex(new[] { "TaxId" }, "IX_Invoice_TaxId");
 
-                    b.HasIndex(new[] { "IdTipoPago" }, "IX_Pedido_IdTipoPago");
-
-                    b.ToTable("Pedido");
+                    b.ToTable("Invoice");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Producto", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetail", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("InvoiceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<byte>("LineNumber")
+                        .HasColumnType("tinyint");
+
+                    b.Property<short?>("ProductId")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("Quantity")
+                        .HasColumnType("smallint");
+
+                    b.Property<byte?>("ServiceId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("Tax")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("money");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex(new[] { "InvoiceId" }, "IX_InvoiceDetail_InvoiceId");
+
+                    b.HasIndex(new[] { "ServiceId" }, "IX_InvoiceDetail_ServiceId");
+
+                    b.ToTable("InvoiceDetail");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetailProduct", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("InvoiceDetailId")
+                        .HasColumnType("bigint");
+
+                    b.Property<short>("ProductId")
+                        .HasColumnType("smallint");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(6, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "InvoiceDetailId" }, "IX_InvoiceDetailProduct_InvoiceDetailId");
+
+                    b.HasIndex(new[] { "ProductId" }, "IX_InvoiceDetailProduct_ProductId");
+
+                    b.ToTable("InvoiceDetailProduct");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Order", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<byte>("BranchId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<short>("CustomerId")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasMaxLength(160)
+                        .HasColumnType("nvarchar(160)");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<short>("Number")
+                        .HasColumnType("smallint");
+
+                    b.Property<byte>("PaymentTypeId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("StatusOrderId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("Tax")
+                        .HasColumnType("money");
+
+                    b.Property<byte>("TaxId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("TaxRate")
+                        .HasColumnType("decimal(5, 2)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("money");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StatusOrderId");
+
+                    b.HasIndex(new[] { "BranchId" }, "IX_Order_BranchId");
+
+                    b.HasIndex(new[] { "CustomerId" }, "IX_Order_CustomerId");
+
+                    b.HasIndex(new[] { "PaymentTypeId" }, "IX_Order_PaymentTypeId");
+
+                    b.HasIndex(new[] { "ReservationId" }, "IX_Order_ReservationId");
+
+                    b.HasIndex(new[] { "TaxId" }, "IX_Order_TaxId");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetail", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<byte>("LineNumber")
+                        .HasColumnType("tinyint");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint");
+
+                    b.Property<short?>("ProductId")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("Quantity")
+                        .HasColumnType("smallint");
+
+                    b.Property<byte?>("ServiceId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("Tax")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("money");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("money");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex(new[] { "OrderId" }, "IX_OrderDetail_OrderId");
+
+                    b.HasIndex(new[] { "ServiceId" }, "IX_OrderDetail_ServiceId");
+
+                    b.ToTable("OrderDetail");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetailProduct", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("OrderDetailId")
+                        .HasColumnType("bigint");
+
+                    b.Property<short>("ProductId")
+                        .HasColumnType("smallint");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(6, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "OrderDetailId" }, "IX_OrderDetailProduct_OrderDetailId");
+
+                    b.HasIndex(new[] { "ProductId" }, "IX_OrderDetailProduct_ProductId");
+
+                    b.ToTable("OrderDetailProduct");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.PaymentType", b =>
+                {
+                    b.Property<byte>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ReferenceNumber")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaymentType");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Product", b =>
                 {
                     b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
@@ -835,40 +895,39 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
 
-                    b.Property<bool>("Activo")
+                    b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<decimal>("Costo")
-                        .HasColumnType("money");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte>("IdCategoria")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("IdUnidadMedida")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Marca")
+                    b.Property<string>("Brand")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<byte>("CategoryId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
 
                     b.Property<string>("Sku")
                         .IsRequired()
@@ -876,25 +935,26 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("SKU");
 
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                    b.Property<byte>("UnitMeasureId")
+                        .HasColumnType("tinyint");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdCategoria" }, "IX_Producto_IdCategoria");
+                    b.HasIndex(new[] { "CategoryId" }, "IX_Producto_CategoryId");
 
-                    b.HasIndex(new[] { "IdUnidadMedida" }, "IX_Producto_IdUnidadMedida");
+                    b.HasIndex(new[] { "UnitMeasureId" }, "IX_Producto_UnitMeasureId");
 
-                    b.ToTable("Producto");
+                    b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Proveedor", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Province", b =>
                 {
                     b.Property<byte>("Id")
                         .ValueGeneratedOnAdd()
@@ -902,82 +962,17 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
-                    b.Property<bool>("Activo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("CedulaJuridica")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("CorreoElectronico")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("DireccionExacta")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<short>("IdDistrito")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<string>("RasonSocial")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<int>("Telefono")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.Property<string>("UsuarioModificacion")
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "IdDistrito" }, "IX_Proveedor_IdDistrito");
-
-                    b.ToTable("Proveedor");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Provincia", b =>
-                {
-                    b.Property<byte>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
-
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Provincia");
+                    b.ToTable("Province");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Reserva", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -985,12 +980,37 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Activo")
+                    b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Estado")
+                    b.Property<byte>("BranchId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<short>("CustomerId")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<TimeOnly>("Hour")
+                        .HasColumnType("time");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
@@ -999,48 +1019,23 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasDefaultValue("P")
                         .IsFixedLength();
 
-                    b.Property<DateOnly>("Fecha")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<TimeOnly>("Hora")
-                        .HasColumnType("time");
-
-                    b.Property<short>("IdCliente")
-                        .HasColumnType("smallint");
-
-                    b.Property<byte>("IdSucursal")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("NombreCliente")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdCliente" }, "IX_Reserva_IdCliente");
+                    b.HasIndex(new[] { "BranchId" }, "IX_Reservation_BranchId");
 
-                    b.HasIndex(new[] { "IdSucursal" }, "IX_Reserva_IdSucursal");
+                    b.HasIndex(new[] { "CustomerId" }, "IX_Reservation_CustomerId");
 
-                    b.ToTable("Reserva");
+                    b.ToTable("Reservation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservaPregunta", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservationDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1048,46 +1043,74 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Activo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                    b.Property<short?>("ProductId")
+                        .HasColumnType("smallint");
 
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("IdReserva")
+                    b.Property<int>("ReservationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Pregunta")
-                        .IsRequired()
+                    b.Property<byte?>("ServiceId")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex(new[] { "ReservationId" }, "IX_ReservationDetail_ReservationId");
+
+                    b.HasIndex(new[] { "ServiceId" }, "IX_ReservationDetail_ServiceId");
+
+                    b.ToTable("ReservationDetail");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservationQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("Answer")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("Respuesta")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("UsuarioCreacion")
+                    b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdReserva" }, "IX_ReservaPregunta_IdReserva");
+                    b.HasIndex(new[] { "ReservationId" }, "IX_ReservationQuestion_ReservationId");
 
-                    b.ToTable("ReservaPregunta");
+                    b.ToTable("ReservationQuestion");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Rol", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Role", b =>
                 {
                     b.Property<byte>("Id")
                         .ValueGeneratedOnAdd()
@@ -1095,42 +1118,85 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
-                    b.Property<bool>("Activo")
+                    b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("UsuarioCreacion")
+                    b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rol");
+                    b.ToTable("Role");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Servicio", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Schedule", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeOnly>("EndHour")
+                        .HasColumnType("time");
+
+                    b.Property<TimeOnly>("StartHour")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Schedule");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Service", b =>
                 {
                     b.Property<byte>("Id")
                         .ValueGeneratedOnAdd()
@@ -1138,195 +1204,69 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
-                    b.Property<bool>("Activo")
+                    b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Descripcion")
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte>("IdTipoServicio")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Observacion")
+                    b.Property<string>("Observation")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<decimal>("Tarifa")
+                    b.Property<decimal>("Price")
                         .HasColumnType("money");
 
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.Property<string>("UsuarioModificacion")
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "IdTipoServicio" }, "IX_Servicio_IdTipoServicio");
-
-                    b.ToTable("Servicio");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Sucursal", b =>
-                {
-                    b.Property<byte>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<byte>("TypeServiceId")
                         .HasColumnType("tinyint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
-
-                    b.Property<bool>("Activo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("CorreoElectronico")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("DireccionExacta")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<short>("IdDistrito")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<int>("Telefono")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdDistrito" }, "IX_Sucursal_IdDistrito");
+                    b.HasIndex(new[] { "TypeServiceId" }, "IX_Service_TypeServiceId");
 
-                    b.ToTable("Sucursal");
+                    b.ToTable("Service");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.SucursalFeriado", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.StatusOrder", b =>
                 {
-                    b.Property<short>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
-
-                    b.Property<short>("Anno")
-                        .HasColumnType("smallint");
-
-                    b.Property<DateOnly>("Fecha")
-                        .HasColumnType("date");
-
-                    b.Property<byte>("IdFeriado")
+                    b.Property<byte>("Id")
                         .HasColumnType("tinyint");
 
-                    b.Property<byte>("IdSucursal")
-                        .HasColumnType("tinyint");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdFeriado" }, "IX_SucursalFeriado_IdFeriado");
-
-                    b.HasIndex(new[] { "IdSucursal" }, "IX_SucursalFeriado_IdSucursal");
-
-                    b.ToTable("SucursalFeriado");
+                    b.ToTable("StatusOrder");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.SucursalHorario", b =>
-                {
-                    b.Property<short>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
-
-                    b.Property<short>("IdHorario")
-                        .HasColumnType("smallint");
-
-                    b.Property<byte>("IdSucursal")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "IdHorario" }, "IX_SucursalHorario_IdHorario");
-
-                    b.HasIndex(new[] { "IdSucursal" }, "IX_SucursalHorario_IdSucursal");
-
-                    b.ToTable("SucursalHorario");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.SucursalHorarioBloqueo", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Activo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<TimeOnly>("HoraFin")
-                        .HasColumnType("time");
-
-                    b.Property<TimeOnly>("HoraInicio")
-                        .HasColumnType("time");
-
-                    b.Property<short>("IdSucursalHorario")
-                        .HasColumnType("smallint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "IdSucursalHorario" }, "IX_SucursalHorarioBloqueo_IdSucursalHorario");
-
-                    b.ToTable("SucursalHorarioBloqueo");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TipoPago", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Tax", b =>
                 {
                     b.Property<byte>("Id")
                         .ValueGeneratedOnAdd()
@@ -1334,38 +1274,17 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
-                    b.Property<string>("Descripcion")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
-                    b.Property<int>("Referencia")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(5, 2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoPago");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TipoServicio", b =>
-                {
-                    b.Property<byte>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
-
-                    b.Property<TimeOnly>("Duracion")
-                        .HasColumnType("time");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TipoServicio");
+                    b.ToTable("Tax");
                 });
 
             modelBuilder.Entity("BaseReservation.Infrastructure.Models.TokenMaster", b =>
@@ -1376,14 +1295,11 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaVencimiento")
+                    b.Property<DateTime>("ExpireAt")
                         .HasColumnType("datetime");
-
-                    b.Property<short>("IdUsuario")
-                        .HasColumnType("smallint");
 
                     b.Property<string>("JwtId")
                         .IsRequired()
@@ -1395,17 +1311,20 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<bool>("Utilizado")
+                    b.Property<bool>("Used")
                         .HasColumnType("bit");
+
+                    b.Property<short>("UserId")
+                        .HasColumnType("smallint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdUsuario" }, "IX_TokenMaster_IdUsuario");
+                    b.HasIndex(new[] { "UserId" }, "IX_TokenMaster_UserId");
 
                     b.ToTable("TokenMaster");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UnidadMedida", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TypeService", b =>
                 {
                     b.Property<byte>("Id")
                         .ValueGeneratedOnAdd()
@@ -1413,12 +1332,33 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
 
-                    b.Property<string>("Nombre")
+                    b.Property<TimeOnly>("BaseDuration")
+                        .HasColumnType("time");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeService");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UnitMeasure", b =>
+                {
+                    b.Property<byte>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<string>("Simbolo")
+                    b.Property<string>("Symbol")
                         .IsRequired()
                         .HasMaxLength(5)
                         .HasColumnType("nchar(5)")
@@ -1426,10 +1366,10 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnidadMedida");
+                    b.ToTable("UnitMeasure");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Usuario", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.User", b =>
                 {
                     b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
@@ -1437,87 +1377,87 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
 
-                    b.Property<bool>("Activo")
+                    b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Apellidos")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                    b.Property<string>("Address")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("Cedula")
+                    b.Property<DateOnly>("Birthday")
+                        .HasColumnType("date");
+
+                    b.Property<string>("CardId")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Contrasenna")
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<short>("DistrictId")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<byte>("GenderId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(80)
                         .IsUnicode(false)
                         .HasColumnType("varchar(80)");
 
-                    b.Property<string>("CorreoElectronico")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("DireccionExacta")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("FechaModificacion")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateOnly>("FechaNacimiento")
-                        .HasColumnType("date");
-
-                    b.Property<short>("IdDistrito")
-                        .HasColumnType("smallint");
-
-                    b.Property<byte>("IdGenero")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("IdRol")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<int>("Telefono")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UrlFoto")
+                    b.Property<string>("ProfilePictureUrl")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("UsuarioCreacion")
-                        .IsRequired()
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                    b.Property<byte>("RoleId")
+                        .HasColumnType("tinyint");
 
-                    b.Property<string>("UsuarioModificacion")
+                    b.Property<int>("Telephone")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdDistrito" }, "IX_Usuario_IdDistrito");
+                    b.HasIndex(new[] { "DistrictId" }, "IX_User_DistrictId");
 
-                    b.HasIndex(new[] { "IdGenero" }, "IX_Usuario_IdGenero");
+                    b.HasIndex(new[] { "GenderId" }, "IX_User_GenderId");
 
-                    b.HasIndex(new[] { "IdRol" }, "IX_Usuario_IdRol");
+                    b.HasIndex(new[] { "RoleId" }, "IX_User_RoleId");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("User");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UsuarioSucursal", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UserBranch", b =>
                 {
                     b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
@@ -1525,681 +1465,746 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
 
-                    b.Property<byte>("IdSucursal")
+                    b.Property<byte>("BranchId")
                         .HasColumnType("tinyint");
 
-                    b.Property<short>("IdUsuario")
+                    b.Property<short>("UserId")
                         .HasColumnType("smallint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "IdSucursal" }, "IX_UsuarioSucursal_IdSucursal");
+                    b.HasIndex(new[] { "BranchId" }, "IX_UserBranch_BranchId");
 
-                    b.HasIndex(new[] { "IdUsuario" }, "IX_UsuarioSucursal_IdUsuario");
+                    b.HasIndex(new[] { "UserId" }, "IX_UserBranch_UserId");
 
-                    b.ToTable("UsuarioSucursal");
+                    b.ToTable("UserBranch");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Vendor", b =>
+                {
+                    b.Property<byte>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<short>("DistrictId")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("FiscalNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("SocialReason")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("Telephone")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "DistrictId" }, "IX_Vendor_DistrictId");
+
+                    b.ToTable("Vendor");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Branch", b =>
+                {
+                    b.HasOne("BaseReservation.Infrastructure.Models.District", "DistrictIdNavigation")
+                        .WithMany("Branches")
+                        .HasForeignKey("DistrictId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Branch_District");
+
+                    b.Navigation("DistrictIdNavigation");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchHoliday", b =>
+                {
+                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                        .WithMany("BranchHolidays")
+                        .HasForeignKey("BranchId")
+                        .IsRequired()
+                        .HasConstraintName("FK_BranchHoliday_Sucursal");
+
+                    b.HasOne("BaseReservation.Infrastructure.Models.Holiday", "HolidayIdNavigation")
+                        .WithMany("BranchHolidays")
+                        .HasForeignKey("HolidayId")
+                        .IsRequired()
+                        .HasConstraintName("FK_BranchHoliday_Holiday");
+
+                    b.Navigation("BranchIdNavigation");
+
+                    b.Navigation("HolidayIdNavigation");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchSchedule", b =>
+                {
+                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                        .WithMany("BranchSchedules")
+                        .HasForeignKey("BranchId")
+                        .IsRequired()
+                        .HasConstraintName("FK_BranchSchedule_Branch");
+
+                    b.HasOne("BaseReservation.Infrastructure.Models.Schedule", "ScheduleIdNavigation")
+                        .WithMany("BranchSchedules")
+                        .HasForeignKey("ScheduleId")
+                        .IsRequired()
+                        .HasConstraintName("FK_BranchSchedule_Schedule");
+
+                    b.Navigation("BranchIdNavigation");
+
+                    b.Navigation("ScheduleIdNavigation");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchScheduleBlock", b =>
+                {
+                    b.HasOne("BaseReservation.Infrastructure.Models.BranchSchedule", "BranchScheduleIdNavigation")
+                        .WithMany("BranchScheduleBlocks")
+                        .HasForeignKey("BranchScheduleId")
+                        .IsRequired()
+                        .HasConstraintName("FK_BranchScheduleBlock_BranchSchedule");
+
+                    b.Navigation("BranchScheduleIdNavigation");
                 });
 
             modelBuilder.Entity("BaseReservation.Infrastructure.Models.Canton", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Provincia", "IdProvinciaNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Province", "ProvinceIdNavigation")
                         .WithMany("Cantons")
-                        .HasForeignKey("IdProvincia")
+                        .HasForeignKey("ProvinceId")
                         .IsRequired()
-                        .HasConstraintName("FK_Canton_Provincia");
+                        .HasConstraintName("FK_Canton_Province");
 
-                    b.Navigation("IdProvinciaNavigation");
+                    b.Navigation("ProvinceIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Cliente", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Contact", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Distrito", "IdDistritoNavigation")
-                        .WithMany("Clientes")
-                        .HasForeignKey("IdDistrito")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Vendor", "VendorIdNavigation")
+                        .WithMany("Contacts")
+                        .HasForeignKey("VendorId")
                         .IsRequired()
-                        .HasConstraintName("FK_Cliente_Distrito");
+                        .HasConstraintName("FK_Contact_Vendor");
 
-                    b.Navigation("IdDistritoNavigation");
+                    b.Navigation("VendorIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Contacto", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Customer", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Proveedor", "IdProveedorNavigation")
-                        .WithMany("Contactos")
-                        .HasForeignKey("IdProveedor")
+                    b.HasOne("BaseReservation.Infrastructure.Models.District", "DistrictIdNavigation")
+                        .WithMany("Customers")
+                        .HasForeignKey("DistrictId")
                         .IsRequired()
-                        .HasConstraintName("FK_Contacto_Proveedor");
+                        .HasConstraintName("FK_Customer_District");
 
-                    b.Navigation("IdProveedorNavigation");
+                    b.Navigation("DistrictIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetalleFactura", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.District", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Factura", "IdFacturaNavigation")
-                        .WithMany("DetalleFacturas")
-                        .HasForeignKey("IdFactura")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Canton", "CantonIdNavigation")
+                        .WithMany("Districts")
+                        .HasForeignKey("CantonId")
                         .IsRequired()
-                        .HasConstraintName("FK_DetalleFactura_Factura");
+                        .HasConstraintName("FK_District_Canton");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Producto", "IdProductoNavigation")
-                        .WithMany("DetalleFacturas")
-                        .HasForeignKey("IdProducto")
-                        .HasConstraintName("FK_DetalleFactura_Producto");
-
-                    b.HasOne("BaseReservation.Infrastructure.Models.Servicio", "IdServicioNavigation")
-                        .WithMany("DetalleFacturas")
-                        .HasForeignKey("IdServicio")
-                        .HasConstraintName("FK_DetalleFactura_Servicio");
-
-                    b.Navigation("IdFacturaNavigation");
-
-                    b.Navigation("IdProductoNavigation");
-
-                    b.Navigation("IdServicioNavigation");
+                    b.Navigation("CantonIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetalleFacturaProducto", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Inventory", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.DetalleFactura", "IdDetalleFacturaNavigation")
-                        .WithMany("DetalleFacturaProductos")
-                        .HasForeignKey("IdDetalleFactura")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                        .WithMany("Inventories")
+                        .HasForeignKey("BranchId")
                         .IsRequired()
-                        .HasConstraintName("FK_DetalleFacturaProducto_DetalleFactura");
+                        .HasConstraintName("FK_Inventory_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Producto", "IdProductoNavigation")
-                        .WithMany("DetalleFacturaProductos")
+                    b.Navigation("BranchIdNavigation");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProduct", b =>
+                {
+                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                        .WithMany("InventoryProducts")
                         .HasForeignKey("IdProducto")
                         .IsRequired()
-                        .HasConstraintName("FK_DetalleFacturaProducto_Producto");
+                        .HasConstraintName("FK_InventoryProduct_Product");
 
-                    b.Navigation("IdDetalleFacturaNavigation");
+                    b.HasOne("BaseReservation.Infrastructure.Models.Inventory", "InventoryIdNavigation")
+                        .WithMany("InventoryProducts")
+                        .HasForeignKey("InventoryId")
+                        .IsRequired()
+                        .HasConstraintName("FK_InventoryProduct_Inventory");
 
-                    b.Navigation("IdProductoNavigation");
+                    b.Navigation("InventoryIdNavigation");
+
+                    b.Navigation("ProductIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetallePedido", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProductTransaction", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Pedido", "IdPedidoNavigation")
-                        .WithMany("DetallePedidos")
-                        .HasForeignKey("IdPedido")
+                    b.HasOne("BaseReservation.Infrastructure.Models.InventoryProduct", "InventoryProductIdNavigation")
+                        .WithMany("InventoryProductTransactions")
+                        .HasForeignKey("InventoryProductId")
                         .IsRequired()
-                        .HasConstraintName("FK_DetallePedido_Pedido");
+                        .HasConstraintName("FK_InventoryProductTransaction_InventoryProduct");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Producto", "IdProductoNavigation")
-                        .WithMany("DetallePedidos")
-                        .HasForeignKey("IdProducto")
-                        .HasConstraintName("FK_DetallePedido_Producto");
-
-                    b.HasOne("BaseReservation.Infrastructure.Models.Servicio", "IdServicioNavigation")
-                        .WithMany("DetallePedidos")
-                        .HasForeignKey("IdServicio")
-                        .HasConstraintName("FK_DetallePedido_Servicio");
-
-                    b.Navigation("IdPedidoNavigation");
-
-                    b.Navigation("IdProductoNavigation");
-
-                    b.Navigation("IdServicioNavigation");
+                    b.Navigation("InventoryProductIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetallePedidoProducto", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Invoice", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.DetallePedido", "IdDetallePedidoNavigation")
-                        .WithMany("DetallePedidoProductos")
-                        .HasForeignKey("IdDetallePedido")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                        .WithMany("Invoices")
+                        .HasForeignKey("BranchId")
                         .IsRequired()
-                        .HasConstraintName("FK_DetallePedidoProducto_DetallePedido");
+                        .HasConstraintName("FK_Invoice_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Producto", "IdProductoNavigation")
-                        .WithMany("DetallePedidoProductos")
-                        .HasForeignKey("IdProducto")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Customer", "CustomerIdNavigation")
+                        .WithMany("Invoices")
+                        .HasForeignKey("CustomerId")
                         .IsRequired()
-                        .HasConstraintName("FK_DetallePedidoProducto_Producto");
+                        .HasConstraintName("FK_Invoice_Customer");
 
-                    b.Navigation("IdDetallePedidoNavigation");
+                    b.HasOne("BaseReservation.Infrastructure.Models.Order", "OrderIdNavigation")
+                        .WithMany("Invoices")
+                        .HasForeignKey("OrderId")
+                        .HasConstraintName("FK_Invoice_Order");
 
-                    b.Navigation("IdProductoNavigation");
+                    b.HasOne("BaseReservation.Infrastructure.Models.PaymentType", "PaymentTypeIdNavigation")
+                        .WithMany("Invoices")
+                        .HasForeignKey("PaymentTypeId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Invoice_PaymentType");
+
+                    b.HasOne("BaseReservation.Infrastructure.Models.Tax", "TaxIdNavigation")
+                        .WithMany("Invoices")
+                        .HasForeignKey("TaxId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Invoice_Tax");
+
+                    b.Navigation("BranchIdNavigation");
+
+                    b.Navigation("CustomerIdNavigation");
+
+                    b.Navigation("OrderIdNavigation");
+
+                    b.Navigation("PaymentTypeIdNavigation");
+
+                    b.Navigation("TaxIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetalleReserva", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetail", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Producto", "IdProductoNavigation")
-                        .WithMany("DetalleReservas")
-                        .HasForeignKey("IdProducto")
-                        .HasConstraintName("FK_DetalleReserva_Producto");
-
-                    b.HasOne("BaseReservation.Infrastructure.Models.Reserva", "IdReservaNavigation")
-                        .WithMany("DetalleReservas")
-                        .HasForeignKey("IdReserva")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Invoice", "InvoiceIdNavigation")
+                        .WithMany("InvoiceDetails")
+                        .HasForeignKey("InvoiceId")
                         .IsRequired()
-                        .HasConstraintName("FK_DetalleReserva_Reserva");
+                        .HasConstraintName("FK_InvoiceDetail_Invoice");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Servicio", "IdServicioNavigation")
-                        .WithMany("DetalleReservas")
-                        .HasForeignKey("IdServicio")
-                        .HasConstraintName("FK_DetalleReserva_Servicio");
+                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                        .WithMany("InvoiceDetails")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_InvoiceDetail_Product");
 
-                    b.Navigation("IdProductoNavigation");
+                    b.HasOne("BaseReservation.Infrastructure.Models.Service", "ServiceIdNavigation")
+                        .WithMany("InvoiceDetails")
+                        .HasForeignKey("ServiceId")
+                        .HasConstraintName("FK_InvoiceDetail_Service");
 
-                    b.Navigation("IdReservaNavigation");
+                    b.Navigation("InvoiceIdNavigation");
 
-                    b.Navigation("IdServicioNavigation");
+                    b.Navigation("ProductIdNavigation");
+
+                    b.Navigation("ServiceIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Distrito", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetailProduct", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Canton", "IdCantonNavigation")
-                        .WithMany("Distritos")
-                        .HasForeignKey("IdCanton")
+                    b.HasOne("BaseReservation.Infrastructure.Models.InvoiceDetail", "InvoiceDetailIdNavigation")
+                        .WithMany("InvoiceDetailProducts")
+                        .HasForeignKey("InvoiceDetailId")
                         .IsRequired()
-                        .HasConstraintName("FK_Distrito_Canton");
+                        .HasConstraintName("FK_InvoiceDetailProduct_InvoiceDetail");
 
-                    b.Navigation("IdCantonNavigation");
+                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                        .WithMany("InvoiceDetailProducts")
+                        .HasForeignKey("ProductId")
+                        .IsRequired()
+                        .HasConstraintName("FK_InvoiceDetailProduct_Product");
+
+                    b.Navigation("InvoiceDetailIdNavigation");
+
+                    b.Navigation("ProductIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Factura", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Order", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Cliente", "IdClienteNavigation")
-                        .WithMany("Facturas")
-                        .HasForeignKey("IdCliente")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                        .WithMany("Orders")
+                        .HasForeignKey("BranchId")
                         .IsRequired()
-                        .HasConstraintName("FK_Factura_Cliente");
+                        .HasConstraintName("FK_Order_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Impuesto", "IdImpuestoNavigation")
-                        .WithMany("Facturas")
-                        .HasForeignKey("IdImpuesto")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Customer", "CustomerIdNavigation")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
                         .IsRequired()
-                        .HasConstraintName("FK_Factura_Impuesto");
+                        .HasConstraintName("FK_Order_Customer");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Pedido", "IdPedidoNavigation")
-                        .WithMany("Facturas")
-                        .HasForeignKey("IdPedido")
-                        .HasConstraintName("FK_Factura_Pedido");
-
-                    b.HasOne("BaseReservation.Infrastructure.Models.Sucursal", "IdSucursalNavigation")
-                        .WithMany("Facturas")
-                        .HasForeignKey("IdSucursal")
+                    b.HasOne("BaseReservation.Infrastructure.Models.PaymentType", "PaymentTypeIdNavigation")
+                        .WithMany("Orders")
+                        .HasForeignKey("PaymentTypeId")
                         .IsRequired()
-                        .HasConstraintName("FK_Factura_Sucursal");
+                        .HasConstraintName("FK_Order_PaymentType");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.TipoPago", "IdTipoPagoNavigation")
-                        .WithMany("Facturas")
-                        .HasForeignKey("IdTipoPago")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Reservation", "ReservationIdNavigation")
+                        .WithMany("Orders")
+                        .HasForeignKey("ReservationId")
                         .IsRequired()
-                        .HasConstraintName("FK_Factura_TipoPago");
+                        .HasConstraintName("FK_Order_Reservation");
 
-                    b.Navigation("IdClienteNavigation");
+                    b.HasOne("BaseReservation.Infrastructure.Models.StatusOrder", "StatusOrderIdNavigation")
+                        .WithMany("Orders")
+                        .HasForeignKey("StatusOrderId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Order_StatusOrder");
 
-                    b.Navigation("IdImpuestoNavigation");
+                    b.HasOne("BaseReservation.Infrastructure.Models.Tax", "TaxIdNavigation")
+                        .WithMany("Orders")
+                        .HasForeignKey("TaxId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Order_Tax");
 
-                    b.Navigation("IdPedidoNavigation");
+                    b.Navigation("BranchIdNavigation");
 
-                    b.Navigation("IdSucursalNavigation");
+                    b.Navigation("CustomerIdNavigation");
 
-                    b.Navigation("IdTipoPagoNavigation");
+                    b.Navigation("PaymentTypeIdNavigation");
+
+                    b.Navigation("ReservationIdNavigation");
+
+                    b.Navigation("StatusOrderIdNavigation");
+
+                    b.Navigation("TaxIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Inventario", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetail", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Sucursal", "IdSucursalNavigation")
-                        .WithMany("Inventarios")
-                        .HasForeignKey("IdSucursal")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Order", "OrderIdNavigation")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
                         .IsRequired()
-                        .HasConstraintName("FK_Inventario_Sucursal");
+                        .HasConstraintName("FK_OrderDetail_Order");
 
-                    b.Navigation("IdSucursalNavigation");
+                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_OrderDetail_Product");
+
+                    b.HasOne("BaseReservation.Infrastructure.Models.Service", "ServiceIdNavigation")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ServiceId")
+                        .HasConstraintName("FK_OrderDetail_Service");
+
+                    b.Navigation("OrderIdNavigation");
+
+                    b.Navigation("ProductIdNavigation");
+
+                    b.Navigation("ServiceIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventarioProducto", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetailProduct", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Inventario", "IdInventarioNavigation")
-                        .WithMany("InventarioProductos")
-                        .HasForeignKey("IdInventario")
+                    b.HasOne("BaseReservation.Infrastructure.Models.OrderDetail", "OrderDetailIdNavigation")
+                        .WithMany("OrderDetailProducts")
+                        .HasForeignKey("OrderDetailId")
                         .IsRequired()
-                        .HasConstraintName("FK_InventarioProducto_Inventario");
+                        .HasConstraintName("FK_OrderDetailProduct_OrderDetail");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Producto", "IdProductoNavigation")
-                        .WithMany("InventarioProductos")
-                        .HasForeignKey("IdProducto")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                        .WithMany("OrderDetailProducts")
+                        .HasForeignKey("ProductId")
                         .IsRequired()
-                        .HasConstraintName("FK_InventarioProducto_Producto");
+                        .HasConstraintName("FK_OrderDetailProduct_Product");
 
-                    b.Navigation("IdInventarioNavigation");
+                    b.Navigation("OrderDetailIdNavigation");
 
-                    b.Navigation("IdProductoNavigation");
+                    b.Navigation("ProductIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventarioProductoMovimiento", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Product", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.InventarioProducto", "IdInventarioProductoNavigation")
-                        .WithMany("InventarioProductoMovimientos")
-                        .HasForeignKey("IdInventarioProducto")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Category", "CategoryIdNavigation")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
                         .IsRequired()
-                        .HasConstraintName("FK_InventarioProductoMovimiento_InventarioProducto");
+                        .HasConstraintName("FK_Product_Category");
 
-                    b.Navigation("IdInventarioProductoNavigation");
+                    b.HasOne("BaseReservation.Infrastructure.Models.UnitMeasure", "UnitMeasureIdNavigation")
+                        .WithMany("Products")
+                        .HasForeignKey("UnitMeasureId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Product_UnitMeasure");
+
+                    b.Navigation("CategoryIdNavigation");
+
+                    b.Navigation("UnitMeasureIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Pedido", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Reservation", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Cliente", "IdClienteNavigation")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("IdCliente")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                        .WithMany("Reservations")
+                        .HasForeignKey("BranchId")
                         .IsRequired()
-                        .HasConstraintName("FK_Pedido_Cliente");
+                        .HasConstraintName("FK_Reservation_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.EstadoPedido", "IdEstadoPedidoNavigation")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("IdEstadoPedido")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Customer", "CustomerIdNavigation")
+                        .WithMany("Reservations")
+                        .HasForeignKey("CustomerId")
                         .IsRequired()
-                        .HasConstraintName("FK_Pedido_EstadoPedido");
+                        .HasConstraintName("FK_Reservation_Customer");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Impuesto", "IdImpuestoNavigation")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("IdImpuesto")
-                        .IsRequired()
-                        .HasConstraintName("FK_Pedido_Impuesto");
+                    b.Navigation("BranchIdNavigation");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Reserva", "IdReservaNavigation")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("IdReserva")
-                        .IsRequired()
-                        .HasConstraintName("FK_Pedido_Reserva");
-
-                    b.HasOne("BaseReservation.Infrastructure.Models.Sucursal", "IdSucursalNavigation")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("IdSucursal")
-                        .IsRequired()
-                        .HasConstraintName("FK_Pedido_Sucursal");
-
-                    b.HasOne("BaseReservation.Infrastructure.Models.TipoPago", "IdTipoPagoNavigation")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("IdTipoPago")
-                        .IsRequired()
-                        .HasConstraintName("FK_Pedido_TipoPago");
-
-                    b.Navigation("IdClienteNavigation");
-
-                    b.Navigation("IdEstadoPedidoNavigation");
-
-                    b.Navigation("IdImpuestoNavigation");
-
-                    b.Navigation("IdReservaNavigation");
-
-                    b.Navigation("IdSucursalNavigation");
-
-                    b.Navigation("IdTipoPagoNavigation");
+                    b.Navigation("CustomerIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Producto", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservationDetail", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Categoria", "IdCategoriaNavigation")
-                        .WithMany("Productos")
-                        .HasForeignKey("IdCategoria")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                        .WithMany("ReservationDetails")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_ReservationDetail_Product");
+
+                    b.HasOne("BaseReservation.Infrastructure.Models.Reservation", "ReservationIdNavigation")
+                        .WithMany("ReservationDetails")
+                        .HasForeignKey("ReservationId")
                         .IsRequired()
-                        .HasConstraintName("FK_Producto_Categoria");
+                        .HasConstraintName("FK_ReservationDetail_Reservation");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.UnidadMedida", "IdUnidadMedidaNavigation")
-                        .WithMany("Productos")
-                        .HasForeignKey("IdUnidadMedida")
-                        .IsRequired()
-                        .HasConstraintName("FK_Producto_UnidadMedida");
+                    b.HasOne("BaseReservation.Infrastructure.Models.Service", "ServiceIdNavigation")
+                        .WithMany("ReservationDetails")
+                        .HasForeignKey("ServiceId")
+                        .HasConstraintName("FK_ReservationDetail_Service");
 
-                    b.Navigation("IdCategoriaNavigation");
+                    b.Navigation("ProductIdNavigation");
 
-                    b.Navigation("IdUnidadMedidaNavigation");
+                    b.Navigation("ReservationIdNavigation");
+
+                    b.Navigation("ServiceIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Proveedor", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservationQuestion", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Distrito", "IdDistritoNavigation")
-                        .WithMany("Proveedors")
-                        .HasForeignKey("IdDistrito")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Reservation", "ReservationIdNavigation")
+                        .WithMany("ReservationQuestions")
+                        .HasForeignKey("ReservationId")
                         .IsRequired()
-                        .HasConstraintName("FK_Proveedor_Distrito");
+                        .HasConstraintName("FK_ReservationQuestion_Reservation");
 
-                    b.Navigation("IdDistritoNavigation");
+                    b.Navigation("ReservationIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Reserva", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Service", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Cliente", "IdClienteNavigation")
-                        .WithMany("Reservas")
-                        .HasForeignKey("IdCliente")
+                    b.HasOne("BaseReservation.Infrastructure.Models.TypeService", "TypeServiceIdNavigation")
+                        .WithMany("Services")
+                        .HasForeignKey("TypeServiceId")
                         .IsRequired()
-                        .HasConstraintName("FK_Reserva_Cliente");
+                        .HasConstraintName("FK_Service_TypeService");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Sucursal", "IdSucursalNavigation")
-                        .WithMany("Reservas")
-                        .HasForeignKey("IdSucursal")
-                        .IsRequired()
-                        .HasConstraintName("FK_Reserva_Sucursal");
-
-                    b.Navigation("IdClienteNavigation");
-
-                    b.Navigation("IdSucursalNavigation");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservaPregunta", b =>
-                {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Reserva", "IdReservaNavigation")
-                        .WithMany("ReservaPregunta")
-                        .HasForeignKey("IdReserva")
-                        .IsRequired()
-                        .HasConstraintName("FK_ReservaPregunta_Reserva");
-
-                    b.Navigation("IdReservaNavigation");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Servicio", b =>
-                {
-                    b.HasOne("BaseReservation.Infrastructure.Models.TipoServicio", "IdTipoServicioNavigation")
-                        .WithMany("Servicios")
-                        .HasForeignKey("IdTipoServicio")
-                        .IsRequired()
-                        .HasConstraintName("FK_Servicio_TipoServicio");
-
-                    b.Navigation("IdTipoServicioNavigation");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Sucursal", b =>
-                {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Distrito", "IdDistritoNavigation")
-                        .WithMany("Sucursals")
-                        .HasForeignKey("IdDistrito")
-                        .IsRequired()
-                        .HasConstraintName("FK_Sucursal_Distrito");
-
-                    b.Navigation("IdDistritoNavigation");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.SucursalFeriado", b =>
-                {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Feriado", "IdFeriadoNavigation")
-                        .WithMany("SucursalFeriados")
-                        .HasForeignKey("IdFeriado")
-                        .IsRequired()
-                        .HasConstraintName("FK_SucursalFeriado_Feriado");
-
-                    b.HasOne("BaseReservation.Infrastructure.Models.Sucursal", "IdSucursalNavigation")
-                        .WithMany("SucursalFeriados")
-                        .HasForeignKey("IdSucursal")
-                        .IsRequired()
-                        .HasConstraintName("FK_SucursalFeriado_Sucursal");
-
-                    b.Navigation("IdFeriadoNavigation");
-
-                    b.Navigation("IdSucursalNavigation");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.SucursalHorario", b =>
-                {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Horario", "IdHorarioNavigation")
-                        .WithMany("SucursalHorarios")
-                        .HasForeignKey("IdHorario")
-                        .IsRequired()
-                        .HasConstraintName("FK_SucursalHorario_Horario");
-
-                    b.HasOne("BaseReservation.Infrastructure.Models.Sucursal", "IdSucursalNavigation")
-                        .WithMany("SucursalHorarios")
-                        .HasForeignKey("IdSucursal")
-                        .IsRequired()
-                        .HasConstraintName("FK_SucursalHorario_Sucursal");
-
-                    b.Navigation("IdHorarioNavigation");
-
-                    b.Navigation("IdSucursalNavigation");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.SucursalHorarioBloqueo", b =>
-                {
-                    b.HasOne("BaseReservation.Infrastructure.Models.SucursalHorario", "IdSucursalHorarioNavigation")
-                        .WithMany("SucursalHorarioBloqueos")
-                        .HasForeignKey("IdSucursalHorario")
-                        .IsRequired()
-                        .HasConstraintName("FK_SucursalHorarioBloqueo_SucursalHorario");
-
-                    b.Navigation("IdSucursalHorarioNavigation");
+                    b.Navigation("TypeServiceIdNavigation");
                 });
 
             modelBuilder.Entity("BaseReservation.Infrastructure.Models.TokenMaster", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Usuario", "IdUsuarioNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Models.User", "UserIdNavigation")
                         .WithMany("TokenMasters")
-                        .HasForeignKey("IdUsuario")
+                        .HasForeignKey("UserId")
                         .IsRequired()
-                        .HasConstraintName("FK_TokenMaster_Usuario");
+                        .HasConstraintName("FK_TokenMaster_User");
 
-                    b.Navigation("IdUsuarioNavigation");
+                    b.Navigation("UserIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Usuario", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.User", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Distrito", "IdDistritoNavigation")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("IdDistrito")
+                    b.HasOne("BaseReservation.Infrastructure.Models.District", "DistrictIdNavigation")
+                        .WithMany("Users")
+                        .HasForeignKey("DistrictId")
                         .IsRequired()
-                        .HasConstraintName("FK_Usuario_Distrito");
+                        .HasConstraintName("FK_User_District");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Genero", "IdGeneroNavigation")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("IdGenero")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Gender", "GenderIdNavigation")
+                        .WithMany("Users")
+                        .HasForeignKey("GenderId")
                         .IsRequired()
-                        .HasConstraintName("FK_Usuario_Genero");
+                        .HasConstraintName("FK_User_Gender");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Rol", "IdRolNavigation")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("IdRol")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Role", "RoleIdNavigation")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
                         .IsRequired()
-                        .HasConstraintName("FK_Usuario_Rol");
+                        .HasConstraintName("FK_User_Role");
 
-                    b.Navigation("IdDistritoNavigation");
+                    b.Navigation("DistrictIdNavigation");
 
-                    b.Navigation("IdGeneroNavigation");
+                    b.Navigation("GenderIdNavigation");
 
-                    b.Navigation("IdRolNavigation");
+                    b.Navigation("RoleIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UsuarioSucursal", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UserBranch", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Sucursal", "IdSucursalNavigation")
-                        .WithMany("UsuarioSucursals")
-                        .HasForeignKey("IdSucursal")
+                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                        .WithMany("UserBranches")
+                        .HasForeignKey("BranchId")
                         .IsRequired()
-                        .HasConstraintName("FK_UsuarioSucursal_Sucursal");
+                        .HasConstraintName("FK_UserBranch_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Usuario", "IdUsuarioNavigation")
-                        .WithMany("UsuarioSucursals")
-                        .HasForeignKey("IdUsuario")
+                    b.HasOne("BaseReservation.Infrastructure.Models.User", "UserIdNavigation")
+                        .WithMany("UserBranches")
+                        .HasForeignKey("UserId")
                         .IsRequired()
-                        .HasConstraintName("FK_UsuarioSucursal_Usuario");
+                        .HasConstraintName("FK_UserBranch_User");
 
-                    b.Navigation("IdSucursalNavigation");
+                    b.Navigation("BranchIdNavigation");
 
-                    b.Navigation("IdUsuarioNavigation");
+                    b.Navigation("UserIdNavigation");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Vendor", b =>
+                {
+                    b.HasOne("BaseReservation.Infrastructure.Models.District", "DistrictIdNavigation")
+                        .WithMany("Vendors")
+                        .HasForeignKey("DistrictId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Vendor_District");
+
+                    b.Navigation("DistrictIdNavigation");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Branch", b =>
+                {
+                    b.Navigation("BranchHolidays");
+
+                    b.Navigation("BranchSchedules");
+
+                    b.Navigation("Inventories");
+
+                    b.Navigation("Invoices");
+
+                    b.Navigation("Orders");
+
+                    b.Navigation("Reservations");
+
+                    b.Navigation("UserBranches");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchSchedule", b =>
+                {
+                    b.Navigation("BranchScheduleBlocks");
                 });
 
             modelBuilder.Entity("BaseReservation.Infrastructure.Models.Canton", b =>
                 {
-                    b.Navigation("Distritos");
+                    b.Navigation("Districts");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Categoria", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Category", b =>
                 {
-                    b.Navigation("Productos");
+                    b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Cliente", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Customer", b =>
                 {
-                    b.Navigation("Facturas");
+                    b.Navigation("Invoices");
 
-                    b.Navigation("Pedidos");
+                    b.Navigation("Orders");
 
-                    b.Navigation("Reservas");
+                    b.Navigation("Reservations");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetalleFactura", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.District", b =>
                 {
-                    b.Navigation("DetalleFacturaProductos");
+                    b.Navigation("Branches");
+
+                    b.Navigation("Customers");
+
+                    b.Navigation("Users");
+
+                    b.Navigation("Vendors");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.DetallePedido", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Gender", b =>
                 {
-                    b.Navigation("DetallePedidoProductos");
+                    b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Distrito", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Holiday", b =>
                 {
-                    b.Navigation("Clientes");
-
-                    b.Navigation("Proveedors");
-
-                    b.Navigation("Sucursals");
-
-                    b.Navigation("Usuarios");
+                    b.Navigation("BranchHolidays");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.EstadoPedido", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Inventory", b =>
                 {
-                    b.Navigation("Pedidos");
+                    b.Navigation("InventoryProducts");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Factura", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProduct", b =>
                 {
-                    b.Navigation("DetalleFacturas");
+                    b.Navigation("InventoryProductTransactions");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Feriado", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Invoice", b =>
                 {
-                    b.Navigation("SucursalFeriados");
+                    b.Navigation("InvoiceDetails");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Genero", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetail", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.Navigation("InvoiceDetailProducts");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Horario", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Order", b =>
                 {
-                    b.Navigation("SucursalHorarios");
+                    b.Navigation("Invoices");
+
+                    b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Impuesto", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetail", b =>
                 {
-                    b.Navigation("Facturas");
-
-                    b.Navigation("Pedidos");
+                    b.Navigation("OrderDetailProducts");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Inventario", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.PaymentType", b =>
                 {
-                    b.Navigation("InventarioProductos");
+                    b.Navigation("Invoices");
+
+                    b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventarioProducto", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Product", b =>
                 {
-                    b.Navigation("InventarioProductoMovimientos");
+                    b.Navigation("InventoryProducts");
+
+                    b.Navigation("InvoiceDetailProducts");
+
+                    b.Navigation("InvoiceDetails");
+
+                    b.Navigation("OrderDetailProducts");
+
+                    b.Navigation("OrderDetails");
+
+                    b.Navigation("ReservationDetails");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Pedido", b =>
-                {
-                    b.Navigation("DetallePedidos");
-
-                    b.Navigation("Facturas");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Producto", b =>
-                {
-                    b.Navigation("DetalleFacturaProductos");
-
-                    b.Navigation("DetalleFacturas");
-
-                    b.Navigation("DetallePedidoProductos");
-
-                    b.Navigation("DetallePedidos");
-
-                    b.Navigation("DetalleReservas");
-
-                    b.Navigation("InventarioProductos");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Proveedor", b =>
-                {
-                    b.Navigation("Contactos");
-                });
-
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Provincia", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Province", b =>
                 {
                     b.Navigation("Cantons");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Reserva", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Reservation", b =>
                 {
-                    b.Navigation("DetalleReservas");
+                    b.Navigation("Orders");
 
-                    b.Navigation("Pedidos");
+                    b.Navigation("ReservationDetails");
 
-                    b.Navigation("ReservaPregunta");
+                    b.Navigation("ReservationQuestions");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Rol", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Role", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Servicio", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Schedule", b =>
                 {
-                    b.Navigation("DetalleFacturas");
-
-                    b.Navigation("DetallePedidos");
-
-                    b.Navigation("DetalleReservas");
+                    b.Navigation("BranchSchedules");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Sucursal", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Service", b =>
                 {
-                    b.Navigation("Facturas");
+                    b.Navigation("InvoiceDetails");
 
-                    b.Navigation("Inventarios");
+                    b.Navigation("OrderDetails");
 
-                    b.Navigation("Pedidos");
-
-                    b.Navigation("Reservas");
-
-                    b.Navigation("SucursalFeriados");
-
-                    b.Navigation("SucursalHorarios");
-
-                    b.Navigation("UsuarioSucursals");
+                    b.Navigation("ReservationDetails");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.SucursalHorario", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.StatusOrder", b =>
                 {
-                    b.Navigation("SucursalHorarioBloqueos");
+                    b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TipoPago", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Tax", b =>
                 {
-                    b.Navigation("Facturas");
+                    b.Navigation("Invoices");
 
-                    b.Navigation("Pedidos");
+                    b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TipoServicio", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TypeService", b =>
                 {
-                    b.Navigation("Servicios");
+                    b.Navigation("Services");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UnidadMedida", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UnitMeasure", b =>
                 {
-                    b.Navigation("Productos");
+                    b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Usuario", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.User", b =>
                 {
                     b.Navigation("TokenMasters");
 
-                    b.Navigation("UsuarioSucursals");
+                    b.Navigation("UserBranches");
+                });
+
+            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Vendor", b =>
+                {
+                    b.Navigation("Contacts");
                 });
 #pragma warning restore 612, 618
         }

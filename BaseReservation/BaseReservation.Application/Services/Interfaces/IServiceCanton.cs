@@ -7,9 +7,9 @@ public interface IServiceCanton
     /// <summary>
     /// Retrieves a list of all cantons by the given province ID.
     /// </summary>
-    /// <param name="idProvincia">The ID of the province to filter cantons.</param>
+    /// <param name="provinceId">The ID of the province to filter cantons.</param>
     /// <returns>ICollection of ResponseCantonDto</returns>
-    Task<ICollection<ResponseCantonDto>> ListAllByProvinciaAsync(byte idProvincia);
+    Task<ICollection<ResponseCantonDto>> ListAllByProvinceAsync(byte provinceId);
 
     /// <summary>
     /// Finds a canton by its unique ID.

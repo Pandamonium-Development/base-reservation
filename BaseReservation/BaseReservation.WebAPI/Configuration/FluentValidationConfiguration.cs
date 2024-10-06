@@ -17,7 +17,7 @@ public static class FluentValidationConfiguration
     {
         ArgumentNullException.ThrowIfNull(services);
 
-        services.AddValidatorsFromAssemblyContaining<SucursalValidator>();
+        services.AddValidatorsFromAssemblyContaining<BranchValidator>();
 
         services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
     }
