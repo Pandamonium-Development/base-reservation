@@ -12,7 +12,7 @@ public class RepositoryUser(BaseReservationContext context) : IRepositoryUser
     public async Task<User?> FindByIdAsync(short id) => await context.Set<User>().FindAsync(id);
 
     /// <inheritdoc />
-    public async Task<User?> FindByEmailAsync(string correoElectronico) => await context.Set<User>().Include(m => m.RoleIdNavigation).AsNoTracking().FirstOrDefaultAsync(m => m.Email == correoElectronico);
+    public async Task<User?> FindByEmailAsync(string email) => await context.Set<User>().Include(m => m.RoleIdNavigation).AsNoTracking().FirstOrDefaultAsync(m => m.Email == email);
 
     /// <inheritdoc />
     public async Task<ICollection<User>> ListAllAsync()

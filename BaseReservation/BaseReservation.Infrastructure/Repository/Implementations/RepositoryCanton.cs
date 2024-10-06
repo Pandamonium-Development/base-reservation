@@ -18,10 +18,10 @@ public class RepositoryCanton(BaseReservationContext context) : IRepositoryCanto
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<Canton>> ListAllByProvinceAsync(byte idProvincia)
+    public async Task<ICollection<Canton>> ListAllByProvinceAsync(byte provinceId)
     {
         var collection = await context.Set<Canton>()
-            .Where(m => m.ProvinceId == idProvincia)
+            .Where(m => m.ProvinceId == provinceId)
             .AsNoTracking()
             .ToListAsync();
         return collection;

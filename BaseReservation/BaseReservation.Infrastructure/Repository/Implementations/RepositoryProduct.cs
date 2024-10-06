@@ -8,19 +8,19 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 public class RepositoryProduct(BaseReservationContext context) : IRepositoryProduct
 {
     /// <inheritdoc />
-    public async Task<Product> CreateProductAsync(Product producto)
+    public async Task<Product> CreateProductAsync(Product product)
     {
-        var result = context.Products.Add(producto);
+        var result = context.Products.Add(product);
         await context.SaveChangesAsync();
         return result.Entity;
     }
 
     /// <inheritdoc />
-    public async Task<Product> UpdateProductAsync(Product producto)
+    public async Task<Product> UpdateProductAsync(Product product)
     {
-        context.Products.Update(producto);
+        context.Products.Update(product);
         await context.SaveChangesAsync();
-        var response = await FindByIdAsync(producto.Id);
+        var response = await FindByIdAsync(product.Id);
         return response!;
     }
 

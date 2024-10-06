@@ -110,7 +110,7 @@ public class RepositoryBranchSchedule(BaseReservationContext context) : IReposit
     /// </summary>
     /// <param name="sucursalHorariosExistentes">List of existing branch schedule blocks</param>
     /// <param name="sucursalHorarios">List of the new branch schedules that will be receiving existing branch schedules blocks</param>
-    private void ReorganizeBlocks(ICollection<BranchSchedule> sucursalHorariosExistentes, IEnumerable<BranchSchedule> branchSchedules)
+    private static void ReorganizeBlocks(ICollection<BranchSchedule> sucursalHorariosExistentes, IEnumerable<BranchSchedule> branchSchedules)
     {
         foreach (var item in branchSchedules)
         {

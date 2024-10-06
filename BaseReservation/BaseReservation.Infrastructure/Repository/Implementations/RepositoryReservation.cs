@@ -8,9 +8,9 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 public class RepositoryReservation(BaseReservationContext context) : IRepositoryReservation
 {
     /// <inheritdoc />
-    public async Task<Reservation> CreateReservationAsync(Reservation reserva)
+    public async Task<Reservation> CreateReservationAsync(Reservation reservation)
     {
-        var result = context.Reservations.Add(reserva);
+        var result = context.Reservations.Add(reservation);
         await context.SaveChangesAsync();
         return result.Entity;
     }
@@ -60,11 +60,11 @@ public class RepositoryReservation(BaseReservationContext context) : IRepository
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<Reservation>> ListAllByBranchAsync(byte branchId, DateOnly date)
+    public async Task<ICollection<Reservation>> ListAllByBranchAsync(byte branchId, DateOnly day)
     {
         var collection = await context.Set<Reservation>()
             .AsNoTracking()
-            .Where(m => m.BranchId == branchId && m.Date == date)
+            .Where(m => m.BranchId == branchId && m.Date == day)
             .ToListAsync();
         return collection;
     }

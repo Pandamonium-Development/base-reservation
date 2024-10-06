@@ -13,9 +13,9 @@ public class ServiceBranchScheduleBlock(IRepositoryBranchScheduleBlock repositor
                                                  IValidator<BranchScheduleBlock> blockValidator, IMapper mapper) : IServiceBranchScheduleBlock
 {
     /// <inheritdoc />
-    public async Task<ResponseBranchScheduleBlockDto> CreateBranchScheduleBlockAsync(RequestBranchScheduleBlockDto blockDto)
+    public async Task<ResponseBranchScheduleBlockDto> CreateBranchScheduleBlockAsync(RequestBranchScheduleBlockDto branchScheduleBlock)
     {
-        var block = await ValidateBranchScheduleBlock(blockDto);
+        var block = await ValidateBranchScheduleBlock(branchScheduleBlock);
 
         var result = await repository.CreateBranchScheduleBlockAsync(block);
         if (result == null) throw new NotFoundException("Horario bloqueo no se ha creado.");
@@ -24,11 +24,11 @@ public class ServiceBranchScheduleBlock(IRepositoryBranchScheduleBlock repositor
     }
 
     /// <inheritdoc />
-    public async Task<bool> CreateBranchScheduleBlockAsync(short idSucursalHorario, IEnumerable<RequestBranchScheduleBlockDto> blocks)
+    public async Task<bool> CreateBranchScheduleBlockAsync(short branchScheduleId, IEnumerable<RequestBranchScheduleBlockDto> branchScheduleBlocks)
     {
-        var blocksGuardar = await ValidateBranchScheduleBlock(idSucursalHorario, blocks);
+        var blocksGuardar = await ValidateBranchScheduleBlock(branchScheduleId, branchScheduleBlocks);
 
-        var result = await repository.CreateBranchScheduleBlockAsync(idSucursalHorario, blocksGuardar);
+        var result = await repository.CreateBranchScheduleBlockAsync(branchScheduleId, blocksGuardar);
         if (!result) throw new ListNotAddedException("Error al guardar bloqueos");
 
         return result;
@@ -44,19 +44,19 @@ public class ServiceBranchScheduleBlock(IRepositoryBranchScheduleBlock repositor
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseBranchScheduleBlockDto>> ListAllByBranchScheduleAsync(short idSucursalHorario)
+    public async Task<ICollection<ResponseBranchScheduleBlockDto>> ListAllByBranchScheduleAsync(short branchScheduleId)
     {
-        var blocks = await repository.ListAllByBranchScheduleAsync(idSucursalHorario);
+        var blocks = await repository.ListAllByBranchScheduleAsync(branchScheduleId);
 
         return mapper.Map<ICollection<ResponseBranchScheduleBlockDto>>(blocks);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseBranchScheduleBlockDto> UpdateBranchScheduleBlockAsync(long id, RequestBranchScheduleBlockDto blockDto)
+    public async Task<ResponseBranchScheduleBlockDto> UpdateBranchScheduleBlockAsync(long id, RequestBranchScheduleBlockDto branchScheduleBlock)
     {
         if (!await repository.ExistsBranchScheduleBlockAsync(id)) throw new NotFoundException("Horario bloqueo no encontrada.");
 
-        var block = await ValidateBranchScheduleBlock(blockDto);
+        var block = await ValidateBranchScheduleBlock(branchScheduleBlock);
         block.Id = id;
         var result = await repository.UpdateBranchScheduleBlockAsync(block);
 
@@ -74,16 +74,16 @@ public class ServiceBranchScheduleBlock(IRepositoryBranchScheduleBlock repositor
     /// <summary>
     /// Validate branch schedule's blocks
     /// </summary>
-    /// <param name="idSucursalHorario">Branch schedule id that receive blocks</param>
+    /// <param name="branchScheduleId">Branch schedule id that receive blocks</param>
     /// <param name="blocksDto">List of branch schedule's blocks request model will be validated</param>
     /// <returns>IEnumerable of BranchScheduleBlock</returns>
-    private async Task<IEnumerable<BranchScheduleBlock>> ValidateBranchScheduleBlock(short idSucursalHorario, IEnumerable<RequestBranchScheduleBlockDto> blocksDto)
+    private async Task<IEnumerable<BranchScheduleBlock>> ValidateBranchScheduleBlock(short branchScheduleId, IEnumerable<RequestBranchScheduleBlockDto> branchScheduleBlocks)
     {
-        var blocks = mapper.Map<List<BranchScheduleBlock>>(blocksDto);
+        var blocks = mapper.Map<List<BranchScheduleBlock>>(branchScheduleBlocks);
         foreach (var item in blocks)
         {
             item.Id = 0;
-            item.BranchScheduleId = idSucursalHorario;
+            item.BranchScheduleId = branchScheduleId;
             await blockValidator.ValidateAndThrowAsync(item);
         }
         return blocks;

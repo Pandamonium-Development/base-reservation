@@ -13,9 +13,9 @@ public class ServiceService(IRepositoryService repository, IMapper mapper,
                                 IValidator<Service> serviceValidator) : IServiceService
 {
     /// <inheritdoc />
-    public async Task<ResponseServiceDto> CreateServiceAsync(RequestServiceDto servicio)
+    public async Task<ResponseServiceDto> CreateServiceAsync(RequestServiceDto serviceDto)
     {
-        var result = await repository.CreateServiceAsync(mapper.Map<Service>(servicio));
+        var result = await repository.CreateServiceAsync(mapper.Map<Service>(serviceDto));
         if (result == null) throw new NotFoundException("Servicio no creado.");
 
         return mapper.Map<ResponseServiceDto>(result);

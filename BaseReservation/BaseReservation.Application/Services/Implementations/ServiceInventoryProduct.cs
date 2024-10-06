@@ -61,12 +61,12 @@ public class ServiceInventoryProduct(IRepositoryInventoryProduct repository, IMa
     }
 
     /// <inheritdoc />
-    public async Task<ResponseInventoryProductDto> UpdateInventoryProductAsync(long InventoryProductId, RequestInventoryProductDto inventoryProductDto)
+    public async Task<ResponseInventoryProductDto> UpdateInventoryProductAsync(long inventoryProductId, RequestInventoryProductDto inventoryProductDto)
     {
-        if (!await repository.ExistsInventoryProductAsync(InventoryProductId)) throw new NotFoundException("Inventario producto no encontrada.");
+        if (!await repository.ExistsInventoryProductAsync(inventoryProductId)) throw new NotFoundException("Inventario producto no encontrada.");
 
         var inventoryProduct = await ValidateInventoryProductAsync(inventoryProductDto);
-        inventoryProduct.Id = InventoryProductId;
+        inventoryProduct.Id = inventoryProductId;
         var result = await repository.UpdateInventoryProductAsync(inventoryProduct);
 
         return mapper.Map<ResponseInventoryProductDto>(result);

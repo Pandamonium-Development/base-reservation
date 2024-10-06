@@ -499,7 +499,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
         }
     }
 
-    private void GenerateAdded(EntityEntry entry, string createdByName, string createdBy, string updatedByName, DateTime created)
+    private static void GenerateAdded(EntityEntry entry, string createdByName, string createdBy, string updatedByName, DateTime created)
     {
         string activeName = "Active";
 
@@ -517,7 +517,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
         if (entry.Entity.GetType().GetProperty(updatedByName) != null) entry.Property(updatedByName).IsModified = false;
     }
 
-    private void GenerateModified(EntityEntry entry, string createdByName, string updatedByName, string updatedBy, DateTime updated)
+    private static void GenerateModified(EntityEntry entry, string createdByName, string updatedByName, string updatedBy, DateTime updated)
     {
         if (entry.State == EntityState.Modified)
         {

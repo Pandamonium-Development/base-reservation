@@ -22,6 +22,14 @@ public interface IServiceReservation
     Task<ICollection<ResponseReservationCalendarAgendaDto>> ListAllByBranchAsync(byte branchId, DateOnly? startDate, DateOnly? endDate);
 
     /// <summary>
+    /// Get list of all reservations by branch and week day
+    /// </summary>
+    /// <param name="branchId">Branch id</param>
+    /// <param name="date">Date to filter</param>
+    /// <returns>ICollection of ResponseReservationDto</returns>
+    Task<ICollection<ResponseReservationDto>> ListAllByBranchAsync(byte branchId, DateOnly date);
+
+    /// <summary>
     /// Get reservation with specific id
     /// </summary>
     /// <param name="id">Id to look for</param>
@@ -49,14 +57,6 @@ public interface IServiceReservation
     /// <param name="reservationDTO">Reservation request model to be updated</param>
     /// <returns>ResponseReservationDto</returns>
     Task<ResponseReservationDto> UpdateReservationAsync(int id, RequestReservationDto reservationDTO);
-
-    /// <summary>
-    /// Get list of all reservations by branch and week day
-    /// </summary>
-    /// <param name="branchId">Branch id</param>
-    /// <param name="date">Date to filter</param>
-    /// <returns>ICollection of ResponseReservationDto</returns>
-    Task<ICollection<ResponseReservationDto>> ListAllByBranchAsync(byte branchId, DateOnly date);
 
     /// <summary>
     /// Get list of times with schedules availabilities base on branch and date

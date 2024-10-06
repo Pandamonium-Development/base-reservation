@@ -12,7 +12,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 public class RepositoryOrder(BaseReservationContext context) : IRepositoryOrder
 {
     /// <inheritdoc />
-    public async Task<Order> CreateOrderAsync(Order order, Reservation reserva)
+    public async Task<Order> CreateOrderAsync(Order order, Reservation reservation)
     {
         Order result = null!;
         var executionStrategy = context.Database.CreateExecutionStrategy();
@@ -31,7 +31,7 @@ public class RepositoryOrder(BaseReservationContext context) : IRepositoryOrder
                     throw (new Exception("No se ha podido guardar el pedido.") as SqlException)!;
                 }
 
-                context.Reservations.Update(reserva);
+                context.Reservations.Update(reservation);
 
                 rowsAffected = await context.SaveChangesAsync();
 

@@ -58,7 +58,7 @@ public class RepositoryInventoryProductTransaction(BaseReservationContext contex
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<InventoryProductTransaction>> ListAllByInventoryAsync(short idInventario)
+    public async Task<ICollection<InventoryProductTransaction>> ListAllByInventoryAsync(short inventoryId)
     {
         var collection = await context.Set<InventoryProductTransaction>()
             .AsNoTracking()
@@ -66,7 +66,7 @@ public class RepositoryInventoryProductTransaction(BaseReservationContext contex
             .ThenInclude(m => m.ProductIdNavigation)
             .Include(m => m.InventoryProductIdNavigation)
             .ThenInclude(m => m.InventoryIdNavigation)
-            .Where(m => m.InventoryProductIdNavigation.InventoryId == idInventario)
+            .Where(m => m.InventoryProductIdNavigation.InventoryId == inventoryId)
             .AsNoTracking()
             .ToListAsync();
 
@@ -74,7 +74,7 @@ public class RepositoryInventoryProductTransaction(BaseReservationContext contex
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<InventoryProductTransaction>> ListAllByProductAsync(short idProducto)
+    public async Task<ICollection<InventoryProductTransaction>> ListAllByProductAsync(short inventoryId)
     {
         var collection = await context.Set<InventoryProductTransaction>()
             .AsNoTracking()
@@ -82,7 +82,7 @@ public class RepositoryInventoryProductTransaction(BaseReservationContext contex
             .ThenInclude(m => m.ProductIdNavigation)
             .Include(m => m.InventoryProductIdNavigation)
             .ThenInclude(m => m.InventoryIdNavigation)
-            .Where(m => m.InventoryProductIdNavigation.ProductId == idProducto)
+            .Where(m => m.InventoryProductIdNavigation.ProductId == inventoryId)
             .AsNoTracking()
             .ToListAsync();
 
