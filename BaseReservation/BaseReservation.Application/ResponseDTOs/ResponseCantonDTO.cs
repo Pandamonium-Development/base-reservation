@@ -4,11 +4,11 @@ public record ResponseCantonDto
 {
     public byte Id { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    public byte IdProvincia { get; set; }
+    public byte ProvinceId { get; set; }
 
-    public virtual ICollection<ResponseDistritoDto> Distritos { get; set; } = new List<ResponseDistritoDto>();
+    public virtual ICollection<ResponseDistrictDto> Districts { get; set; } = new List<ResponseDistrictDto>();
 
-    public virtual ResponseProvinciaDto Provincia { get; set; } = null!;
+    public virtual ResponseProvinceDto Province { get; set; } = null!;
 }

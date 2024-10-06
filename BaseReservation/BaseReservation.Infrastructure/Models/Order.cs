@@ -22,13 +22,13 @@ public partial class Order : BaseModel
     public short CustomerId { get; set; }
 
     [StringLength(160)]
-    public string NombreCliente { get; set; } = null!;
+    public string CustomerName { get; set; } = null!;
 
-    public DateOnly Fecha { get; set; }
+    public DateOnly Date { get; set; }
 
     public byte PaymentTypeId { get; set; }
 
-    public short Consecutivo { get; set; }
+    public short Number { get; set; }
 
     public byte TaxId { get; set; }
 

@@ -15,6 +15,6 @@ public partial class Category : BaseModel
     [StringLength(50)]
     public string Name { get; set; } = null!;
 
-    [InverseProperty("CategoriaIdNavigation")]
+    [InverseProperty("CategoryIdNavigation")]
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

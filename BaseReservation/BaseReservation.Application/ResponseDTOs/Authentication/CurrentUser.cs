@@ -4,9 +4,9 @@ namespace BaseReservation.Application.ResponseDTOs.Authentication;
 
 public record CurrentUser
 {
-    public short IdUsuario { get; init; }
+    public short UserId { get; init; }
 
-    public string? CorreoElectronico { get; init; }
+    public string? Email { get; init; }
 
-    public Rol? Role { get; init; }
+    public Role? Role { get; init; }
 }

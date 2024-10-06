@@ -13,9 +13,9 @@ public partial class BranchScheduleBlock
 
     public short BranchScheduleId { get; set; }
 
-    public TimeOnly StartTime { get; set; }
+    public TimeOnly StartHour { get; set; }
 
-    public TimeOnly EndTime { get; set; }
+    public TimeOnly EndHour { get; set; }
 
     public bool Active { get; set; }
 

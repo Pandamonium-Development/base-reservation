@@ -2,11 +2,11 @@
 
 public record BaseEntity
 {
-    public DateTime FechaCreacion { get; set; }
+    public DateTime Created { get; set; }
 
-    public string UsuarioCreacion { get; set; } = null!;
+    public string CreatedBy { get; set; } = null!;
 
-    public DateTime? FechaModificacion { get; set; }
-    
-    public string? UsuarioModificacion { get; set; }
+    public DateTime? Updated { get; set; }
+
+    public string? UpdatedBy { get; set; }
 }

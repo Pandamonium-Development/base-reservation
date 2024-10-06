@@ -12,7 +12,7 @@ public partial class Customer : BaseModel
     public short Id { get; set; }
 
     [StringLength(80)]
-    public string Name { get; set; } = null!;
+    public string FirstName { get; set; } = null!;
 
     [StringLength(80)]
     public string LastName { get; set; } = null!;

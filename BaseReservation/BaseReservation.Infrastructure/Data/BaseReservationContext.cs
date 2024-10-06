@@ -106,7 +106,6 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
         modelBuilder.Entity<Customer>(entity =>
         {
             entity.Property(e => e.Active).HasDefaultValue(true);
-            entity.Property(e => e.Created).HasDefaultValue("");
 
             entity.HasOne(d => d.DistrictIdNavigation).WithMany(p => p.Customers)
                 .OnDelete(DeleteBehavior.ClientSetNull)

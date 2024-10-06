@@ -22,7 +22,7 @@ public partial class Invoice : BaseModel
     public short CustomerId { get; set; }
 
     [StringLength(160)]
-    public string ClientName { get; set; } = null!;
+    public string CustomerName { get; set; } = null!;
 
     public DateOnly Date { get; set; }
 

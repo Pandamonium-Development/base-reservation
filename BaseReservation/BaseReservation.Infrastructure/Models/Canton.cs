@@ -16,7 +16,7 @@ public partial class Canton
 
     public byte ProvinceId { get; set; }
 
-    [InverseProperty("IdCantonNavigation")]
+    [InverseProperty("CantonIdNavigation")]
     public virtual ICollection<District> Districts { get; set; } = new List<District>();
 
     [ForeignKey("ProvinceId")]

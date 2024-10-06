@@ -21,9 +21,9 @@ public partial class Inventory : BaseModel
     public bool Active { get; set; }
 
     [ForeignKey("BranchId")]
-    [InverseProperty("Inventaries")]
+    [InverseProperty("Inventories")]
     public virtual Branch BranchIdNavigation { get; set; } = null!;
 
-    [InverseProperty("InventaryIdNavigation")]
+    [InverseProperty("InventoryIdNavigation")]
     public virtual ICollection<InventoryProduct> InventoryProducts { get; set; } = new List<InventoryProduct>();
 }

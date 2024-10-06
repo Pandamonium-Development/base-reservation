@@ -20,13 +20,13 @@ public class UserIdentityHandler : AuthorizationHandler<IdentifiedUser>
         var httpContext = (HttpContext)context.Resource!;
         var claimFinder = new ClaimFinder(context.User.Claims);
 
-        if (claimFinder.IdUsuario != null && claimFinder.Role != null && claimFinder.CorreoElectronico != null)
+        if (claimFinder.UserId != null && claimFinder.Role != null && claimFinder.Email != null)
         {
             httpContext.Items["CurrentUser"] = new CurrentUser
             {
-                IdUsuario = short.Parse(claimFinder.IdUsuario!.Value),
-                CorreoElectronico = claimFinder.CorreoElectronico!.Value,
-                Role = (Rol)Enum.Parse(typeof(Rol), claimFinder.Role!.Value.ToUpper())
+                UserId = short.Parse(claimFinder.UserId!.Value),
+                Email = claimFinder.Email!.Value,
+                Role = (Role)Enum.Parse(typeof(Role), claimFinder.Role!.Value.ToUpper())
             };
         }
 
