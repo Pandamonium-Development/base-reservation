@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net;
-using BaseReservation.Application.Comunes;
+using BaseReservation.Application.Common;
 using Microsoft.AspNetCore.Diagnostics;
 
 namespace BaseReservation.WebAPI.Configuration;

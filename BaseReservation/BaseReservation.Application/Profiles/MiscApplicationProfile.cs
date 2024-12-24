@@ -1,4 +1,4 @@
-﻿using App = BaseReservation.Application.ResponseDTOs.Enums;
+﻿using App = BaseReservation.Application.Enums;
 using AutoMapper;
 using Infra = BaseReservation.Infrastructure.Enums;
 using BaseReservation.Application.ResponseDTOs;
@@ -12,38 +12,38 @@ public class MiscApplicationProfile : Profile
 {
     public MiscApplicationProfile()
     {
-        CreateMap<App.DiaSemana, Infra.DiaSemana>().ReverseMap();
+        CreateMap<App.WeekDay, Infra.WeekDay>().ReverseMap();
 
         CreateMap<BaseEntity, BaseModel>()
-            .ForMember(m => m.UsuarioCreacion, opts =>
+            .ForMember(m => m.CreatedBy, opts =>
             {
                 opts.MapFrom<CurrentUserIdResolverBaseEntityAdd>();
             })
-            .ForMember(m => m.UsuarioModificacion, opts =>
+            .ForMember(m => m.UpdatedBy, opts =>
             {
                 opts.MapFrom<CurrentUserIdResolverBaseEntityModify>();
             });
 
-        CreateMap<ResponseReservaDto, Reserva>()
+        CreateMap<ResponseReservationDto, Reservation>()
             .IncludeBase<BaseEntity, BaseModel>();
 
-        CreateMap<ResponseReservaPreguntaDto, ReservaPregunta>()
+        CreateMap<ResponseReservationQuestionDto, ReservationQuestion>()
             .IncludeBase<BaseEntity, BaseModel>();
 
-        CreateMap<ResponseDetalleReservaDto, DetalleReserva>();
+        CreateMap<ResponseReservationDetailDto, ReservationDetail>();
 
-        CreateMap<ResponsePedidoDto, Pedido>()
+        CreateMap<ResponseOrderDto, Order>()
             .IncludeBase<BaseEntity, BaseModel>();
 
-        CreateMap<ResponseDetallePedidoDto, DetallePedido>();
+        CreateMap<ResponseOrderDetailDto, OrderDetail>();
 
-        CreateMap<ResponseClienteDto, Cliente>()
+        CreateMap<ResponseCustomerDto, Customer>()
             .IncludeBase<BaseEntity, BaseModel>();
-   
-        CreateMap<ResponseTipoPagoDto, TipoPago>();
-        CreateMap<ResponseImpuestoDto, Impuesto>();
 
-        CreateMap<ResponseSucursalDto, Sucursal>()
+        CreateMap<ResponsePaymentTypeDto, PaymentType>();
+        CreateMap<ResponseTaxDto, Tax>();
+
+        CreateMap<ResponseBranchDto, Branch>()
             .IncludeBase<BaseEntity, BaseModel>();
     }
 }

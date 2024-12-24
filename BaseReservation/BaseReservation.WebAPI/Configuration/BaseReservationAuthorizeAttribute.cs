@@ -20,9 +20,9 @@ public class BaseReservationAuthorizeAttribute : AuthorizeAttribute
     /// Overload constructor to pass list of roles
     /// </summary>
     /// <param name="roles">List of roles</param>
-    public BaseReservationAuthorizeAttribute(params Rol[] roles)
+    public BaseReservationAuthorizeAttribute(params Role[] roles)
     {
-        var allowedRolesAsStrings = roles.Select(x => StringExtension.Capitalize(Enum.GetName(typeof(Rol), x)!));
+        var allowedRolesAsStrings = roles.Select(x => StringExtension.Capitalize(Enum.GetName(typeof(Role), x)!));
         Roles = string.Join(",", allowedRolesAsStrings);
     }
 }

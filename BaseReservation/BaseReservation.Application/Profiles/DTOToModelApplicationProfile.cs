@@ -11,62 +11,62 @@ public class DtoToModelApplicationProfile : Profile
     public DtoToModelApplicationProfile()
     {
         CreateMap<RequestBaseDto, BaseModel>()
-            .ForMember(m => m.UsuarioCreacion, opts =>
+            .ForMember(m => m.CreatedBy, opts =>
             {
                 opts.MapFrom<CurrentUserIdResolverAdd>();
             })
-            .ForMember(m => m.UsuarioModificacion, opts =>
+            .ForMember(m => m.UpdatedBy, opts =>
             {
                 opts.MapFrom<CurrentUserIdResolverModify>();
             });
 
-        CreateMap<RequestProductoDto, Producto>()
+        CreateMap<RequestProductDto, Product>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestSucursalDto, Sucursal>()
+        CreateMap<RequestBranchDto, Branch>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestServicioDto, Servicio>()
+        CreateMap<RequestServiceDto, Service>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestFeriadoDto, Feriado>()
+        CreateMap<RequestHolidayDto, Holiday>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestHorarioDto, Horario>()
+        CreateMap<RequestScheduleDto, Schedule>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestInventarioDto, Inventario>()
+        CreateMap<RequestInventoryDto, Inventory>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestInventarioProductoDto, InventarioProducto>()
+        CreateMap<RequestInventoryProductDto, InventoryProduct>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestFacturaDto, Factura>()
+        CreateMap<RequestInvoiceDto, Invoice>()
             .IncludeBase<RequestBaseDto, BaseModel>();
         
-        CreateMap<RequestPedidoDto, Pedido>()
+        CreateMap<RequestOrderDto, Order>()
             .IncludeBase<RequestBaseDto, BaseModel>();
         
-        CreateMap<RequestReservaDto, Reserva>()
+        CreateMap<RequestReservationDto, Reservation>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestReservaPreguntaDto, ReservaPregunta>()
+        CreateMap<RequestReservationQuestionDto, ReservationQuestion>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestInventarioProductoMovimientoDto, InventarioProductoMovimiento>()
+        CreateMap<RequestInventoryProductTransactionDto, InventoryProductTransaction>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
-        CreateMap<RequestProveedorDto, Proveedor>()
+        CreateMap<RequestVendorDto, Vendor>()
             .IncludeBase<RequestBaseDto, BaseModel>();
 
         
-        CreateMap<RequestTipoServicioDto, TipoServicio>();
-        CreateMap<RequestSucursalHorarioDto, SucursalHorario>();
-        CreateMap<RequestSucursalHorarioBloqueoDto, SucursalHorarioBloqueo>();
-        CreateMap<RequestSucursalFeriadoDto, SucursalFeriado>();
-        CreateMap<RequestDetalleFacturaDto,  DetalleFactura>();
-        CreateMap<RequestDetallePedidoDto, DetallePedido>();
-        CreateMap<RequestDetalleReservaDto, DetalleReserva>();
-        CreateMap<RequestUsuarioSucursalDto, UsuarioSucursal>();
+        CreateMap<RequestTypeServiceDto, TypeService>();
+        CreateMap<RequestBranchScheduleDto, BranchSchedule>();
+        CreateMap<RequestBranchScheduleBlockDto, BranchScheduleBlock>();
+        CreateMap<RequestBranchHolidayDto, BranchHoliday>();
+        CreateMap<RequestInvoiceDetailDto,  InvoiceDetail>();
+        CreateMap<RequestOrderDetailDto, OrderDetail>();
+        CreateMap<RequestReservationDetailDto, ReservationDetail>();
+        CreateMap<RequestUserBranchDto, UserBranch>();
     }
 }

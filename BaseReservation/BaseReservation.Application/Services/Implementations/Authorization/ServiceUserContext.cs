@@ -16,7 +16,7 @@ public class ServiceUserContext(IHttpContextAccessor httpContextAccessor) : ISer
             var httpContextItems = httpContextAccessor.HttpContext?.Items;
             if (httpContextItems != null && httpContextItems["CurrentUser"] is CurrentUser currentUser)
             {
-                result = currentUser.CorreoElectronico;
+                result = currentUser.Email;
             }
 
             if (string.IsNullOrEmpty(result))

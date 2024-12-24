@@ -22,14 +22,14 @@ public class CantonController(IServiceCanton serviceCanton) : ControllerBase
     /// <summary>
     /// Retrieves all cantons associated with a specific province.
     /// </summary>
-    /// <param name="idProvincia">The ID of the province.</param>
+    /// <param name="provinceId">The ID of the province.</param>
     /// <returns>A list of cantons within the specified province.</returns>
-    [HttpGet("~/api/Provincia/{idProvincia}/Canton")]
+    [HttpGet("~/api/Province/{provinceId}/Canton")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ICollection<ResponseCantonDto>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetAllCantonesByProvinciaAsync(byte idProvincia)
+    public async Task<IActionResult> ListAllByByProvinceAsync(byte provinceId)
     {
-        var cantons = await serviceCanton.ListAllByProvinciaAsync(idProvincia);
+        var cantons = await serviceCanton.ListAllByProvinceAsync(provinceId);
         return StatusCode(StatusCodes.Status200OK, cantons);
     }
 
@@ -42,7 +42,7 @@ public class CantonController(IServiceCanton serviceCanton) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseCantonDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> GetCantonAsync(byte id)
+    public async Task<IActionResult> FindByIdAsync(byte id)
     {
         var cantons = await serviceCanton.FindByIdAsync(id);
         return StatusCode(StatusCodes.Status200OK, cantons);

@@ -11,13 +11,13 @@ public class ClaimFinder(IEnumerable<Claim> claims)
     /// User id property
     /// </summary>
     /// <returns></returns>
-    public Claim? IdUsuario { get => claims.FirstOrDefault(m => m.Type == "IdUsuario"); }
+    public Claim? UserId { get => claims.FirstOrDefault(m => m.Type == "UserId"); }
 
     /// <summary>
     /// Email property
     /// </summary>
     /// <returns></returns>
-    public Claim? CorreoElectronico { get => claims.FirstOrDefault(m => m.Type == "CorreoElectronico"); }
+    public Claim? Email { get => claims.FirstOrDefault(m => m.Type == "Email"); }
 
     /// <summary>
     /// Role property

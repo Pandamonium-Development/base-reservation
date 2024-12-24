@@ -12,16 +12,16 @@ public class RepositoryCanton(BaseReservationContext context) : IRepositoryCanto
     {
         var keyProperty = context.Model.FindEntityType(typeof(Canton))!.FindPrimaryKey()!.Properties[0];
         return await context.Set<Canton>()
-                    .Include(m => m.IdProvinciaNavigation)
+                    .Include(m => m.ProvinceIdNavigation)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<Canton>> ListAllByProvinciaAsync(byte idProvincia)
+    public async Task<ICollection<Canton>> ListAllByProvinceAsync(byte provinceId)
     {
         var collection = await context.Set<Canton>()
-            .Where(m => m.IdProvincia == idProvincia)
+            .Where(m => m.ProvinceId == provinceId)
             .AsNoTracking()
             .ToListAsync();
         return collection;

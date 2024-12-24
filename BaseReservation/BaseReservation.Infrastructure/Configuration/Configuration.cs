@@ -8,40 +8,52 @@ public static class Configuration
 {
     public static void ConfigureInfraestructure(this IServiceCollection services)
     {
-        services.AddTransient<IRepositoryUsuario, RepositoryUsuario>();
-        services.AddTransient<IRepositoryProducto, RepositoryProducto>();
-        services.AddTransient<IRepositoryRol, RepositoryRol>();
-        services.AddTransient<IRepositoryFactura, RepositoryFactura>();
-        services.AddTransient<IRepositoryDetalleFactura, RepositoryDetalleFactura>();
-        services.AddTransient<IRepositorySucursal, RepositorySucursal>();
-        services.AddTransient<IRepositoryReserva, RepositoryReserva>();
-        services.AddTransient<IRepositoryServicio, RepositoryServicio>();
-        services.AddTransient<IRepositoryHorario, RepositoryHorario>();
-        services.AddTransient<IRepositoryReservaPregunta, RepositoryReservaPregunta>();
-        services.AddTransient<IRepositoryTipoServicio, RepositoryTipoServicio>();
-        services.AddTransient<IRepositoryUnidadMedida, RepositoryUnidadMedida>();
-        services.AddTransient<IRepositoryCategoria, RepositoryCategoria>();
-        services.AddTransient<IRepositoryCanton, RepositoryCanton>();
-        services.AddTransient<IRepositoryProvincia, RepositoryProvincia>();
-        services.AddTransient<IRepositoryDistrito, RepositoryDistrito>();
-        services.AddTransient<IRepositoryTipoServicio, RepositoryTipoServicio>();
-        services.AddTransient<IRepositoryFeriado, RepositoryFeriado>();
-        services.AddTransient<IRepositorySucursalFeriado, RepositorySucursalFeriado>();
-        services.AddTransient<IRepositorySucursalHorarioBloqueo, RepositorySucursalHorarioBloqueo>();
-        services.AddTransient<IRepositorySucursalHorario, RepositorySucursalHorario>();
-        services.AddTransient<IRepositoryInventario, RepositoryInventario>();
-        services.AddTransient<IRepositoryPedido, RepositoryPedido>();
-        services.AddTransient<IRepositoryDetallePedido, RepositoryDetallePedido>();
-        services.AddTransient<IRepositoryDetalleReserva, RepositoryDetalleReserva>();
-        services.AddTransient<IRepositoryCliente, RepositoryCliente>();
-        services.AddTransient<IRepositoryInventarioProducto, RepositoryInventarioProducto>();
-        services.AddTransient<IRepositoryInventarioProductoMovimiento, RepositoryInventarioProductoMovimiento>();
-        services.AddTransient<IRepositoryTipoPago, RepositoryTipoPago>();
-        services.AddTransient<IRepositoryImpuesto, RepositoryImpuesto>();
-        services.AddTransient<IRepositoryProveedor, RepositoryProveedor>();
+        // General
+        services.AddTransient<IRepositoryPaymentType, RepositoryPaymentType>();
+        services.AddTransient<IRepositoryTypeService, RepositoryTypeService>();
+        services.AddTransient<IRepositoryUnitMeasure, RepositoryUnitMeasure>();
+        services.AddTransient<IRepositoryProduct, RepositoryProduct>();
+        services.AddTransient<IRepositoryService, RepositoryService>();
+        services.AddTransient<IRepositoryCategory, RepositoryCategory>();
+        services.AddTransient<IRepositoryTax, RepositoryTax>();
+        services.AddTransient<IRepositoryCustomer, RepositoryCustomer>();
+        services.AddTransient<IRepositorySchedule, RepositorySchedule>();
+        services.AddTransient<IRepositoryHoliday, RepositoryHoliday>();
+        services.AddTransient<IRepositoryVendor, RepositoryVendor>();
+
+        // Security
+        services.AddTransient<IRepositoryUser, RepositoryUser>();
+        services.AddTransient<IRepositoryRole, RepositoryRole>();
         services.AddTransient<IRepositoryTokenMaster, RepositoryTokenMaster>();
-        services.AddTransient<IRepositoryUsuarioSucursal, RepositoryUsuarioSucursal>();
+
+        // Address
+        services.AddTransient<IRepositoryProvince, RepositoryProvince>();
+        services.AddTransient<IRepositoryCanton, RepositoryCanton>();
+        services.AddTransient<IRepositoryDistrict, RepositoryDistrict>();
+
+        // Invoice
+        services.AddTransient<IRepositoryInvoice, RepositoryInvoice>();
+        services.AddTransient<IRepositoryInvoiceDetail, RepositoryInvoiceDetail>();
+
+        // Order
+        services.AddTransient<IRepositoryOrder, RepositoryOrder>();
+        services.AddTransient<IRepositoryOrderDetail, RepositoryOrderDetail>();
+
+        // Reservation
+        services.AddTransient<IRepositoryReservation, RepositoryReservation>();
+        services.AddTransient<IRepositoryReservationDetail, RepositoryReservationDetail>();
+        services.AddTransient<IRepositoryReservationQuestion, RepositoryReservationQuestion>();
+
+        // Branch
+        services.AddTransient<IRepositoryBranch, RepositoryBranch>();
+        services.AddTransient<IRepositoryBranchHoliday, RepositoryBranchHoliday>();
+        services.AddTransient<IRepositoryBranchSchedule, RepositoryBranchSchedule>();
+        services.AddTransient<IRepositoryBranchScheduleBlock, RepositoryBranchScheduleBlock>();
+        services.AddTransient<IRepositoryUserBranch, RepositoryUserBranch>();
+
+        // Inventory
+        services.AddTransient<IRepositoryInventory, RepositoryInventory>();
+        services.AddTransient<IRepositoryInventoryProduct, RepositoryInventoryProduct>();
+        services.AddTransient<IRepositoryInventoryProductTransaction, RepositoryInventoryProductTransaction>();
     }
 }
-// es una extencion xq usa la palabra this
-// Trasient cambia por cada request //scoped como para  factruas y// singleton presente hasta la vida util de la aplicacion
