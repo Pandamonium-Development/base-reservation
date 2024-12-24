@@ -18,7 +18,7 @@ public record ResponseProductDto : BaseEntity
 
     public string Sku { get; set; } = null!;
 
-    public byte unitMeasure { get; set; }
+    public byte UnitMeasureId { get; set; }
 
     public bool Active { get; set; }
 
