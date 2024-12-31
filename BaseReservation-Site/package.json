@@ -9,11 +9,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "api-base-reservation:generate": "openapi-typescript ./src/api/base-reservation/spec.json -o ./src/api/base-reservation/api.d.ts",
-    "api-base-reservation:update-local": "curl -s http://localhost:5001/swagger/v1/swagger.json -o ./src/api/base-reservation/spec.json && sed -i '' 's/; x-api-version=[0-9]*//' ./src/api/base-reservation/spec.json && npx openapi-typescript ./src/api/base-reservation/spec.json -o ./src/api/base-reservation/api.d.ts"
+    "api-base-reservation:update-local": "curl -s http://localhost:5001/swagger/v1/swagger.json -o ./src/api/base-reservation/spec.json && sed -i '' 's/; x-api-version=[0-9]*//' ./src/api/base-reservation/spec.json && npx openapi-typescript ./src/api/base-reservation/spec.json -o ./src/api/base-reservation/api.d.ts --bare"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.62.9",
-    "openapi-fetch": "^0.13.3",
     "openapi-typescript": "^7.4.4",
     "openapi-typescript-fetch": "^2.0.0",
     "react": "^18.3.1",

@@ -14,8 +14,13 @@ export const useTypedApiClientBS = <
 
     const fetcher = Fetcher.for<paths>();
     fetcher.configure({
-        baseUrl: import.meta.env.VITE_API_BASERESERVATION_BASE_URL
+        baseUrl: import.meta.env.VITE_API_BASERESERVATION_BASE_URL,
+        init: {
+            headers: {
+                "x-api-version": "1",
+            },
+        },
     });
 
-    return fetcher.path(path).method(method).create({}) as TypedFetch<paths[PathT][MethodT]> ;
+    return fetcher.path(path).method(method).create({}) as TypedFetch<paths[PathT][MethodT]>;
 }

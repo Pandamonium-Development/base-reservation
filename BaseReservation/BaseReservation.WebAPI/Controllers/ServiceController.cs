@@ -54,7 +54,7 @@ public class ServiceController(IServiceService serviceService) : ControllerBase
     /// <param name="service">Service request model to be added</param>
     /// <returns>IActionResult</returns>
     [HttpPost]
-    [BaseReservationAuthorize(Role.ADMINISTRADOR)]
+    [BaseReservationAuthorize(RoleApplication.ADMINISTRADOR)]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseServiceDto))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
@@ -72,7 +72,7 @@ public class ServiceController(IServiceService serviceService) : ControllerBase
     /// <param name="service">Service request model to be updated</param>
     /// <returns>IActionResult</returns>
     [HttpPut("{serviceId}")]
-    [BaseReservationAuthorize(Role.ADMINISTRADOR)]
+    [BaseReservationAuthorize(RoleApplication.ADMINISTRADOR)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseServiceDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]

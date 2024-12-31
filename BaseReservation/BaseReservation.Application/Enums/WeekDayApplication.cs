@@ -2,7 +2,7 @@
 
 namespace BaseReservation.Application.Enums;
 
-public enum WeekDay
+public enum WeekDayApplication
 {
     Lunes = 1,
 

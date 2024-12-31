@@ -39,7 +39,7 @@ public class ServiceUser(IRepositoryUser repository, IRepositoryBranch repositor
             return mapper.Map<ICollection<ResponseUserDto>>(list);
         }
 
-        Role roleEnum;
+        RoleApplication roleEnum;
         if (!Enum.TryParse(role, out roleEnum)) throw new BaseReservationException("Rol Inválido");
 
         var listFilter = await repository.ListAllByRoleAsync((byte)roleEnum);

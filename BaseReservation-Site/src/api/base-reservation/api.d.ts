@@ -26,10 +26,10 @@ export interface paths {
             /** @description The login credentials. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestUserLoginDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestUserLoginDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestUserLoginDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestUserLoginDto"];
+                    "application/json-patch+json": components["schemas"]["RequestUserLoginDto"];
+                    "application/json": components["schemas"]["RequestUserLoginDto"];
+                    "text/json": components["schemas"]["RequestUserLoginDto"];
+                    "application/*+json": components["schemas"]["RequestUserLoginDto"];
                 };
             };
             responses: {
@@ -39,9 +39,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.AuthenticationResult"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.AuthenticationResult"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.AuthenticationResult"];
+                        "text/plain": components["schemas"]["AuthenticationResult"];
+                        "application/json": components["schemas"]["AuthenticationResult"];
+                        "text/json": components["schemas"]["AuthenticationResult"];
                     };
                 };
                 /** @description Unauthorized */
@@ -50,9 +50,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Not Found */
@@ -61,9 +61,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -72,9 +72,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -107,10 +107,10 @@ export interface paths {
             /** @description The token refresh request. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.TokenModel"];
-                    "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.TokenModel"];
-                    "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.TokenModel"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.TokenModel"];
+                    "application/json-patch+json": components["schemas"]["TokenModel"];
+                    "application/json": components["schemas"]["TokenModel"];
+                    "text/json": components["schemas"]["TokenModel"];
+                    "application/*+json": components["schemas"]["TokenModel"];
                 };
             };
             responses: {
@@ -120,9 +120,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.AuthenticationResult"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.AuthenticationResult"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.Authentication.AuthenticationResult"];
+                        "text/plain": components["schemas"]["AuthenticationResult"];
+                        "application/json": components["schemas"]["AuthenticationResult"];
+                        "text/json": components["schemas"]["AuthenticationResult"];
                     };
                 };
                 /** @description Unauthorized */
@@ -131,9 +131,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Not Found */
@@ -142,9 +142,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -153,9 +153,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -191,9 +191,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"][];
+                        "text/plain": components["schemas"]["ResponseBranchDto"][];
+                        "application/json": components["schemas"]["ResponseBranchDto"][];
+                        "text/json": components["schemas"]["ResponseBranchDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -202,9 +202,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -223,10 +223,10 @@ export interface paths {
             /** @description Branch request model to be added */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchDto"];
+                    "application/json-patch+json": components["schemas"]["RequestBranchDto"];
+                    "application/json": components["schemas"]["RequestBranchDto"];
+                    "text/json": components["schemas"]["RequestBranchDto"];
+                    "application/*+json": components["schemas"]["RequestBranchDto"];
                 };
             };
             responses: {
@@ -236,9 +236,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
+                        "text/plain": components["schemas"]["ResponseBranchDto"];
+                        "application/json": components["schemas"]["ResponseBranchDto"];
+                        "text/json": components["schemas"]["ResponseBranchDto"];
                     };
                 };
                 /** @description Unauthorized */
@@ -261,9 +261,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -272,9 +272,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -310,9 +310,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"][];
+                        "text/plain": components["schemas"]["ResponseBranchDto"][];
+                        "application/json": components["schemas"]["ResponseBranchDto"][];
+                        "text/json": components["schemas"]["ResponseBranchDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -321,9 +321,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -364,9 +364,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
+                        "text/plain": components["schemas"]["ResponseBranchDto"];
+                        "application/json": components["schemas"]["ResponseBranchDto"];
+                        "text/json": components["schemas"]["ResponseBranchDto"];
                     };
                 };
                 /** @description Not Found */
@@ -375,9 +375,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -386,9 +386,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -409,10 +409,10 @@ export interface paths {
             /** @description Branch request model to be added */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchDto"];
+                    "application/json-patch+json": components["schemas"]["RequestBranchDto"];
+                    "application/json": components["schemas"]["RequestBranchDto"];
+                    "text/json": components["schemas"]["RequestBranchDto"];
+                    "application/*+json": components["schemas"]["RequestBranchDto"];
                 };
             };
             responses: {
@@ -422,9 +422,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
+                        "text/plain": components["schemas"]["ResponseBranchDto"];
+                        "application/json": components["schemas"]["ResponseBranchDto"];
+                        "text/json": components["schemas"]["ResponseBranchDto"];
                     };
                 };
                 /** @description Unauthorized */
@@ -447,9 +447,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -458,9 +458,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -469,9 +469,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -498,9 +498,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
+                        "text/plain": components["schemas"]["ResponseBranchDto"];
+                        "application/json": components["schemas"]["ResponseBranchDto"];
+                        "text/json": components["schemas"]["ResponseBranchDto"];
                     };
                 };
                 /** @description Not Found */
@@ -509,9 +509,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -520,9 +520,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -563,9 +563,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchHolidayDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchHolidayDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchHolidayDto"][];
+                        "text/plain": components["schemas"]["ResponseBranchHolidayDto"][];
+                        "application/json": components["schemas"]["ResponseBranchHolidayDto"][];
+                        "text/json": components["schemas"]["ResponseBranchHolidayDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -574,9 +574,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -598,10 +598,10 @@ export interface paths {
             /** @description List of holidays */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchHolidayDto"][];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchHolidayDto"][];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchHolidayDto"][];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchHolidayDto"][];
+                    "application/json-patch+json": components["schemas"]["RequestBranchHolidayDto"][];
+                    "application/json": components["schemas"]["RequestBranchHolidayDto"][];
+                    "text/json": components["schemas"]["RequestBranchHolidayDto"][];
+                    "application/*+json": components["schemas"]["RequestBranchHolidayDto"][];
                 };
             };
             responses: {
@@ -622,9 +622,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -633,9 +633,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -674,9 +674,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchHolidayDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchHolidayDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchHolidayDto"];
+                        "text/plain": components["schemas"]["ResponseBranchHolidayDto"];
+                        "application/json": components["schemas"]["ResponseBranchHolidayDto"];
+                        "text/json": components["schemas"]["ResponseBranchHolidayDto"];
                     };
                 };
                 /** @description Not Found */
@@ -685,9 +685,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -696,9 +696,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -739,9 +739,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto"];
+                        "text/plain": components["schemas"]["ResponseBranchScheduleDto"];
+                        "application/json": components["schemas"]["ResponseBranchScheduleDto"];
+                        "text/json": components["schemas"]["ResponseBranchScheduleDto"];
                     };
                 };
                 /** @description Not Found */
@@ -750,9 +750,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -761,9 +761,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -785,10 +785,10 @@ export interface paths {
             /** @description List Block request model to be assign */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"][];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"][];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"][];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"][];
+                    "application/json-patch+json": components["schemas"]["RequestBranchScheduleBlockDto"][];
+                    "application/json": components["schemas"]["RequestBranchScheduleBlockDto"][];
+                    "text/json": components["schemas"]["RequestBranchScheduleBlockDto"][];
+                    "application/*+json": components["schemas"]["RequestBranchScheduleBlockDto"][];
                 };
             };
             responses: {
@@ -798,9 +798,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"];
+                        "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                        "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                        "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -809,9 +809,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -820,9 +820,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -861,9 +861,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto"];
+                        "text/plain": components["schemas"]["ResponseBranchScheduleDto"];
+                        "application/json": components["schemas"]["ResponseBranchScheduleDto"];
+                        "text/json": components["schemas"]["ResponseBranchScheduleDto"];
                     };
                 };
                 /** @description Not Found */
@@ -872,9 +872,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -883,9 +883,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -907,10 +907,10 @@ export interface paths {
             /** @description List of schedules */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleDto"][];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleDto"][];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleDto"][];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleDto"][];
+                    "application/json-patch+json": components["schemas"]["RequestBranchScheduleDto"][];
+                    "application/json": components["schemas"]["RequestBranchScheduleDto"][];
+                    "text/json": components["schemas"]["RequestBranchScheduleDto"][];
+                    "application/*+json": components["schemas"]["RequestBranchScheduleDto"][];
                 };
             };
             responses: {
@@ -931,9 +931,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -942,9 +942,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -977,10 +977,10 @@ export interface paths {
             /** @description Block request model to be added */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"];
+                    "application/json-patch+json": components["schemas"]["RequestBranchScheduleBlockDto"];
+                    "application/json": components["schemas"]["RequestBranchScheduleBlockDto"];
+                    "text/json": components["schemas"]["RequestBranchScheduleBlockDto"];
+                    "application/*+json": components["schemas"]["RequestBranchScheduleBlockDto"];
                 };
             };
             responses: {
@@ -990,9 +990,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"];
+                        "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                        "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                        "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -1001,9 +1001,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1012,9 +1012,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1049,10 +1049,10 @@ export interface paths {
             /** @description Block request model to be updated */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto"];
+                    "application/json-patch+json": components["schemas"]["RequestBranchScheduleBlockDto"];
+                    "application/json": components["schemas"]["RequestBranchScheduleBlockDto"];
+                    "text/json": components["schemas"]["RequestBranchScheduleBlockDto"];
+                    "application/*+json": components["schemas"]["RequestBranchScheduleBlockDto"];
                 };
             };
             responses: {
@@ -1062,9 +1062,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"];
+                        "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                        "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                        "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
                     };
                 };
                 /** @description Not Found */
@@ -1073,9 +1073,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -1084,9 +1084,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1095,9 +1095,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1137,9 +1137,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCantonDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCantonDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCantonDto"][];
+                        "text/plain": components["schemas"]["ResponseCantonDto"][];
+                        "application/json": components["schemas"]["ResponseCantonDto"][];
+                        "text/json": components["schemas"]["ResponseCantonDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1148,9 +1148,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1193,9 +1193,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCantonDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCantonDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCantonDto"];
+                        "text/plain": components["schemas"]["ResponseCantonDto"];
+                        "application/json": components["schemas"]["ResponseCantonDto"];
+                        "text/json": components["schemas"]["ResponseCantonDto"];
                     };
                 };
                 /** @description Not Found */
@@ -1204,9 +1204,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1215,9 +1215,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1255,9 +1255,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCategoryDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCategoryDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCategoryDto"][];
+                        "text/plain": components["schemas"]["ResponseCategoryDto"][];
+                        "application/json": components["schemas"]["ResponseCategoryDto"][];
+                        "text/json": components["schemas"]["ResponseCategoryDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1266,9 +1266,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1306,9 +1306,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"][];
+                        "text/plain": components["schemas"]["ResponseCustomerDto"][];
+                        "application/json": components["schemas"]["ResponseCustomerDto"][];
+                        "text/json": components["schemas"]["ResponseCustomerDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1317,9 +1317,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1360,9 +1360,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"];
+                        "text/plain": components["schemas"]["ResponseCustomerDto"];
+                        "application/json": components["schemas"]["ResponseCustomerDto"];
+                        "text/json": components["schemas"]["ResponseCustomerDto"];
                     };
                 };
                 /** @description Not Found */
@@ -1371,9 +1371,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1382,9 +1382,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1412,9 +1412,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"];
+                        "text/plain": components["schemas"]["ResponseCustomerDto"];
+                        "application/json": components["schemas"]["ResponseCustomerDto"];
+                        "text/json": components["schemas"]["ResponseCustomerDto"];
                     };
                 };
                 /** @description Not Found */
@@ -1423,9 +1423,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1434,9 +1434,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1474,9 +1474,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"][];
+                        "text/plain": components["schemas"]["ResponseDistrictDto"][];
+                        "application/json": components["schemas"]["ResponseDistrictDto"][];
+                        "text/json": components["schemas"]["ResponseDistrictDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1485,9 +1485,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1530,9 +1530,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"];
+                        "text/plain": components["schemas"]["ResponseDistrictDto"];
+                        "application/json": components["schemas"]["ResponseDistrictDto"];
+                        "text/json": components["schemas"]["ResponseDistrictDto"];
                     };
                 };
                 /** @description Not Found */
@@ -1541,9 +1541,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1552,9 +1552,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1592,9 +1592,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"][];
+                        "text/plain": components["schemas"]["ResponseHolidayDto"][];
+                        "application/json": components["schemas"]["ResponseHolidayDto"][];
+                        "text/json": components["schemas"]["ResponseHolidayDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1603,9 +1603,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1624,10 +1624,10 @@ export interface paths {
             /** @description The holiday data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestHolidayDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestHolidayDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestHolidayDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestHolidayDto"];
+                    "application/json-patch+json": components["schemas"]["RequestHolidayDto"];
+                    "application/json": components["schemas"]["RequestHolidayDto"];
+                    "text/json": components["schemas"]["RequestHolidayDto"];
+                    "application/*+json": components["schemas"]["RequestHolidayDto"];
                 };
             };
             responses: {
@@ -1637,9 +1637,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
+                        "text/plain": components["schemas"]["ResponseHolidayDto"];
+                        "application/json": components["schemas"]["ResponseHolidayDto"];
+                        "text/json": components["schemas"]["ResponseHolidayDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -1648,9 +1648,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1659,9 +1659,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1700,9 +1700,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
+                        "text/plain": components["schemas"]["ResponseHolidayDto"];
+                        "application/json": components["schemas"]["ResponseHolidayDto"];
+                        "text/json": components["schemas"]["ResponseHolidayDto"];
                     };
                 };
                 /** @description Not Found */
@@ -1711,9 +1711,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1722,9 +1722,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1745,10 +1745,10 @@ export interface paths {
             /** @description The updated holiday data. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestHolidayDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestHolidayDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestHolidayDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestHolidayDto"];
+                    "application/json-patch+json": components["schemas"]["RequestHolidayDto"];
+                    "application/json": components["schemas"]["RequestHolidayDto"];
+                    "text/json": components["schemas"]["RequestHolidayDto"];
+                    "application/*+json": components["schemas"]["RequestHolidayDto"];
                 };
             };
             responses: {
@@ -1758,9 +1758,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
+                        "text/plain": components["schemas"]["ResponseHolidayDto"];
+                        "application/json": components["schemas"]["ResponseHolidayDto"];
+                        "text/json": components["schemas"]["ResponseHolidayDto"];
                     };
                 };
                 /** @description Not Found */
@@ -1769,9 +1769,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -1780,9 +1780,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1791,9 +1791,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1820,9 +1820,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
+                        "text/plain": components["schemas"]["ResponseHolidayDto"];
+                        "application/json": components["schemas"]["ResponseHolidayDto"];
+                        "text/json": components["schemas"]["ResponseHolidayDto"];
                     };
                 };
                 /** @description Not Found */
@@ -1831,9 +1831,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1842,9 +1842,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1882,9 +1882,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"][];
+                        "text/plain": components["schemas"]["ResponseInventoryDto"][];
+                        "application/json": components["schemas"]["ResponseInventoryDto"][];
+                        "text/json": components["schemas"]["ResponseInventoryDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1893,9 +1893,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1917,10 +1917,10 @@ export interface paths {
             /** @description The inventory data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryDto"];
+                    "application/json-patch+json": components["schemas"]["RequestInventoryDto"];
+                    "application/json": components["schemas"]["RequestInventoryDto"];
+                    "text/json": components["schemas"]["RequestInventoryDto"];
+                    "application/*+json": components["schemas"]["RequestInventoryDto"];
                 };
             };
             responses: {
@@ -1930,9 +1930,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
+                        "text/plain": components["schemas"]["ResponseInventoryDto"];
+                        "application/json": components["schemas"]["ResponseInventoryDto"];
+                        "text/json": components["schemas"]["ResponseInventoryDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -1941,9 +1941,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -1952,9 +1952,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -1993,9 +1993,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
+                        "text/plain": components["schemas"]["ResponseInventoryDto"];
+                        "application/json": components["schemas"]["ResponseInventoryDto"];
+                        "text/json": components["schemas"]["ResponseInventoryDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -2004,9 +2004,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2015,9 +2015,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2041,10 +2041,10 @@ export interface paths {
             /** @description The updated inventory data. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryDto"];
+                    "application/json-patch+json": components["schemas"]["RequestInventoryDto"];
+                    "application/json": components["schemas"]["RequestInventoryDto"];
+                    "text/json": components["schemas"]["RequestInventoryDto"];
+                    "application/*+json": components["schemas"]["RequestInventoryDto"];
                 };
             };
             responses: {
@@ -2054,9 +2054,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
+                        "text/plain": components["schemas"]["ResponseInventoryDto"];
+                        "application/json": components["schemas"]["ResponseInventoryDto"];
+                        "text/json": components["schemas"]["ResponseInventoryDto"];
                     };
                 };
                 /** @description Not Found */
@@ -2065,9 +2065,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -2076,9 +2076,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2087,9 +2087,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2127,9 +2127,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Conflict */
@@ -2138,9 +2138,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2149,9 +2149,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2189,9 +2189,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
+                        "text/plain": components["schemas"]["ResponseInventoryProductDto"];
+                        "application/json": components["schemas"]["ResponseInventoryProductDto"];
+                        "text/json": components["schemas"]["ResponseInventoryProductDto"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2200,9 +2200,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2223,10 +2223,10 @@ export interface paths {
             /** @description The updated inventory product data. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"];
+                    "application/json-patch+json": components["schemas"]["RequestInventoryProductDto"];
+                    "application/json": components["schemas"]["RequestInventoryProductDto"];
+                    "text/json": components["schemas"]["RequestInventoryProductDto"];
+                    "application/*+json": components["schemas"]["RequestInventoryProductDto"];
                 };
             };
             responses: {
@@ -2236,9 +2236,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
+                        "text/plain": components["schemas"]["ResponseInventoryProductDto"];
+                        "application/json": components["schemas"]["ResponseInventoryProductDto"];
+                        "text/json": components["schemas"]["ResponseInventoryProductDto"];
                     };
                 };
                 /** @description Not Found */
@@ -2247,9 +2247,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -2258,9 +2258,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2269,9 +2269,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2311,9 +2311,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"][];
+                        "text/plain": components["schemas"]["ResponseInventoryProductDto"][];
+                        "application/json": components["schemas"]["ResponseInventoryProductDto"][];
+                        "text/json": components["schemas"]["ResponseInventoryProductDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2322,9 +2322,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2365,9 +2365,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"][];
+                        "text/plain": components["schemas"]["ResponseInventoryProductDto"][];
+                        "application/json": components["schemas"]["ResponseInventoryProductDto"][];
+                        "text/json": components["schemas"]["ResponseInventoryProductDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2376,9 +2376,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2413,10 +2413,10 @@ export interface paths {
             /** @description The inventory product data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"];
+                    "application/json-patch+json": components["schemas"]["RequestInventoryProductDto"];
+                    "application/json": components["schemas"]["RequestInventoryProductDto"];
+                    "text/json": components["schemas"]["RequestInventoryProductDto"];
+                    "application/*+json": components["schemas"]["RequestInventoryProductDto"];
                 };
             };
             responses: {
@@ -2426,9 +2426,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
+                        "text/plain": components["schemas"]["ResponseInventoryProductDto"];
+                        "application/json": components["schemas"]["ResponseInventoryProductDto"];
+                        "text/json": components["schemas"]["ResponseInventoryProductDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -2437,9 +2437,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2448,9 +2448,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2483,10 +2483,10 @@ export interface paths {
             /** @description A collection of inventory product data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"][];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"][];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"][];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductDto"][];
+                    "application/json-patch+json": components["schemas"]["RequestInventoryProductDto"][];
+                    "application/json": components["schemas"]["RequestInventoryProductDto"][];
+                    "text/json": components["schemas"]["RequestInventoryProductDto"][];
+                    "application/*+json": components["schemas"]["RequestInventoryProductDto"][];
                 };
             };
             responses: {
@@ -2507,9 +2507,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2518,9 +2518,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2553,10 +2553,10 @@ export interface paths {
             /** @description The inventory product movement data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductTransactionDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductTransactionDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductTransactionDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInventoryProductTransactionDto"];
+                    "application/json-patch+json": components["schemas"]["RequestInventoryProductTransactionDto"];
+                    "application/json": components["schemas"]["RequestInventoryProductTransactionDto"];
+                    "text/json": components["schemas"]["RequestInventoryProductTransactionDto"];
+                    "application/*+json": components["schemas"]["RequestInventoryProductTransactionDto"];
                 };
             };
             responses: {
@@ -2566,9 +2566,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto"];
+                        "text/plain": components["schemas"]["ResponseInventoryProductTransactionDto"];
+                        "application/json": components["schemas"]["ResponseInventoryProductTransactionDto"];
+                        "text/json": components["schemas"]["ResponseInventoryProductTransactionDto"];
                     };
                 };
                 /** @description Conflict */
@@ -2577,9 +2577,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -2588,9 +2588,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2599,9 +2599,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2640,9 +2640,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto"][];
+                        "text/plain": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+                        "application/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+                        "text/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2651,9 +2651,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2694,9 +2694,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto"][];
+                        "text/plain": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+                        "application/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+                        "text/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2705,9 +2705,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2745,9 +2745,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"][];
+                        "text/plain": components["schemas"]["ResponseInvoiceDto"][];
+                        "application/json": components["schemas"]["ResponseInvoiceDto"][];
+                        "text/json": components["schemas"]["ResponseInvoiceDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2756,9 +2756,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2777,10 +2777,10 @@ export interface paths {
             /** @description The invoice data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInvoiceDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInvoiceDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInvoiceDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInvoiceDto"];
+                    "application/json-patch+json": components["schemas"]["RequestInvoiceDto"];
+                    "application/json": components["schemas"]["RequestInvoiceDto"];
+                    "text/json": components["schemas"]["RequestInvoiceDto"];
+                    "application/*+json": components["schemas"]["RequestInvoiceDto"];
                 };
             };
             responses: {
@@ -2790,9 +2790,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"];
+                        "text/plain": components["schemas"]["ResponseInvoiceDto"];
+                        "application/json": components["schemas"]["ResponseInvoiceDto"];
+                        "text/json": components["schemas"]["ResponseInvoiceDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -2801,9 +2801,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2812,9 +2812,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2853,9 +2853,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"];
+                        "text/plain": components["schemas"]["ResponseInvoiceDto"];
+                        "application/json": components["schemas"]["ResponseInvoiceDto"];
+                        "text/json": components["schemas"]["ResponseInvoiceDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -2864,9 +2864,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2875,9 +2875,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2918,9 +2918,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto"][];
+                        "text/plain": components["schemas"]["ResponseInvoiceDetailDto"][];
+                        "application/json": components["schemas"]["ResponseInvoiceDetailDto"][];
+                        "text/json": components["schemas"]["ResponseInvoiceDetailDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2929,9 +2929,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -2973,9 +2973,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto"];
+                        "text/plain": components["schemas"]["ResponseInvoiceDetailDto"];
+                        "application/json": components["schemas"]["ResponseInvoiceDetailDto"];
+                        "text/json": components["schemas"]["ResponseInvoiceDetailDto"];
                     };
                 };
                 /** @description Not Found */
@@ -2984,9 +2984,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -2995,9 +2995,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3035,9 +3035,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"][];
+                        "text/plain": components["schemas"]["ResponseOrderDto"][];
+                        "application/json": components["schemas"]["ResponseOrderDto"][];
+                        "text/json": components["schemas"]["ResponseOrderDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3046,9 +3046,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3067,10 +3067,10 @@ export interface paths {
             /** @description The order data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestOrderDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestOrderDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestOrderDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestOrderDto"];
+                    "application/json-patch+json": components["schemas"]["RequestOrderDto"];
+                    "application/json": components["schemas"]["RequestOrderDto"];
+                    "text/json": components["schemas"]["RequestOrderDto"];
+                    "application/*+json": components["schemas"]["RequestOrderDto"];
                 };
             };
             responses: {
@@ -3080,9 +3080,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"];
+                        "text/plain": components["schemas"]["ResponseOrderDto"];
+                        "application/json": components["schemas"]["ResponseOrderDto"];
+                        "text/json": components["schemas"]["ResponseOrderDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -3091,9 +3091,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3102,9 +3102,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3143,9 +3143,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"];
+                        "text/plain": components["schemas"]["ResponseOrderDto"];
+                        "application/json": components["schemas"]["ResponseOrderDto"];
+                        "text/json": components["schemas"]["ResponseOrderDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -3154,9 +3154,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3165,9 +3165,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3205,9 +3205,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponsePaymentTypeDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponsePaymentTypeDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponsePaymentTypeDto"][];
+                        "text/plain": components["schemas"]["ResponsePaymentTypeDto"][];
+                        "application/json": components["schemas"]["ResponsePaymentTypeDto"][];
+                        "text/json": components["schemas"]["ResponsePaymentTypeDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3216,9 +3216,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3261,9 +3261,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"][];
+                        "text/plain": components["schemas"]["ResponseProductDto"][];
+                        "application/json": components["schemas"]["ResponseProductDto"][];
+                        "text/json": components["schemas"]["ResponseProductDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3272,9 +3272,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3293,10 +3293,10 @@ export interface paths {
             /** @description The product data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestProductDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestProductDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestProductDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestProductDto"];
+                    "application/json-patch+json": components["schemas"]["RequestProductDto"];
+                    "application/json": components["schemas"]["RequestProductDto"];
+                    "text/json": components["schemas"]["RequestProductDto"];
+                    "application/*+json": components["schemas"]["RequestProductDto"];
                 };
             };
             responses: {
@@ -3306,9 +3306,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
+                        "text/plain": components["schemas"]["ResponseProductDto"];
+                        "application/json": components["schemas"]["ResponseProductDto"];
+                        "text/json": components["schemas"]["ResponseProductDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -3317,9 +3317,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3328,9 +3328,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3369,9 +3369,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
+                        "text/plain": components["schemas"]["ResponseProductDto"];
+                        "application/json": components["schemas"]["ResponseProductDto"];
+                        "text/json": components["schemas"]["ResponseProductDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -3380,9 +3380,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3391,9 +3391,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3414,10 +3414,10 @@ export interface paths {
             /** @description The updated product data. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestProductDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestProductDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestProductDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestProductDto"];
+                    "application/json-patch+json": components["schemas"]["RequestProductDto"];
+                    "application/json": components["schemas"]["RequestProductDto"];
+                    "text/json": components["schemas"]["RequestProductDto"];
+                    "application/*+json": components["schemas"]["RequestProductDto"];
                 };
             };
             responses: {
@@ -3427,9 +3427,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
+                        "text/plain": components["schemas"]["ResponseProductDto"];
+                        "application/json": components["schemas"]["ResponseProductDto"];
+                        "text/json": components["schemas"]["ResponseProductDto"];
                     };
                 };
                 /** @description Not Found */
@@ -3438,9 +3438,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -3449,9 +3449,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3460,9 +3460,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3499,9 +3499,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProvinceDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProvinceDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProvinceDto"][];
+                        "text/plain": components["schemas"]["ResponseProvinceDto"][];
+                        "application/json": components["schemas"]["ResponseProvinceDto"][];
+                        "text/json": components["schemas"]["ResponseProvinceDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3510,9 +3510,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3553,9 +3553,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProvinceDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProvinceDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProvinceDto"];
+                        "text/plain": components["schemas"]["ResponseProvinceDto"];
+                        "application/json": components["schemas"]["ResponseProvinceDto"];
+                        "text/json": components["schemas"]["ResponseProvinceDto"];
                     };
                 };
                 /** @description Not Found */
@@ -3564,9 +3564,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3575,9 +3575,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3615,9 +3615,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"][];
+                        "text/plain": components["schemas"]["ResponseReservationDto"][];
+                        "application/json": components["schemas"]["ResponseReservationDto"][];
+                        "text/json": components["schemas"]["ResponseReservationDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3626,9 +3626,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3647,10 +3647,10 @@ export interface paths {
             /** @description Reservation request model to be added */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDto"];
+                    "application/json-patch+json": components["schemas"]["RequestReservationDto"];
+                    "application/json": components["schemas"]["RequestReservationDto"];
+                    "text/json": components["schemas"]["RequestReservationDto"];
+                    "application/*+json": components["schemas"]["RequestReservationDto"];
                 };
             };
             responses: {
@@ -3660,9 +3660,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
+                        "text/plain": components["schemas"]["ResponseReservationDto"];
+                        "application/json": components["schemas"]["ResponseReservationDto"];
+                        "text/json": components["schemas"]["ResponseReservationDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -3671,9 +3671,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3682,9 +3682,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3728,9 +3728,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationCalendarAgendaDto"][][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationCalendarAgendaDto"][][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationCalendarAgendaDto"][][];
+                        "text/plain": components["schemas"]["ResponseReservationCalendarAgendaDto"][][];
+                        "application/json": components["schemas"]["ResponseReservationCalendarAgendaDto"][][];
+                        "text/json": components["schemas"]["ResponseReservationCalendarAgendaDto"][][];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -3739,9 +3739,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3750,9 +3750,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3793,9 +3793,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
+                        "text/plain": components["schemas"]["ResponseReservationDto"];
+                        "application/json": components["schemas"]["ResponseReservationDto"];
+                        "text/json": components["schemas"]["ResponseReservationDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -3804,9 +3804,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3815,9 +3815,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3840,10 +3840,10 @@ export interface paths {
             /** @description Reservation request model to be updated */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDto"];
+                    "application/json-patch+json": components["schemas"]["RequestReservationDto"];
+                    "application/json": components["schemas"]["RequestReservationDto"];
+                    "text/json": components["schemas"]["RequestReservationDto"];
+                    "application/*+json": components["schemas"]["RequestReservationDto"];
                 };
             };
             responses: {
@@ -3853,9 +3853,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
+                        "text/plain": components["schemas"]["ResponseReservationDto"];
+                        "application/json": components["schemas"]["ResponseReservationDto"];
+                        "text/json": components["schemas"]["ResponseReservationDto"];
                     };
                 };
                 /** @description Not Found */
@@ -3864,9 +3864,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -3875,9 +3875,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3886,9 +3886,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3941,9 +3941,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -3952,9 +3952,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -3995,9 +3995,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDetailDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDetailDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDetailDto"];
+                        "text/plain": components["schemas"]["ResponseReservationDetailDto"];
+                        "application/json": components["schemas"]["ResponseReservationDetailDto"];
+                        "text/json": components["schemas"]["ResponseReservationDetailDto"];
                     };
                 };
                 /** @description Not Found */
@@ -4006,9 +4006,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4017,9 +4017,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4060,9 +4060,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDetailDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDetailDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDetailDto"];
+                        "text/plain": components["schemas"]["ResponseReservationDetailDto"];
+                        "application/json": components["schemas"]["ResponseReservationDetailDto"];
+                        "text/json": components["schemas"]["ResponseReservationDetailDto"];
                     };
                 };
                 /** @description Not Found */
@@ -4071,9 +4071,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4082,9 +4082,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4108,10 +4108,10 @@ export interface paths {
             /** @description List of details to be added */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDetailDto"][];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDetailDto"][];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDetailDto"][];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDetailDto"][];
+                    "application/json-patch+json": components["schemas"]["RequestReservationDetailDto"][];
+                    "application/json": components["schemas"]["RequestReservationDetailDto"][];
+                    "text/json": components["schemas"]["RequestReservationDetailDto"][];
+                    "application/*+json": components["schemas"]["RequestReservationDetailDto"][];
                 };
             };
             responses: {
@@ -4132,9 +4132,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4143,9 +4143,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4181,9 +4181,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationQuestionDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationQuestionDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationQuestionDto"][];
+                        "text/plain": components["schemas"]["ResponseReservationQuestionDto"][];
+                        "application/json": components["schemas"]["ResponseReservationQuestionDto"][];
+                        "text/json": components["schemas"]["ResponseReservationQuestionDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4192,9 +4192,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4235,9 +4235,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationQuestionDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationQuestionDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationQuestionDto"];
+                        "text/plain": components["schemas"]["ResponseReservationQuestionDto"];
+                        "application/json": components["schemas"]["ResponseReservationQuestionDto"];
+                        "text/json": components["schemas"]["ResponseReservationQuestionDto"];
                     };
                 };
                 /** @description Not Found */
@@ -4246,9 +4246,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4257,9 +4257,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4297,9 +4297,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseRoleDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseRoleDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseRoleDto"][];
+                        "text/plain": components["schemas"]["ResponseRoleDto"][];
+                        "application/json": components["schemas"]["ResponseRoleDto"][];
+                        "text/json": components["schemas"]["ResponseRoleDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4308,9 +4308,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4348,9 +4348,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"][];
+                        "text/plain": components["schemas"]["ResponseScheduleDto"][];
+                        "application/json": components["schemas"]["ResponseScheduleDto"][];
+                        "text/json": components["schemas"]["ResponseScheduleDto"][];
                     };
                 };
                 /** @description Not Found */
@@ -4359,9 +4359,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4370,9 +4370,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4391,10 +4391,10 @@ export interface paths {
             /** @description The schedule data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestScheduleDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestScheduleDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestScheduleDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestScheduleDto"];
+                    "application/json-patch+json": components["schemas"]["RequestScheduleDto"];
+                    "application/json": components["schemas"]["RequestScheduleDto"];
+                    "text/json": components["schemas"]["RequestScheduleDto"];
+                    "application/*+json": components["schemas"]["RequestScheduleDto"];
                 };
             };
             responses: {
@@ -4404,9 +4404,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
+                        "text/plain": components["schemas"]["ResponseScheduleDto"];
+                        "application/json": components["schemas"]["ResponseScheduleDto"];
+                        "text/json": components["schemas"]["ResponseScheduleDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -4415,9 +4415,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4426,9 +4426,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4467,9 +4467,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
+                        "text/plain": components["schemas"]["ResponseScheduleDto"];
+                        "application/json": components["schemas"]["ResponseScheduleDto"];
+                        "text/json": components["schemas"]["ResponseScheduleDto"];
                     };
                 };
                 /** @description Not Found */
@@ -4478,9 +4478,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4489,9 +4489,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4512,10 +4512,10 @@ export interface paths {
             /** @description The updated schedule data. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestScheduleDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestScheduleDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestScheduleDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestScheduleDto"];
+                    "application/json-patch+json": components["schemas"]["RequestScheduleDto"];
+                    "application/json": components["schemas"]["RequestScheduleDto"];
+                    "text/json": components["schemas"]["RequestScheduleDto"];
+                    "application/*+json": components["schemas"]["RequestScheduleDto"];
                 };
             };
             responses: {
@@ -4525,9 +4525,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
+                        "text/plain": components["schemas"]["ResponseScheduleDto"];
+                        "application/json": components["schemas"]["ResponseScheduleDto"];
+                        "text/json": components["schemas"]["ResponseScheduleDto"];
                     };
                 };
                 /** @description Not Found */
@@ -4536,9 +4536,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -4547,9 +4547,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4558,9 +4558,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4598,9 +4598,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Conflict */
@@ -4609,9 +4609,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4620,9 +4620,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4657,9 +4657,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"][];
+                        "text/plain": components["schemas"]["ResponseServiceDto"][];
+                        "application/json": components["schemas"]["ResponseServiceDto"][];
+                        "text/json": components["schemas"]["ResponseServiceDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4668,9 +4668,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4689,10 +4689,10 @@ export interface paths {
             /** @description Service request model to be added */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestServiceDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestServiceDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestServiceDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestServiceDto"];
+                    "application/json-patch+json": components["schemas"]["RequestServiceDto"];
+                    "application/json": components["schemas"]["RequestServiceDto"];
+                    "text/json": components["schemas"]["RequestServiceDto"];
+                    "application/*+json": components["schemas"]["RequestServiceDto"];
                 };
             };
             responses: {
@@ -4702,9 +4702,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
+                        "text/plain": components["schemas"]["ResponseServiceDto"];
+                        "application/json": components["schemas"]["ResponseServiceDto"];
+                        "text/json": components["schemas"]["ResponseServiceDto"];
                     };
                 };
                 /** @description Unauthorized */
@@ -4727,9 +4727,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4738,9 +4738,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4779,9 +4779,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
+                        "text/plain": components["schemas"]["ResponseServiceDto"];
+                        "application/json": components["schemas"]["ResponseServiceDto"];
+                        "text/json": components["schemas"]["ResponseServiceDto"];
                     };
                 };
                 /** @description Not Found */
@@ -4790,9 +4790,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4801,9 +4801,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4824,10 +4824,10 @@ export interface paths {
             /** @description Service request model to be updated */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestServiceDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestServiceDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestServiceDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestServiceDto"];
+                    "application/json-patch+json": components["schemas"]["RequestServiceDto"];
+                    "application/json": components["schemas"]["RequestServiceDto"];
+                    "text/json": components["schemas"]["RequestServiceDto"];
+                    "application/*+json": components["schemas"]["RequestServiceDto"];
                 };
             };
             responses: {
@@ -4837,9 +4837,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
+                        "text/plain": components["schemas"]["ResponseServiceDto"];
+                        "application/json": components["schemas"]["ResponseServiceDto"];
+                        "text/json": components["schemas"]["ResponseServiceDto"];
                     };
                 };
                 /** @description Unauthorized */
@@ -4862,9 +4862,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -4873,9 +4873,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4884,9 +4884,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4913,9 +4913,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
+                        "text/plain": components["schemas"]["ResponseServiceDto"];
+                        "application/json": components["schemas"]["ResponseServiceDto"];
+                        "text/json": components["schemas"]["ResponseServiceDto"];
                     };
                 };
                 /** @description Not Found */
@@ -4924,9 +4924,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4935,9 +4935,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -4972,9 +4972,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseTaxDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseTaxDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseTaxDto"][];
+                        "text/plain": components["schemas"]["ResponseTaxDto"][];
+                        "application/json": components["schemas"]["ResponseTaxDto"][];
+                        "text/json": components["schemas"]["ResponseTaxDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -4983,9 +4983,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5023,9 +5023,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseTypeServiceDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseTypeServiceDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseTypeServiceDto"][];
+                        "text/plain": components["schemas"]["ResponseTypeServiceDto"][];
+                        "application/json": components["schemas"]["ResponseTypeServiceDto"][];
+                        "text/json": components["schemas"]["ResponseTypeServiceDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5034,9 +5034,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5074,9 +5074,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUnitMeasureDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUnitMeasureDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUnitMeasureDto"][];
+                        "text/plain": components["schemas"]["ResponseUnitMeasureDto"][];
+                        "application/json": components["schemas"]["ResponseUnitMeasureDto"][];
+                        "text/json": components["schemas"]["ResponseUnitMeasureDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5085,9 +5085,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5125,9 +5125,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserDto"][];
+                        "text/plain": components["schemas"]["ResponseUserDto"][];
+                        "application/json": components["schemas"]["ResponseUserDto"][];
+                        "text/json": components["schemas"]["ResponseUserDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5136,9 +5136,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5181,9 +5181,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserDto"][];
+                        "text/plain": components["schemas"]["ResponseUserDto"][];
+                        "application/json": components["schemas"]["ResponseUserDto"][];
+                        "text/json": components["schemas"]["ResponseUserDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5192,9 +5192,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5248,9 +5248,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5259,9 +5259,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5299,10 +5299,10 @@ export interface paths {
             /** @description List of users */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestUserBranchDto"][];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestUserBranchDto"][];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestUserBranchDto"][];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestUserBranchDto"][];
+                    "application/json-patch+json": components["schemas"]["RequestUserBranchDto"][];
+                    "application/json": components["schemas"]["RequestUserBranchDto"][];
+                    "text/json": components["schemas"]["RequestUserBranchDto"][];
+                    "application/*+json": components["schemas"]["RequestUserBranchDto"][];
                 };
             };
             responses: {
@@ -5323,9 +5323,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5334,9 +5334,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5376,9 +5376,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"][];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"][];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"][];
+                        "text/plain": components["schemas"]["ResponseVendorDto"][];
+                        "application/json": components["schemas"]["ResponseVendorDto"][];
+                        "text/json": components["schemas"]["ResponseVendorDto"][];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5387,9 +5387,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5408,10 +5408,10 @@ export interface paths {
             /** @description The supplier data to be created. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestVendorDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestVendorDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestVendorDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestVendorDto"];
+                    "application/json-patch+json": components["schemas"]["RequestVendorDto"];
+                    "application/json": components["schemas"]["RequestVendorDto"];
+                    "text/json": components["schemas"]["RequestVendorDto"];
+                    "application/*+json": components["schemas"]["RequestVendorDto"];
                 };
             };
             responses: {
@@ -5421,9 +5421,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
+                        "text/plain": components["schemas"]["ResponseVendorDto"];
+                        "application/json": components["schemas"]["ResponseVendorDto"];
+                        "text/json": components["schemas"]["ResponseVendorDto"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -5432,9 +5432,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5443,9 +5443,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5484,9 +5484,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
+                        "text/plain": components["schemas"]["ResponseVendorDto"];
+                        "application/json": components["schemas"]["ResponseVendorDto"];
+                        "text/json": components["schemas"]["ResponseVendorDto"];
                     };
                 };
                 /** @description Not Found */
@@ -5495,9 +5495,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5506,9 +5506,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5529,10 +5529,10 @@ export interface paths {
             /** @description The updated supplier data. */
             requestBody?: {
                 content: {
-                    "application/json-patch+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestVendorDto"];
-                    "application/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestVendorDto"];
-                    "text/json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestVendorDto"];
-                    "application/*+json": components["schemas"]["BaseReservation.Application.RequestDTOs.RequestVendorDto"];
+                    "application/json-patch+json": components["schemas"]["RequestVendorDto"];
+                    "application/json": components["schemas"]["RequestVendorDto"];
+                    "text/json": components["schemas"]["RequestVendorDto"];
+                    "application/*+json": components["schemas"]["RequestVendorDto"];
                 };
             };
             responses: {
@@ -5542,9 +5542,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
-                        "application/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
-                        "text/json": components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
+                        "text/plain": components["schemas"]["ResponseVendorDto"];
+                        "application/json": components["schemas"]["ResponseVendorDto"];
+                        "text/json": components["schemas"]["ResponseVendorDto"];
                     };
                 };
                 /** @description Not Found */
@@ -5553,9 +5553,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Unprocessable Content */
@@ -5564,9 +5564,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5575,9 +5575,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5615,9 +5615,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -5626,9 +5626,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["BaseReservation.WebAPI.ErrorDetailsBaseReservation"];
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
                     };
                 };
             };
@@ -5642,15 +5642,454 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        AuthenticationResult: {
+            success?: boolean;
+            errors?: string[] | null;
+            token?: string | null;
+            refreshToken?: string | null;
+        };
+        Branch: {
+            /** Format: int32 */
+            id?: number;
+            name: string;
+            description: string;
+            /** Format: int32 */
+            telephone: number;
+            /** Format: email */
+            email: string;
+            /** Format: int32 */
+            districtId: number;
+            address?: string | null;
+            active?: boolean;
+            invoices?: components["schemas"]["Invoice"][] | null;
+            districtIdNavigation?: components["schemas"]["District"];
+            inventories?: components["schemas"]["Inventory"][] | null;
+            orders?: components["schemas"]["Order"][] | null;
+            reservations?: components["schemas"]["Reservation"][] | null;
+            branchHolidays?: components["schemas"]["BranchHoliday"][] | null;
+            branchSchedules?: components["schemas"]["BranchSchedule"][] | null;
+            userBranches?: components["schemas"]["UserBranch"][] | null;
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        BranchHoliday: {
+            /** Format: int32 */
+            id?: number;
+            /** Format: int32 */
+            holidayId: number;
+            /** Format: int32 */
+            branchId: number;
+            /** Format: int32 */
+            year?: number;
+            /** Format: date */
+            date?: string;
+            holidayIdNavigation?: components["schemas"]["Holiday"];
+            branchIdNavigation?: components["schemas"]["Branch"];
+        };
+        BranchSchedule: {
+            /** Format: int32 */
+            id?: number;
+            /** Format: int32 */
+            branchId: number;
+            /** Format: int32 */
+            scheduleId: number;
+            scheduleIdNavigation?: components["schemas"]["Schedule"];
+            branchIdNavigation?: components["schemas"]["Branch"];
+            branchScheduleBlocks?: components["schemas"]["BranchScheduleBlock"][] | null;
+        };
+        BranchScheduleBlock: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: int32 */
+            branchScheduleId: number;
+            /** Format: time */
+            startHour: string;
+            /** Format: time */
+            endHour: string;
+            active?: boolean;
+            branchScheduleIdNavigation?: components["schemas"]["BranchSchedule"];
+        };
+        Canton: {
+            /** Format: int32 */
+            id?: number;
+            name?: string | null;
+            /** Format: int32 */
+            provinceId?: number;
+            districts?: components["schemas"]["District"][] | null;
+            provinceIdNavigation?: components["schemas"]["Province"];
+        };
+        Category: {
+            /** Format: int32 */
+            id?: number;
+            code?: string | null;
+            name?: string | null;
+            products?: components["schemas"]["Product"][] | null;
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        Contact: {
+            /** Format: int32 */
+            id?: number;
+            firstName?: string | null;
+            lastName?: string | null;
+            /** Format: int32 */
+            telephone?: number;
+            email?: string | null;
+            /** Format: int32 */
+            vendorId?: number;
+            active?: boolean;
+            vendorIdNavigation?: components["schemas"]["Vendor"];
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        Customer: {
+            /** Format: int32 */
+            id?: number;
+            firstName?: string | null;
+            lastName?: string | null;
+            email?: string | null;
+            /** Format: int32 */
+            telephone?: number;
+            /** Format: int32 */
+            districtId?: number;
+            address?: string | null;
+            active?: boolean;
+            invoices?: components["schemas"]["Invoice"][] | null;
+            districtIdNavigation?: components["schemas"]["District"];
+            orders?: components["schemas"]["Order"][] | null;
+            reservations?: components["schemas"]["Reservation"][] | null;
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        District: {
+            /** Format: int32 */
+            id?: number;
+            name?: string | null;
+            /** Format: int32 */
+            cantonId?: number;
+            customers?: components["schemas"]["Customer"][] | null;
+            cantonIdNavigation?: components["schemas"]["Canton"];
+            vendors?: components["schemas"]["Vendor"][] | null;
+            branches?: components["schemas"]["Branch"][] | null;
+            users?: components["schemas"]["User"][] | null;
+        };
+        /** @description Class to specify error properties for exceptions */
+        ErrorDetailsBaseReservation: {
+            /** @description Type identifier */
+            type?: string | null;
+            /**
+             * Format: int32
+             * @description Status code for error
+             */
+            statusCode?: number;
+            /** @description Error message */
+            message?: string | null;
+            /** @description Error detail */
+            detail?: string | null;
+            logLevel?: components["schemas"]["LogLevel"];
+        };
+        Gender: {
+            /** Format: int32 */
+            id?: number;
+            name?: string | null;
+            users?: components["schemas"]["User"][] | null;
+        };
+        Holiday: {
+            /** Format: int32 */
+            id?: number;
+            name: string;
+            month?: components["schemas"]["Month"];
+            /** Format: int32 */
+            day?: number;
+            active?: boolean;
+            branchHolidays?: components["schemas"]["BranchHoliday"][] | null;
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        Inventory: {
+            /** Format: int32 */
+            id?: number;
+            /** Format: int32 */
+            branchId?: number;
+            name?: string | null;
+            typeInventory?: components["schemas"]["TypeInventory"];
+            active?: boolean;
+            branchIdNavigation?: components["schemas"]["Branch"];
+            inventoryProducts?: components["schemas"]["InventoryProduct"][] | null;
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        InventoryProduct: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: int32 */
+            inventoryId?: number;
+            /** Format: int32 */
+            productId?: number;
+            /** Format: double */
+            assignable?: number;
+            /** Format: double */
+            mininum?: number;
+            /** Format: double */
+            maximum?: number;
+            inventoryIdNavigation?: components["schemas"]["Inventory"];
+            productIdNavigation?: components["schemas"]["Product"];
+            inventoryProductTransactions?: components["schemas"]["InventoryProductTransaction"][] | null;
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        InventoryProductTransaction: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: int64 */
+            inventoryProductId?: number;
+            transactionType?: components["schemas"]["TransactionTypeInventory"];
+            /** Format: double */
+            quantity?: number;
+            inventoryProductIdNavigation?: components["schemas"]["InventoryProduct"];
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        Invoice: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: int32 */
+            branchId?: number;
+            /** Format: int64 */
+            orderId?: number | null;
+            /** Format: int32 */
+            customerId?: number;
+            customerName: string;
+            /** Format: date */
+            date?: string;
+            /** Format: int32 */
+            paymentTypeId?: number;
+            /** Format: int32 */
+            number?: number;
+            /** Format: int32 */
+            taxId?: number;
+            /** Format: double */
+            taxRate?: number;
+            /** Format: double */
+            subTotal?: number;
+            /** Format: double */
+            tax?: number;
+            /** Format: double */
+            total?: number;
+            invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
+            customerIdNavigation?: components["schemas"]["Customer"];
+            taxIdNavigation?: components["schemas"]["Tax"];
+            orderIdNavigation?: components["schemas"]["Order"];
+            branchIdNavigation?: components["schemas"]["Branch"];
+            paymentTypeIdNavigation?: components["schemas"]["PaymentType"];
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        InvoiceDetail: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: int64 */
+            invoiceId?: number;
+            /** Format: int32 */
+            serviceId?: number | null;
+            /** Format: int32 */
+            productId?: number | null;
+            /** Format: int32 */
+            lineNumber?: number;
+            /** Format: int32 */
+            quantity?: number;
+            /** Format: double */
+            unitPrice?: number;
+            /** Format: double */
+            subTotal?: number;
+            /** Format: double */
+            tax?: number;
+            /** Format: double */
+            total?: number;
+            invoiceDetailProducts?: components["schemas"]["InvoiceDetailProduct"][] | null;
+            invoiceIdNavigation?: components["schemas"]["Invoice"];
+            productIdNavigation?: components["schemas"]["Product"];
+            serviceIdNavigation?: components["schemas"]["Service"];
+        };
+        InvoiceDetailProduct: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: int64 */
+            invoiceDetailId?: number;
+            /** Format: int32 */
+            productId?: number;
+            /** Format: double */
+            quantity?: number;
+            invoiceDetailIdNavigation?: components["schemas"]["InvoiceDetail"];
+            productIdNavigation?: components["schemas"]["Product"];
+        };
         /** @enum {string} */
-        "BaseReservation.Application.Enums.Month": "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
+        LogLevel: "Trace" | "Debug" | "Information" | "Warning" | "Error" | "Critical" | "None";
         /** @enum {string} */
-        "BaseReservation.Application.Enums.TransactionTypeInventory": "Entrada" | "Salida";
+        Month: "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
         /** @enum {string} */
-        "BaseReservation.Application.Enums.TypeInventory": "Venta" | "Compra";
-        /** @enum {string} */
-        "BaseReservation.Application.Enums.WeekDay": "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
-        "BaseReservation.Application.RequestDTOs.RequestBranchDto": {
+        MonthApplication: "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
+        Order: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: int32 */
+            branchId?: number;
+            /** Format: int32 */
+            reservationId?: number;
+            /** Format: int32 */
+            customerId?: number;
+            customerName?: string | null;
+            /** Format: date */
+            date?: string;
+            /** Format: int32 */
+            paymentTypeId?: number;
+            /** Format: int32 */
+            number?: number;
+            /** Format: int32 */
+            taxId?: number;
+            /** Format: double */
+            taxRate?: number;
+            /** Format: double */
+            subTotal?: number;
+            /** Format: double */
+            tax?: number;
+            /** Format: double */
+            total?: number;
+            /** Format: int32 */
+            statusOrderId?: number;
+            orderDetails?: components["schemas"]["OrderDetail"][] | null;
+            invoices?: components["schemas"]["Invoice"][] | null;
+            customerIdNavigation?: components["schemas"]["Customer"];
+            statusOrderIdNavigation?: components["schemas"]["StatusOrder"];
+            taxIdNavigation?: components["schemas"]["Tax"];
+            reservationIdNavigation?: components["schemas"]["Reservation"];
+            branchIdNavigation?: components["schemas"]["Branch"];
+            paymentTypeIdNavigation?: components["schemas"]["PaymentType"];
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        OrderDetail: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: int64 */
+            orderId?: number;
+            /** Format: int32 */
+            serviceId?: number | null;
+            /** Format: int32 */
+            productId?: number | null;
+            /** Format: int32 */
+            lineNumber?: number;
+            /** Format: int32 */
+            quantity?: number;
+            /** Format: double */
+            unitPrice?: number;
+            /** Format: double */
+            subTotal?: number;
+            /** Format: double */
+            tax?: number;
+            /** Format: double */
+            total?: number;
+            orderDetailProducts?: components["schemas"]["OrderDetailProduct"][] | null;
+            orderIdNavigation?: components["schemas"]["Order"];
+            productIdNavigation?: components["schemas"]["Product"];
+            serviceIdNavigation?: components["schemas"]["Service"];
+        };
+        OrderDetailProduct: {
+            /** Format: int64 */
+            id?: number;
+            /** Format: int64 */
+            orderDetailId?: number;
+            /** Format: int32 */
+            productId?: number;
+            /** Format: double */
+            quantity?: number;
+            orderDetailIdNavigation?: components["schemas"]["OrderDetail"];
+            productIdNavigation?: components["schemas"]["Product"];
+        };
+        PaymentType: {
+            /** Format: int32 */
+            id?: number;
+            description?: string | null;
+            referenceNumber?: string | null;
+            invoices?: components["schemas"]["Invoice"][] | null;
+            orders?: components["schemas"]["Order"][] | null;
+        };
+        Product: {
+            /** Format: int32 */
+            id?: number;
+            name: string;
+            description: string;
+            brand: string;
+            /** Format: int32 */
+            categoryId: number;
+            /** Format: double */
+            price?: number;
+            sku: string;
+            /** Format: int32 */
+            unitMeasureId: number;
+            active?: boolean;
+            invoiceDetailProducts?: components["schemas"]["InvoiceDetailProduct"][] | null;
+            invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
+            orderDetailProducts?: components["schemas"]["OrderDetailProduct"][] | null;
+            orderDetails?: components["schemas"]["OrderDetail"][] | null;
+            reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
+            categoryIdNavigation?: components["schemas"]["Category"];
+            unitMeasureIdNavigation?: components["schemas"]["UnitMeasure"];
+            inventoryProducts?: components["schemas"]["InventoryProduct"][] | null;
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        Province: {
+            /** Format: int32 */
+            id?: number;
+            name?: string | null;
+            cantons?: components["schemas"]["Canton"][] | null;
+        };
+        RequestBranchDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
@@ -5663,7 +6102,7 @@ export interface components {
             address?: string | null;
             active?: boolean;
         };
-        "BaseReservation.Application.RequestDTOs.RequestBranchHolidayDto": {
+        RequestBranchHolidayDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
@@ -5675,7 +6114,7 @@ export interface components {
             /** Format: int32 */
             year?: number;
         };
-        "BaseReservation.Application.RequestDTOs.RequestBranchScheduleBlockDto": {
+        RequestBranchScheduleBlockDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int32 */
@@ -5686,7 +6125,7 @@ export interface components {
             endHour?: string;
             active?: boolean;
         };
-        "BaseReservation.Application.RequestDTOs.RequestBranchScheduleDto": {
+        RequestBranchScheduleDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
@@ -5694,25 +6133,25 @@ export interface components {
             /** Format: int32 */
             scheduleId?: number;
         };
-        "BaseReservation.Application.RequestDTOs.RequestHolidayDto": {
+        RequestHolidayDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             active?: boolean;
-            month?: components["schemas"]["BaseReservation.Application.Enums.Month"];
+            month?: components["schemas"]["MonthApplication"];
             /** Format: int32 */
             day?: number;
         };
-        "BaseReservation.Application.RequestDTOs.RequestInventoryDto": {
+        RequestInventoryDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             /** Format: int32 */
             branchId?: number;
-            typeInventory?: components["schemas"]["BaseReservation.Application.Enums.TypeInventory"];
+            typeInventory?: components["schemas"]["TypeInventoryApplication"];
             active?: boolean;
         };
-        "BaseReservation.Application.RequestDTOs.RequestInventoryProductDto": {
+        RequestInventoryProductDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int32 */
@@ -5726,16 +6165,16 @@ export interface components {
             /** Format: double */
             maximum?: number;
         };
-        "BaseReservation.Application.RequestDTOs.RequestInventoryProductTransactionDto": {
+        RequestInventoryProductTransactionDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int64 */
             inventoryProductId?: number;
-            transactionType?: components["schemas"]["BaseReservation.Application.Enums.TransactionTypeInventory"];
+            transactionType?: components["schemas"]["TransactionTypeInventoryApplication"];
             /** Format: double */
             quantity?: number;
         };
-        "BaseReservation.Application.RequestDTOs.RequestInvoiceDetailDto": {
+        RequestInvoiceDetailDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int64 */
@@ -5757,7 +6196,7 @@ export interface components {
             /** Format: double */
             total?: number;
         };
-        "BaseReservation.Application.RequestDTOs.RequestInvoiceDto": {
+        RequestInvoiceDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int32 */
@@ -5783,9 +6222,9 @@ export interface components {
             tax?: number;
             /** Format: double */
             total?: number;
-            invoiceDetails?: components["schemas"]["BaseReservation.Application.RequestDTOs.RequestInvoiceDetailDto"][] | null;
+            invoiceDetails?: components["schemas"]["RequestInvoiceDetailDto"][] | null;
         };
-        "BaseReservation.Application.RequestDTOs.RequestOrderDetailDto": {
+        RequestOrderDetailDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int64 */
@@ -5807,7 +6246,7 @@ export interface components {
             /** Format: double */
             total?: number;
         };
-        "BaseReservation.Application.RequestDTOs.RequestOrderDto": {
+        RequestOrderDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int32 */
@@ -5834,9 +6273,9 @@ export interface components {
             statusOrderId?: string;
             /** Format: int32 */
             branchId?: number;
-            orderDetails?: components["schemas"]["BaseReservation.Application.RequestDTOs.RequestOrderDetailDto"][] | null;
+            orderDetails?: components["schemas"]["RequestOrderDetailDto"][] | null;
         };
-        "BaseReservation.Application.RequestDTOs.RequestProductDto": {
+        RequestProductDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
@@ -5851,7 +6290,7 @@ export interface components {
             unitMeasureId?: number;
             active?: boolean;
         };
-        "BaseReservation.Application.RequestDTOs.RequestReservationDetailDto": {
+        RequestReservationDetailDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
@@ -5861,7 +6300,7 @@ export interface components {
             /** Format: int32 */
             productId?: number | null;
         };
-        "BaseReservation.Application.RequestDTOs.RequestReservationDto": {
+        RequestReservationDto: {
             /** Format: int32 */
             id?: number;
             /** Format: date */
@@ -5875,10 +6314,10 @@ export interface components {
             customerName?: string | null;
             status?: string | null;
             active?: boolean;
-            reservationQuestion?: components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationQuestionDto"][] | null;
-            reservationDetails?: components["schemas"]["BaseReservation.Application.RequestDTOs.RequestReservationDetailDto"][] | null;
+            reservationQuestion?: components["schemas"]["RequestReservationQuestionDto"][] | null;
+            reservationDetails?: components["schemas"]["RequestReservationDetailDto"][] | null;
         };
-        "BaseReservation.Application.RequestDTOs.RequestReservationQuestionDto": {
+        RequestReservationQuestionDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
@@ -5887,16 +6326,16 @@ export interface components {
             active?: boolean;
             answer?: string | null;
         };
-        "BaseReservation.Application.RequestDTOs.RequestScheduleDto": {
+        RequestScheduleDto: {
             /** Format: int32 */
             id?: number;
-            day?: components["schemas"]["BaseReservation.Application.Enums.WeekDay"];
+            day?: components["schemas"]["WeekDayApplication"];
             /** Format: time */
             startHour?: string;
             /** Format: time */
             endHour?: string;
         };
-        "BaseReservation.Application.RequestDTOs.RequestServiceDto": {
+        RequestServiceDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
@@ -5908,7 +6347,7 @@ export interface components {
             observation?: string | null;
             active?: boolean;
         };
-        "BaseReservation.Application.RequestDTOs.RequestUserBranchDto": {
+        RequestUserBranchDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
@@ -5916,11 +6355,11 @@ export interface components {
             /** Format: int32 */
             branchId?: number;
         };
-        "BaseReservation.Application.RequestDTOs.RequestUserLoginDto": {
+        RequestUserLoginDto: {
             email?: string | null;
             password?: string | null;
         };
-        "BaseReservation.Application.RequestDTOs.RequestVendorDto": {
+        RequestVendorDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
@@ -5934,17 +6373,62 @@ export interface components {
             address?: string | null;
             active?: boolean;
         };
-        "BaseReservation.Application.ResponseDTOs.Authentication.AuthenticationResult": {
-            success?: boolean;
-            errors?: string[] | null;
-            token?: string | null;
-            refreshToken?: string | null;
+        Reservation: {
+            /** Format: int32 */
+            id?: number;
+            /** Format: int32 */
+            branchId?: number;
+            /** Format: int32 */
+            customerId?: number;
+            customerName?: string | null;
+            /** Format: date */
+            date: string;
+            /** Format: time */
+            hour: string;
+            status?: string | null;
+            active?: boolean;
+            reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
+            customerIdNavigation?: components["schemas"]["Customer"];
+            branchIdNavigation?: components["schemas"]["Branch"];
+            orders?: components["schemas"]["Order"][] | null;
+            reservationQuestions?: components["schemas"]["ReservationQuestion"][] | null;
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.Authentication.TokenModel": {
-            token?: string | null;
-            refreshToken?: string | null;
+        ReservationDetail: {
+            /** Format: int32 */
+            id?: number;
+            /** Format: int32 */
+            reservationId: number;
+            /** Format: int32 */
+            serviceId?: number | null;
+            /** Format: int32 */
+            productId?: number | null;
+            productIdNavigation?: components["schemas"]["Product"];
+            reservationIdNavigation?: components["schemas"]["Reservation"];
+            serviceIdNavigation?: components["schemas"]["Service"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseBranchDto": {
+        ReservationQuestion: {
+            /** Format: int32 */
+            id?: number;
+            /** Format: int32 */
+            reservationId?: number;
+            question?: string | null;
+            answer?: string | null;
+            active?: boolean;
+            reservationIdNavigation?: components["schemas"]["Reservation"];
+            /** Format: date-time */
+            created?: string;
+            createdBy?: string | null;
+            /** Format: date-time */
+            updated?: string | null;
+            updatedBy?: string | null;
+        };
+        ResponseBranchDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
@@ -5956,14 +6440,14 @@ export interface components {
             districtId?: number;
             address?: string | null;
             active?: boolean;
-            district?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"];
-            inventories?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"][] | null;
-            branchSchedules?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto"][] | null;
-            userBranches?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserBranchDto"][] | null;
-            branchHolidays?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchHolidayDto"][] | null;
-            reservas?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"][] | null;
-            orders?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"][] | null;
-            invoices?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"][] | null;
+            district?: components["schemas"]["ResponseDistrictDto"];
+            inventories?: components["schemas"]["ResponseInventoryDto"][] | null;
+            branchSchedules?: components["schemas"]["ResponseBranchScheduleDto"][] | null;
+            userBranches?: components["schemas"]["ResponseUserBranchDto"][] | null;
+            branchHolidays?: components["schemas"]["ResponseBranchHolidayDto"][] | null;
+            reservas?: components["schemas"]["ResponseReservationDto"][] | null;
+            orders?: components["schemas"]["ResponseOrderDto"][] | null;
+            invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -5971,7 +6455,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseBranchHolidayDto": {
+        ResponseBranchHolidayDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
@@ -5982,10 +6466,10 @@ export interface components {
             date?: string;
             /** Format: int32 */
             year?: number;
-            holiday?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseHolidayDto"];
-            branch?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
+            holiday?: components["schemas"]["ResponseHolidayDto"];
+            branch?: components["schemas"]["ResponseBranchDto"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto": {
+        ResponseBranchScheduleBlockDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int32 */
@@ -5995,34 +6479,34 @@ export interface components {
             /** Format: time */
             endHour?: string;
             active?: boolean;
-            branchSchedule?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto"];
+            branchSchedule?: components["schemas"]["ResponseBranchScheduleDto"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto": {
+        ResponseBranchScheduleDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
             branchId?: number;
             /** Format: int32 */
             scheduleId?: number;
-            schedule?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseScheduleDto"];
-            branch?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-            branchScheduleBlocks?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleBlockDto"][] | null;
+            schedule?: components["schemas"]["ResponseScheduleDto"];
+            branch?: components["schemas"]["ResponseBranchDto"];
+            branchScheduleBlocks?: components["schemas"]["ResponseBranchScheduleBlockDto"][] | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseCantonDto": {
+        ResponseCantonDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             /** Format: int32 */
             provinceId?: number;
-            districts?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"][] | null;
-            province?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProvinceDto"];
+            districts?: components["schemas"]["ResponseDistrictDto"][] | null;
+            province?: components["schemas"]["ResponseProvinceDto"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseCategoryDto": {
+        ResponseCategoryDto: {
             /** Format: int32 */
             id?: number;
             code?: string | null;
             name?: string | null;
-            products?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"][] | null;
+            products?: components["schemas"]["ResponseProductDto"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6030,7 +6514,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseContactDto": {
+        ResponseContactDto: {
             /** Format: int32 */
             id?: number;
             firstName?: string | null;
@@ -6041,7 +6525,7 @@ export interface components {
             /** Format: int32 */
             vendorId?: number;
             active?: boolean;
-            vendor?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"];
+            vendor?: components["schemas"]["ResponseVendorDto"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6049,7 +6533,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseCustomerDto": {
+        ResponseCustomerDto: {
             /** Format: int32 */
             id?: number;
             firstName?: string | null;
@@ -6061,9 +6545,9 @@ export interface components {
             districtId?: number;
             address?: string | null;
             active?: boolean;
-            invoices?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"][] | null;
-            reservations?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"][] | null;
-            district?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"];
+            invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
+            reservations?: components["schemas"]["ResponseReservationDto"][] | null;
+            district?: components["schemas"]["ResponseDistrictDto"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6071,27 +6555,27 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseDistrictDto": {
+        ResponseDistrictDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             /** Format: int32 */
             cantonId?: number;
-            customers?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"][] | null;
-            canton?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCantonDto"];
-            vendors?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseVendorDto"][] | null;
-            branches?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"][] | null;
-            users?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserDto"][] | null;
+            customers?: components["schemas"]["ResponseCustomerDto"][] | null;
+            canton?: components["schemas"]["ResponseCantonDto"];
+            vendors?: components["schemas"]["ResponseVendorDto"][] | null;
+            branches?: components["schemas"]["ResponseBranchDto"][] | null;
+            users?: components["schemas"]["ResponseUserDto"][] | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseHolidayDto": {
+        ResponseHolidayDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             active?: boolean;
-            month?: components["schemas"]["BaseReservation.Application.Enums.Month"];
+            month?: components["schemas"]["MonthApplication"];
             /** Format: int32 */
             day?: number;
-            branchHolidays?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchHolidayDto"][] | null;
+            branchHolidays?: components["schemas"]["ResponseBranchHolidayDto"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6099,16 +6583,16 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseInventoryDto": {
+        ResponseInventoryDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             /** Format: int32 */
             idSucursal?: number;
-            typeInventory?: components["schemas"]["BaseReservation.Application.Enums.TypeInventory"];
+            typeInventory?: components["schemas"]["TypeInventoryApplication"];
             active?: boolean;
-            branch?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-            inventoryProducts?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"][] | null;
+            branch?: components["schemas"]["ResponseBranchDto"];
+            inventoryProducts?: components["schemas"]["ResponseInventoryProductDto"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6116,7 +6600,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto": {
+        ResponseInventoryProductDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int32 */
@@ -6129,8 +6613,8 @@ export interface components {
             minimum?: number;
             /** Format: double */
             maximum?: number;
-            inventory?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"];
-            product?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
+            inventory?: components["schemas"]["ResponseInventoryDto"];
+            product?: components["schemas"]["ResponseProductDto"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6138,15 +6622,15 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseInventoryProductTransactionDto": {
+        ResponseInventoryProductTransactionDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int64 */
             idInventarioProducto?: number;
-            transactionType?: components["schemas"]["BaseReservation.Application.Enums.TransactionTypeInventory"];
+            transactionType?: components["schemas"]["TransactionTypeInventoryApplication"];
             /** Format: double */
             quantity?: number;
-            inventoryProduct?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"];
+            inventoryProduct?: components["schemas"]["ResponseInventoryProductDto"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6154,7 +6638,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto": {
+        ResponseInvoiceDetailDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int64 */
@@ -6175,11 +6659,11 @@ export interface components {
             tax?: number;
             /** Format: double */
             total?: number;
-            invoiceDetailProducts?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailProductDto"][] | null;
-            invoice?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"];
-            service?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
+            invoiceDetailProducts?: components["schemas"]["ResponseInvoiceDetailProductDto"][] | null;
+            invoice?: components["schemas"]["ResponseInvoiceDto"];
+            service?: components["schemas"]["ResponseServiceDto"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailProductDto": {
+        ResponseInvoiceDetailProductDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int64 */
@@ -6188,10 +6672,10 @@ export interface components {
             productId?: number;
             /** Format: double */
             quantity?: number;
-            invoiceDetail?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto"];
-            product?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
+            invoiceDetail?: components["schemas"]["ResponseInvoiceDetailDto"];
+            product?: components["schemas"]["ResponseProductDto"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto": {
+        ResponseInvoiceDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int32 */
@@ -6217,12 +6701,12 @@ export interface components {
             total?: number;
             /** Format: int32 */
             branchId?: number;
-            invoiceDetails?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto"][] | null;
-            customer?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"];
-            taxInfo?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseTaxDto"];
-            paymentType?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponsePaymentTypeDto"];
-            order?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"];
-            branch?: components["schemas"]["BaseReservation.Infrastructure.Models.Branch"];
+            invoiceDetails?: components["schemas"]["ResponseInvoiceDetailDto"][] | null;
+            customer?: components["schemas"]["ResponseCustomerDto"];
+            taxInfo?: components["schemas"]["ResponseTaxDto"];
+            paymentType?: components["schemas"]["ResponsePaymentTypeDto"];
+            order?: components["schemas"]["ResponseOrderDto"];
+            branch?: components["schemas"]["Branch"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6230,7 +6714,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseOrderDetailDto": {
+        ResponseOrderDetailDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int64 */
@@ -6251,11 +6735,11 @@ export interface components {
             tax?: number;
             /** Format: double */
             total?: number;
-            orderDetailProducts?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDetailProductDto"][] | null;
-            order?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"];
-            service?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
+            orderDetailProducts?: components["schemas"]["ResponseOrderDetailProductDto"][] | null;
+            order?: components["schemas"]["ResponseOrderDto"];
+            service?: components["schemas"]["ResponseServiceDto"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseOrderDetailProductDto": {
+        ResponseOrderDetailProductDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int64 */
@@ -6264,10 +6748,10 @@ export interface components {
             productId?: number;
             /** Format: double */
             quantity?: number;
-            orderDetail?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDetailDto"];
-            product?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
+            orderDetail?: components["schemas"]["ResponseOrderDetailDto"];
+            product?: components["schemas"]["ResponseProductDto"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseOrderDto": {
+        ResponseOrderDto: {
             /** Format: int64 */
             id?: number;
             /** Format: int32 */
@@ -6295,12 +6779,12 @@ export interface components {
             statusOrderId?: number;
             /** Format: int32 */
             branchId?: number;
-            orderDetails?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDetailDto"][] | null;
-            customer?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"];
-            taxInfo?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseTaxDto"];
-            paymentType?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponsePaymentTypeDto"];
-            reservation?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
-            branch?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
+            orderDetails?: components["schemas"]["ResponseOrderDetailDto"][] | null;
+            customer?: components["schemas"]["ResponseCustomerDto"];
+            taxInfo?: components["schemas"]["ResponseTaxDto"];
+            paymentType?: components["schemas"]["ResponsePaymentTypeDto"];
+            reservation?: components["schemas"]["ResponseReservationDto"];
+            branch?: components["schemas"]["ResponseBranchDto"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6308,15 +6792,15 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponsePaymentTypeDto": {
+        ResponsePaymentTypeDto: {
             /** Format: int32 */
             id?: number;
             description?: string | null;
             /** Format: int32 */
             referenceNumber?: number;
-            invoices?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"][] | null;
+            invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseProductDto": {
+        ResponseProductDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
@@ -6330,11 +6814,11 @@ export interface components {
             /** Format: int32 */
             unitMeasureId?: number;
             active?: boolean;
-            invoiceDetailProducts?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailProductDto"][] | null;
-            category?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCategoryDto"];
-            unitMeasure?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUnitMeasureDto"];
-            inventarios?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryDto"][] | null;
-            inventoryProducts?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInventoryProductDto"][] | null;
+            invoiceDetailProducts?: components["schemas"]["ResponseInvoiceDetailProductDto"][] | null;
+            category?: components["schemas"]["ResponseCategoryDto"];
+            unitMeasure?: components["schemas"]["ResponseUnitMeasureDto"];
+            inventarios?: components["schemas"]["ResponseInventoryDto"][] | null;
+            inventoryProducts?: components["schemas"]["ResponseInventoryProductDto"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6342,13 +6826,13 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseProvinceDto": {
+        ResponseProvinceDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
-            cantons?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCantonDto"][] | null;
+            cantons?: components["schemas"]["ResponseCantonDto"][] | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseReservationCalendarAgendaDto": {
+        ResponseReservationCalendarAgendaDto: {
             title?: string | null;
             description?: string | null;
             /** Format: date-time */
@@ -6360,7 +6844,7 @@ export interface components {
             allDay?: boolean;
             display?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseReservationDetailDto": {
+        ResponseReservationDetailDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
@@ -6369,11 +6853,11 @@ export interface components {
             serviceId?: number | null;
             /** Format: int32 */
             productId?: number | null;
-            reservation?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
-            service?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"];
-            product?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"];
+            reservation?: components["schemas"]["ResponseReservationDto"];
+            service?: components["schemas"]["ResponseServiceDto"];
+            product?: components["schemas"]["ResponseProductDto"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseReservationDto": {
+        ResponseReservationDto: {
             /** Format: int32 */
             id?: number;
             /** Format: date */
@@ -6387,11 +6871,11 @@ export interface components {
             customerName?: string | null;
             status?: string | null;
             active?: boolean;
-            branch?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-            customer?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseCustomerDto"];
-            reservationQuestions?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationQuestionDto"][] | null;
-            reservationDetails?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDetailDto"][] | null;
-            orders?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseOrderDto"][] | null;
+            branch?: components["schemas"]["ResponseBranchDto"];
+            customer?: components["schemas"]["ResponseCustomerDto"];
+            reservationQuestions?: components["schemas"]["ResponseReservationQuestionDto"][] | null;
+            reservationDetails?: components["schemas"]["ResponseReservationDetailDto"][] | null;
+            orders?: components["schemas"]["ResponseOrderDto"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6399,7 +6883,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseReservationQuestionDto": {
+        ResponseReservationQuestionDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
@@ -6407,7 +6891,7 @@ export interface components {
             question?: string | null;
             active?: boolean;
             answer?: string | null;
-            reservation?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDto"];
+            reservation?: components["schemas"]["ResponseReservationDto"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6415,13 +6899,13 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseRoleDto": {
+        ResponseRoleDto: {
             /** Format: int32 */
             id?: number;
             description?: string | null;
             type?: string | null;
             active?: boolean;
-            users?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserDto"][] | null;
+            users?: components["schemas"]["ResponseUserDto"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6429,15 +6913,15 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseScheduleDto": {
+        ResponseScheduleDto: {
             /** Format: int32 */
             id?: number;
-            day?: components["schemas"]["BaseReservation.Application.Enums.WeekDay"];
+            day?: components["schemas"]["WeekDayApplication"];
             /** Format: time */
             startHour?: string;
             /** Format: time */
             endHour?: string;
-            branchSchedules?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchScheduleDto"][] | null;
+            branchSchedules?: components["schemas"]["ResponseBranchScheduleDto"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6445,7 +6929,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseServiceDto": {
+        ResponseServiceDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
@@ -6456,9 +6940,9 @@ export interface components {
             price?: number;
             observation?: string | null;
             active?: boolean;
-            invoiceDetails?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDetailDto"][] | null;
-            typeService?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseTypeServiceDto"];
-            detalleReservas?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseReservationDetailDto"][] | null;
+            invoiceDetails?: components["schemas"]["ResponseInvoiceDetailDto"][] | null;
+            typeService?: components["schemas"]["ResponseTypeServiceDto"];
+            detalleReservas?: components["schemas"]["ResponseReservationDetailDto"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6466,40 +6950,40 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseTaxDto": {
+        ResponseTaxDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             /** Format: double */
             rate?: number;
-            invoices?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseInvoiceDto"][] | null;
+            invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseTypeServiceDto": {
+        ResponseTypeServiceDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             /** Format: time */
             duration?: string;
-            services?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseServiceDto"][] | null;
+            services?: components["schemas"]["ResponseServiceDto"][] | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseUnitMeasureDto": {
+        ResponseUnitMeasureDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             symbol?: string | null;
-            products?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseProductDto"][] | null;
+            products?: components["schemas"]["ResponseProductDto"][] | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseUserBranchDto": {
+        ResponseUserBranchDto: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
             userId?: number;
             /** Format: int32 */
             branchId?: number;
-            branch?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseBranchDto"];
-            user?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseUserDto"];
+            branch?: components["schemas"]["ResponseBranchDto"];
+            user?: components["schemas"]["ResponseUserDto"];
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseUserDto": {
+        ResponseUserDto: {
             /** Format: int32 */
             id?: number;
             cardId?: string | null;
@@ -6520,10 +7004,10 @@ export interface components {
             profilePictureUrl?: string | null;
             /** Format: int32 */
             roleId?: number;
-            district?: components["schemas"]["BaseReservation.Infrastructure.Models.District"];
-            gender?: components["schemas"]["BaseReservation.Infrastructure.Models.Gender"];
-            role?: components["schemas"]["BaseReservation.Infrastructure.Models.Role"];
-            userBranches?: components["schemas"]["BaseReservation.Infrastructure.Models.UserBranch"][] | null;
+            district?: components["schemas"]["District"];
+            gender?: components["schemas"]["Gender"];
+            role?: components["schemas"]["Role"];
+            userBranches?: components["schemas"]["UserBranch"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6531,7 +7015,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Application.ResponseDTOs.ResponseVendorDto": {
+        ResponseVendorDto: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
@@ -6544,8 +7028,8 @@ export interface components {
             districtId?: number;
             address?: string | null;
             active?: boolean;
-            contacts?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseContactDto"][] | null;
-            district?: components["schemas"]["BaseReservation.Application.ResponseDTOs.ResponseDistrictDto"];
+            contacts?: components["schemas"]["ResponseContactDto"][] | null;
+            district?: components["schemas"]["ResponseDistrictDto"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -6553,496 +7037,13 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        /** @enum {string} */
-        "BaseReservation.Infrastructure.Enums.Month": "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
-        /** @enum {string} */
-        "BaseReservation.Infrastructure.Enums.TransactionTypeInventory": "Entrada" | "Salida";
-        /** @enum {string} */
-        "BaseReservation.Infrastructure.Enums.TypeInventory": "Venta" | "Compra";
-        /** @enum {string} */
-        "BaseReservation.Infrastructure.Enums.WeekDay": "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
-        "BaseReservation.Infrastructure.Models.Branch": {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            description: string;
-            /** Format: int32 */
-            telephone: number;
-            /** Format: email */
-            email: string;
-            /** Format: int32 */
-            districtId: number;
-            address?: string | null;
-            active?: boolean;
-            invoices?: components["schemas"]["BaseReservation.Infrastructure.Models.Invoice"][] | null;
-            districtIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.District"];
-            inventories?: components["schemas"]["BaseReservation.Infrastructure.Models.Inventory"][] | null;
-            orders?: components["schemas"]["BaseReservation.Infrastructure.Models.Order"][] | null;
-            reservations?: components["schemas"]["BaseReservation.Infrastructure.Models.Reservation"][] | null;
-            branchHolidays?: components["schemas"]["BaseReservation.Infrastructure.Models.BranchHoliday"][] | null;
-            branchSchedules?: components["schemas"]["BaseReservation.Infrastructure.Models.BranchSchedule"][] | null;
-            userBranches?: components["schemas"]["BaseReservation.Infrastructure.Models.UserBranch"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.BranchHoliday": {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            holidayId: number;
-            /** Format: int32 */
-            branchId: number;
-            /** Format: int32 */
-            year?: number;
-            /** Format: date */
-            date?: string;
-            holidayIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Holiday"];
-            branchIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Branch"];
-        };
-        "BaseReservation.Infrastructure.Models.BranchSchedule": {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId: number;
-            /** Format: int32 */
-            scheduleId: number;
-            scheduleIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Schedule"];
-            branchIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Branch"];
-            branchScheduleBlocks?: components["schemas"]["BaseReservation.Infrastructure.Models.BranchScheduleBlock"][] | null;
-        };
-        "BaseReservation.Infrastructure.Models.BranchScheduleBlock": {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchScheduleId: number;
-            /** Format: time */
-            startHour: string;
-            /** Format: time */
-            endHour: string;
-            active?: boolean;
-            branchScheduleIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.BranchSchedule"];
-        };
-        "BaseReservation.Infrastructure.Models.Canton": {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            provinceId?: number;
-            districts?: components["schemas"]["BaseReservation.Infrastructure.Models.District"][] | null;
-            provinceIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Province"];
-        };
-        "BaseReservation.Infrastructure.Models.Category": {
-            /** Format: int32 */
-            id?: number;
-            code?: string | null;
-            name?: string | null;
-            products?: components["schemas"]["BaseReservation.Infrastructure.Models.Product"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.Contact": {
-            /** Format: int32 */
-            id?: number;
-            firstName?: string | null;
-            lastName?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            vendorId?: number;
-            active?: boolean;
-            vendorIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Vendor"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.Customer": {
-            /** Format: int32 */
-            id?: number;
-            firstName?: string | null;
-            lastName?: string | null;
-            email?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            active?: boolean;
-            invoices?: components["schemas"]["BaseReservation.Infrastructure.Models.Invoice"][] | null;
-            districtIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.District"];
-            orders?: components["schemas"]["BaseReservation.Infrastructure.Models.Order"][] | null;
-            reservations?: components["schemas"]["BaseReservation.Infrastructure.Models.Reservation"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.District": {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            cantonId?: number;
-            customers?: components["schemas"]["BaseReservation.Infrastructure.Models.Customer"][] | null;
-            cantonIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Canton"];
-            vendors?: components["schemas"]["BaseReservation.Infrastructure.Models.Vendor"][] | null;
-            branches?: components["schemas"]["BaseReservation.Infrastructure.Models.Branch"][] | null;
-            users?: components["schemas"]["BaseReservation.Infrastructure.Models.User"][] | null;
-        };
-        "BaseReservation.Infrastructure.Models.Gender": {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            users?: components["schemas"]["BaseReservation.Infrastructure.Models.User"][] | null;
-        };
-        "BaseReservation.Infrastructure.Models.Holiday": {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            month?: components["schemas"]["BaseReservation.Infrastructure.Enums.Month"];
-            /** Format: int32 */
-            day?: number;
-            active?: boolean;
-            branchHolidays?: components["schemas"]["BaseReservation.Infrastructure.Models.BranchHoliday"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.Inventory": {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            name?: string | null;
-            typeInventory?: components["schemas"]["BaseReservation.Infrastructure.Enums.TypeInventory"];
-            active?: boolean;
-            branchIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Branch"];
-            inventoryProducts?: components["schemas"]["BaseReservation.Infrastructure.Models.InventoryProduct"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.InventoryProduct": {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            inventoryId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            assignable?: number;
-            /** Format: double */
-            mininum?: number;
-            /** Format: double */
-            maximum?: number;
-            inventoryIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Inventory"];
-            productIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Product"];
-            inventoryProductTransactions?: components["schemas"]["BaseReservation.Infrastructure.Models.InventoryProductTransaction"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.InventoryProductTransaction": {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            inventoryProductId?: number;
-            transactionType?: components["schemas"]["BaseReservation.Infrastructure.Enums.TransactionTypeInventory"];
-            /** Format: double */
-            quantity?: number;
-            inventoryProductIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.InventoryProduct"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.Invoice": {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int64 */
-            orderId?: number | null;
-            /** Format: int32 */
-            customerId?: number;
-            customerName: string;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            invoiceDetails?: components["schemas"]["BaseReservation.Infrastructure.Models.InvoiceDetail"][] | null;
-            customerIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Customer"];
-            taxIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Tax"];
-            orderIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Order"];
-            branchIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Branch"];
-            paymentTypeIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.PaymentType"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.InvoiceDetail": {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            invoiceId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            invoiceDetailProducts?: components["schemas"]["BaseReservation.Infrastructure.Models.InvoiceDetailProduct"][] | null;
-            invoiceIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Invoice"];
-            productIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Product"];
-            serviceIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Service"];
-        };
-        "BaseReservation.Infrastructure.Models.InvoiceDetailProduct": {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            invoiceDetailId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            quantity?: number;
-            invoiceDetailIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.InvoiceDetail"];
-            productIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Product"];
-        };
-        "BaseReservation.Infrastructure.Models.Order": {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            /** Format: int32 */
-            statusOrderId?: number;
-            orderDetails?: components["schemas"]["BaseReservation.Infrastructure.Models.OrderDetail"][] | null;
-            invoices?: components["schemas"]["BaseReservation.Infrastructure.Models.Invoice"][] | null;
-            customerIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Customer"];
-            statusOrderIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.StatusOrder"];
-            taxIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Tax"];
-            reservationIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Reservation"];
-            branchIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Branch"];
-            paymentTypeIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.PaymentType"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.OrderDetail": {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            orderId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            orderDetailProducts?: components["schemas"]["BaseReservation.Infrastructure.Models.OrderDetailProduct"][] | null;
-            orderIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Order"];
-            productIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Product"];
-            serviceIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Service"];
-        };
-        "BaseReservation.Infrastructure.Models.OrderDetailProduct": {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            orderDetailId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            quantity?: number;
-            orderDetailIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.OrderDetail"];
-            productIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Product"];
-        };
-        "BaseReservation.Infrastructure.Models.PaymentType": {
-            /** Format: int32 */
-            id?: number;
-            description?: string | null;
-            referenceNumber?: string | null;
-            invoices?: components["schemas"]["BaseReservation.Infrastructure.Models.Invoice"][] | null;
-            orders?: components["schemas"]["BaseReservation.Infrastructure.Models.Order"][] | null;
-        };
-        "BaseReservation.Infrastructure.Models.Product": {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            description: string;
-            brand: string;
-            /** Format: int32 */
-            categoryId: number;
-            /** Format: double */
-            price?: number;
-            sku: string;
-            /** Format: int32 */
-            unitMeasureId: number;
-            active?: boolean;
-            invoiceDetailProducts?: components["schemas"]["BaseReservation.Infrastructure.Models.InvoiceDetailProduct"][] | null;
-            invoiceDetails?: components["schemas"]["BaseReservation.Infrastructure.Models.InvoiceDetail"][] | null;
-            orderDetailProducts?: components["schemas"]["BaseReservation.Infrastructure.Models.OrderDetailProduct"][] | null;
-            orderDetails?: components["schemas"]["BaseReservation.Infrastructure.Models.OrderDetail"][] | null;
-            reservationDetails?: components["schemas"]["BaseReservation.Infrastructure.Models.ReservationDetail"][] | null;
-            categoryIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Category"];
-            unitMeasureIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.UnitMeasure"];
-            inventoryProducts?: components["schemas"]["BaseReservation.Infrastructure.Models.InventoryProduct"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.Province": {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            cantons?: components["schemas"]["BaseReservation.Infrastructure.Models.Canton"][] | null;
-        };
-        "BaseReservation.Infrastructure.Models.Reservation": {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: date */
-            date: string;
-            /** Format: time */
-            hour: string;
-            status?: string | null;
-            active?: boolean;
-            reservationDetails?: components["schemas"]["BaseReservation.Infrastructure.Models.ReservationDetail"][] | null;
-            customerIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Customer"];
-            branchIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Branch"];
-            orders?: components["schemas"]["BaseReservation.Infrastructure.Models.Order"][] | null;
-            reservationQuestions?: components["schemas"]["BaseReservation.Infrastructure.Models.ReservationQuestion"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.ReservationDetail": {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            productIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Product"];
-            reservationIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Reservation"];
-            serviceIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Service"];
-        };
-        "BaseReservation.Infrastructure.Models.ReservationQuestion": {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            question?: string | null;
-            answer?: string | null;
-            active?: boolean;
-            reservationIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Reservation"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        "BaseReservation.Infrastructure.Models.Role": {
+        Role: {
             /** Format: int32 */
             id?: number;
             description?: string | null;
             type?: string | null;
             active?: boolean;
-            users?: components["schemas"]["BaseReservation.Infrastructure.Models.User"][] | null;
+            users?: components["schemas"]["User"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -7050,16 +7051,16 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Infrastructure.Models.Schedule": {
+        Schedule: {
             /** Format: int32 */
             id?: number;
-            day?: components["schemas"]["BaseReservation.Infrastructure.Enums.WeekDay"];
+            day?: components["schemas"]["WeekDay"];
             /** Format: time */
             startHour: string;
             /** Format: time */
             endHour: string;
             active?: boolean;
-            branchSchedules?: components["schemas"]["BaseReservation.Infrastructure.Models.BranchSchedule"][] | null;
+            branchSchedules?: components["schemas"]["BranchSchedule"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -7067,7 +7068,7 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Infrastructure.Models.Service": {
+        Service: {
             /** Format: int32 */
             id?: number;
             name: string;
@@ -7078,10 +7079,10 @@ export interface components {
             price: number;
             observation: string;
             active?: boolean;
-            invoiceDetails?: components["schemas"]["BaseReservation.Infrastructure.Models.InvoiceDetail"][] | null;
-            orderDetails?: components["schemas"]["BaseReservation.Infrastructure.Models.OrderDetail"][] | null;
-            reservationDetails?: components["schemas"]["BaseReservation.Infrastructure.Models.ReservationDetail"][] | null;
-            typeServiceIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.TypeService"];
+            invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
+            orderDetails?: components["schemas"]["OrderDetail"][] | null;
+            reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
+            typeServiceIdNavigation?: components["schemas"]["TypeService"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -7089,22 +7090,22 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Infrastructure.Models.StatusOrder": {
+        StatusOrder: {
             /** Format: int32 */
             id?: number;
             description?: string | null;
-            orders?: components["schemas"]["BaseReservation.Infrastructure.Models.Order"][] | null;
+            orders?: components["schemas"]["Order"][] | null;
         };
-        "BaseReservation.Infrastructure.Models.Tax": {
+        Tax: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             /** Format: double */
             rate?: number;
-            invoices?: components["schemas"]["BaseReservation.Infrastructure.Models.Invoice"][] | null;
-            orders?: components["schemas"]["BaseReservation.Infrastructure.Models.Order"][] | null;
+            invoices?: components["schemas"]["Invoice"][] | null;
+            orders?: components["schemas"]["Order"][] | null;
         };
-        "BaseReservation.Infrastructure.Models.TokenMaster": {
+        TokenMaster: {
             /** Format: int64 */
             id?: number;
             token?: string | null;
@@ -7116,24 +7117,36 @@ export interface components {
             used?: boolean;
             /** Format: int32 */
             userId?: number;
-            userIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.User"];
+            userIdNavigation?: components["schemas"]["User"];
         };
-        "BaseReservation.Infrastructure.Models.TypeService": {
+        TokenModel: {
+            token?: string | null;
+            refreshToken?: string | null;
+        };
+        /** @enum {string} */
+        TransactionTypeInventory: "Entrada" | "Salida";
+        /** @enum {string} */
+        TransactionTypeInventoryApplication: "Entrada" | "Salida";
+        /** @enum {string} */
+        TypeInventory: "Venta" | "Compra";
+        /** @enum {string} */
+        TypeInventoryApplication: "Venta" | "Compra";
+        TypeService: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             /** Format: time */
             baseDuration?: string;
-            services?: components["schemas"]["BaseReservation.Infrastructure.Models.Service"][] | null;
+            services?: components["schemas"]["Service"][] | null;
         };
-        "BaseReservation.Infrastructure.Models.UnitMeasure": {
+        UnitMeasure: {
             /** Format: int32 */
             id?: number;
             name?: string | null;
             symbol?: string | null;
-            products?: components["schemas"]["BaseReservation.Infrastructure.Models.Product"][] | null;
+            products?: components["schemas"]["Product"][] | null;
         };
-        "BaseReservation.Infrastructure.Models.User": {
+        User: {
             /** Format: int32 */
             id?: number;
             cardId?: string | null;
@@ -7154,11 +7167,11 @@ export interface components {
             profilePictureUrl?: string | null;
             /** Format: int32 */
             roleId?: number;
-            districtIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.District"];
-            genderIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Gender"];
-            roleIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Role"];
-            tokenMasters?: components["schemas"]["BaseReservation.Infrastructure.Models.TokenMaster"][] | null;
-            userBranches?: components["schemas"]["BaseReservation.Infrastructure.Models.UserBranch"][] | null;
+            districtIdNavigation?: components["schemas"]["District"];
+            genderIdNavigation?: components["schemas"]["Gender"];
+            roleIdNavigation?: components["schemas"]["Role"];
+            tokenMasters?: components["schemas"]["TokenMaster"][] | null;
+            userBranches?: components["schemas"]["UserBranch"][] | null;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -7166,17 +7179,17 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        "BaseReservation.Infrastructure.Models.UserBranch": {
+        UserBranch: {
             /** Format: int32 */
             id?: number;
             /** Format: int32 */
             userId?: number;
             /** Format: int32 */
             branchId?: number;
-            branchIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.Branch"];
-            userIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.User"];
+            branchIdNavigation?: components["schemas"]["Branch"];
+            userIdNavigation?: components["schemas"]["User"];
         };
-        "BaseReservation.Infrastructure.Models.Vendor": {
+        Vendor: {
             /** Format: int32 */
             id?: number;
             name: string;
@@ -7190,8 +7203,8 @@ export interface components {
             districtId: number;
             address?: string | null;
             active?: boolean;
-            contacts?: components["schemas"]["BaseReservation.Infrastructure.Models.Contact"][] | null;
-            districtIdNavigation?: components["schemas"]["BaseReservation.Infrastructure.Models.District"];
+            contacts?: components["schemas"]["Contact"][] | null;
+            districtIdNavigation?: components["schemas"]["District"];
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
@@ -7199,23 +7212,10 @@ export interface components {
             updated?: string | null;
             updatedBy?: string | null;
         };
-        /** @description Class to specify error properties for exceptions */
-        "BaseReservation.WebAPI.ErrorDetailsBaseReservation": {
-            /** @description Type identifier */
-            type?: string | null;
-            /**
-             * Format: int32
-             * @description Status code for error
-             */
-            statusCode?: number;
-            /** @description Error message */
-            message?: string | null;
-            /** @description Error detail */
-            detail?: string | null;
-            logLevel?: components["schemas"]["Microsoft.Extensions.Logging.LogLevel"];
-        };
         /** @enum {string} */
-        "Microsoft.Extensions.Logging.LogLevel": "Trace" | "Debug" | "Information" | "Warning" | "Error" | "Critical" | "None";
+        WeekDay: "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
+        /** @enum {string} */
+        WeekDayApplication: "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
     };
     responses: never;
     parameters: never;

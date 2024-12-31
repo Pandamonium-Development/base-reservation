@@ -2,7 +2,7 @@
 
 namespace BaseReservation.Application.ResponseDTOs.Enums;
 
-public enum Role
+public enum RoleApplication
 {
     [Description("Administrador")]
     ADMINISTRADOR = 1,

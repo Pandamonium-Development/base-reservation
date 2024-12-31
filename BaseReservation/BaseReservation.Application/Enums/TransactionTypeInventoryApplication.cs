@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.Enums;
 
-public enum TransactionTypeInventory
+public enum TransactionTypeInventoryApplication
 {
     Entrada = 1,
 

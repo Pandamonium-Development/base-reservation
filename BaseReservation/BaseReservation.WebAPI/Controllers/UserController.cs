@@ -12,7 +12,7 @@ namespace BaseReservation.WebAPI.Controllers;
 /// Controller in charge of users calls
 /// </summary>
 [ApiController]
-[BaseReservationAuthorize(Role.ADMINISTRADOR)]
+[BaseReservationAuthorize(RoleApplication.ADMINISTRADOR)]
 [ApiVersion("1.0")]
 [Route("api/[controller]")]
 [Authorize(Policy = "BaseReservation")]

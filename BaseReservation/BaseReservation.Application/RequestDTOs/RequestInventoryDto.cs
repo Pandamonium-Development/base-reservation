@@ -10,7 +10,7 @@ public record RequestInventoryDto : RequestBaseDto
 
     public byte BranchId { get; set; }
 
-    public TypeInventory TypeInventory { get; set; }
+    public TypeInventoryApplication TypeInventory { get; set; }
 
     public bool Active { get; set; }
 }
