@@ -44,7 +44,7 @@ public static class SwaggerConfiguration
             });
 
             opts.OperationFilter<AuthorizeOperationFilter>();
-
+            opts.OperationFilter<CleanOperationFilter>();
             opts.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
         });
 

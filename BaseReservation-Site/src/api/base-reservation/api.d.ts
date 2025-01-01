@@ -3,7225 +3,5354 @@
  * Do not make direct changes to the file.
  */
 
+
 export interface paths {
-    "/api/Authentication": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  "/api/Authentication": {
+    /** Logs in a user using the provided login model. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        get?: never;
-        put?: never;
-        /** Logs in a user using the provided login model. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The login credentials. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestUserLoginDto"];
-                    "application/json": components["schemas"]["RequestUserLoginDto"];
-                    "text/json": components["schemas"]["RequestUserLoginDto"];
-                    "application/*+json": components["schemas"]["RequestUserLoginDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["AuthenticationResult"];
-                        "application/json": components["schemas"]["AuthenticationResult"];
-                        "text/json": components["schemas"]["AuthenticationResult"];
-                    };
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description The login credentials. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestUserLoginDto"];
+          "application/json": components["schemas"]["RequestUserLoginDto"];
+          "text/json": components["schemas"]["RequestUserLoginDto"];
+          "application/*+json": components["schemas"]["RequestUserLoginDto"];
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["AuthenticationResult"];
+            "application/json": components["schemas"]["AuthenticationResult"];
+            "text/json": components["schemas"]["AuthenticationResult"];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Authentication/refreshToken": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Authentication/refreshToken": {
+    /** Refreshes the authentication token using the provided token model. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        get?: never;
-        put?: never;
-        /** Refreshes the authentication token using the provided token model. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The token refresh request. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["TokenModel"];
-                    "application/json": components["schemas"]["TokenModel"];
-                    "text/json": components["schemas"]["TokenModel"];
-                    "application/*+json": components["schemas"]["TokenModel"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["AuthenticationResult"];
-                        "application/json": components["schemas"]["AuthenticationResult"];
-                        "text/json": components["schemas"]["AuthenticationResult"];
-                    };
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description The token refresh request. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["TokenModel"];
+          "application/json": components["schemas"]["TokenModel"];
+          "text/json": components["schemas"]["TokenModel"];
+          "application/*+json": components["schemas"]["TokenModel"];
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["AuthenticationResult"];
+            "application/json": components["schemas"]["AuthenticationResult"];
+            "text/json": components["schemas"]["AuthenticationResult"];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Branch": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Branch": {
+    /** Get list of all branches */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all branches */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchDto"][];
-                        "application/json": components["schemas"]["ResponseBranchDto"][];
-                        "text/json": components["schemas"]["ResponseBranchDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchDto"][];
+            "application/json": components["schemas"]["ResponseBranchDto"][];
+            "text/json": components["schemas"]["ResponseBranchDto"][];
+          };
         };
-        put?: never;
-        /** Create new branch */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description Branch request model to be added */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestBranchDto"];
-                    "application/json": components["schemas"]["RequestBranchDto"];
-                    "text/json": components["schemas"]["RequestBranchDto"];
-                    "application/*+json": components["schemas"]["RequestBranchDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchDto"];
-                        "application/json": components["schemas"]["ResponseBranchDto"];
-                        "text/json": components["schemas"]["ResponseBranchDto"];
-                    };
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Forbidden */
-                403: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/Branch/ByRol": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Create new branch */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all branches by role from user logged in */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchDto"][];
-                        "application/json": components["schemas"]["ResponseBranchDto"][];
-                        "text/json": components["schemas"]["ResponseBranchDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description Branch request model to be added */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestBranchDto"];
+          "application/json": components["schemas"]["RequestBranchDto"];
+          "text/json": components["schemas"]["RequestBranchDto"];
+          "application/*+json": components["schemas"]["RequestBranchDto"];
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchDto"];
+            "application/json": components["schemas"]["ResponseBranchDto"];
+            "text/json": components["schemas"]["ResponseBranchDto"];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          content: never;
+        };
+        /** @description Forbidden */
+        403: {
+          content: never;
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Branch/{branchId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Branch/ByRol": {
+    /** Get list of all branches by role from user logged in */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get branch with specific id */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchDto"];
-                        "application/json": components["schemas"]["ResponseBranchDto"];
-                        "text/json": components["schemas"]["ResponseBranchDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchDto"][];
+            "application/json": components["schemas"]["ResponseBranchDto"][];
+            "text/json": components["schemas"]["ResponseBranchDto"][];
+          };
         };
-        /** Update existing branch */
-        put: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            /** @description Branch request model to be added */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestBranchDto"];
-                    "application/json": components["schemas"]["RequestBranchDto"];
-                    "text/json": components["schemas"]["RequestBranchDto"];
-                    "application/*+json": components["schemas"]["RequestBranchDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchDto"];
-                        "application/json": components["schemas"]["ResponseBranchDto"];
-                        "text/json": components["schemas"]["ResponseBranchDto"];
-                    };
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Forbidden */
-                403: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
         };
-        post?: never;
-        /** Deletes a branch by its ID. */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the branch to delete. */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchDto"];
-                        "application/json": components["schemas"]["ResponseBranchDto"];
-                        "text/json": components["schemas"]["ResponseBranchDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
-        };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/Branch/{branchId}/Holiday": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Branch/{branchId}": {
+    /** Get branch with specific id */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all branch's holidays */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Year */
-                    year?: number;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchHolidayDto"][];
-                        "application/json": components["schemas"]["ResponseBranchHolidayDto"][];
-                        "text/json": components["schemas"]["ResponseBranchHolidayDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch id */
+          branchId: number;
         };
-        put?: never;
-        /** Assign holidays to a branch */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            /** @description List of holidays */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestBranchHolidayDto"][];
-                    "application/json": components["schemas"]["RequestBranchHolidayDto"][];
-                    "text/json": components["schemas"]["RequestBranchHolidayDto"][];
-                    "application/*+json": components["schemas"]["RequestBranchHolidayDto"][];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchDto"];
+            "application/json": components["schemas"]["ResponseBranchDto"];
+            "text/json": components["schemas"]["ResponseBranchDto"];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/BranchHoliday/{branchHolidayId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Update existing branch */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get branch holiday */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch holiday Id */
-                    branchHolidayId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchHolidayDto"];
-                        "application/json": components["schemas"]["ResponseBranchHolidayDto"];
-                        "text/json": components["schemas"]["ResponseBranchHolidayDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch id */
+          branchId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      /** @description Branch request model to be added */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestBranchDto"];
+          "application/json": components["schemas"]["RequestBranchDto"];
+          "text/json": components["schemas"]["RequestBranchDto"];
+          "application/*+json": components["schemas"]["RequestBranchDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchDto"];
+            "application/json": components["schemas"]["ResponseBranchDto"];
+            "text/json": components["schemas"]["ResponseBranchDto"];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          content: never;
+        };
+        /** @description Forbidden */
+        403: {
+          content: never;
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/BranchSchedule/{branchScheduleId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Deletes a branch by its ID. */
+    delete: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get branch schedule with specific id */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch schedule id */
-                    branchScheduleId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchScheduleDto"];
-                        "application/json": components["schemas"]["ResponseBranchScheduleDto"];
-                        "text/json": components["schemas"]["ResponseBranchScheduleDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the branch to delete. */
+          branchId: number;
         };
-        put?: never;
-        /** Assign new blocks of branch's schedule */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch schedule id */
-                    branchScheduleId: number;
-                };
-                cookie?: never;
-            };
-            /** @description List Block request model to be assign */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestBranchScheduleBlockDto"][];
-                    "application/json": components["schemas"]["RequestBranchScheduleBlockDto"][];
-                    "text/json": components["schemas"]["RequestBranchScheduleBlockDto"][];
-                    "application/*+json": components["schemas"]["RequestBranchScheduleBlockDto"][];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                        "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                        "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchDto"];
+            "application/json": components["schemas"]["ResponseBranchDto"];
+            "text/json": components["schemas"]["ResponseBranchDto"];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Branch/{branchId}/Horario": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Branch/{branchId}/Holiday": {
+    /** Get list of all branch's holidays */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Year */
+          year?: number;
         };
-        /** Get schedules by branch */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchScheduleDto"];
-                        "application/json": components["schemas"]["ResponseBranchScheduleDto"];
-                        "text/json": components["schemas"]["ResponseBranchScheduleDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        header?: {
+          "x-api-version"?: string;
         };
-        put?: never;
-        /** Assign schedules to a branch */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            /** @description List of schedules */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestBranchScheduleDto"][];
-                    "application/json": components["schemas"]["RequestBranchScheduleDto"][];
-                    "text/json": components["schemas"]["RequestBranchScheduleDto"][];
-                    "application/*+json": components["schemas"]["RequestBranchScheduleDto"][];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch id */
+          branchId: number;
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchHolidayDto"][];
+            "application/json": components["schemas"]["ResponseBranchHolidayDto"][];
+            "text/json": components["schemas"]["ResponseBranchHolidayDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/BranchScheduleBlock": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Assign holidays to a branch */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        get?: never;
-        put?: never;
-        /** Create new block of branch's schedule */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description Block request model to be added */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestBranchScheduleBlockDto"];
-                    "application/json": components["schemas"]["RequestBranchScheduleBlockDto"];
-                    "text/json": components["schemas"]["RequestBranchScheduleBlockDto"];
-                    "application/*+json": components["schemas"]["RequestBranchScheduleBlockDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                        "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                        "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch id */
+          branchId: number;
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      /** @description List of holidays */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestBranchHolidayDto"][];
+          "application/json": components["schemas"]["RequestBranchHolidayDto"][];
+          "text/json": components["schemas"]["RequestBranchHolidayDto"][];
+          "application/*+json": components["schemas"]["RequestBranchHolidayDto"][];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/BranchScheduleBlock/{idBranchScheduleBlock}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/BranchHoliday/{branchHolidayId}": {
+    /** Get branch holiday */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        get?: never;
-        /** Update existing block of branch's schedule */
-        put: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Block branch's schedule id */
-                    idBranchScheduleBlock: number;
-                };
-                cookie?: never;
-            };
-            /** @description Block request model to be updated */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestBranchScheduleBlockDto"];
-                    "application/json": components["schemas"]["RequestBranchScheduleBlockDto"];
-                    "text/json": components["schemas"]["RequestBranchScheduleBlockDto"];
-                    "application/*+json": components["schemas"]["RequestBranchScheduleBlockDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                        "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                        "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch holiday Id */
+          branchHolidayId: number;
         };
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchHolidayDto"];
+            "application/json": components["schemas"]["ResponseBranchHolidayDto"];
+            "text/json": components["schemas"]["ResponseBranchHolidayDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Province/{provinceId}/Canton": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/BranchSchedule/{branchScheduleId}": {
+    /** Get branch schedule with specific id */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all cantons associated with a specific province. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the province. */
-                    provinceId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseCantonDto"][];
-                        "application/json": components["schemas"]["ResponseCantonDto"][];
-                        "text/json": components["schemas"]["ResponseCantonDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch schedule id */
+          branchScheduleId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchScheduleDto"];
+            "application/json": components["schemas"]["ResponseBranchScheduleDto"];
+            "text/json": components["schemas"]["ResponseBranchScheduleDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Canton/{idCanton}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Assign new blocks of branch's schedule */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves details of a specific canton by its ID. */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description The ID of the canton. */
-                    id?: number;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    idCanton: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseCantonDto"];
-                        "application/json": components["schemas"]["ResponseCantonDto"];
-                        "text/json": components["schemas"]["ResponseCantonDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch schedule id */
+          branchScheduleId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      /** @description List Block request model to be assign */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestBranchScheduleBlockDto"][];
+          "application/json": components["schemas"]["RequestBranchScheduleBlockDto"][];
+          "text/json": components["schemas"]["RequestBranchScheduleBlockDto"][];
+          "application/*+json": components["schemas"]["RequestBranchScheduleBlockDto"][];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
+            "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+            "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Category": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Branch/{branchId}/Horario": {
+    /** Get schedules by branch */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all categories. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseCategoryDto"][];
-                        "application/json": components["schemas"]["ResponseCategoryDto"][];
-                        "text/json": components["schemas"]["ResponseCategoryDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch id */
+          branchId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchScheduleDto"];
+            "application/json": components["schemas"]["ResponseBranchScheduleDto"];
+            "text/json": components["schemas"]["ResponseBranchScheduleDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Customer": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Assign schedules to a branch */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves a list of all customers. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseCustomerDto"][];
-                        "application/json": components["schemas"]["ResponseCustomerDto"][];
-                        "text/json": components["schemas"]["ResponseCustomerDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch id */
+          branchId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      /** @description List of schedules */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestBranchScheduleDto"][];
+          "application/json": components["schemas"]["RequestBranchScheduleDto"][];
+          "text/json": components["schemas"]["RequestBranchScheduleDto"][];
+          "application/*+json": components["schemas"]["RequestBranchScheduleDto"][];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Customer/{customerId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/BranchScheduleBlock": {
+    /** Create new block of branch's schedule */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves a specific customer by its ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the customer. */
-                    customerId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseCustomerDto"];
-                        "application/json": components["schemas"]["ResponseCustomerDto"];
-                        "text/json": components["schemas"]["ResponseCustomerDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description Block request model to be added */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestBranchScheduleBlockDto"];
+          "application/json": components["schemas"]["RequestBranchScheduleBlockDto"];
+          "text/json": components["schemas"]["RequestBranchScheduleBlockDto"];
+          "application/*+json": components["schemas"]["RequestBranchScheduleBlockDto"];
         };
-        put?: never;
-        post?: never;
-        /** Deletes a customer by its ID. */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the holiday to delete. */
-                    customerId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseCustomerDto"];
-                        "application/json": components["schemas"]["ResponseCustomerDto"];
-                        "text/json": components["schemas"]["ResponseCustomerDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
+            "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+            "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+          };
         };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Canton/{cantonId}/District": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/BranchScheduleBlock/{idBranchScheduleBlock}": {
+    /** Update existing block of branch's schedule */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all districts associated with a specific canton. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the canton. */
-                    cantonId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseDistrictDto"][];
-                        "application/json": components["schemas"]["ResponseDistrictDto"][];
-                        "text/json": components["schemas"]["ResponseDistrictDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Block branch's schedule id */
+          idBranchScheduleBlock: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      /** @description Block request model to be updated */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestBranchScheduleBlockDto"];
+          "application/json": components["schemas"]["RequestBranchScheduleBlockDto"];
+          "text/json": components["schemas"]["RequestBranchScheduleBlockDto"];
+          "application/*+json": components["schemas"]["RequestBranchScheduleBlockDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
+            "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+            "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/District/{idDistrict}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Province/{provinceId}/Canton": {
+    /** Retrieves all cantons associated with a specific province. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves details of a specific district by its ID. */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description The ID of the district. */
-                    id?: number;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    idDistrict: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseDistrictDto"];
-                        "application/json": components["schemas"]["ResponseDistrictDto"];
-                        "text/json": components["schemas"]["ResponseDistrictDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the province. */
+          provinceId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCantonDto"][];
+            "application/json": components["schemas"]["ResponseCantonDto"][];
+            "text/json": components["schemas"]["ResponseCantonDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Holiday": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Canton/{idCanton}": {
+    /** Retrieves details of a specific canton by its ID. */
+    get: {
+      parameters: {
+        query?: {
+          /** @description The ID of the canton. */
+          id?: number;
         };
-        /** Retrieves all holidays. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseHolidayDto"][];
-                        "application/json": components["schemas"]["ResponseHolidayDto"][];
-                        "text/json": components["schemas"]["ResponseHolidayDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        header?: {
+          "x-api-version"?: string;
         };
-        put?: never;
-        /** Creates a new holiday. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The holiday data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestHolidayDto"];
-                    "application/json": components["schemas"]["RequestHolidayDto"];
-                    "text/json": components["schemas"]["RequestHolidayDto"];
-                    "application/*+json": components["schemas"]["RequestHolidayDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseHolidayDto"];
-                        "application/json": components["schemas"]["ResponseHolidayDto"];
-                        "text/json": components["schemas"]["ResponseHolidayDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          idCanton: string;
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCantonDto"];
+            "application/json": components["schemas"]["ResponseCantonDto"];
+            "text/json": components["schemas"]["ResponseCantonDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Holiday/{holidayId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Category": {
+    /** Retrieves all categories. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves a specific holiday by its ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the holiday. */
-                    holidayId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseHolidayDto"];
-                        "application/json": components["schemas"]["ResponseHolidayDto"];
-                        "text/json": components["schemas"]["ResponseHolidayDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCategoryDto"][];
+            "application/json": components["schemas"]["ResponseCategoryDto"][];
+            "text/json": components["schemas"]["ResponseCategoryDto"][];
+          };
         };
-        /** Updates an existing holiday by its ID. */
-        put: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the holiday to update. */
-                    holidayId: number;
-                };
-                cookie?: never;
-            };
-            /** @description The updated holiday data. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestHolidayDto"];
-                    "application/json": components["schemas"]["RequestHolidayDto"];
-                    "text/json": components["schemas"]["RequestHolidayDto"];
-                    "application/*+json": components["schemas"]["RequestHolidayDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseHolidayDto"];
-                        "application/json": components["schemas"]["ResponseHolidayDto"];
-                        "text/json": components["schemas"]["ResponseHolidayDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
         };
-        post?: never;
-        /** Deletes a holiday by its ID. */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the holiday to delete. */
-                    holidayId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseHolidayDto"];
-                        "application/json": components["schemas"]["ResponseHolidayDto"];
-                        "text/json": components["schemas"]["ResponseHolidayDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
-        };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/Inventory": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Customer": {
+    /** Retrieves a list of all customers. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all inventories for a given branch. */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description The ID of the branch. */
-                    inventoryId?: number;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryDto"][];
-                        "application/json": components["schemas"]["ResponseInventoryDto"][];
-                        "text/json": components["schemas"]["ResponseInventoryDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCustomerDto"][];
+            "application/json": components["schemas"]["ResponseCustomerDto"][];
+            "text/json": components["schemas"]["ResponseCustomerDto"][];
+          };
         };
-        put?: never;
-        /** Creates a new inventory for a given branch. */
-        post: {
-            parameters: {
-                query?: {
-                    /** @description The ID of the branch. */
-                    branchId?: number;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The inventory data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestInventoryDto"];
-                    "application/json": components["schemas"]["RequestInventoryDto"];
-                    "text/json": components["schemas"]["RequestInventoryDto"];
-                    "application/*+json": components["schemas"]["RequestInventoryDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryDto"];
-                        "application/json": components["schemas"]["ResponseInventoryDto"];
-                        "text/json": components["schemas"]["ResponseInventoryDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/Inventory/{inventoryId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Customer/{customerId}": {
+    /** Retrieves a specific customer by its ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves a specific inventory by its ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the inventory. */
-                    inventoryId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryDto"];
-                        "application/json": components["schemas"]["ResponseInventoryDto"];
-                        "text/json": components["schemas"]["ResponseInventoryDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the customer. */
+          customerId: number;
         };
-        /** Updates an existing inventory for a given branch. */
-        put: {
-            parameters: {
-                query?: {
-                    /** @description The ID of the branch. */
-                    branchId?: number;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the inventory to update. */
-                    inventoryId: number;
-                };
-                cookie?: never;
-            };
-            /** @description The updated inventory data. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestInventoryDto"];
-                    "application/json": components["schemas"]["RequestInventoryDto"];
-                    "text/json": components["schemas"]["RequestInventoryDto"];
-                    "application/*+json": components["schemas"]["RequestInventoryDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryDto"];
-                        "application/json": components["schemas"]["ResponseInventoryDto"];
-                        "text/json": components["schemas"]["ResponseInventoryDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCustomerDto"];
+            "application/json": components["schemas"]["ResponseCustomerDto"];
+            "text/json": components["schemas"]["ResponseCustomerDto"];
+          };
         };
-        post?: never;
-        /** Deletes a specific inventory by its ID. */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the inventory to delete. */
-                    inventoryId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Conflict */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
         };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/InventoryProduct/{inventoryProductId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Deletes a customer by its ID. */
+    delete: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves a specific inventory product by its ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the inventory product. */
-                    inventoryProductId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryProductDto"];
-                        "application/json": components["schemas"]["ResponseInventoryProductDto"];
-                        "text/json": components["schemas"]["ResponseInventoryProductDto"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the holiday to delete. */
+          customerId: number;
         };
-        /** Updates an existing inventory product. */
-        put: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the inventory product to update. */
-                    inventoryProductId: number;
-                };
-                cookie?: never;
-            };
-            /** @description The updated inventory product data. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestInventoryProductDto"];
-                    "application/json": components["schemas"]["RequestInventoryProductDto"];
-                    "text/json": components["schemas"]["RequestInventoryProductDto"];
-                    "application/*+json": components["schemas"]["RequestInventoryProductDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryProductDto"];
-                        "application/json": components["schemas"]["ResponseInventoryProductDto"];
-                        "text/json": components["schemas"]["ResponseInventoryProductDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseCustomerDto"];
+            "application/json": components["schemas"]["ResponseCustomerDto"];
+            "text/json": components["schemas"]["ResponseCustomerDto"];
+          };
         };
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Inventory/{inventoryId}/Products": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Canton/{cantonId}/District": {
+    /** Retrieves all districts associated with a specific canton. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all inventory products for a given inventory. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the inventory. */
-                    inventoryId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryProductDto"][];
-                        "application/json": components["schemas"]["ResponseInventoryProductDto"][];
-                        "text/json": components["schemas"]["ResponseInventoryProductDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the canton. */
+          cantonId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseDistrictDto"][];
+            "application/json": components["schemas"]["ResponseDistrictDto"][];
+            "text/json": components["schemas"]["ResponseDistrictDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Product/{productId}/Inventaries": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/District/{idDistrict}": {
+    /** Retrieves details of a specific district by its ID. */
+    get: {
+      parameters: {
+        query?: {
+          /** @description The ID of the district. */
+          id?: number;
         };
-        /** Retrieves all inventory products for a given product. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the product. */
-                    productId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryProductDto"][];
-                        "application/json": components["schemas"]["ResponseInventoryProductDto"][];
-                        "text/json": components["schemas"]["ResponseInventoryProductDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        header?: {
+          "x-api-version"?: string;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        path: {
+          idDistrict: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseDistrictDto"];
+            "application/json": components["schemas"]["ResponseDistrictDto"];
+            "text/json": components["schemas"]["ResponseDistrictDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/InventoryProduct": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Holiday": {
+    /** Retrieves all holidays. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        get?: never;
-        put?: never;
-        /** Creates a new inventory product. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The inventory product data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestInventoryProductDto"];
-                    "application/json": components["schemas"]["RequestInventoryProductDto"];
-                    "text/json": components["schemas"]["RequestInventoryProductDto"];
-                    "application/*+json": components["schemas"]["RequestInventoryProductDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryProductDto"];
-                        "application/json": components["schemas"]["ResponseInventoryProductDto"];
-                        "text/json": components["schemas"]["ResponseInventoryProductDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseHolidayDto"][];
+            "application/json": components["schemas"]["ResponseHolidayDto"][];
+            "text/json": components["schemas"]["ResponseHolidayDto"][];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/InventoryProduct/Bulk": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Creates a new holiday. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        get?: never;
-        put?: never;
-        /** Creates multiple inventory products in bulk. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description A collection of inventory product data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestInventoryProductDto"][];
-                    "application/json": components["schemas"]["RequestInventoryProductDto"][];
-                    "text/json": components["schemas"]["RequestInventoryProductDto"][];
-                    "application/*+json": components["schemas"]["RequestInventoryProductDto"][];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description The holiday data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestHolidayDto"];
+          "application/json": components["schemas"]["RequestHolidayDto"];
+          "text/json": components["schemas"]["RequestHolidayDto"];
+          "application/*+json": components["schemas"]["RequestHolidayDto"];
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseHolidayDto"];
+            "application/json": components["schemas"]["ResponseHolidayDto"];
+            "text/json": components["schemas"]["ResponseHolidayDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/InventoryProductTransaction": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Holiday/{holidayId}": {
+    /** Retrieves a specific holiday by its ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        get?: never;
-        put?: never;
-        /** Creates a new inventory product movement record. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The inventory product movement data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestInventoryProductTransactionDto"];
-                    "application/json": components["schemas"]["RequestInventoryProductTransactionDto"];
-                    "text/json": components["schemas"]["RequestInventoryProductTransactionDto"];
-                    "application/*+json": components["schemas"]["RequestInventoryProductTransactionDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryProductTransactionDto"];
-                        "application/json": components["schemas"]["ResponseInventoryProductTransactionDto"];
-                        "text/json": components["schemas"]["ResponseInventoryProductTransactionDto"];
-                    };
-                };
-                /** @description Conflict */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the holiday. */
+          holidayId: number;
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseHolidayDto"];
+            "application/json": components["schemas"]["ResponseHolidayDto"];
+            "text/json": components["schemas"]["ResponseHolidayDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Inventory/{inventoryId}/Transactions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Updates an existing holiday by its ID. */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all inventory product movements for a given inventory. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the inventory. */
-                    inventoryId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryProductTransactionDto"][];
-                        "application/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
-                        "text/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the holiday to update. */
+          holidayId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      /** @description The updated holiday data. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestHolidayDto"];
+          "application/json": components["schemas"]["RequestHolidayDto"];
+          "text/json": components["schemas"]["RequestHolidayDto"];
+          "application/*+json": components["schemas"]["RequestHolidayDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseHolidayDto"];
+            "application/json": components["schemas"]["ResponseHolidayDto"];
+            "text/json": components["schemas"]["ResponseHolidayDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Product/{productId}/Transactions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Deletes a holiday by its ID. */
+    delete: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all inventory product movements for a given product. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the product. */
-                    productId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInventoryProductTransactionDto"][];
-                        "application/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
-                        "text/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the holiday to delete. */
+          holidayId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseHolidayDto"];
+            "application/json": components["schemas"]["ResponseHolidayDto"];
+            "text/json": components["schemas"]["ResponseHolidayDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Invoice": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Inventory": {
+    /** Retrieves all inventories for a given branch. */
+    get: {
+      parameters: {
+        query?: {
+          /** @description The ID of the branch. */
+          inventoryId?: number;
         };
-        /** Retrieves all invoices. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInvoiceDto"][];
-                        "application/json": components["schemas"]["ResponseInvoiceDto"][];
-                        "text/json": components["schemas"]["ResponseInvoiceDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        header?: {
+          "x-api-version"?: string;
         };
-        put?: never;
-        /** Creates a new invoice. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The invoice data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestInvoiceDto"];
-                    "application/json": components["schemas"]["RequestInvoiceDto"];
-                    "text/json": components["schemas"]["RequestInvoiceDto"];
-                    "application/*+json": components["schemas"]["RequestInvoiceDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInvoiceDto"];
-                        "application/json": components["schemas"]["ResponseInvoiceDto"];
-                        "text/json": components["schemas"]["ResponseInvoiceDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryDto"][];
+            "application/json": components["schemas"]["ResponseInventoryDto"][];
+            "text/json": components["schemas"]["ResponseInventoryDto"][];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Invoice/{invoiceId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Creates a new inventory for a given branch. */
+    post: {
+      parameters: {
+        query?: {
+          /** @description The ID of the branch. */
+          branchId?: number;
         };
-        /** Retrieves a specific invoice by its ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the invoice. */
-                    invoiceId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInvoiceDto"];
-                        "application/json": components["schemas"]["ResponseInvoiceDto"];
-                        "text/json": components["schemas"]["ResponseInvoiceDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        header?: {
+          "x-api-version"?: string;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      /** @description The inventory data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestInventoryDto"];
+          "application/json": components["schemas"]["RequestInventoryDto"];
+          "text/json": components["schemas"]["RequestInventoryDto"];
+          "application/*+json": components["schemas"]["RequestInventoryDto"];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryDto"];
+            "application/json": components["schemas"]["ResponseInventoryDto"];
+            "text/json": components["schemas"]["ResponseInventoryDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Invoice/{invoiceId}/InvoiceDetail": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Inventory/{inventoryId}": {
+    /** Retrieves a specific inventory by its ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all detail invoices associated with a specific invoice. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the invoice. */
-                    invoiceId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInvoiceDetailDto"][];
-                        "application/json": components["schemas"]["ResponseInvoiceDetailDto"][];
-                        "text/json": components["schemas"]["ResponseInvoiceDetailDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the inventory. */
+          inventoryId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryDto"];
+            "application/json": components["schemas"]["ResponseInventoryDto"];
+            "text/json": components["schemas"]["ResponseInventoryDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Invoice/{invoiceId}/InvoiceDetail/{invoiceDetailId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Updates an existing inventory for a given branch. */
+    put: {
+      parameters: {
+        query?: {
+          /** @description The ID of the branch. */
+          branchId?: number;
         };
-        /** Retrieves a specific detail invoice by its ID and associated invoice ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the detail invoice. */
-                    invoiceDetailId: number;
-                    invoiceId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseInvoiceDetailDto"];
-                        "application/json": components["schemas"]["ResponseInvoiceDetailDto"];
-                        "text/json": components["schemas"]["ResponseInvoiceDetailDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        header?: {
+          "x-api-version"?: string;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        path: {
+          /** @description The ID of the inventory to update. */
+          inventoryId: number;
+        };
+      };
+      /** @description The updated inventory data. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestInventoryDto"];
+          "application/json": components["schemas"]["RequestInventoryDto"];
+          "text/json": components["schemas"]["RequestInventoryDto"];
+          "application/*+json": components["schemas"]["RequestInventoryDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryDto"];
+            "application/json": components["schemas"]["ResponseInventoryDto"];
+            "text/json": components["schemas"]["ResponseInventoryDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Order": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Deletes a specific inventory by its ID. */
+    delete: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all orders. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseOrderDto"][];
-                        "application/json": components["schemas"]["ResponseOrderDto"][];
-                        "text/json": components["schemas"]["ResponseOrderDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the inventory to delete. */
+          inventoryId: number;
         };
-        put?: never;
-        /** Creates a new order. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The order data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestOrderDto"];
-                    "application/json": components["schemas"]["RequestOrderDto"];
-                    "text/json": components["schemas"]["RequestOrderDto"];
-                    "application/*+json": components["schemas"]["RequestOrderDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseOrderDto"];
-                        "application/json": components["schemas"]["ResponseOrderDto"];
-                        "text/json": components["schemas"]["ResponseOrderDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Conflict */
+        409: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Order/{orderId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/InventoryProduct/{inventoryProductId}": {
+    /** Retrieves a specific inventory product by its ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves an order by its ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the order to retrieve. */
-                    orderId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseOrderDto"];
-                        "application/json": components["schemas"]["ResponseOrderDto"];
-                        "text/json": components["schemas"]["ResponseOrderDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the inventory product. */
+          inventoryProductId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryProductDto"];
+            "application/json": components["schemas"]["ResponseInventoryProductDto"];
+            "text/json": components["schemas"]["ResponseInventoryProductDto"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/PaymentType": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Updates an existing inventory product. */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all payment types */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponsePaymentTypeDto"][];
-                        "application/json": components["schemas"]["ResponsePaymentTypeDto"][];
-                        "text/json": components["schemas"]["ResponsePaymentTypeDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the inventory product to update. */
+          inventoryProductId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      /** @description The updated inventory product data. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestInventoryProductDto"];
+          "application/json": components["schemas"]["RequestInventoryProductDto"];
+          "text/json": components["schemas"]["RequestInventoryProductDto"];
+          "application/*+json": components["schemas"]["RequestInventoryProductDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryProductDto"];
+            "application/json": components["schemas"]["ResponseInventoryProductDto"];
+            "text/json": components["schemas"]["ResponseInventoryProductDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Product": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Inventory/{inventoryId}/Products": {
+    /** Retrieves all inventory products for a given inventory. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves a list of products, optionally excluding those associated with a specified inventory. */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Whether to exclude products associated with the inventory. */
-                    excludeProductsInventory?: boolean;
-                    /** @description The ID of the inventory to filter products by. */
-                    inventoryId?: number;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseProductDto"][];
-                        "application/json": components["schemas"]["ResponseProductDto"][];
-                        "text/json": components["schemas"]["ResponseProductDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the inventory. */
+          inventoryId: number;
         };
-        put?: never;
-        /** Creates a new product. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The product data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestProductDto"];
-                    "application/json": components["schemas"]["RequestProductDto"];
-                    "text/json": components["schemas"]["RequestProductDto"];
-                    "application/*+json": components["schemas"]["RequestProductDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseProductDto"];
-                        "application/json": components["schemas"]["ResponseProductDto"];
-                        "text/json": components["schemas"]["ResponseProductDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryProductDto"][];
+            "application/json": components["schemas"]["ResponseInventoryProductDto"][];
+            "text/json": components["schemas"]["ResponseInventoryProductDto"][];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Product/{productId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Product/{productId}/Inventaries": {
+    /** Retrieves all inventory products for a given product. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves a product by its ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the product to retrieve. */
-                    productId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseProductDto"];
-                        "application/json": components["schemas"]["ResponseProductDto"];
-                        "text/json": components["schemas"]["ResponseProductDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the product. */
+          productId: number;
         };
-        /** Updates an existing product by its ID. */
-        put: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the product to update. */
-                    productId: number;
-                };
-                cookie?: never;
-            };
-            /** @description The updated product data. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestProductDto"];
-                    "application/json": components["schemas"]["RequestProductDto"];
-                    "text/json": components["schemas"]["RequestProductDto"];
-                    "application/*+json": components["schemas"]["RequestProductDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseProductDto"];
-                        "application/json": components["schemas"]["ResponseProductDto"];
-                        "text/json": components["schemas"]["ResponseProductDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryProductDto"][];
+            "application/json": components["schemas"]["ResponseInventoryProductDto"][];
+            "text/json": components["schemas"]["ResponseInventoryProductDto"][];
+          };
         };
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Province": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/InventoryProduct": {
+    /** Creates a new inventory product. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all provinces */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseProvinceDto"][];
-                        "application/json": components["schemas"]["ResponseProvinceDto"][];
-                        "text/json": components["schemas"]["ResponseProvinceDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description The inventory product data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestInventoryProductDto"];
+          "application/json": components["schemas"]["RequestInventoryProductDto"];
+          "text/json": components["schemas"]["RequestInventoryProductDto"];
+          "application/*+json": components["schemas"]["RequestInventoryProductDto"];
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryProductDto"];
+            "application/json": components["schemas"]["ResponseInventoryProductDto"];
+            "text/json": components["schemas"]["ResponseInventoryProductDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Province/{provinceId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/InventoryProduct/Bulk": {
+    /** Creates multiple inventory products in bulk. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get province with specific id */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Province id */
-                    provinceId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseProvinceDto"];
-                        "application/json": components["schemas"]["ResponseProvinceDto"];
-                        "text/json": components["schemas"]["ResponseProvinceDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description A collection of inventory product data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestInventoryProductDto"][];
+          "application/json": components["schemas"]["RequestInventoryProductDto"][];
+          "text/json": components["schemas"]["RequestInventoryProductDto"][];
+          "application/*+json": components["schemas"]["RequestInventoryProductDto"][];
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Reservation": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/InventoryProductTransaction": {
+    /** Creates a new inventory product movement record. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all reservations */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseReservationDto"][];
-                        "application/json": components["schemas"]["ResponseReservationDto"][];
-                        "text/json": components["schemas"]["ResponseReservationDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description The inventory product movement data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestInventoryProductTransactionDto"];
+          "application/json": components["schemas"]["RequestInventoryProductTransactionDto"];
+          "text/json": components["schemas"]["RequestInventoryProductTransactionDto"];
+          "application/*+json": components["schemas"]["RequestInventoryProductTransactionDto"];
         };
-        put?: never;
-        /** Create a new reservation */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description Reservation request model to be added */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestReservationDto"];
-                    "application/json": components["schemas"]["RequestReservationDto"];
-                    "text/json": components["schemas"]["RequestReservationDto"];
-                    "application/*+json": components["schemas"]["RequestReservationDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseReservationDto"];
-                        "application/json": components["schemas"]["ResponseReservationDto"];
-                        "text/json": components["schemas"]["ResponseReservationDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryProductTransactionDto"];
+            "application/json": components["schemas"]["ResponseInventoryProductTransactionDto"];
+            "text/json": components["schemas"]["ResponseInventoryProductTransactionDto"];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Conflict */
+        409: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Branch/{branchId}/reservations": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Inventory/{inventoryId}/Transactions": {
+    /** Retrieves all inventory product movements for a given inventory. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all reservations by branch with filter option with start date and end date */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Start date */
-                    startDate?: string;
-                    /** @description End date */
-                    endDate?: string;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseReservationCalendarAgendaDto"][][];
-                        "application/json": components["schemas"]["ResponseReservationCalendarAgendaDto"][][];
-                        "text/json": components["schemas"]["ResponseReservationCalendarAgendaDto"][][];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the inventory. */
+          inventoryId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+            "application/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+            "text/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Reservation/{reservationId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Product/{productId}/Transactions": {
+    /** Retrieves all inventory product movements for a given product. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all reservations by branch */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    reservationId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseReservationDto"];
-                        "application/json": components["schemas"]["ResponseReservationDto"];
-                        "text/json": components["schemas"]["ResponseReservationDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the product. */
+          productId: number;
         };
-        /** Update an existing reservation */
-        put: {
-            parameters: {
-                query?: {
-                    /** @description Service id */
-                    serviceId?: number;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    reservationId: string;
-                };
-                cookie?: never;
-            };
-            /** @description Reservation request model to be updated */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestReservationDto"];
-                    "application/json": components["schemas"]["RequestReservationDto"];
-                    "text/json": components["schemas"]["RequestReservationDto"];
-                    "application/*+json": components["schemas"]["RequestReservationDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseReservationDto"];
-                        "application/json": components["schemas"]["ResponseReservationDto"];
-                        "text/json": components["schemas"]["ResponseReservationDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+            "application/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+            "text/json": components["schemas"]["ResponseInventoryProductTransactionDto"][];
+          };
         };
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Branch/{branchId}/date-availability/{date}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Invoice": {
+    /** Retrieves all invoices. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get availablity for a branch in specific date */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    branchId: number;
-                    /** @description Date to filter */
-                    date: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": string[];
-                        "application/json": string[];
-                        "text/json": string[];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInvoiceDto"][];
+            "application/json": components["schemas"]["ResponseInvoiceDto"][];
+            "text/json": components["schemas"]["ResponseInvoiceDto"][];
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/ReservationDetail/{reservationDetailId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Creates a new invoice. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get reservation detail with specific id */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Reservation detail Id */
-                    reservationDetailId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseReservationDetailDto"];
-                        "application/json": components["schemas"]["ResponseReservationDetailDto"];
-                        "text/json": components["schemas"]["ResponseReservationDetailDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description The invoice data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestInvoiceDto"];
+          "application/json": components["schemas"]["RequestInvoiceDto"];
+          "text/json": components["schemas"]["RequestInvoiceDto"];
+          "application/*+json": components["schemas"]["RequestInvoiceDto"];
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInvoiceDto"];
+            "application/json": components["schemas"]["ResponseInvoiceDto"];
+            "text/json": components["schemas"]["ResponseInvoiceDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Reservation/{id}/Detail": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Invoice/{invoiceId}": {
+    /** Retrieves a specific invoice by its ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all reservation's details by branch */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    id: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseReservationDetailDto"];
-                        "application/json": components["schemas"]["ResponseReservationDetailDto"];
-                        "text/json": components["schemas"]["ResponseReservationDetailDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the invoice. */
+          invoiceId: number;
         };
-        put?: never;
-        /** Create details reservation */
-        post: {
-            parameters: {
-                query?: {
-                    /** @description Branch id */
-                    branchId?: number;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            /** @description List of details to be added */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestReservationDetailDto"][];
-                    "application/json": components["schemas"]["RequestReservationDetailDto"][];
-                    "text/json": components["schemas"]["RequestReservationDetailDto"][];
-                    "application/*+json": components["schemas"]["RequestReservationDetailDto"][];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInvoiceDto"];
+            "application/json": components["schemas"]["ResponseInvoiceDto"];
+            "text/json": components["schemas"]["ResponseInvoiceDto"];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/ReservationQuestion": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Invoice/{invoiceId}/InvoiceDetail": {
+    /** Retrieves all detail invoices associated with a specific invoice. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all reservation's questions */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseReservationQuestionDto"][];
-                        "application/json": components["schemas"]["ResponseReservationQuestionDto"][];
-                        "text/json": components["schemas"]["ResponseReservationQuestionDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the invoice. */
+          invoiceId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInvoiceDetailDto"][];
+            "application/json": components["schemas"]["ResponseInvoiceDetailDto"][];
+            "text/json": components["schemas"]["ResponseInvoiceDetailDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/ReservationQuestion/{reservationQuestionId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Invoice/{invoiceId}/InvoiceDetail/{invoiceDetailId}": {
+    /** Retrieves a specific detail invoice by its ID and associated invoice ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get reservation question with specific id */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Reservation question Id */
-                    reservationQuestionId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseReservationQuestionDto"];
-                        "application/json": components["schemas"]["ResponseReservationQuestionDto"];
-                        "text/json": components["schemas"]["ResponseReservationQuestionDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the detail invoice. */
+          invoiceDetailId: number;
+          invoiceId: string;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseInvoiceDetailDto"];
+            "application/json": components["schemas"]["ResponseInvoiceDetailDto"];
+            "text/json": components["schemas"]["ResponseInvoiceDetailDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Role": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Order": {
+    /** Retrieves all orders. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all roles */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseRoleDto"][];
-                        "application/json": components["schemas"]["ResponseRoleDto"][];
-                        "text/json": components["schemas"]["ResponseRoleDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseOrderDto"][];
+            "application/json": components["schemas"]["ResponseOrderDto"][];
+            "text/json": components["schemas"]["ResponseOrderDto"][];
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Schedule": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Creates a new order. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all schedules. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseScheduleDto"][];
-                        "application/json": components["schemas"]["ResponseScheduleDto"][];
-                        "text/json": components["schemas"]["ResponseScheduleDto"][];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description The order data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestOrderDto"];
+          "application/json": components["schemas"]["RequestOrderDto"];
+          "text/json": components["schemas"]["RequestOrderDto"];
+          "application/*+json": components["schemas"]["RequestOrderDto"];
         };
-        put?: never;
-        /** Creates a new schedule. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The schedule data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestScheduleDto"];
-                    "application/json": components["schemas"]["RequestScheduleDto"];
-                    "text/json": components["schemas"]["RequestScheduleDto"];
-                    "application/*+json": components["schemas"]["RequestScheduleDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseScheduleDto"];
-                        "application/json": components["schemas"]["ResponseScheduleDto"];
-                        "text/json": components["schemas"]["ResponseScheduleDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseOrderDto"];
+            "application/json": components["schemas"]["ResponseOrderDto"];
+            "text/json": components["schemas"]["ResponseOrderDto"];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Schedule/{scheduleId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Order/{orderId}": {
+    /** Retrieves an order by its ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves a specific schedule by its ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the schedule. */
-                    scheduleId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseScheduleDto"];
-                        "application/json": components["schemas"]["ResponseScheduleDto"];
-                        "text/json": components["schemas"]["ResponseScheduleDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the order to retrieve. */
+          orderId: number;
         };
-        /** Updates an existing schedule by its ID. */
-        put: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the schedule to update. */
-                    scheduleId: number;
-                };
-                cookie?: never;
-            };
-            /** @description The updated schedule data. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestScheduleDto"];
-                    "application/json": components["schemas"]["RequestScheduleDto"];
-                    "text/json": components["schemas"]["RequestScheduleDto"];
-                    "application/*+json": components["schemas"]["RequestScheduleDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseScheduleDto"];
-                        "application/json": components["schemas"]["ResponseScheduleDto"];
-                        "text/json": components["schemas"]["ResponseScheduleDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseOrderDto"];
+            "application/json": components["schemas"]["ResponseOrderDto"];
+            "text/json": components["schemas"]["ResponseOrderDto"];
+          };
         };
-        post?: never;
-        /** Deletes a specific schedule by its ID. */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the schedule to delete. */
-                    scheduleId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Conflict */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
         };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Service": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/PaymentType": {
+    /** Get list of all payment types */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all services */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseServiceDto"][];
-                        "application/json": components["schemas"]["ResponseServiceDto"][];
-                        "text/json": components["schemas"]["ResponseServiceDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponsePaymentTypeDto"][];
+            "application/json": components["schemas"]["ResponsePaymentTypeDto"][];
+            "text/json": components["schemas"]["ResponsePaymentTypeDto"][];
+          };
         };
-        put?: never;
-        /** Create new service */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description Service request model to be added */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestServiceDto"];
-                    "application/json": components["schemas"]["RequestServiceDto"];
-                    "text/json": components["schemas"]["RequestServiceDto"];
-                    "application/*+json": components["schemas"]["RequestServiceDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseServiceDto"];
-                        "application/json": components["schemas"]["ResponseServiceDto"];
-                        "text/json": components["schemas"]["ResponseServiceDto"];
-                    };
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Forbidden */
-                403: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/Service/{serviceId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Product": {
+    /** Retrieves a list of products, optionally excluding those associated with a specified inventory. */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Whether to exclude products associated with the inventory. */
+          excludeProductsInventory?: boolean;
+          /** @description The ID of the inventory to filter products by. */
+          inventoryId?: number;
         };
-        /** Get service with specific id */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Service id */
-                    serviceId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseServiceDto"];
-                        "application/json": components["schemas"]["ResponseServiceDto"];
-                        "text/json": components["schemas"]["ResponseServiceDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Update existing service */
-        put: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Service id */
-                    serviceId: number;
-                };
-                cookie?: never;
-            };
-            /** @description Service request model to be updated */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestServiceDto"];
-                    "application/json": components["schemas"]["RequestServiceDto"];
-                    "text/json": components["schemas"]["RequestServiceDto"];
-                    "application/*+json": components["schemas"]["RequestServiceDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseServiceDto"];
-                        "application/json": components["schemas"]["ResponseServiceDto"];
-                        "text/json": components["schemas"]["ResponseServiceDto"];
-                    };
-                };
-                /** @description Unauthorized */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Forbidden */
-                403: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseProductDto"][];
+            "application/json": components["schemas"]["ResponseProductDto"][];
+            "text/json": components["schemas"]["ResponseProductDto"][];
+          };
         };
-        post?: never;
-        /** Deletes a service by its ID. */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the service to delete. */
-                    serviceId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseServiceDto"];
-                        "application/json": components["schemas"]["ResponseServiceDto"];
-                        "text/json": components["schemas"]["ResponseServiceDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
         };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/Tax": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Creates a new product. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves all taxes. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseTaxDto"][];
-                        "application/json": components["schemas"]["ResponseTaxDto"][];
-                        "text/json": components["schemas"]["ResponseTaxDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description The product data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestProductDto"];
+          "application/json": components["schemas"]["RequestProductDto"];
+          "text/json": components["schemas"]["RequestProductDto"];
+          "application/*+json": components["schemas"]["RequestProductDto"];
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseProductDto"];
+            "application/json": components["schemas"]["ResponseProductDto"];
+            "text/json": components["schemas"]["ResponseProductDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/TypeService": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Product/{productId}": {
+    /** Retrieves a product by its ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all service types */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseTypeServiceDto"][];
-                        "application/json": components["schemas"]["ResponseTypeServiceDto"][];
-                        "text/json": components["schemas"]["ResponseTypeServiceDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the product to retrieve. */
+          productId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseProductDto"];
+            "application/json": components["schemas"]["ResponseProductDto"];
+            "text/json": components["schemas"]["ResponseProductDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/UnitMeasure": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Updates an existing product by its ID. */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all unit of measures */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseUnitMeasureDto"][];
-                        "application/json": components["schemas"]["ResponseUnitMeasureDto"][];
-                        "text/json": components["schemas"]["ResponseUnitMeasureDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description The ID of the product to update. */
+          productId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      /** @description The updated product data. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestProductDto"];
+          "application/json": components["schemas"]["RequestProductDto"];
+          "text/json": components["schemas"]["RequestProductDto"];
+          "application/*+json": components["schemas"]["RequestProductDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseProductDto"];
+            "application/json": components["schemas"]["ResponseProductDto"];
+            "text/json": components["schemas"]["ResponseProductDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/User": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Province": {
+    /** Get list of all provinces */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all users */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseUserDto"][];
-                        "application/json": components["schemas"]["ResponseUserDto"][];
-                        "text/json": components["schemas"]["ResponseUserDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseProvinceDto"][];
+            "application/json": components["schemas"]["ResponseProvinceDto"][];
+            "text/json": components["schemas"]["ResponseProvinceDto"][];
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/User/ByRol/{rol}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Province/{provinceId}": {
+    /** Get province with specific id */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Get list of all users by role */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Role to look for */
-                    role?: string;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    rol: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseUserDto"][];
-                        "application/json": components["schemas"]["ResponseUserDto"][];
-                        "text/json": components["schemas"]["ResponseUserDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Province id */
+          provinceId: number;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseProvinceDto"];
+            "application/json": components["schemas"]["ResponseProvinceDto"];
+            "text/json": components["schemas"]["ResponseProvinceDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/User/{id}/Branch/{branchId}/availability": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Reservation": {
+    /** Get list of all reservations */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Check if user is availably to assign to a branch */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description User id */
-                    id: number;
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseReservationDto"][];
+            "application/json": components["schemas"]["ResponseReservationDto"][];
+            "text/json": components["schemas"]["ResponseReservationDto"][];
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Branch/{branchId}/Users": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Create a new reservation */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        get?: never;
-        put?: never;
-        /** Assign users to specific branch */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            /** @description List of users */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestUserBranchDto"][];
-                    "application/json": components["schemas"]["RequestUserBranchDto"][];
-                    "text/json": components["schemas"]["RequestUserBranchDto"][];
-                    "application/*+json": components["schemas"]["RequestUserBranchDto"][];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      /** @description Reservation request model to be added */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestReservationDto"];
+          "application/json": components["schemas"]["RequestReservationDto"];
+          "text/json": components["schemas"]["RequestReservationDto"];
+          "application/*+json": components["schemas"]["RequestReservationDto"];
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseReservationDto"];
+            "application/json": components["schemas"]["ResponseReservationDto"];
+            "text/json": components["schemas"]["ResponseReservationDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Vendor": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Branch/{branchId}/reservations": {
+    /** Get list of all reservations by branch with filter option with start date and end date */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Start date */
+          startDate?: string;
+          /** @description End date */
+          endDate?: string;
         };
-        /** Retrieves a list of suppliers with optional pagination. */
-        get: {
-            parameters: {
-                query?: {
-                    PageNumber?: number;
-                    PageSize?: number;
-                    Paginated?: boolean;
-                };
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseVendorDto"][];
-                        "application/json": components["schemas"]["ResponseVendorDto"][];
-                        "text/json": components["schemas"]["ResponseVendorDto"][];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        header?: {
+          "x-api-version"?: string;
         };
-        put?: never;
-        /** Creates a new supplier. */
-        post: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path?: never;
-                cookie?: never;
-            };
-            /** @description The supplier data to be created. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestVendorDto"];
-                    "application/json": components["schemas"]["RequestVendorDto"];
-                    "text/json": components["schemas"]["RequestVendorDto"];
-                    "application/*+json": components["schemas"]["RequestVendorDto"];
-                };
-            };
-            responses: {
-                /** @description Created */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseVendorDto"];
-                        "application/json": components["schemas"]["ResponseVendorDto"];
-                        "text/json": components["schemas"]["ResponseVendorDto"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch id */
+          branchId: number;
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseReservationCalendarAgendaDto"][][];
+            "application/json": components["schemas"]["ResponseReservationCalendarAgendaDto"][][];
+            "text/json": components["schemas"]["ResponseReservationCalendarAgendaDto"][][];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
-    "/api/Vendor/{vendorId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+  };
+  "/api/Reservation/{reservationId}": {
+    /** Get list of all reservations by branch */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
         };
-        /** Retrieves a supplier by its ID. */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the supplier to retrieve. */
-                    vendorId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseVendorDto"];
-                        "application/json": components["schemas"]["ResponseVendorDto"];
-                        "text/json": components["schemas"]["ResponseVendorDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        path: {
+          /** @description Branch id */
+          reservationId: number;
         };
-        /** Updates an existing supplier by its ID. */
-        put: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the supplier to update. */
-                    vendorId: number;
-                };
-                cookie?: never;
-            };
-            /** @description The updated supplier data. */
-            requestBody?: {
-                content: {
-                    "application/json-patch+json": components["schemas"]["RequestVendorDto"];
-                    "application/json": components["schemas"]["RequestVendorDto"];
-                    "text/json": components["schemas"]["RequestVendorDto"];
-                    "application/*+json": components["schemas"]["RequestVendorDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ResponseVendorDto"];
-                        "application/json": components["schemas"]["ResponseVendorDto"];
-                        "text/json": components["schemas"]["ResponseVendorDto"];
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Unprocessable Content */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseReservationDto"];
+            "application/json": components["schemas"]["ResponseReservationDto"];
+            "text/json": components["schemas"]["ResponseReservationDto"];
+          };
         };
-        post?: never;
-        /** Deletes a supplier by its ID. */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description The ID of the supplier to delete. */
-                    vendorId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
         };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
     };
+    /** Update an existing reservation */
+    put: {
+      parameters: {
+        query?: {
+          /** @description Service id */
+          serviceId?: number;
+        };
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          reservationId: string;
+        };
+      };
+      /** @description Reservation request model to be updated */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestReservationDto"];
+          "application/json": components["schemas"]["RequestReservationDto"];
+          "text/json": components["schemas"]["RequestReservationDto"];
+          "application/*+json": components["schemas"]["RequestReservationDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseReservationDto"];
+            "application/json": components["schemas"]["ResponseReservationDto"];
+            "text/json": components["schemas"]["ResponseReservationDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Branch/{branchId}/date-availability/{date}": {
+    /** Get availablity for a branch in specific date */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Branch id */
+          branchId: number;
+          /** @description Date to filter */
+          date: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": string[];
+            "application/json": string[];
+            "text/json": string[];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/ReservationDetail/{reservationDetailId}": {
+    /** Get reservation detail with specific id */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Reservation detail Id */
+          reservationDetailId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseReservationDetailDto"];
+            "application/json": components["schemas"]["ResponseReservationDetailDto"];
+            "text/json": components["schemas"]["ResponseReservationDetailDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Reservation/{id}/Detail": {
+    /** Get list of all reservation's details by branch */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Branch id */
+          id: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseReservationDetailDto"];
+            "application/json": components["schemas"]["ResponseReservationDetailDto"];
+            "text/json": components["schemas"]["ResponseReservationDetailDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Create details reservation */
+    post: {
+      parameters: {
+        query?: {
+          /** @description Branch id */
+          branchId?: number;
+        };
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          id: string;
+        };
+      };
+      /** @description List of details to be added */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestReservationDetailDto"][];
+          "application/json": components["schemas"]["RequestReservationDetailDto"][];
+          "text/json": components["schemas"]["RequestReservationDetailDto"][];
+          "application/*+json": components["schemas"]["RequestReservationDetailDto"][];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/ReservationQuestion": {
+    /** Get list of all reservation's questions */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseReservationQuestionDto"][];
+            "application/json": components["schemas"]["ResponseReservationQuestionDto"][];
+            "text/json": components["schemas"]["ResponseReservationQuestionDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/ReservationQuestion/{reservationQuestionId}": {
+    /** Get reservation question with specific id */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Reservation question Id */
+          reservationQuestionId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseReservationQuestionDto"];
+            "application/json": components["schemas"]["ResponseReservationQuestionDto"];
+            "text/json": components["schemas"]["ResponseReservationQuestionDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Role": {
+    /** Get list of all roles */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseRoleDto"][];
+            "application/json": components["schemas"]["ResponseRoleDto"][];
+            "text/json": components["schemas"]["ResponseRoleDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Schedule": {
+    /** Retrieves all schedules. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseScheduleDto"][];
+            "application/json": components["schemas"]["ResponseScheduleDto"][];
+            "text/json": components["schemas"]["ResponseScheduleDto"][];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Creates a new schedule. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      /** @description The schedule data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestScheduleDto"];
+          "application/json": components["schemas"]["RequestScheduleDto"];
+          "text/json": components["schemas"]["RequestScheduleDto"];
+          "application/*+json": components["schemas"]["RequestScheduleDto"];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseScheduleDto"];
+            "application/json": components["schemas"]["ResponseScheduleDto"];
+            "text/json": components["schemas"]["ResponseScheduleDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Schedule/{scheduleId}": {
+    /** Retrieves a specific schedule by its ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description The ID of the schedule. */
+          scheduleId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseScheduleDto"];
+            "application/json": components["schemas"]["ResponseScheduleDto"];
+            "text/json": components["schemas"]["ResponseScheduleDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Updates an existing schedule by its ID. */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description The ID of the schedule to update. */
+          scheduleId: number;
+        };
+      };
+      /** @description The updated schedule data. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestScheduleDto"];
+          "application/json": components["schemas"]["RequestScheduleDto"];
+          "text/json": components["schemas"]["RequestScheduleDto"];
+          "application/*+json": components["schemas"]["RequestScheduleDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseScheduleDto"];
+            "application/json": components["schemas"]["ResponseScheduleDto"];
+            "text/json": components["schemas"]["ResponseScheduleDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Deletes a specific schedule by its ID. */
+    delete: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description The ID of the schedule to delete. */
+          scheduleId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Conflict */
+        409: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Service": {
+    /** Get list of all services */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseServiceDto"][];
+            "application/json": components["schemas"]["ResponseServiceDto"][];
+            "text/json": components["schemas"]["ResponseServiceDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Create new service */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      /** @description Service request model to be added */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestServiceDto"];
+          "application/json": components["schemas"]["RequestServiceDto"];
+          "text/json": components["schemas"]["RequestServiceDto"];
+          "application/*+json": components["schemas"]["RequestServiceDto"];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseServiceDto"];
+            "application/json": components["schemas"]["ResponseServiceDto"];
+            "text/json": components["schemas"]["ResponseServiceDto"];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          content: never;
+        };
+        /** @description Forbidden */
+        403: {
+          content: never;
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Service/{serviceId}": {
+    /** Get service with specific id */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Service id */
+          serviceId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseServiceDto"];
+            "application/json": components["schemas"]["ResponseServiceDto"];
+            "text/json": components["schemas"]["ResponseServiceDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Update existing service */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Service id */
+          serviceId: number;
+        };
+      };
+      /** @description Service request model to be updated */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestServiceDto"];
+          "application/json": components["schemas"]["RequestServiceDto"];
+          "text/json": components["schemas"]["RequestServiceDto"];
+          "application/*+json": components["schemas"]["RequestServiceDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseServiceDto"];
+            "application/json": components["schemas"]["ResponseServiceDto"];
+            "text/json": components["schemas"]["ResponseServiceDto"];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          content: never;
+        };
+        /** @description Forbidden */
+        403: {
+          content: never;
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Deletes a service by its ID. */
+    delete: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description The ID of the service to delete. */
+          serviceId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseServiceDto"];
+            "application/json": components["schemas"]["ResponseServiceDto"];
+            "text/json": components["schemas"]["ResponseServiceDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Tax": {
+    /** Retrieves all taxes. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseTaxDto"][];
+            "application/json": components["schemas"]["ResponseTaxDto"][];
+            "text/json": components["schemas"]["ResponseTaxDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/TypeService": {
+    /** Get list of all service types */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseTypeServiceDto"][];
+            "application/json": components["schemas"]["ResponseTypeServiceDto"][];
+            "text/json": components["schemas"]["ResponseTypeServiceDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/UnitMeasure": {
+    /** Get list of all unit of measures */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseUnitMeasureDto"][];
+            "application/json": components["schemas"]["ResponseUnitMeasureDto"][];
+            "text/json": components["schemas"]["ResponseUnitMeasureDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/User": {
+    /** Get list of all users */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseUserDto"][];
+            "application/json": components["schemas"]["ResponseUserDto"][];
+            "text/json": components["schemas"]["ResponseUserDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/User/ByRol/{rol}": {
+    /** Get list of all users by role */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Role to look for */
+          role?: string;
+        };
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          rol: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseUserDto"][];
+            "application/json": components["schemas"]["ResponseUserDto"][];
+            "text/json": components["schemas"]["ResponseUserDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/User/{id}/Branch/{branchId}/availability": {
+    /** Check if user is availably to assign to a branch */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description User id */
+          id: number;
+          /** @description Branch id */
+          branchId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Branch/{branchId}/Users": {
+    /** Assign users to specific branch */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description Branch id */
+          branchId: number;
+        };
+      };
+      /** @description List of users */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestUserBranchDto"][];
+          "application/json": components["schemas"]["RequestUserBranchDto"][];
+          "text/json": components["schemas"]["RequestUserBranchDto"][];
+          "application/*+json": components["schemas"]["RequestUserBranchDto"][];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Vendor": {
+    /** Retrieves a list of suppliers with optional pagination. */
+    get: {
+      parameters: {
+        query?: {
+          PageNumber?: number;
+          PageSize?: number;
+          Paginated?: boolean;
+        };
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseVendorDto"][];
+            "application/json": components["schemas"]["ResponseVendorDto"][];
+            "text/json": components["schemas"]["ResponseVendorDto"][];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Creates a new supplier. */
+    post: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+      };
+      /** @description The supplier data to be created. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestVendorDto"];
+          "application/json": components["schemas"]["RequestVendorDto"];
+          "text/json": components["schemas"]["RequestVendorDto"];
+          "application/*+json": components["schemas"]["RequestVendorDto"];
+        };
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          content: {
+            "text/plain": components["schemas"]["ResponseVendorDto"];
+            "application/json": components["schemas"]["ResponseVendorDto"];
+            "text/json": components["schemas"]["ResponseVendorDto"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
+  "/api/Vendor/{vendorId}": {
+    /** Retrieves a supplier by its ID. */
+    get: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description The ID of the supplier to retrieve. */
+          vendorId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseVendorDto"];
+            "application/json": components["schemas"]["ResponseVendorDto"];
+            "text/json": components["schemas"]["ResponseVendorDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Updates an existing supplier by its ID. */
+    put: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description The ID of the supplier to update. */
+          vendorId: number;
+        };
+      };
+      /** @description The updated supplier data. */
+      requestBody?: {
+        content: {
+          "application/json-patch+json": components["schemas"]["RequestVendorDto"];
+          "application/json": components["schemas"]["RequestVendorDto"];
+          "text/json": components["schemas"]["RequestVendorDto"];
+          "application/*+json": components["schemas"]["RequestVendorDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["ResponseVendorDto"];
+            "application/json": components["schemas"]["ResponseVendorDto"];
+            "text/json": components["schemas"]["ResponseVendorDto"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Unprocessable Content */
+        422: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+    /** Deletes a supplier by its ID. */
+    delete: {
+      parameters: {
+        header?: {
+          "x-api-version"?: string;
+        };
+        path: {
+          /** @description The ID of the supplier to delete. */
+          vendorId: number;
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "text/plain": boolean;
+            "application/json": boolean;
+            "text/json": boolean;
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+        /** @description Internal Server Error */
+        500: {
+          content: {
+            "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+            "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+            "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+          };
+        };
+      };
+    };
+  };
 }
+
 export type webhooks = Record<string, never>;
+
 export interface components {
-    schemas: {
-        AuthenticationResult: {
-            success?: boolean;
-            errors?: string[] | null;
-            token?: string | null;
-            refreshToken?: string | null;
-        };
-        Branch: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            description: string;
-            /** Format: int32 */
-            telephone: number;
-            /** Format: email */
-            email: string;
-            /** Format: int32 */
-            districtId: number;
-            address?: string | null;
-            active?: boolean;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            districtIdNavigation?: components["schemas"]["District"];
-            inventories?: components["schemas"]["Inventory"][] | null;
-            orders?: components["schemas"]["Order"][] | null;
-            reservations?: components["schemas"]["Reservation"][] | null;
-            branchHolidays?: components["schemas"]["BranchHoliday"][] | null;
-            branchSchedules?: components["schemas"]["BranchSchedule"][] | null;
-            userBranches?: components["schemas"]["UserBranch"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        BranchHoliday: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            holidayId: number;
-            /** Format: int32 */
-            branchId: number;
-            /** Format: int32 */
-            year?: number;
-            /** Format: date */
-            date?: string;
-            holidayIdNavigation?: components["schemas"]["Holiday"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-        };
-        BranchSchedule: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId: number;
-            /** Format: int32 */
-            scheduleId: number;
-            scheduleIdNavigation?: components["schemas"]["Schedule"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-            branchScheduleBlocks?: components["schemas"]["BranchScheduleBlock"][] | null;
-        };
-        BranchScheduleBlock: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchScheduleId: number;
-            /** Format: time */
-            startHour: string;
-            /** Format: time */
-            endHour: string;
-            active?: boolean;
-            branchScheduleIdNavigation?: components["schemas"]["BranchSchedule"];
-        };
-        Canton: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            provinceId?: number;
-            districts?: components["schemas"]["District"][] | null;
-            provinceIdNavigation?: components["schemas"]["Province"];
-        };
-        Category: {
-            /** Format: int32 */
-            id?: number;
-            code?: string | null;
-            name?: string | null;
-            products?: components["schemas"]["Product"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Contact: {
-            /** Format: int32 */
-            id?: number;
-            firstName?: string | null;
-            lastName?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            vendorId?: number;
-            active?: boolean;
-            vendorIdNavigation?: components["schemas"]["Vendor"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Customer: {
-            /** Format: int32 */
-            id?: number;
-            firstName?: string | null;
-            lastName?: string | null;
-            email?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            active?: boolean;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            districtIdNavigation?: components["schemas"]["District"];
-            orders?: components["schemas"]["Order"][] | null;
-            reservations?: components["schemas"]["Reservation"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        District: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            cantonId?: number;
-            customers?: components["schemas"]["Customer"][] | null;
-            cantonIdNavigation?: components["schemas"]["Canton"];
-            vendors?: components["schemas"]["Vendor"][] | null;
-            branches?: components["schemas"]["Branch"][] | null;
-            users?: components["schemas"]["User"][] | null;
-        };
-        /** @description Class to specify error properties for exceptions */
-        ErrorDetailsBaseReservation: {
-            /** @description Type identifier */
-            type?: string | null;
-            /**
-             * Format: int32
-             * @description Status code for error
-             */
-            statusCode?: number;
-            /** @description Error message */
-            message?: string | null;
-            /** @description Error detail */
-            detail?: string | null;
-            logLevel?: components["schemas"]["LogLevel"];
-        };
-        Gender: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            users?: components["schemas"]["User"][] | null;
-        };
-        Holiday: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            month?: components["schemas"]["Month"];
-            /** Format: int32 */
-            day?: number;
-            active?: boolean;
-            branchHolidays?: components["schemas"]["BranchHoliday"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Inventory: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            name?: string | null;
-            typeInventory?: components["schemas"]["TypeInventory"];
-            active?: boolean;
-            branchIdNavigation?: components["schemas"]["Branch"];
-            inventoryProducts?: components["schemas"]["InventoryProduct"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        InventoryProduct: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            inventoryId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            assignable?: number;
-            /** Format: double */
-            mininum?: number;
-            /** Format: double */
-            maximum?: number;
-            inventoryIdNavigation?: components["schemas"]["Inventory"];
-            productIdNavigation?: components["schemas"]["Product"];
-            inventoryProductTransactions?: components["schemas"]["InventoryProductTransaction"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        InventoryProductTransaction: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            inventoryProductId?: number;
-            transactionType?: components["schemas"]["TransactionTypeInventory"];
-            /** Format: double */
-            quantity?: number;
-            inventoryProductIdNavigation?: components["schemas"]["InventoryProduct"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Invoice: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int64 */
-            orderId?: number | null;
-            /** Format: int32 */
-            customerId?: number;
-            customerName: string;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
-            customerIdNavigation?: components["schemas"]["Customer"];
-            taxIdNavigation?: components["schemas"]["Tax"];
-            orderIdNavigation?: components["schemas"]["Order"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-            paymentTypeIdNavigation?: components["schemas"]["PaymentType"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        InvoiceDetail: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            invoiceId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            invoiceDetailProducts?: components["schemas"]["InvoiceDetailProduct"][] | null;
-            invoiceIdNavigation?: components["schemas"]["Invoice"];
-            productIdNavigation?: components["schemas"]["Product"];
-            serviceIdNavigation?: components["schemas"]["Service"];
-        };
-        InvoiceDetailProduct: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            invoiceDetailId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            quantity?: number;
-            invoiceDetailIdNavigation?: components["schemas"]["InvoiceDetail"];
-            productIdNavigation?: components["schemas"]["Product"];
-        };
-        /** @enum {string} */
-        LogLevel: "Trace" | "Debug" | "Information" | "Warning" | "Error" | "Critical" | "None";
-        /** @enum {string} */
-        Month: "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
-        /** @enum {string} */
-        MonthApplication: "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
-        Order: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            /** Format: int32 */
-            statusOrderId?: number;
-            orderDetails?: components["schemas"]["OrderDetail"][] | null;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            customerIdNavigation?: components["schemas"]["Customer"];
-            statusOrderIdNavigation?: components["schemas"]["StatusOrder"];
-            taxIdNavigation?: components["schemas"]["Tax"];
-            reservationIdNavigation?: components["schemas"]["Reservation"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-            paymentTypeIdNavigation?: components["schemas"]["PaymentType"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        OrderDetail: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            orderId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            orderDetailProducts?: components["schemas"]["OrderDetailProduct"][] | null;
-            orderIdNavigation?: components["schemas"]["Order"];
-            productIdNavigation?: components["schemas"]["Product"];
-            serviceIdNavigation?: components["schemas"]["Service"];
-        };
-        OrderDetailProduct: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            orderDetailId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            quantity?: number;
-            orderDetailIdNavigation?: components["schemas"]["OrderDetail"];
-            productIdNavigation?: components["schemas"]["Product"];
-        };
-        PaymentType: {
-            /** Format: int32 */
-            id?: number;
-            description?: string | null;
-            referenceNumber?: string | null;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            orders?: components["schemas"]["Order"][] | null;
-        };
-        Product: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            description: string;
-            brand: string;
-            /** Format: int32 */
-            categoryId: number;
-            /** Format: double */
-            price?: number;
-            sku: string;
-            /** Format: int32 */
-            unitMeasureId: number;
-            active?: boolean;
-            invoiceDetailProducts?: components["schemas"]["InvoiceDetailProduct"][] | null;
-            invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
-            orderDetailProducts?: components["schemas"]["OrderDetailProduct"][] | null;
-            orderDetails?: components["schemas"]["OrderDetail"][] | null;
-            reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
-            categoryIdNavigation?: components["schemas"]["Category"];
-            unitMeasureIdNavigation?: components["schemas"]["UnitMeasure"];
-            inventoryProducts?: components["schemas"]["InventoryProduct"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Province: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            cantons?: components["schemas"]["Canton"][] | null;
-        };
-        RequestBranchDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            description?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            active?: boolean;
-        };
-        RequestBranchHolidayDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            holidayId?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            year?: number;
-        };
-        RequestBranchScheduleBlockDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchScheduleId?: number;
-            /** Format: time */
-            startHour?: string;
-            /** Format: time */
-            endHour?: string;
-            active?: boolean;
-        };
-        RequestBranchScheduleDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            scheduleId?: number;
-        };
-        RequestHolidayDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            active?: boolean;
-            month?: components["schemas"]["MonthApplication"];
-            /** Format: int32 */
-            day?: number;
-        };
-        RequestInventoryDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            branchId?: number;
-            typeInventory?: components["schemas"]["TypeInventoryApplication"];
-            active?: boolean;
-        };
-        RequestInventoryProductDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            inventoryId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            assignable?: number;
-            /** Format: double */
-            mininum?: number;
-            /** Format: double */
-            maximum?: number;
-        };
-        RequestInventoryProductTransactionDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            inventoryProductId?: number;
-            transactionType?: components["schemas"]["TransactionTypeInventoryApplication"];
-            /** Format: double */
-            quantity?: number;
-        };
-        RequestInvoiceDetailDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            invoiceId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-        };
-        RequestInvoiceDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: int64 */
-            orderId?: number | null;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            invoiceDetails?: components["schemas"]["RequestInvoiceDetailDto"][] | null;
-        };
-        RequestOrderDetailDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            orderId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-        };
-        RequestOrderDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            statusOrderId?: string;
-            /** Format: int32 */
-            branchId?: number;
-            orderDetails?: components["schemas"]["RequestOrderDetailDto"][] | null;
-        };
-        RequestProductDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            description?: string | null;
-            brand?: string | null;
-            /** Format: int32 */
-            categoryId?: number;
-            /** Format: double */
-            price?: number;
-            sku?: string | null;
-            /** Format: int32 */
-            unitMeasureId?: number;
-            active?: boolean;
-        };
-        RequestReservationDetailDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-        };
-        RequestReservationDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: date */
-            date?: string;
-            /** Format: time */
-            hour?: string;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            status?: string | null;
-            active?: boolean;
-            reservationQuestion?: components["schemas"]["RequestReservationQuestionDto"][] | null;
-            reservationDetails?: components["schemas"]["RequestReservationDetailDto"][] | null;
-        };
-        RequestReservationQuestionDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            question?: string | null;
-            active?: boolean;
-            answer?: string | null;
-        };
-        RequestScheduleDto: {
-            /** Format: int32 */
-            id?: number;
-            day?: components["schemas"]["WeekDayApplication"];
-            /** Format: time */
-            startHour?: string;
-            /** Format: time */
-            endHour?: string;
-        };
-        RequestServiceDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            description?: string | null;
-            /** Format: int32 */
-            typeServiceId?: number;
-            /** Format: double */
-            price?: number;
-            observation?: string | null;
-            active?: boolean;
-        };
-        RequestUserBranchDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            userId?: number;
-            /** Format: int32 */
-            branchId?: number;
-        };
-        RequestUserLoginDto: {
-            email?: string | null;
-            password?: string | null;
-        };
-        RequestVendorDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            fiscalNumber?: string | null;
-            socialReason?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            active?: boolean;
-        };
-        Reservation: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: date */
-            date: string;
-            /** Format: time */
-            hour: string;
-            status?: string | null;
-            active?: boolean;
-            reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
-            customerIdNavigation?: components["schemas"]["Customer"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-            orders?: components["schemas"]["Order"][] | null;
-            reservationQuestions?: components["schemas"]["ReservationQuestion"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ReservationDetail: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            productIdNavigation?: components["schemas"]["Product"];
-            reservationIdNavigation?: components["schemas"]["Reservation"];
-            serviceIdNavigation?: components["schemas"]["Service"];
-        };
-        ReservationQuestion: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            question?: string | null;
-            answer?: string | null;
-            active?: boolean;
-            reservationIdNavigation?: components["schemas"]["Reservation"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseBranchDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            description?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            active?: boolean;
-            district?: components["schemas"]["ResponseDistrictDto"];
-            inventories?: components["schemas"]["ResponseInventoryDto"][] | null;
-            branchSchedules?: components["schemas"]["ResponseBranchScheduleDto"][] | null;
-            userBranches?: components["schemas"]["ResponseUserBranchDto"][] | null;
-            branchHolidays?: components["schemas"]["ResponseBranchHolidayDto"][] | null;
-            reservas?: components["schemas"]["ResponseReservationDto"][] | null;
-            orders?: components["schemas"]["ResponseOrderDto"][] | null;
-            invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseBranchHolidayDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            holidayId?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            year?: number;
-            holiday?: components["schemas"]["ResponseHolidayDto"];
-            branch?: components["schemas"]["ResponseBranchDto"];
-        };
-        ResponseBranchScheduleBlockDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchScheduleId?: number;
-            /** Format: time */
-            startHour?: string;
-            /** Format: time */
-            endHour?: string;
-            active?: boolean;
-            branchSchedule?: components["schemas"]["ResponseBranchScheduleDto"];
-        };
-        ResponseBranchScheduleDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            scheduleId?: number;
-            schedule?: components["schemas"]["ResponseScheduleDto"];
-            branch?: components["schemas"]["ResponseBranchDto"];
-            branchScheduleBlocks?: components["schemas"]["ResponseBranchScheduleBlockDto"][] | null;
-        };
-        ResponseCantonDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            provinceId?: number;
-            districts?: components["schemas"]["ResponseDistrictDto"][] | null;
-            province?: components["schemas"]["ResponseProvinceDto"];
-        };
-        ResponseCategoryDto: {
-            /** Format: int32 */
-            id?: number;
-            code?: string | null;
-            name?: string | null;
-            products?: components["schemas"]["ResponseProductDto"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseContactDto: {
-            /** Format: int32 */
-            id?: number;
-            firstName?: string | null;
-            lastName?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            vendorId?: number;
-            active?: boolean;
-            vendor?: components["schemas"]["ResponseVendorDto"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseCustomerDto: {
-            /** Format: int32 */
-            id?: number;
-            firstName?: string | null;
-            lastName?: string | null;
-            email?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            active?: boolean;
-            invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
-            reservations?: components["schemas"]["ResponseReservationDto"][] | null;
-            district?: components["schemas"]["ResponseDistrictDto"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseDistrictDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            cantonId?: number;
-            customers?: components["schemas"]["ResponseCustomerDto"][] | null;
-            canton?: components["schemas"]["ResponseCantonDto"];
-            vendors?: components["schemas"]["ResponseVendorDto"][] | null;
-            branches?: components["schemas"]["ResponseBranchDto"][] | null;
-            users?: components["schemas"]["ResponseUserDto"][] | null;
-        };
-        ResponseHolidayDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            active?: boolean;
-            month?: components["schemas"]["MonthApplication"];
-            /** Format: int32 */
-            day?: number;
-            branchHolidays?: components["schemas"]["ResponseBranchHolidayDto"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseInventoryDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            idSucursal?: number;
-            typeInventory?: components["schemas"]["TypeInventoryApplication"];
-            active?: boolean;
-            branch?: components["schemas"]["ResponseBranchDto"];
-            inventoryProducts?: components["schemas"]["ResponseInventoryProductDto"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseInventoryProductDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            inventoryId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            assignable?: number;
-            /** Format: double */
-            minimum?: number;
-            /** Format: double */
-            maximum?: number;
-            inventory?: components["schemas"]["ResponseInventoryDto"];
-            product?: components["schemas"]["ResponseProductDto"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseInventoryProductTransactionDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            idInventarioProducto?: number;
-            transactionType?: components["schemas"]["TransactionTypeInventoryApplication"];
-            /** Format: double */
-            quantity?: number;
-            inventoryProduct?: components["schemas"]["ResponseInventoryProductDto"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseInvoiceDetailDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            invoiceId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            invoiceDetailProducts?: components["schemas"]["ResponseInvoiceDetailProductDto"][] | null;
-            invoice?: components["schemas"]["ResponseInvoiceDto"];
-            service?: components["schemas"]["ResponseServiceDto"];
-        };
-        ResponseInvoiceDetailProductDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            invoiceDetailId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            quantity?: number;
-            invoiceDetail?: components["schemas"]["ResponseInvoiceDetailDto"];
-            product?: components["schemas"]["ResponseProductDto"];
-        };
-        ResponseInvoiceDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: int64 */
-            orderId?: number | null;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            /** Format: int32 */
-            branchId?: number;
-            invoiceDetails?: components["schemas"]["ResponseInvoiceDetailDto"][] | null;
-            customer?: components["schemas"]["ResponseCustomerDto"];
-            taxInfo?: components["schemas"]["ResponseTaxDto"];
-            paymentType?: components["schemas"]["ResponsePaymentTypeDto"];
-            order?: components["schemas"]["ResponseOrderDto"];
-            branch?: components["schemas"]["Branch"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseOrderDetailDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            orderId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subtotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            orderDetailProducts?: components["schemas"]["ResponseOrderDetailProductDto"][] | null;
-            order?: components["schemas"]["ResponseOrderDto"];
-            service?: components["schemas"]["ResponseServiceDto"];
-        };
-        ResponseOrderDetailProductDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            orderDetailId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            quantity?: number;
-            orderDetail?: components["schemas"]["ResponseOrderDetailDto"];
-            product?: components["schemas"]["ResponseProductDto"];
-        };
-        ResponseOrderDto: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            /** Format: int32 */
-            statusOrderId?: number;
-            /** Format: int32 */
-            branchId?: number;
-            orderDetails?: components["schemas"]["ResponseOrderDetailDto"][] | null;
-            customer?: components["schemas"]["ResponseCustomerDto"];
-            taxInfo?: components["schemas"]["ResponseTaxDto"];
-            paymentType?: components["schemas"]["ResponsePaymentTypeDto"];
-            reservation?: components["schemas"]["ResponseReservationDto"];
-            branch?: components["schemas"]["ResponseBranchDto"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponsePaymentTypeDto: {
-            /** Format: int32 */
-            id?: number;
-            description?: string | null;
-            /** Format: int32 */
-            referenceNumber?: number;
-            invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
-        };
-        ResponseProductDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            description?: string | null;
-            brand?: string | null;
-            /** Format: int32 */
-            categoryId?: number;
-            /** Format: double */
-            price?: number;
-            sku?: string | null;
-            /** Format: int32 */
-            unitMeasureId?: number;
-            active?: boolean;
-            invoiceDetailProducts?: components["schemas"]["ResponseInvoiceDetailProductDto"][] | null;
-            category?: components["schemas"]["ResponseCategoryDto"];
-            unitMeasure?: components["schemas"]["ResponseUnitMeasureDto"];
-            inventarios?: components["schemas"]["ResponseInventoryDto"][] | null;
-            inventoryProducts?: components["schemas"]["ResponseInventoryProductDto"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseProvinceDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            cantons?: components["schemas"]["ResponseCantonDto"][] | null;
-        };
-        ResponseReservationCalendarAgendaDto: {
-            title?: string | null;
-            description?: string | null;
-            /** Format: date-time */
-            start?: string;
-            /** Format: date-time */
-            end?: string;
-            classNames?: string | null;
-            icon?: string | null;
-            allDay?: boolean;
-            display?: string | null;
-        };
-        ResponseReservationDetailDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            reservation?: components["schemas"]["ResponseReservationDto"];
-            service?: components["schemas"]["ResponseServiceDto"];
-            product?: components["schemas"]["ResponseProductDto"];
-        };
-        ResponseReservationDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: date */
-            date?: string;
-            /** Format: time */
-            hour?: string;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            status?: string | null;
-            active?: boolean;
-            branch?: components["schemas"]["ResponseBranchDto"];
-            customer?: components["schemas"]["ResponseCustomerDto"];
-            reservationQuestions?: components["schemas"]["ResponseReservationQuestionDto"][] | null;
-            reservationDetails?: components["schemas"]["ResponseReservationDetailDto"][] | null;
-            orders?: components["schemas"]["ResponseOrderDto"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseReservationQuestionDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            question?: string | null;
-            active?: boolean;
-            answer?: string | null;
-            reservation?: components["schemas"]["ResponseReservationDto"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseRoleDto: {
-            /** Format: int32 */
-            id?: number;
-            description?: string | null;
-            type?: string | null;
-            active?: boolean;
-            users?: components["schemas"]["ResponseUserDto"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseScheduleDto: {
-            /** Format: int32 */
-            id?: number;
-            day?: components["schemas"]["WeekDayApplication"];
-            /** Format: time */
-            startHour?: string;
-            /** Format: time */
-            endHour?: string;
-            branchSchedules?: components["schemas"]["ResponseBranchScheduleDto"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseServiceDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            description?: string | null;
-            /** Format: int32 */
-            typeServiceId?: number;
-            /** Format: double */
-            price?: number;
-            observation?: string | null;
-            active?: boolean;
-            invoiceDetails?: components["schemas"]["ResponseInvoiceDetailDto"][] | null;
-            typeService?: components["schemas"]["ResponseTypeServiceDto"];
-            detalleReservas?: components["schemas"]["ResponseReservationDetailDto"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseTaxDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: double */
-            rate?: number;
-            invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
-        };
-        ResponseTypeServiceDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: time */
-            duration?: string;
-            services?: components["schemas"]["ResponseServiceDto"][] | null;
-        };
-        ResponseUnitMeasureDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            symbol?: string | null;
-            products?: components["schemas"]["ResponseProductDto"][] | null;
-        };
-        ResponseUserBranchDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            userId?: number;
-            /** Format: int32 */
-            branchId?: number;
-            branch?: components["schemas"]["ResponseBranchDto"];
-            user?: components["schemas"]["ResponseUserDto"];
-        };
-        ResponseUserDto: {
-            /** Format: int32 */
-            id?: number;
-            cardId?: string | null;
-            firstName?: string | null;
-            lastName?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            /** Format: date */
-            birthday?: string;
-            password?: string | null;
-            /** Format: int32 */
-            genderId?: number;
-            active?: boolean;
-            profilePictureUrl?: string | null;
-            /** Format: int32 */
-            roleId?: number;
-            district?: components["schemas"]["District"];
-            gender?: components["schemas"]["Gender"];
-            role?: components["schemas"]["Role"];
-            userBranches?: components["schemas"]["UserBranch"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ResponseVendorDto: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            cardId?: string | null;
-            socialReason?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            active?: boolean;
-            contacts?: components["schemas"]["ResponseContactDto"][] | null;
-            district?: components["schemas"]["ResponseDistrictDto"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Role: {
-            /** Format: int32 */
-            id?: number;
-            description?: string | null;
-            type?: string | null;
-            active?: boolean;
-            users?: components["schemas"]["User"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Schedule: {
-            /** Format: int32 */
-            id?: number;
-            day?: components["schemas"]["WeekDay"];
-            /** Format: time */
-            startHour: string;
-            /** Format: time */
-            endHour: string;
-            active?: boolean;
-            branchSchedules?: components["schemas"]["BranchSchedule"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Service: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            description: string;
-            /** Format: int32 */
-            typeServiceId: number;
-            /** Format: double */
-            price: number;
-            observation: string;
-            active?: boolean;
-            invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
-            orderDetails?: components["schemas"]["OrderDetail"][] | null;
-            reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
-            typeServiceIdNavigation?: components["schemas"]["TypeService"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        StatusOrder: {
-            /** Format: int32 */
-            id?: number;
-            description?: string | null;
-            orders?: components["schemas"]["Order"][] | null;
-        };
-        Tax: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: double */
-            rate?: number;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            orders?: components["schemas"]["Order"][] | null;
-        };
-        TokenMaster: {
-            /** Format: int64 */
-            id?: number;
-            token?: string | null;
-            jwtId?: string | null;
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            expireAt?: string;
-            used?: boolean;
-            /** Format: int32 */
-            userId?: number;
-            userIdNavigation?: components["schemas"]["User"];
-        };
-        TokenModel: {
-            token?: string | null;
-            refreshToken?: string | null;
-        };
-        /** @enum {string} */
-        TransactionTypeInventory: "Entrada" | "Salida";
-        /** @enum {string} */
-        TransactionTypeInventoryApplication: "Entrada" | "Salida";
-        /** @enum {string} */
-        TypeInventory: "Venta" | "Compra";
-        /** @enum {string} */
-        TypeInventoryApplication: "Venta" | "Compra";
-        TypeService: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: time */
-            baseDuration?: string;
-            services?: components["schemas"]["Service"][] | null;
-        };
-        UnitMeasure: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            symbol?: string | null;
-            products?: components["schemas"]["Product"][] | null;
-        };
-        User: {
-            /** Format: int32 */
-            id?: number;
-            cardId?: string | null;
-            firstName?: string | null;
-            lastName?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            /** Format: date */
-            birthday?: string;
-            password?: string | null;
-            /** Format: int32 */
-            genderId?: number;
-            active?: boolean;
-            profilePictureUrl?: string | null;
-            /** Format: int32 */
-            roleId?: number;
-            districtIdNavigation?: components["schemas"]["District"];
-            genderIdNavigation?: components["schemas"]["Gender"];
-            roleIdNavigation?: components["schemas"]["Role"];
-            tokenMasters?: components["schemas"]["TokenMaster"][] | null;
-            userBranches?: components["schemas"]["UserBranch"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        UserBranch: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            userId?: number;
-            /** Format: int32 */
-            branchId?: number;
-            branchIdNavigation?: components["schemas"]["Branch"];
-            userIdNavigation?: components["schemas"]["User"];
-        };
-        Vendor: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            fiscalNumber: string;
-            socialReason: string;
-            /** Format: int32 */
-            telephone: number;
-            /** Format: email */
-            email: string;
-            /** Format: int32 */
-            districtId: number;
-            address?: string | null;
-            active?: boolean;
-            contacts?: components["schemas"]["Contact"][] | null;
-            districtIdNavigation?: components["schemas"]["District"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        /** @enum {string} */
-        WeekDay: "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
-        /** @enum {string} */
-        WeekDayApplication: "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
+  schemas: {
+    AuthenticationResult: {
+      success?: boolean;
+      errors?: string[] | null;
+      token?: string | null;
+      refreshToken?: string | null;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    Branch: {
+      /** Format: int32 */
+      id?: number;
+      name: string;
+      description: string;
+      /** Format: int32 */
+      telephone: number;
+      /** Format: email */
+      email: string;
+      /** Format: int32 */
+      districtId: number;
+      address?: string | null;
+      active?: boolean;
+      invoices?: components["schemas"]["Invoice"][] | null;
+      districtIdNavigation?: components["schemas"]["District"];
+      inventories?: components["schemas"]["Inventory"][] | null;
+      orders?: components["schemas"]["Order"][] | null;
+      reservations?: components["schemas"]["Reservation"][] | null;
+      branchHolidays?: components["schemas"]["BranchHoliday"][] | null;
+      branchSchedules?: components["schemas"]["BranchSchedule"][] | null;
+      userBranches?: components["schemas"]["UserBranch"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    BranchHoliday: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      holidayId: number;
+      /** Format: int32 */
+      branchId: number;
+      /** Format: int32 */
+      year?: number;
+      /** Format: date */
+      date?: string;
+      holidayIdNavigation?: components["schemas"]["Holiday"];
+      branchIdNavigation?: components["schemas"]["Branch"];
+    };
+    BranchSchedule: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      branchId: number;
+      /** Format: int32 */
+      scheduleId: number;
+      scheduleIdNavigation?: components["schemas"]["Schedule"];
+      branchIdNavigation?: components["schemas"]["Branch"];
+      branchScheduleBlocks?: components["schemas"]["BranchScheduleBlock"][] | null;
+    };
+    BranchScheduleBlock: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      branchScheduleId: number;
+      /** Format: time */
+      startHour: string;
+      /** Format: time */
+      endHour: string;
+      active?: boolean;
+      branchScheduleIdNavigation?: components["schemas"]["BranchSchedule"];
+    };
+    Canton: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: int32 */
+      provinceId?: number;
+      districts?: components["schemas"]["District"][] | null;
+      provinceIdNavigation?: components["schemas"]["Province"];
+    };
+    Category: {
+      /** Format: int32 */
+      id?: number;
+      code?: string | null;
+      name?: string | null;
+      products?: components["schemas"]["Product"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    Contact: {
+      /** Format: int32 */
+      id?: number;
+      firstName?: string | null;
+      lastName?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      email?: string | null;
+      /** Format: int32 */
+      vendorId?: number;
+      active?: boolean;
+      vendorIdNavigation?: components["schemas"]["Vendor"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    Customer: {
+      /** Format: int32 */
+      id?: number;
+      firstName?: string | null;
+      lastName?: string | null;
+      email?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      /** Format: int32 */
+      districtId?: number;
+      address?: string | null;
+      active?: boolean;
+      invoices?: components["schemas"]["Invoice"][] | null;
+      districtIdNavigation?: components["schemas"]["District"];
+      orders?: components["schemas"]["Order"][] | null;
+      reservations?: components["schemas"]["Reservation"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    District: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: int32 */
+      cantonId?: number;
+      customers?: components["schemas"]["Customer"][] | null;
+      cantonIdNavigation?: components["schemas"]["Canton"];
+      vendors?: components["schemas"]["Vendor"][] | null;
+      branches?: components["schemas"]["Branch"][] | null;
+      users?: components["schemas"]["User"][] | null;
+    };
+    /** @description Class to specify error properties for exceptions */
+    ErrorDetailsBaseReservation: {
+      /** @description Type identifier */
+      type?: string | null;
+      /**
+       * Format: int32
+       * @description Status code for error
+       */
+      statusCode?: number;
+      /** @description Error message */
+      message?: string | null;
+      /** @description Error detail */
+      detail?: string | null;
+      logLevel?: components["schemas"]["LogLevel"];
+    };
+    Gender: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      users?: components["schemas"]["User"][] | null;
+    };
+    Holiday: {
+      /** Format: int32 */
+      id?: number;
+      name: string;
+      month?: components["schemas"]["Month"];
+      /** Format: int32 */
+      day?: number;
+      active?: boolean;
+      branchHolidays?: components["schemas"]["BranchHoliday"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    Inventory: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      branchId?: number;
+      name?: string | null;
+      typeInventory?: components["schemas"]["TypeInventory"];
+      active?: boolean;
+      branchIdNavigation?: components["schemas"]["Branch"];
+      inventoryProducts?: components["schemas"]["InventoryProduct"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    InventoryProduct: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      inventoryId?: number;
+      /** Format: int32 */
+      productId?: number;
+      /** Format: double */
+      assignable?: number;
+      /** Format: double */
+      mininum?: number;
+      /** Format: double */
+      maximum?: number;
+      inventoryIdNavigation?: components["schemas"]["Inventory"];
+      productIdNavigation?: components["schemas"]["Product"];
+      inventoryProductTransactions?: components["schemas"]["InventoryProductTransaction"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    InventoryProductTransaction: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      inventoryProductId?: number;
+      transactionType?: components["schemas"]["TransactionTypeInventory"];
+      /** Format: double */
+      quantity?: number;
+      inventoryProductIdNavigation?: components["schemas"]["InventoryProduct"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    Invoice: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: int64 */
+      orderId?: number | null;
+      /** Format: int32 */
+      customerId?: number;
+      customerName: string;
+      /** Format: date */
+      date?: string;
+      /** Format: int32 */
+      paymentTypeId?: number;
+      /** Format: int32 */
+      number?: number;
+      /** Format: int32 */
+      taxId?: number;
+      /** Format: double */
+      taxRate?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
+      customerIdNavigation?: components["schemas"]["Customer"];
+      taxIdNavigation?: components["schemas"]["Tax"];
+      orderIdNavigation?: components["schemas"]["Order"];
+      branchIdNavigation?: components["schemas"]["Branch"];
+      paymentTypeIdNavigation?: components["schemas"]["PaymentType"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    InvoiceDetail: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      invoiceId?: number;
+      /** Format: int32 */
+      serviceId?: number | null;
+      /** Format: int32 */
+      productId?: number | null;
+      /** Format: int32 */
+      lineNumber?: number;
+      /** Format: int32 */
+      quantity?: number;
+      /** Format: double */
+      unitPrice?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      invoiceDetailProducts?: components["schemas"]["InvoiceDetailProduct"][] | null;
+      invoiceIdNavigation?: components["schemas"]["Invoice"];
+      productIdNavigation?: components["schemas"]["Product"];
+      serviceIdNavigation?: components["schemas"]["Service"];
+    };
+    InvoiceDetailProduct: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      invoiceDetailId?: number;
+      /** Format: int32 */
+      productId?: number;
+      /** Format: double */
+      quantity?: number;
+      invoiceDetailIdNavigation?: components["schemas"]["InvoiceDetail"];
+      productIdNavigation?: components["schemas"]["Product"];
+    };
+    /** @enum {string} */
+    LogLevel: "Trace" | "Debug" | "Information" | "Warning" | "Error" | "Critical" | "None";
+    /** @enum {string} */
+    Month: "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
+    /** @enum {string} */
+    MonthApplication: "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
+    Order: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: int32 */
+      reservationId?: number;
+      /** Format: int32 */
+      customerId?: number;
+      customerName?: string | null;
+      /** Format: date */
+      date?: string;
+      /** Format: int32 */
+      paymentTypeId?: number;
+      /** Format: int32 */
+      number?: number;
+      /** Format: int32 */
+      taxId?: number;
+      /** Format: double */
+      taxRate?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      /** Format: int32 */
+      statusOrderId?: number;
+      orderDetails?: components["schemas"]["OrderDetail"][] | null;
+      invoices?: components["schemas"]["Invoice"][] | null;
+      customerIdNavigation?: components["schemas"]["Customer"];
+      statusOrderIdNavigation?: components["schemas"]["StatusOrder"];
+      taxIdNavigation?: components["schemas"]["Tax"];
+      reservationIdNavigation?: components["schemas"]["Reservation"];
+      branchIdNavigation?: components["schemas"]["Branch"];
+      paymentTypeIdNavigation?: components["schemas"]["PaymentType"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    OrderDetail: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      orderId?: number;
+      /** Format: int32 */
+      serviceId?: number | null;
+      /** Format: int32 */
+      productId?: number | null;
+      /** Format: int32 */
+      lineNumber?: number;
+      /** Format: int32 */
+      quantity?: number;
+      /** Format: double */
+      unitPrice?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      orderDetailProducts?: components["schemas"]["OrderDetailProduct"][] | null;
+      orderIdNavigation?: components["schemas"]["Order"];
+      productIdNavigation?: components["schemas"]["Product"];
+      serviceIdNavigation?: components["schemas"]["Service"];
+    };
+    OrderDetailProduct: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      orderDetailId?: number;
+      /** Format: int32 */
+      productId?: number;
+      /** Format: double */
+      quantity?: number;
+      orderDetailIdNavigation?: components["schemas"]["OrderDetail"];
+      productIdNavigation?: components["schemas"]["Product"];
+    };
+    PaymentType: {
+      /** Format: int32 */
+      id?: number;
+      description?: string | null;
+      referenceNumber?: string | null;
+      invoices?: components["schemas"]["Invoice"][] | null;
+      orders?: components["schemas"]["Order"][] | null;
+    };
+    Product: {
+      /** Format: int32 */
+      id?: number;
+      name: string;
+      description: string;
+      brand: string;
+      /** Format: int32 */
+      categoryId: number;
+      /** Format: double */
+      price?: number;
+      sku: string;
+      /** Format: int32 */
+      unitMeasureId: number;
+      active?: boolean;
+      invoiceDetailProducts?: components["schemas"]["InvoiceDetailProduct"][] | null;
+      invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
+      orderDetailProducts?: components["schemas"]["OrderDetailProduct"][] | null;
+      orderDetails?: components["schemas"]["OrderDetail"][] | null;
+      reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
+      categoryIdNavigation?: components["schemas"]["Category"];
+      unitMeasureIdNavigation?: components["schemas"]["UnitMeasure"];
+      inventoryProducts?: components["schemas"]["InventoryProduct"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    Province: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      cantons?: components["schemas"]["Canton"][] | null;
+    };
+    RequestBranchDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      description?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      email?: string | null;
+      /** Format: int32 */
+      districtId?: number;
+      address?: string | null;
+      active?: boolean;
+    };
+    RequestBranchHolidayDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      holidayId?: number;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: date */
+      date?: string;
+      /** Format: int32 */
+      year?: number;
+    };
+    RequestBranchScheduleBlockDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      branchScheduleId?: number;
+      /** Format: time */
+      startHour?: string;
+      /** Format: time */
+      endHour?: string;
+      active?: boolean;
+    };
+    RequestBranchScheduleDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: int32 */
+      scheduleId?: number;
+    };
+    RequestHolidayDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      active?: boolean;
+      month?: components["schemas"]["MonthApplication"];
+      /** Format: int32 */
+      day?: number;
+    };
+    RequestInventoryDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: int32 */
+      branchId?: number;
+      typeInventory?: components["schemas"]["TypeInventoryApplication"];
+      active?: boolean;
+    };
+    RequestInventoryProductDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      inventoryId?: number;
+      /** Format: int32 */
+      productId?: number;
+      /** Format: double */
+      assignable?: number;
+      /** Format: double */
+      mininum?: number;
+      /** Format: double */
+      maximum?: number;
+    };
+    RequestInventoryProductTransactionDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      inventoryProductId?: number;
+      transactionType?: components["schemas"]["TransactionTypeInventoryApplication"];
+      /** Format: double */
+      quantity?: number;
+    };
+    RequestInvoiceDetailDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      invoiceId?: number;
+      /** Format: int32 */
+      serviceId?: number | null;
+      /** Format: int32 */
+      productId?: number | null;
+      /** Format: int32 */
+      lineNumber?: number;
+      /** Format: int32 */
+      quantity?: number;
+      /** Format: double */
+      unitPrice?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+    };
+    RequestInvoiceDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: int32 */
+      customerId?: number;
+      customerName?: string | null;
+      /** Format: int64 */
+      orderId?: number | null;
+      /** Format: date */
+      date?: string;
+      /** Format: int32 */
+      paymentTypeId?: number;
+      /** Format: int32 */
+      number?: number;
+      /** Format: int32 */
+      taxId?: number;
+      /** Format: double */
+      taxRate?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      invoiceDetails?: components["schemas"]["RequestInvoiceDetailDto"][] | null;
+    };
+    RequestOrderDetailDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      orderId?: number;
+      /** Format: int32 */
+      serviceId?: number | null;
+      /** Format: int32 */
+      productId?: number | null;
+      /** Format: int32 */
+      lineNumber?: number;
+      /** Format: int32 */
+      quantity?: number;
+      /** Format: double */
+      unitPrice?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+    };
+    RequestOrderDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      customerId?: number;
+      customerName?: string | null;
+      /** Format: date */
+      date?: string;
+      /** Format: int32 */
+      paymentTypeId?: number;
+      /** Format: int32 */
+      number?: number;
+      /** Format: int32 */
+      taxId?: number;
+      /** Format: int32 */
+      reservationId?: number;
+      /** Format: double */
+      taxRate?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      statusOrderId?: string;
+      /** Format: int32 */
+      branchId?: number;
+      orderDetails?: components["schemas"]["RequestOrderDetailDto"][] | null;
+    };
+    RequestProductDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      description?: string | null;
+      brand?: string | null;
+      /** Format: int32 */
+      categoryId?: number;
+      /** Format: double */
+      price?: number;
+      sku?: string | null;
+      /** Format: int32 */
+      unitMeasureId?: number;
+      active?: boolean;
+    };
+    RequestReservationDetailDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      reservationId?: number;
+      /** Format: int32 */
+      serviceId?: number | null;
+      /** Format: int32 */
+      productId?: number | null;
+    };
+    RequestReservationDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: date */
+      date?: string;
+      /** Format: time */
+      hour?: string;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: int32 */
+      customerId?: number;
+      customerName?: string | null;
+      status?: string | null;
+      active?: boolean;
+      reservationQuestion?: components["schemas"]["RequestReservationQuestionDto"][] | null;
+      reservationDetails?: components["schemas"]["RequestReservationDetailDto"][] | null;
+    };
+    RequestReservationQuestionDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      reservationId?: number;
+      question?: string | null;
+      active?: boolean;
+      answer?: string | null;
+    };
+    RequestScheduleDto: {
+      /** Format: int32 */
+      id?: number;
+      day?: components["schemas"]["WeekDayApplication"];
+      /** Format: time */
+      startHour?: string;
+      /** Format: time */
+      endHour?: string;
+    };
+    RequestServiceDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      description?: string | null;
+      /** Format: int32 */
+      typeServiceId?: number;
+      /** Format: double */
+      price?: number;
+      observation?: string | null;
+      active?: boolean;
+    };
+    RequestUserBranchDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      userId?: number;
+      /** Format: int32 */
+      branchId?: number;
+    };
+    RequestUserLoginDto: {
+      email?: string | null;
+      password?: string | null;
+    };
+    RequestVendorDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      fiscalNumber?: string | null;
+      socialReason?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      email?: string | null;
+      /** Format: int32 */
+      districtId?: number;
+      address?: string | null;
+      active?: boolean;
+    };
+    Reservation: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: int32 */
+      customerId?: number;
+      customerName?: string | null;
+      /** Format: date */
+      date: string;
+      /** Format: time */
+      hour: string;
+      status?: string | null;
+      active?: boolean;
+      reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
+      customerIdNavigation?: components["schemas"]["Customer"];
+      branchIdNavigation?: components["schemas"]["Branch"];
+      orders?: components["schemas"]["Order"][] | null;
+      reservationQuestions?: components["schemas"]["ReservationQuestion"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ReservationDetail: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      reservationId: number;
+      /** Format: int32 */
+      serviceId?: number | null;
+      /** Format: int32 */
+      productId?: number | null;
+      productIdNavigation?: components["schemas"]["Product"];
+      reservationIdNavigation?: components["schemas"]["Reservation"];
+      serviceIdNavigation?: components["schemas"]["Service"];
+    };
+    ReservationQuestion: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      reservationId?: number;
+      question?: string | null;
+      answer?: string | null;
+      active?: boolean;
+      reservationIdNavigation?: components["schemas"]["Reservation"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseBranchDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      description?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      email?: string | null;
+      /** Format: int32 */
+      districtId?: number;
+      address?: string | null;
+      active?: boolean;
+      district?: components["schemas"]["ResponseDistrictDto"];
+      inventories?: components["schemas"]["ResponseInventoryDto"][] | null;
+      branchSchedules?: components["schemas"]["ResponseBranchScheduleDto"][] | null;
+      userBranches?: components["schemas"]["ResponseUserBranchDto"][] | null;
+      branchHolidays?: components["schemas"]["ResponseBranchHolidayDto"][] | null;
+      reservas?: components["schemas"]["ResponseReservationDto"][] | null;
+      orders?: components["schemas"]["ResponseOrderDto"][] | null;
+      invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseBranchHolidayDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      holidayId?: number;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: date */
+      date?: string;
+      /** Format: int32 */
+      year?: number;
+      holiday?: components["schemas"]["ResponseHolidayDto"];
+      branch?: components["schemas"]["ResponseBranchDto"];
+    };
+    ResponseBranchScheduleBlockDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      branchScheduleId?: number;
+      /** Format: time */
+      startHour?: string;
+      /** Format: time */
+      endHour?: string;
+      active?: boolean;
+      branchSchedule?: components["schemas"]["ResponseBranchScheduleDto"];
+    };
+    ResponseBranchScheduleDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: int32 */
+      scheduleId?: number;
+      schedule?: components["schemas"]["ResponseScheduleDto"];
+      branch?: components["schemas"]["ResponseBranchDto"];
+      branchScheduleBlocks?: components["schemas"]["ResponseBranchScheduleBlockDto"][] | null;
+    };
+    ResponseCantonDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: int32 */
+      provinceId?: number;
+      districts?: components["schemas"]["ResponseDistrictDto"][] | null;
+      province?: components["schemas"]["ResponseProvinceDto"];
+    };
+    ResponseCategoryDto: {
+      /** Format: int32 */
+      id?: number;
+      code?: string | null;
+      name?: string | null;
+      products?: components["schemas"]["ResponseProductDto"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseContactDto: {
+      /** Format: int32 */
+      id?: number;
+      firstName?: string | null;
+      lastName?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      email?: string | null;
+      /** Format: int32 */
+      vendorId?: number;
+      active?: boolean;
+      vendor?: components["schemas"]["ResponseVendorDto"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseCustomerDto: {
+      /** Format: int32 */
+      id?: number;
+      firstName?: string | null;
+      lastName?: string | null;
+      email?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      /** Format: int32 */
+      districtId?: number;
+      address?: string | null;
+      active?: boolean;
+      invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
+      reservations?: components["schemas"]["ResponseReservationDto"][] | null;
+      district?: components["schemas"]["ResponseDistrictDto"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseDistrictDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: int32 */
+      cantonId?: number;
+      customers?: components["schemas"]["ResponseCustomerDto"][] | null;
+      canton?: components["schemas"]["ResponseCantonDto"];
+      vendors?: components["schemas"]["ResponseVendorDto"][] | null;
+      branches?: components["schemas"]["ResponseBranchDto"][] | null;
+      users?: components["schemas"]["ResponseUserDto"][] | null;
+    };
+    ResponseHolidayDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      active?: boolean;
+      month?: components["schemas"]["MonthApplication"];
+      /** Format: int32 */
+      day?: number;
+      branchHolidays?: components["schemas"]["ResponseBranchHolidayDto"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseInventoryDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: int32 */
+      idSucursal?: number;
+      typeInventory?: components["schemas"]["TypeInventoryApplication"];
+      active?: boolean;
+      branch?: components["schemas"]["ResponseBranchDto"];
+      inventoryProducts?: components["schemas"]["ResponseInventoryProductDto"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseInventoryProductDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      inventoryId?: number;
+      /** Format: int32 */
+      productId?: number;
+      /** Format: double */
+      assignable?: number;
+      /** Format: double */
+      minimum?: number;
+      /** Format: double */
+      maximum?: number;
+      inventory?: components["schemas"]["ResponseInventoryDto"];
+      product?: components["schemas"]["ResponseProductDto"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseInventoryProductTransactionDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      idInventarioProducto?: number;
+      transactionType?: components["schemas"]["TransactionTypeInventoryApplication"];
+      /** Format: double */
+      quantity?: number;
+      inventoryProduct?: components["schemas"]["ResponseInventoryProductDto"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseInvoiceDetailDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      invoiceId?: number;
+      /** Format: int32 */
+      serviceId?: number | null;
+      /** Format: int32 */
+      productId?: number | null;
+      /** Format: int32 */
+      lineNumber?: number;
+      /** Format: int32 */
+      quantity?: number;
+      /** Format: double */
+      unitPrice?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      invoiceDetailProducts?: components["schemas"]["ResponseInvoiceDetailProductDto"][] | null;
+      invoice?: components["schemas"]["ResponseInvoiceDto"];
+      service?: components["schemas"]["ResponseServiceDto"];
+    };
+    ResponseInvoiceDetailProductDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      invoiceDetailId?: number;
+      /** Format: int32 */
+      productId?: number;
+      /** Format: double */
+      quantity?: number;
+      invoiceDetail?: components["schemas"]["ResponseInvoiceDetailDto"];
+      product?: components["schemas"]["ResponseProductDto"];
+    };
+    ResponseInvoiceDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      customerId?: number;
+      customerName?: string | null;
+      /** Format: int64 */
+      orderId?: number | null;
+      /** Format: date */
+      date?: string;
+      /** Format: int32 */
+      paymentTypeId?: number;
+      /** Format: int32 */
+      number?: number;
+      /** Format: int32 */
+      taxId?: number;
+      /** Format: double */
+      taxRate?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      /** Format: int32 */
+      branchId?: number;
+      invoiceDetails?: components["schemas"]["ResponseInvoiceDetailDto"][] | null;
+      customer?: components["schemas"]["ResponseCustomerDto"];
+      taxInfo?: components["schemas"]["ResponseTaxDto"];
+      paymentType?: components["schemas"]["ResponsePaymentTypeDto"];
+      order?: components["schemas"]["ResponseOrderDto"];
+      branch?: components["schemas"]["Branch"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseOrderDetailDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      orderId?: number;
+      /** Format: int32 */
+      serviceId?: number | null;
+      /** Format: int32 */
+      productId?: number | null;
+      /** Format: int32 */
+      lineNumber?: number;
+      /** Format: int32 */
+      quantity?: number;
+      /** Format: double */
+      unitPrice?: number;
+      /** Format: double */
+      subtotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      orderDetailProducts?: components["schemas"]["ResponseOrderDetailProductDto"][] | null;
+      order?: components["schemas"]["ResponseOrderDto"];
+      service?: components["schemas"]["ResponseServiceDto"];
+    };
+    ResponseOrderDetailProductDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int64 */
+      orderDetailId?: number;
+      /** Format: int32 */
+      productId?: number;
+      /** Format: double */
+      quantity?: number;
+      orderDetail?: components["schemas"]["ResponseOrderDetailDto"];
+      product?: components["schemas"]["ResponseProductDto"];
+    };
+    ResponseOrderDto: {
+      /** Format: int64 */
+      id?: number;
+      /** Format: int32 */
+      customerId?: number;
+      customerName?: string | null;
+      /** Format: date */
+      date?: string;
+      /** Format: int32 */
+      paymentTypeId?: number;
+      /** Format: int32 */
+      number?: number;
+      /** Format: int32 */
+      taxId?: number;
+      /** Format: int32 */
+      reservationId?: number;
+      /** Format: double */
+      taxRate?: number;
+      /** Format: double */
+      subTotal?: number;
+      /** Format: double */
+      tax?: number;
+      /** Format: double */
+      total?: number;
+      /** Format: int32 */
+      statusOrderId?: number;
+      /** Format: int32 */
+      branchId?: number;
+      orderDetails?: components["schemas"]["ResponseOrderDetailDto"][] | null;
+      customer?: components["schemas"]["ResponseCustomerDto"];
+      taxInfo?: components["schemas"]["ResponseTaxDto"];
+      paymentType?: components["schemas"]["ResponsePaymentTypeDto"];
+      reservation?: components["schemas"]["ResponseReservationDto"];
+      branch?: components["schemas"]["ResponseBranchDto"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponsePaymentTypeDto: {
+      /** Format: int32 */
+      id?: number;
+      description?: string | null;
+      /** Format: int32 */
+      referenceNumber?: number;
+      invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
+    };
+    ResponseProductDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      description?: string | null;
+      brand?: string | null;
+      /** Format: int32 */
+      categoryId?: number;
+      /** Format: double */
+      price?: number;
+      sku?: string | null;
+      /** Format: int32 */
+      unitMeasureId?: number;
+      active?: boolean;
+      invoiceDetailProducts?: components["schemas"]["ResponseInvoiceDetailProductDto"][] | null;
+      category?: components["schemas"]["ResponseCategoryDto"];
+      unitMeasure?: components["schemas"]["ResponseUnitMeasureDto"];
+      inventarios?: components["schemas"]["ResponseInventoryDto"][] | null;
+      inventoryProducts?: components["schemas"]["ResponseInventoryProductDto"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseProvinceDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      cantons?: components["schemas"]["ResponseCantonDto"][] | null;
+    };
+    ResponseReservationCalendarAgendaDto: {
+      title?: string | null;
+      description?: string | null;
+      /** Format: date-time */
+      start?: string;
+      /** Format: date-time */
+      end?: string;
+      classNames?: string | null;
+      icon?: string | null;
+      allDay?: boolean;
+      display?: string | null;
+    };
+    ResponseReservationDetailDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      reservationId?: number;
+      /** Format: int32 */
+      serviceId?: number | null;
+      /** Format: int32 */
+      productId?: number | null;
+      reservation?: components["schemas"]["ResponseReservationDto"];
+      service?: components["schemas"]["ResponseServiceDto"];
+      product?: components["schemas"]["ResponseProductDto"];
+    };
+    ResponseReservationDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: date */
+      date?: string;
+      /** Format: time */
+      hour?: string;
+      /** Format: int32 */
+      branchId?: number;
+      /** Format: int32 */
+      customerId?: number;
+      customerName?: string | null;
+      status?: string | null;
+      active?: boolean;
+      branch?: components["schemas"]["ResponseBranchDto"];
+      customer?: components["schemas"]["ResponseCustomerDto"];
+      reservationQuestions?: components["schemas"]["ResponseReservationQuestionDto"][] | null;
+      reservationDetails?: components["schemas"]["ResponseReservationDetailDto"][] | null;
+      orders?: components["schemas"]["ResponseOrderDto"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseReservationQuestionDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      reservationId?: number;
+      question?: string | null;
+      active?: boolean;
+      answer?: string | null;
+      reservation?: components["schemas"]["ResponseReservationDto"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseRoleDto: {
+      /** Format: int32 */
+      id?: number;
+      description?: string | null;
+      type?: string | null;
+      active?: boolean;
+      users?: components["schemas"]["ResponseUserDto"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseScheduleDto: {
+      /** Format: int32 */
+      id?: number;
+      day?: components["schemas"]["WeekDayApplication"];
+      /** Format: time */
+      startHour?: string;
+      /** Format: time */
+      endHour?: string;
+      branchSchedules?: components["schemas"]["ResponseBranchScheduleDto"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseServiceDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      description?: string | null;
+      /** Format: int32 */
+      typeServiceId?: number;
+      /** Format: double */
+      price?: number;
+      observation?: string | null;
+      active?: boolean;
+      invoiceDetails?: components["schemas"]["ResponseInvoiceDetailDto"][] | null;
+      typeService?: components["schemas"]["ResponseTypeServiceDto"];
+      detalleReservas?: components["schemas"]["ResponseReservationDetailDto"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseTaxDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: double */
+      rate?: number;
+      invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
+    };
+    ResponseTypeServiceDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: time */
+      duration?: string;
+      services?: components["schemas"]["ResponseServiceDto"][] | null;
+    };
+    ResponseUnitMeasureDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      symbol?: string | null;
+      products?: components["schemas"]["ResponseProductDto"][] | null;
+    };
+    ResponseUserBranchDto: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      userId?: number;
+      /** Format: int32 */
+      branchId?: number;
+      branch?: components["schemas"]["ResponseBranchDto"];
+      user?: components["schemas"]["ResponseUserDto"];
+    };
+    ResponseUserDto: {
+      /** Format: int32 */
+      id?: number;
+      cardId?: string | null;
+      firstName?: string | null;
+      lastName?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      email?: string | null;
+      /** Format: int32 */
+      districtId?: number;
+      address?: string | null;
+      /** Format: date */
+      birthday?: string;
+      password?: string | null;
+      /** Format: int32 */
+      genderId?: number;
+      active?: boolean;
+      profilePictureUrl?: string | null;
+      /** Format: int32 */
+      roleId?: number;
+      district?: components["schemas"]["District"];
+      gender?: components["schemas"]["Gender"];
+      role?: components["schemas"]["Role"];
+      userBranches?: components["schemas"]["UserBranch"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    ResponseVendorDto: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      cardId?: string | null;
+      socialReason?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      email?: string | null;
+      /** Format: int32 */
+      districtId?: number;
+      address?: string | null;
+      active?: boolean;
+      contacts?: components["schemas"]["ResponseContactDto"][] | null;
+      district?: components["schemas"]["ResponseDistrictDto"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    Role: {
+      /** Format: int32 */
+      id?: number;
+      description?: string | null;
+      type?: string | null;
+      active?: boolean;
+      users?: components["schemas"]["User"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    Schedule: {
+      /** Format: int32 */
+      id?: number;
+      day?: components["schemas"]["WeekDay"];
+      /** Format: time */
+      startHour: string;
+      /** Format: time */
+      endHour: string;
+      active?: boolean;
+      branchSchedules?: components["schemas"]["BranchSchedule"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    Service: {
+      /** Format: int32 */
+      id?: number;
+      name: string;
+      description: string;
+      /** Format: int32 */
+      typeServiceId: number;
+      /** Format: double */
+      price: number;
+      observation: string;
+      active?: boolean;
+      invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
+      orderDetails?: components["schemas"]["OrderDetail"][] | null;
+      reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
+      typeServiceIdNavigation?: components["schemas"]["TypeService"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    StatusOrder: {
+      /** Format: int32 */
+      id?: number;
+      description?: string | null;
+      orders?: components["schemas"]["Order"][] | null;
+    };
+    Tax: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: double */
+      rate?: number;
+      invoices?: components["schemas"]["Invoice"][] | null;
+      orders?: components["schemas"]["Order"][] | null;
+    };
+    TokenMaster: {
+      /** Format: int64 */
+      id?: number;
+      token?: string | null;
+      jwtId?: string | null;
+      /** Format: date-time */
+      createdAt?: string;
+      /** Format: date-time */
+      expireAt?: string;
+      used?: boolean;
+      /** Format: int32 */
+      userId?: number;
+      userIdNavigation?: components["schemas"]["User"];
+    };
+    TokenModel: {
+      token?: string | null;
+      refreshToken?: string | null;
+    };
+    /** @enum {string} */
+    TransactionTypeInventory: "Entrada" | "Salida";
+    /** @enum {string} */
+    TransactionTypeInventoryApplication: "Entrada" | "Salida";
+    /** @enum {string} */
+    TypeInventory: "Venta" | "Compra";
+    /** @enum {string} */
+    TypeInventoryApplication: "Venta" | "Compra";
+    TypeService: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      /** Format: time */
+      baseDuration?: string;
+      services?: components["schemas"]["Service"][] | null;
+    };
+    UnitMeasure: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      symbol?: string | null;
+      products?: components["schemas"]["Product"][] | null;
+    };
+    User: {
+      /** Format: int32 */
+      id?: number;
+      cardId?: string | null;
+      firstName?: string | null;
+      lastName?: string | null;
+      /** Format: int32 */
+      telephone?: number;
+      email?: string | null;
+      /** Format: int32 */
+      districtId?: number;
+      address?: string | null;
+      /** Format: date */
+      birthday?: string;
+      password?: string | null;
+      /** Format: int32 */
+      genderId?: number;
+      active?: boolean;
+      profilePictureUrl?: string | null;
+      /** Format: int32 */
+      roleId?: number;
+      districtIdNavigation?: components["schemas"]["District"];
+      genderIdNavigation?: components["schemas"]["Gender"];
+      roleIdNavigation?: components["schemas"]["Role"];
+      tokenMasters?: components["schemas"]["TokenMaster"][] | null;
+      userBranches?: components["schemas"]["UserBranch"][] | null;
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    UserBranch: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      userId?: number;
+      /** Format: int32 */
+      branchId?: number;
+      branchIdNavigation?: components["schemas"]["Branch"];
+      userIdNavigation?: components["schemas"]["User"];
+    };
+    Vendor: {
+      /** Format: int32 */
+      id?: number;
+      name: string;
+      fiscalNumber: string;
+      socialReason: string;
+      /** Format: int32 */
+      telephone: number;
+      /** Format: email */
+      email: string;
+      /** Format: int32 */
+      districtId: number;
+      address?: string | null;
+      active?: boolean;
+      contacts?: components["schemas"]["Contact"][] | null;
+      districtIdNavigation?: components["schemas"]["District"];
+      /** Format: date-time */
+      created?: string;
+      createdBy?: string | null;
+      /** Format: date-time */
+      updated?: string | null;
+      updatedBy?: string | null;
+    };
+    /** @enum {string} */
+    WeekDay: "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
+    /** @enum {string} */
+    WeekDayApplication: "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
+
 export type $defs = Record<string, never>;
+
+export type external = Record<string, never>;
+
 export type operations = Record<string, never>;

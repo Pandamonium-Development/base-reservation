@@ -11,7 +11,7 @@ export const useGetProvinces = (): UseQueryResult<Array<Province>> => {
     return useQuery({
         queryKey: ["Provinces"],
         queryFn: async () => {
-            const { data } = await getProvinces(undefined);
+            const { data } = await getProvinces({});
             return data
         },
         enabled: true
