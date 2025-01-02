@@ -68,7 +68,7 @@ public class BranchController(IServiceBranch serviceBranch) : ControllerBase
     /// <param name="branch">Branch request model to be added</param>
     /// <returns>IActionResult</returns>
     [HttpPost]
-    [BaseReservationAuthorize(Role.ADMINISTRADOR)]
+    [BaseReservationAuthorize(RoleApplication.ADMINISTRADOR)]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseBranchDto))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
@@ -86,7 +86,7 @@ public class BranchController(IServiceBranch serviceBranch) : ControllerBase
     /// <param name="branch">Branch request model to be added</param>
     /// <returns>IActionResult</returns>
     [HttpPut("{branchId}")]
-    [BaseReservationAuthorize(Role.ADMINISTRADOR)]
+    [BaseReservationAuthorize(RoleApplication.ADMINISTRADOR)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseBranchDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]

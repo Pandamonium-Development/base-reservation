@@ -11,7 +11,7 @@ public record ResponseInventoryDto : BaseEntity
 
     public byte IdSucursal { get; set; }
 
-    public TypeInventory TypeInventory { get; set; }
+    public TypeInventoryApplication TypeInventory { get; set; }
 
     public bool Active { get; set; }
 

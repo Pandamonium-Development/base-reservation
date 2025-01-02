@@ -21,7 +21,7 @@ public static class SwaggerConfiguration
 
         services.AddSwaggerGen(opts =>
         {
-            opts.CustomSchemaIds(type => type.ToString());
+            opts.CustomSchemaIds(type => type.Name);
             opts.AddSecurityDefinition(name: "Bearer", securityScheme: new OpenApiSecurityScheme
             {
                 Description = "JWT Authorization header using Bearer schema",
@@ -44,7 +44,7 @@ public static class SwaggerConfiguration
             });
 
             opts.OperationFilter<AuthorizeOperationFilter>();
-
+            opts.OperationFilter<CleanOperationFilter>();
             opts.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
         });
 

@@ -8,7 +8,7 @@ public record RequestInventoryProductTransactionDto : RequestBaseDto
 
     public long InventoryProductId { get; set; }
 
-    public TransactionTypeInventory TransactionType { get; set; }
+    public TransactionTypeInventoryApplication TransactionType { get; set; }
 
     public decimal Quantity { get; set; }
 }

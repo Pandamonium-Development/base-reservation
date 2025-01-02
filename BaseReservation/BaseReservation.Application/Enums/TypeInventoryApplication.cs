@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.Enums;
 
-public enum TypeInventory
+public enum TypeInventoryApplication
 {
     Venta = 1,
 

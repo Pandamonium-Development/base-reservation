@@ -1,6 +1,6 @@
-﻿using App = BaseReservation.Application.Enums;
+﻿using BaseReservation.Application.Enums;
 using AutoMapper;
-using Infra = BaseReservation.Infrastructure.Enums;
+using BaseReservation.Infrastructure.Enums;
 using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Infrastructure.Models;
 using BaseReservation.Application.ResponseDTOs.Base;
@@ -12,7 +12,7 @@ public class MiscApplicationProfile : Profile
 {
     public MiscApplicationProfile()
     {
-        CreateMap<App.WeekDay, Infra.WeekDay>().ReverseMap();
+        CreateMap<WeekDayApplication, WeekDay>().ReverseMap();
 
         CreateMap<BaseEntity, BaseModel>()
             .ForMember(m => m.CreatedBy, opts =>

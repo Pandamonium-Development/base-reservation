@@ -26,7 +26,7 @@ public class UserIdentityHandler : AuthorizationHandler<IdentifiedUser>
             {
                 UserId = short.Parse(claimFinder.UserId!.Value),
                 Email = claimFinder.Email!.Value,
-                Role = (Role)Enum.Parse(typeof(Role), claimFinder.Role!.Value.ToUpper())
+                Role = (RoleApplication)Enum.Parse(typeof(RoleApplication), claimFinder.Role!.Value.ToUpper())
             };
         }
 

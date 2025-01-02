@@ -1,6 +1,6 @@
 namespace BaseReservation.Application.Enums;
 
-public enum Month
+public enum MonthApplication
 {
     Enero = 1,
 

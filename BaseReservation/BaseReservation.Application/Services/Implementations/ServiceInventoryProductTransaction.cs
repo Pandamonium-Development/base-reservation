@@ -24,7 +24,7 @@ public class ServiceInventoryProductTransaction(IRepositoryInventoryProductTrans
         if (inventoryProductTransaction.TransactionType == TransactionTypeInventory.Salida && inventarioProducto.Assignable - inventoryProductTransaction.Quantity < 0)
             throw new BaseReservationException("No puede generar un movimiento de inventario con una cantidad mayor a la disponible.");
 
-        var newAssignableQuantity = inventoryProductTransactionDto.TransactionType == Enums.TransactionTypeInventory.Entrada ?
+        var newAssignableQuantity = inventoryProductTransactionDto.TransactionType == Enums.TransactionTypeInventoryApplication.Entrada ?
                             inventoryProductTransaction.Quantity : inventoryProductTransaction.Quantity * -1 + inventarioProducto.Assignable;
 
         if (newAssignableQuantity > inventarioProducto.Maximum)

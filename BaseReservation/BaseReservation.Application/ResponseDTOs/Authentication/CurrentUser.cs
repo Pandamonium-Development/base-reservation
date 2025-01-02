@@ -8,5 +8,5 @@ public record CurrentUser
 
     public string? Email { get; init; }
 
-    public Role? Role { get; init; }
+    public RoleApplication? Role { get; init; }
 }

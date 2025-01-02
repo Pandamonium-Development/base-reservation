@@ -1,0 +1,35 @@
+{
+  "name": "basereservation-site",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "api-base-reservation:generate": "openapi-typescript ./src/api/base-reservation/spec.json -o ./src/api/base-reservation/api.d.ts",
+    "api-base-reservation:update-local": "curl -s http://localhost:5001/swagger/v1/swagger.json -o ./src/api/base-reservation/spec.json && sed -i '' 's/; x-api-version=[0-9]*//' ./src/api/base-reservation/spec.json && npx openapi-typescript ./src/api/base-reservation/spec.json -o ./src/api/base-reservation/api.d.ts --bare"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.62.9",
+    "openapi-fetch": "^0.13.3",
+    "openapi-typescript": "^6.7.6",
+    "openapi-typescript-fetch": "^2.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.5"
+  }
+}

@@ -1,7 +1,7 @@
-using System.ComponentModel.DataAnnotations;
 using System.Net;
-using BaseReservation.Application.Common;
 using Microsoft.AspNetCore.Diagnostics;
+using BaseReservation.Application.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace BaseReservation.WebAPI.Configuration;
 
@@ -12,10 +12,10 @@ public static class ExceptionHandlingConfigurationExtension
 {
     /// <summary>
     /// Configuration exception handler extension to catch errors
-    /// </summary>
+    /// /// </summary>
     /// <param name="app">Application builder</param>
     /// <param name="logger">App log</param>
-    public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILogger logger)
+    public static void ConfigureExceptionHandler(this IApplicationBuilder app, Serilog.ILogger logger)
     {
         app.UseExceptionHandler(appError =>
         {
@@ -25,6 +25,10 @@ public static class ExceptionHandlingConfigurationExtension
                 if (contextFailure != null)
                 {
                     var errorDetails = GetErrorDetails(contextFailure);
+
+                    // Log the error using Serilog
+                    logger.Error(contextFailure.Error, "An error occurred: {ErrorDetails}", errorDetails);
+
                     context.Response.StatusCode = errorDetails.StatusCode;
                     context.Response.ContentType = "application/json";
                     await context.Response.WriteAsync(errorDetails.ToString());

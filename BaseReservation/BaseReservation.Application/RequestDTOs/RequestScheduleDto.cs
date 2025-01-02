@@ -6,7 +6,7 @@ public record RequestScheduleDto : RequestBaseDto
 {
     public short Id { get; set; }
 
-    public WeekDay Day { get; set; }
+    public WeekDayApplication Day { get; set; }
 
     public TimeOnly StartHour { get; set; }
 

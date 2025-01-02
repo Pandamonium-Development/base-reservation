@@ -10,7 +10,7 @@ public record RequestHolidayDto : RequestBaseDto
 
     public bool Active { get; set; }
 
-    public Month Month { get; set; }
+    public MonthApplication Month { get; set; }
 
     public byte Day { get; set; }
 }
