@@ -1,12 +1,12 @@
-using BaseReservation.Infrastructure.Configuration;
-using BaseReservation.Application.Configuration;
-using BaseReservation.WebAPI.Configuration;
+using Serilog;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using BaseReservation.Utils.Converter;
-using BaseReservation.WebAPI.Authorization;
 using BaseReservation.WebAPI.Swagger;
-using Serilog;
+using BaseReservation.Utils.Converter;
+using BaseReservation.WebAPI.Configuration;
+using BaseReservation.WebAPI.Authorization;
+using BaseReservation.Application.Configuration;
+using BaseReservation.Infrastructure.Configuration;
 
 var BaseReservationSpecificOrigins = "_BaseReservationSpecificOrigins";
 
@@ -90,7 +90,6 @@ app.MapControllers();
 
 app.UseSerilogRequestLogging();
 
-var logger = app.Services.GetRequiredService<ILogger<Program>>();
-app.ConfigureExceptionHandler(logger);
+app.ConfigureExceptionHandler(Log.Logger);
 
 await app.RunAsync();
