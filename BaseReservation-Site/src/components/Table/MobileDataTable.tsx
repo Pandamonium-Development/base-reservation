@@ -5,11 +5,11 @@ import {
     GridColType,
     GridColDef,
 } from '@mui/x-data-grid'
+import { MutableRefObject } from 'react'
 import { compact, isNil, reject } from 'lodash'
 import { isPresent, convertToArray } from 'utils/util'
 import { type GridApiCommunity } from '@mui/x-data-grid/internals'
 import { Box, Checkbox, Divider, Typography } from '@mui/material'
-import { MutableRefObject } from 'react'
 
 const handleCheckBoxOnClick = <RowModelT extends GridValidRowModel>(
     rowSelectionModel: DataGridProps<RowModelT>['rowSelectionModel'],

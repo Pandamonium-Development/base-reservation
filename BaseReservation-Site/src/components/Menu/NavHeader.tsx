@@ -1,17 +1,35 @@
+import { MobileMenu } from './MobileMenu';
 import { MenuOptions } from './MenuOptions';
 import { useLayout } from 'hooks/useLayout';
 import { ToolbarIcon } from './ToolbarIcon';
+import { useState, MouseEvent } from 'react';
+import { useAuth } from 'contexts/AuthContext';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Avatar, Box, IconButton, Toolbar } from '@mui/material';
-import { MobileMenu } from './MobileMenu';
-import { useState } from 'react';
+import { AppBar, Avatar, Box, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
 
 export const NavHeader = () => {
     const { isMobile } = useLayout();
+    const { logout } = useAuth();
 
     const [menuMobileOpen, setMenuMobileOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [openMenu, setOpenMenu] = useState(false);
 
     const toggleMenuMobile = (state: boolean) => setMenuMobileOpen(state);
+
+    const handleAvatarClick = (event: MouseEvent<HTMLDivElement>) => {
+        setAnchorEl(event.currentTarget);
+        setOpenMenu(true);
+    };
+
+    const handleCloseMenu = () => {
+        setOpenMenu(false);
+    };
+
+    const handleLogout = () => {
+        logout();
+        handleCloseMenu();
+    };
 
     return (
         <AppBar
@@ -56,7 +74,25 @@ export const NavHeader = () => {
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar />
+                    <Avatar
+                        onClick={handleAvatarClick} // Al hacer clic, abre el menú desplegable
+                        sx={{ cursor: 'pointer' }}
+                    />
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={openMenu}
+                        onClose={handleCloseMenu}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                        }}
+                    >
+                        <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
+                    </Menu>
                 </Box>
             </Toolbar>
         </AppBar>

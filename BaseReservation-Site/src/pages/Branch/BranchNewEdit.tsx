@@ -1,32 +1,44 @@
+import { isEmpty, isNil } from "lodash";
 import { useEffect, useState } from "react";
 import { useLayout } from "hooks/useLayout";
 import { Page } from "components/Shared/Page";
 import { useSnackbar } from "stores/useSnackbar";
-import { useMutation } from "@tanstack/react-query";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PageHeader } from "components/Shared/PageHeader";
-import { BranchDefaultValues, BranchSchema, type BranchForm } from "./BranchSchema";
-import { useTypedApiClientBS } from "hooks/useTypedApiClientBS";
 import { CantonSelect } from "components/Directions/CantonSelect";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { BranchDefaultValues, BranchSchema } from "./BranchSchema";
 import { Controller, FormProvider, useForm } from "react-hook-form";
-import { Alert, Box, Button, FormControlLabel, Stack, Switch, TextField } from "@mui/material";
 import { DistrictSelect } from "components/Directions/DistrictSelect";
 import { ProvinceSelect } from "components/Directions/ProvinceSelect";
 import { applyPhoneMask, isPresent, removePhoneMask } from "utils/util";
+import { usePostBranch } from "hooks/api-basereservation/usePostBranch";
 import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
+import { BaseReservationErrorDetails, Branch } from "types/api-basereservation";
+import { Alert, Box, Button, FormControlLabel, Stack, Switch, TextField } from "@mui/material";
 
-export const BranchNewEdit = () => {
+export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined | null }) => {
     const navigate = useNavigate();
     const { isMobile } = useLayout();
     const setMessage = useSnackbar((state) => state.setMessage);
-    const [province, setProvince] = useState(0);
-    const [canton, setCanton] = useState(0);
-    const [district, setDistrict] = useState(0);
+    const [province, setProvince] = useState(isNil(branchData) ? 0 : Number(branchData.district?.canton?.provinceId));
+    const [canton, setCanton] = useState(isNil(branchData) ? 0 : Number(branchData.district?.cantonId));
+    const [district, setDistrict] = useState(isNil(branchData) ? 0 : Number(branchData.districtId));
 
     const formMethods = useForm({
         resolver: yupResolver(BranchSchema),
-        defaultValues: BranchDefaultValues
+        defaultValues: isNil(branchData) ? BranchDefaultValues : {
+            id: Number(branchData.id),
+            name: String(branchData.name),
+            description: String(branchData.description),
+            telephone: applyPhoneMask(String(branchData.telephone)),
+            email: String(branchData.email),
+            provinceId: Number(branchData.district?.canton?.provinceId),
+            cantonId: Number(branchData.district?.cantonId),
+            districtId: Number(branchData.districtId),
+            address: isNil(branchData.address) ? '' : branchData.address,
+            active: Boolean(branchData.active)
+        }
     });
 
     const {
@@ -36,44 +48,35 @@ export const BranchNewEdit = () => {
         formState: { errors },
     } = formMethods;
 
-    const postBranch = useTypedApiClientBS({
-        path: '/api/Branch',
-        method: 'post'
-    })
-
-    const createBranch = useMutation({
-        mutationKey: ['Branches'],
-        mutationFn: async (data: BranchForm) => {
-            return await postBranch({
-                name: data.name,
-                description: data.description,
-                telephone: removePhoneMask(data.telephone),
-                email: data.email,
-                districtId: data.districtId,
-                address: data.address,
-                active: data.active
-            })
-        },
-        onSuccess: () => {
+    const { mutate: postBranch } = usePostBranch({
+        onSuccess() {
+            setMessage('Sucursal creada correctamente');
             navigate('/Sucursal');
-            setMessage('Sucursal creada correctamente', 'success');
         },
-        onError: (error) => {
-            setMessage(error.message, 'error');
+        onError(data: BaseReservationErrorDetails) {
+            setMessage(`${data.message}`, 'error');
         }
     })
 
     useEffect(() => {
-        setCanton(0);
-        setDistrict(0);
-    }, [province]);
+        setCanton(canton);
+        setDistrict(district);
+    }, [province, canton, district]);
 
     useEffect(() => {
-        setDistrict(0);
-    }, [canton]);
+        setDistrict(district);
+    }, [canton, district]);
 
     const createBranchWrapper = handleSubmit((data) => {
-        createBranch.mutate(data);
+        postBranch({
+            name: data.name,
+            description: data.description,
+            telephone: removePhoneMask(data.telephone),
+            email: data.email,
+            districtId: data.districtId,
+            address: isEmpty(data.address) ? null : data.address,
+            active: data.active
+        });
     });
 
     return (

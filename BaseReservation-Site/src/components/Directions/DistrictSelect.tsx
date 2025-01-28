@@ -37,7 +37,7 @@ export const DistrictSelect = ({ selectedProvince, selectedCanton, selectedDistr
             <FormControl fullWidth error={error}>
                 <Select
                     id='district'
-                    value={selectedDistrict}
+                    value={selectedDistrict != 0 && districts?.length == 0 ? 0 : selectedDistrict}
                     onChange={(e) => onDistrictChange(Number(e.target.value))}
                 >
                     <MenuItem key={0} value={0}>

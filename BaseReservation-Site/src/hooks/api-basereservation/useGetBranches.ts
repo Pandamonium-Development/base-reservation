@@ -1,6 +1,6 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { useTypedApiClientBS } from "../useTypedApiClientBS";
 import { Branch } from "types/api-basereservation";
+import { useTypedApiClientBS } from "../useTypedApiClientBS";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 export const useGetBranches = (): UseQueryResult<Array<Branch>> => {
     const getBranches = useTypedApiClientBS({
@@ -9,7 +9,7 @@ export const useGetBranches = (): UseQueryResult<Array<Branch>> => {
     })
 
     return useQuery({
-        queryKey: ["Branches"],
+        queryKey: ["GetBranches"],
         queryFn: async () => {
             const { data } = await getBranches({});
             return data

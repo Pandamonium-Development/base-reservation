@@ -8,13 +8,15 @@ export const Snackbar = () => {
     const setMessage = useSnackbar((state) => state.setMessage)
     const anchorOrigin = useSnackbar((state) => state.anchorOrigin)
 
+    const handleClose = () => {
+        setMessage(null);
+    };
+
     return (
         <MuiSnackbar
-            autoHideDuration={4000}
+            autoHideDuration={3000}
             open={isVisible}
-            onClose={() => {
-                setMessage(null);
-            }}
+            onClose={handleClose}
             anchorOrigin={anchorOrigin}
             sx={{ paddingTop: '4%' }}
         >

@@ -17,7 +17,7 @@ export const ProvinceSelect = ({ selectedProvince, onProvinceChange }: ProvinceS
         if (provinceItemsQuery.data) {
             setProvinces(provinceItemsQuery.data)
         }
-    }, [provinceItemsQuery.data])
+    }, [provinceItemsQuery.data, onProvinceChange, selectedProvince])
 
     if (provinceItemsQuery.isPending) {
         return <CircularProgress />
@@ -34,7 +34,7 @@ export const ProvinceSelect = ({ selectedProvince, onProvinceChange }: ProvinceS
             </InputLabel>
             <Select
                 id='province'
-                value={selectedProvince}
+                value={selectedProvince != 0 && provinces.length == 0 ? 0 : selectedProvince}
                 onChange={(e) => onProvinceChange(Number(e.target.value))}
             >
                 <MenuItem key={0} value={0}>

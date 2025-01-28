@@ -1,10 +1,15 @@
+import { LoginPage } from 'pages/Login/LoginPage';
+import { ProtectLayout } from './ProtectedLayout';
 import { getProtectedRoutes } from './ProtectedNavigation';
-import { createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-            {getProtectedRoutes()}
+            <Route path="/" element={<LoginPage />} />
+            <Route element={<ProtectLayout />}>
+                {getProtectedRoutes()}
+            </Route>
         </>
     )
 )

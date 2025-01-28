@@ -40,6 +40,9 @@
       ],
       "stores/*": [
         "src/stores/*"
+      ],
+      "contexts/*": [
+        "src/contexts/*"
       ]
     }
   },

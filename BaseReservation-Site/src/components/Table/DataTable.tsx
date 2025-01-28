@@ -1,9 +1,9 @@
 import { isEmpty } from "lodash"
 import { useState } from "react"
 import { useLayout } from "hooks/useLayout"
+import { MobileDataTable } from "./MobileDataTable"
 import { NoDataIndicador } from "components/NoDataIndicator/NoDataIndicador"
 import { DataGrid, DataGridProps, GridSortModel, GridValidRowModel } from "@mui/x-data-grid"
-import { MobileDataTable } from "./MobileDataTable"
 
 export const DataTable = <RowModelT extends GridValidRowModel>({
     sortFieldName,

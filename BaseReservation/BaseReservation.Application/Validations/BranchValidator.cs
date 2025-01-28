@@ -26,7 +26,7 @@ public class BranchValidator : AbstractValidator<Branch>
             .NotEmpty().WithMessage("Por favor ingrese un distrito válido");
 
         RuleFor(x => x.Address)
-            .NotEmpty().WithMessage("Por favor ingrese un distrito válido")
+            .NotEmpty().WithMessage("Por favor ingrese un dirección válida")
             .When(x => x.Address != null);
     }
 }

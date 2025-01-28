@@ -34,7 +34,7 @@ export const CantonSelect = ({ selectedProvince, selectedCanton, onCantonChange 
             </InputLabel>
             <Select
                 id='canton'
-                value={selectedCanton}
+                value={selectedCanton != 0 && cantons?.length == 0 ? 0 : selectedCanton}
                 onChange={(e) => onCantonChange(Number(e.target.value))}
             >
                 <MenuItem key={0} value={0}>
