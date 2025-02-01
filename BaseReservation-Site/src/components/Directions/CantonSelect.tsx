@@ -52,11 +52,11 @@ export const CantonSelect = ({ selectedProvince, selectedCanton, onCantonChange 
             </InputLabel>
             <Select
                 id='canton'
-                value={localSelectedCanton}  // Usamos el valor local para la selección
+                value={localSelectedCanton}
                 onChange={(e) => {
                     const newCanton = Number(e.target.value);
-                    setLocalSelectedCanton(newCanton);  // Actualizamos el valor local
-                    onCantonChange(newCanton);  // Propagamos el cambio hacia el padre
+                    setLocalSelectedCanton(newCanton);
+                    onCantonChange(newCanton);
                 }}
             >
                 <MenuItem key={0} value={0}>

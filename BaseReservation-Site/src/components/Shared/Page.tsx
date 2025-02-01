@@ -13,7 +13,7 @@ export const Page = (props: {
                 sx={{
                     my: { xs: '5rem', sm: '3rem', md: '5rem' },
                     mx: { xs: '1rem', sm: '3rem', md: '5rem' },
-                    px: '2rem',
+                    px: '3rem',
                     py: '1rem',
                     backgroundColor: 'background.default',
                     borderRadius: '32px',
@@ -33,7 +33,7 @@ export const Page = (props: {
                         overflowY: 'auto',
                         overflowX: 'hidden',
                         width: '100%',
-                        boxSizing: 'border-box', // Ensures padding and border don't cause overflow
+                        boxSizing: 'border-box',
                     }}>
                     {props.header}
                     <Box

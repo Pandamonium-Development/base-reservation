@@ -28,7 +28,6 @@ export const usePostAuthentication = ({
         mutationFn: async (
             loginUserInformation: LoginUserRequest
         ) => {
-            //const { data } = await postAuthentication(loginUserInformation as OpArgType<paths['/api/Authentication']['post']['requestBody']> as never);
             const { data } = await postAuthentication(castRequestBody(loginUserInformation, "/api/Authentication", "post"))
             return data;
         },

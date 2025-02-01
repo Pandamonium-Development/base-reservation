@@ -1,37 +1,19 @@
 import Cookies from 'js-cookie';
+import { useState } from 'react';
 import { MobileMenu } from './MobileMenu';
 import { MenuOptions } from './MenuOptions';
 import { useLayout } from 'hooks/useLayout';
 import { ToolbarIcon } from './ToolbarIcon';
-import { useState, MouseEvent } from 'react';
-import { useAuth } from 'contexts/AuthContext';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Avatar, Box, Divider, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
+import { AvatarMenuOption } from './AvatarMenuOption';
+import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
 
 export const NavHeader = () => {
     const { isMobile } = useLayout();
-    const { logout } = useAuth();
     const userName = Cookies.get('user_name');
 
     const [menuMobileOpen, setMenuMobileOpen] = useState(false);
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [openMenu, setOpenMenu] = useState(false);
-
     const toggleMenuMobile = (state: boolean) => setMenuMobileOpen(state);
-
-    const handleAvatarClick = (event: MouseEvent<HTMLDivElement>) => {
-        setAnchorEl(event.currentTarget);
-        setOpenMenu(true);
-    };
-
-    const handleCloseMenu = () => {
-        setOpenMenu(false);
-    };
-
-    const handleLogout = () => {
-        logout();
-        handleCloseMenu();
-    };
 
     return (
         <AppBar
@@ -75,33 +57,8 @@ export const NavHeader = () => {
                     <ToolbarIcon />
                 </Box>
 
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    {!isMobile && (<Typography variant='body2' sx={{ minWidth: '9rem' }}>{userName}</Typography>)}
-                    <Avatar
-                        onClick={handleAvatarClick} // Al hacer clic, abre el menú desplegable
-                        sx={{ cursor: 'pointer' }}
-                    />
-                    <Menu
-                        anchorEl={anchorEl}
-                        open={openMenu}
-                        onClose={handleCloseMenu}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                        }}
-                    >
-                        <MenuItem sx={{ paddingBottom: '2rem' }}>
-                            <Typography variant='body2'>{userName}</Typography>
-                        </MenuItem>
-                        <Divider />
-                        <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
-                    </Menu>
-                </Box>
+                <AvatarMenuOption UserName={userName} />
             </Toolbar>
-        </AppBar>
+        </AppBar >
     )
 }
