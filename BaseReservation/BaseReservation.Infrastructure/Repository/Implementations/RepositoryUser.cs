@@ -9,7 +9,7 @@ namespace BaseReservation.Infrastructure.Repository.Implementations;
 public class RepositoryUser(BaseReservationContext context) : IRepositoryUser
 {
     /// <inheritdoc />
-    public async Task<User?> FindByIdAsync(short id) => await context.Set<User>().FindAsync(id);
+    public async Task<User?> FindByIdAsync(short id) => await context.Set<User>().Include(m => m.RoleIdNavigation).AsNoTracking().FirstOrDefaultAsync();
 
     /// <inheritdoc />
     public async Task<User?> FindByEmailAsync(string email) => await context.Set<User>().Include(m => m.RoleIdNavigation).AsNoTracking().FirstOrDefaultAsync(m => m.Email == email);

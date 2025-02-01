@@ -143,7 +143,7 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
 
         existingRefreshToken.Used = true;
         await repositoryTokenMaster.UpdateTokenMasterAsync(existingRefreshToken);
-        var user = await GetUserAsync(validatedToken.Claims.Single(x => x.Type == "IdUsuario").Value);
+        var user = await GetUserAsync(validatedToken.Claims.Single(x => x.Type == "UserId").Value);
 
         return await AuthenticateAsync(user);
     }

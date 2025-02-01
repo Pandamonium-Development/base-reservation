@@ -1,6 +1,6 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { Province } from "types/api-basereservation";
 import { useTypedApiClientBS } from "../useTypedApiClientBS";
-import { Province } from "../../types/api-basereservation";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 export const useGetProvinces = (): UseQueryResult<Array<Province>> => {
     const getProvinces = useTypedApiClientBS({
