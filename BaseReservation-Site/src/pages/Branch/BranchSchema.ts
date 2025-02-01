@@ -1,5 +1,5 @@
 import { telephoneMaskRegex } from "utils/util";
-import { bool, number, object, string, type InferType } from "yup";
+import { number, object, string, type InferType } from "yup";
 
 export const BranchDefaultValues = {
     id: 0,
@@ -11,7 +11,6 @@ export const BranchDefaultValues = {
     cantonId: 0,
     districtId: 0,
     address: '',
-    active: true,
 };
 
 export const BranchSchema = object().shape({
@@ -24,7 +23,6 @@ export const BranchSchema = object().shape({
     cantonId: number(),
     districtId: number().required('Seleccione el distrito').min(1, 'Seleccione el distrito'),
     address: string().max(250),
-    active: bool().required('Seleccione el estado de la sucursal')
 })
 
 export type BranchForm = InferType<typeof BranchSchema>

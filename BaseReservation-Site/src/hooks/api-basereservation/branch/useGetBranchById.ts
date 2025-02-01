@@ -1,7 +1,7 @@
 import { isPresent } from "utils/util";
 import { Branch } from "types/api-basereservation";
-import { useTypedApiClientBS } from "../useTypedApiClientBS";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
 
 export const useGetBranchById = (branchId: string | undefined): UseQueryResult<Branch> => {
     const getBranch = useTypedApiClientBS({
@@ -12,7 +12,7 @@ export const useGetBranchById = (branchId: string | undefined): UseQueryResult<B
     return useQuery({
         queryKey: ["GetBranch", branchId],
         queryFn: async () => {
-            const { data } = await getBranch({ branchId: Number(branchId) });
+            const { data } = await getBranch(castRequestBody({ branchId: Number(branchId) }, "/api/Branch/{branchId}", "get"));
             return data
         },
         enabled: isPresent(branchId),

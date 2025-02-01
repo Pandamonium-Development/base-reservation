@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { MobileMenu } from './MobileMenu';
 import { MenuOptions } from './MenuOptions';
 import { useLayout } from 'hooks/useLayout';
@@ -5,11 +6,12 @@ import { ToolbarIcon } from './ToolbarIcon';
 import { useState, MouseEvent } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Avatar, Box, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
+import { AppBar, Avatar, Box, Divider, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 
 export const NavHeader = () => {
     const { isMobile } = useLayout();
     const { logout } = useAuth();
+    const userName = Cookies.get('user_name');
 
     const [menuMobileOpen, setMenuMobileOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -74,6 +76,7 @@ export const NavHeader = () => {
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    {!isMobile && (<Typography variant='body2' sx={{ minWidth: '9rem' }}>{userName}</Typography>)}
                     <Avatar
                         onClick={handleAvatarClick} // Al hacer clic, abre el menú desplegable
                         sx={{ cursor: 'pointer' }}
@@ -91,6 +94,10 @@ export const NavHeader = () => {
                             horizontal: 'center',
                         }}
                     >
+                        <MenuItem sx={{ paddingBottom: '2rem' }}>
+                            <Typography variant='body2'>{userName}</Typography>
+                        </MenuItem>
+                        <Divider />
                         <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
                     </Menu>
                 </Box>

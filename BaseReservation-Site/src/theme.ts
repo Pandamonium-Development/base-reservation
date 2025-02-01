@@ -157,7 +157,7 @@ export const theme = createTheme({
         MuiFormLabel: {
             styleOverrides: {
                 root: {
-                    fontSize: '1rem', // Adjust the font size as needed
+                    fontSize: '1.25rem', // Adjust the font size as needed
                     '&.Mui-focused': {
                         color: '#DB9F6A',
                         fontSize: '1.25rem',
@@ -198,5 +198,12 @@ export const theme = createTheme({
                 },
             },
         },
+        MuiDivider: {
+            styleOverrides: {
+                root: {
+                    borderColor: "white"
+                }
+            }
+        }
     },
 });

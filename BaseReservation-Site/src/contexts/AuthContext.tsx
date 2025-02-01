@@ -7,8 +7,8 @@ import { useSnackbar } from 'stores/useSnackbar';
 import { LoginTypeForm } from 'pages/Login/LoginSchema';
 import { createContext, useState, useContext, useEffect } from 'react';
 import { Authentication, BaseReservationErrorDetails } from 'types/api-basereservation';
-import { usePostAuthentication } from 'hooks/api-basereservation/usePostAuthentication';
-import { usePostRefreshAuthentication } from 'hooks/api-basereservation/usePostRefreshAuthentication';
+import { usePostAuthentication } from 'hooks/api-basereservation/authentication/usePostAuthentication';
+import { usePostRefreshAuthentication } from 'hooks/api-basereservation/authentication/usePostRefreshAuthentication';
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -21,6 +21,7 @@ interface AuthContextType {
 interface DecodedToken {
     exp: number;
     [key: string]: unknown;
+    FullName: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -33,11 +34,16 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     const getToken = useCallback(() => Cookies.get('access_token'), []);
     const getRefreshToken = useCallback(() => Cookies.get('refresh_token'), []);
 
+    const setUserName = (decodedToken: DecodedToken) => {
+        Cookies.set('user_name', decodedToken.FullName)
+    }
+
     const { mutate: postAuthenticationUser } = usePostAuthentication({
         onSuccess: (data: Authentication) => {
             setSnackbarMessage('Inicio de sesión válido');
             Cookies.set('access_token', String(data.token), { expires: 1 / 24 });
             Cookies.set('refresh_token', String(data.refreshToken), { expires: 30 });
+            setUserName(jwtDecode<DecodedToken>(String(data.token)))
             setIsAuthenticated(true);
         },
         onError: (data: BaseReservationErrorDetails) => {
@@ -57,6 +63,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     const logout = useCallback(() => {
         Cookies.remove('access_token');
         Cookies.remove('refresh_token');
+        Cookies.remove('user_name');
         setIsAuthenticated(false);
     }, []);
 
@@ -64,6 +71,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         onSuccess: (data: Authentication) => {
             Cookies.set('access_token', String(data.token), { expires: 1 / 24 });
             Cookies.set('refresh_token', String(data.refreshToken), { expires: 30 });
+            setUserName(jwtDecode<DecodedToken>(String(data.token)))
             setIsAuthenticated(true);
         },
         onError: (data: BaseReservationErrorDetails) => {

@@ -15,7 +15,7 @@ const getHeaders = (disableAuth: boolean, token: string): Record<string, string>
 
 export const useTypedApiClientBS = <
     PathT extends keyof paths,
-    MethodT extends keyof paths[PathT]
+    MethodT extends keyof paths[PathT],
 >({
     path,
     method,
@@ -36,3 +36,37 @@ export const useTypedApiClientBS = <
 
     return fetcher.path(path).method(method).create({}) as TypedFetch<paths[PathT][MethodT]>;
 }
+
+export const castRequestBody = <
+    PathT extends keyof paths,
+    MethodT extends keyof paths[PathT]
+>(
+    data: unknown,
+    path: PathT,
+    method: MethodT
+): paths[PathT][MethodT] extends { requestBody: { content: { 'application/json': infer R } } } ? R | undefined : never => {
+    if (method === 'post' || method === 'put' || method === 'patch') {
+        return data as paths[PathT][MethodT] extends { requestBody: { content: { 'application/json': infer R } } } ? R : never;
+    }
+
+    if (method === 'get' || method === 'delete') {
+        if (data && typeof data === 'object') {
+            return data as never;
+        }
+
+        const pathParams = path.match(/{(.*?)}/g);
+        if (pathParams) {
+            const pathObj = pathParams.reduce((acc, param) => {
+                const paramName = param.replace(/{|}/g, '');
+                if (typeof data === 'object' && data !== null && paramName in (data as Record<string, unknown>)) {
+                    acc[paramName] = (data as Record<string, unknown>)[paramName];
+                }
+                return acc;
+            }, {} as { [key: string]: unknown });
+
+            return pathObj as never;
+        }
+    }
+
+    return undefined as never;
+};

@@ -1,11 +1,12 @@
-import { CircularProgress, InputLabel, MenuItem, Select, Stack } from "@mui/material"
-import { ErrorProcess } from "components/Error/ErrorProcess"
-import { useGetProvinces } from "hooks/api-basereservation/useGetProvinces"
 import { useEffect, useState } from "react"
 import { Province } from "types/api-basereservation"
+import { ErrorProcess } from "components/Error/ErrorProcess"
+import { InputLabel, MenuItem, Select, Stack } from "@mui/material"
+import { useGetProvinces } from "hooks/api-basereservation/useGetProvinces"
+import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
 
 interface ProvinceSelectProps {
-    selectedProvince: number
+    selectedProvince: number;
     onProvinceChange: (provinceId: number) => void;
 }
 
@@ -17,10 +18,13 @@ export const ProvinceSelect = ({ selectedProvince, onProvinceChange }: ProvinceS
         if (provinceItemsQuery.data) {
             setProvinces(provinceItemsQuery.data)
         }
-    }, [provinceItemsQuery.data, onProvinceChange, selectedProvince])
+    }, [provinceItemsQuery.data, selectedProvince])
+
+    const isValidProvince = provinces.some(province => province.id === selectedProvince)
+    const valueToShow = isValidProvince ? selectedProvince : 0
 
     if (provinceItemsQuery.isPending) {
-        return <CircularProgress />
+        return <CircularLoadingProgress />
     }
 
     if (provinceItemsQuery.isError) {
@@ -29,12 +33,12 @@ export const ProvinceSelect = ({ selectedProvince, onProvinceChange }: ProvinceS
 
     return (
         <Stack direction='column' gap={1}>
-            <InputLabel htmlFor='province' required>
+            <InputLabel sx={{ fontSize: '1rem' }} htmlFor='province' required>
                 Provincia
             </InputLabel>
             <Select
                 id='province'
-                value={selectedProvince != 0 && provinces.length == 0 ? 0 : selectedProvince}
+                value={valueToShow}
                 onChange={(e) => onProvinceChange(Number(e.target.value))}
             >
                 <MenuItem key={0} value={0}>

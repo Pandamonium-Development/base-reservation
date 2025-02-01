@@ -1,8 +1,8 @@
 import { isPresent } from "utils/util";
 import { useAuth } from "contexts/AuthContext";
-import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useCallback, useEffect, useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
@@ -14,15 +14,18 @@ export const LoginForm = () => {
         defaultValues: LoginDefaultValues
     });
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const { handleSubmit, control, formState: { errors } } = formMethods;
     const { login, isAuthenticated } = useAuth();
 
     const createLoginWrapper = useCallback((data: LoginTypeForm) => {
+        setLoading(true)
         login(data);
     }, [login]);
 
     useEffect(() => {
         if (isAuthenticated) {
+            setLoading(false);
             navigate('/Inicio');
         }
     }, [isAuthenticated, navigate])
@@ -90,6 +93,8 @@ export const LoginForm = () => {
                         )}
                     </Box>
                     <Button
+                        loading={loading}
+                        loadingPosition="start"
                         type="submit"
                         fullWidth
                         variant="contained"

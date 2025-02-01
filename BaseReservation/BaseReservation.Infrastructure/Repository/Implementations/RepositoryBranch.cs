@@ -63,6 +63,7 @@ public class RepositoryBranch(BaseReservationContext context) : IRepositoryBranc
             .ThenInclude(m => m.CantonIdNavigation)
             .ThenInclude(m => m.ProvinceIdNavigation)
             .AsNoTracking()
+            .Where(m => m.Active)
             .ToListAsync();
         return collection;
     }

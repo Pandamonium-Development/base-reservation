@@ -1,7 +1,7 @@
 import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
-import { useTypedApiClientBS } from "hooks/useTypedApiClientBS";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
 import { BaseReservationErrorDetails, Branch, BranchRequest } from "types/api-basereservation";
 
 interface usePostBranchProps {
@@ -12,12 +12,18 @@ interface usePostBranchProps {
     onError?: (
         data: BaseReservationErrorDetails,
         variables: BranchRequest
+    ) => void,
+    onSettled?: (
+        data: Branch | undefined,
+        error: BaseReservationErrorDetails | null,
+        variables: BranchRequest
     ) => void
 }
 
 export const usePostBranch = ({
     onSuccess,
-    onError
+    onError,
+    onSettled
 }: usePostBranchProps) => {
     const postBranch = useTypedApiClientBS({
         path: '/api/Branch',
@@ -25,30 +31,25 @@ export const usePostBranch = ({
     })
     const queryClient = useQueryClient();
 
-    const createBranch = useMutation({
+    const createBranchMutation = useMutation({
         mutationKey: ['PostBranch'],
         mutationFn: async (data: BranchRequest) => {
-            const response = await postBranch({
-                name: data.name,
-                description: data.description,
-                telephone: data.telephone,
-                email: data.email,
-                districtId: data.districtId,
-                address: data.address,
-                active: data.active
-            })
+            const response = await postBranch(castRequestBody(data, "/api/Branch", "post"))
             return response.data;
         },
         onSuccess: async (data: Branch, variables: BranchRequest) => {
             await queryClient.invalidateQueries({
-                queryKey: ['Branches']
+                queryKey: ['GetBranch']
             })
             onSuccess?.(data, variables)
         },
         onError: (error: ApiError, _) => {
             onError?.(transformErrorKeys(error.data) as BaseReservationErrorDetails, _)
+        },
+        onSettled: (data, error, variables) => {
+            onSettled?.(data, error, variables)
         }
     })
 
-    return createBranch;
+    return createBranchMutation;
 }

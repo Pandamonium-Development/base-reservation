@@ -1,5 +1,5 @@
 import { isEmpty, isNil } from "lodash";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLayout } from "hooks/useLayout";
 import { Page } from "components/Shared/Page";
 import { useSnackbar } from "stores/useSnackbar";
@@ -9,21 +9,34 @@ import { CantonSelect } from "components/Directions/CantonSelect";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { BranchDefaultValues, BranchSchema } from "./BranchSchema";
 import { Controller, FormProvider, useForm } from "react-hook-form";
+import { Alert, Box, Button, Stack, TextField } from "@mui/material";
 import { DistrictSelect } from "components/Directions/DistrictSelect";
 import { ProvinceSelect } from "components/Directions/ProvinceSelect";
 import { applyPhoneMask, isPresent, removePhoneMask } from "utils/util";
-import { usePostBranch } from "hooks/api-basereservation/usePostBranch";
 import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
+import { usePutBranch } from "hooks/api-basereservation/branch/usePutBranch";
+import { usePostBranch } from "hooks/api-basereservation/branch/usePostBranch";
 import { BaseReservationErrorDetails, Branch } from "types/api-basereservation";
-import { Alert, Box, Button, FormControlLabel, Stack, Switch, TextField } from "@mui/material";
+import { BranchDeleteModalConfirmation } from "./BranchDeleteModalConfirmation";
 
 export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined | null }) => {
     const navigate = useNavigate();
     const { isMobile } = useLayout();
-    const setMessage = useSnackbar((state) => state.setMessage);
-    const [province, setProvince] = useState(isNil(branchData) ? 0 : Number(branchData.district?.canton?.provinceId));
-    const [canton, setCanton] = useState(isNil(branchData) ? 0 : Number(branchData.district?.cantonId));
-    const [district, setDistrict] = useState(isNil(branchData) ? 0 : Number(branchData.districtId));
+    const setSnackbarMessage = useSnackbar((state) => state.setMessage);
+
+    const [loading, setLoading] = useState(false);
+    const [hasLoaded, setHasLoaded] = useState(false);
+    const [province, setProvince] = useState(branchData?.district?.canton?.provinceId ?? 0);
+    const [canton, setCanton] = useState(branchData?.district?.cantonId ?? 0);
+    const [district, setDistrict] = useState(branchData?.districtId ?? 0);
+
+    const initialProvinceRef = useRef(branchData?.district?.canton?.provinceId ?? 0);
+    const initialCantonRef = useRef(branchData?.district?.cantonId ?? 0);
+
+    const formTitle = isNil(branchData) ? 'Crear nueva sucursal' : `Editar sucursal número ${branchData.id}`;
+    const isExisting = !isNil(branchData);
+
+    const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
 
     const formMethods = useForm({
         resolver: yupResolver(BranchSchema),
@@ -37,7 +50,6 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
             cantonId: Number(branchData.district?.cantonId),
             districtId: Number(branchData.districtId),
             address: isNil(branchData.address) ? '' : branchData.address,
-            active: Boolean(branchData.active)
         }
     });
 
@@ -50,43 +62,84 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
 
     const { mutate: postBranch } = usePostBranch({
         onSuccess() {
-            setMessage('Sucursal creada correctamente');
+            setSnackbarMessage('Sucursal creada correctamente');
             navigate('/Sucursal');
         },
         onError(data: BaseReservationErrorDetails) {
-            setMessage(`${data.message}`, 'error');
+            setSnackbarMessage(`${data.message}`, 'error');
+        },
+        onSettled() {
+            setLoading(false);
+        }
+    })
+
+    const { mutate: putBranch } = usePutBranch({
+        onSuccess() {
+            setSnackbarMessage('Sucursal actualizada correctamente');
+            navigate('/Sucursal');
+        },
+        onError(data: BaseReservationErrorDetails) {
+            setSnackbarMessage(`${data.message}`, 'error');
+        },
+        onSettled() {
+            setLoading(false);
         }
     })
 
     useEffect(() => {
-        setCanton(canton);
-        setDistrict(district);
-    }, [province, canton, district]);
+        if (branchData) {
+            setHasLoaded(true);
+        }
+    }, [branchData]);
 
     useEffect(() => {
-        setDistrict(district);
-    }, [canton, district]);
+        if (hasLoaded && province !== initialProvinceRef.current) {
+            setCanton(0);
+            setDistrict(0);
+        }
+    }, [province, hasLoaded]);
+
+    useEffect(() => {
+        if (hasLoaded && canton !== initialCantonRef.current) {
+            setDistrict(0);
+        }
+    }, [canton, hasLoaded]);
 
     const createBranchWrapper = handleSubmit((data) => {
-        postBranch({
+        setLoading(true);
+        const formatedData = {
             name: data.name,
             description: data.description,
             telephone: removePhoneMask(data.telephone),
             email: data.email,
             districtId: data.districtId,
             address: isEmpty(data.address) ? null : data.address,
-            active: data.active
-        });
+        }
+        if (!isExisting) {
+            postBranch({ ...formatedData, active: true });
+            return;
+        }
+
+        putBranch({
+            id: data.id,
+            ...formatedData,
+            active: true,
+        })
     });
 
     return (
         <Page
             header={
                 <PageHeader
-                    title="Crear nueva sucursal"
+                    title={formTitle}
                     subtitle="Debe completar los campos requeridos antes de guardar la información"
                     backText="Sucursales"
                     backPath="/Sucursal"
+                    actionButton={
+                        <Button variant="contained" size="large" fullWidth onClick={() => setOpenModalConfirmation(true)}>
+                            Eliminar
+                        </Button>
+                    }
                 />
             }
         >
@@ -111,6 +164,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                                 <FormFieldErrorMessage message={errors.name.message} />
                             )}
                         </Box>
+
                         <Box>
                             <TextField
                                 required
@@ -125,6 +179,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                                 <FormFieldErrorMessage message={errors.description.message} />
                             )}
                         </Box>
+
                         <Box>
                             <Controller
                                 name="telephone"
@@ -153,6 +208,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                                 <FormFieldErrorMessage message={errors.telephone.message} />
                             )}
                         </Box>
+
                         <Box>
                             <TextField
                                 required
@@ -166,6 +222,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                                 <FormFieldErrorMessage message={errors.email.message} />
                             )}
                         </Box>
+
                         <ProvinceSelect selectedProvince={province} onProvinceChange={setProvince} />
                         <CantonSelect selectedProvince={province} selectedCanton={canton} onCantonChange={setCanton} />
                         <Box>
@@ -190,6 +247,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                                 <FormFieldErrorMessage message={errors.districtId.message} />
                             )}
                         </Box>
+
                         <Box>
                             <TextField
                                 error={isPresent(errors.address)}
@@ -203,30 +261,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                                 <FormFieldErrorMessage message={errors.address.message} />
                             )}
                         </Box>
-                        <Box display="flex" justifyContent="center" alignItems="center" width="100%">
-                            <Controller
-                                name="active"
-                                control={control}
-                                defaultValue={true}
-                                render={({ field }) => (
-                                    <FormControlLabel
-                                        control={
-                                            <Switch
-                                                {...field}
-                                                checked={field.value}
-                                                onChange={(e) => field.onChange(e.target.checked)}
-                                            />
-                                        }
-                                        label="Activo"
-                                        labelPlacement="start"
-                                        disabled
-                                    />
-                                )}
-                            />
-                            {errors.active?.message && (
-                                <FormFieldErrorMessage message={errors.active.message} />
-                            )}
-                        </Box>
+
                         {isMobile && (
                             <Box display='flex' justifyContent='space-between' maxWidth='90vw' gap='8px'>
                                 <Box flex={1} px={1} pr={2} sx={{ pl: 0 }}>
@@ -235,18 +270,19 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                                     </RouterLink>
                                 </Box>
                                 <Box flex={1} px={1} pl={2} sx={{ pr: 0 }}>
-                                    <Button type="submit" variant="contained" fullWidth>
+                                    <Button loading={loading} loadingPosition="start" type="submit" variant="contained" fullWidth>
                                         Guardar
                                     </Button>
                                 </Box>
                             </Box>
                         )}
+
                         {!isMobile && (
                             <Stack direction='row' spacing={2} justifyContent='flex-end'>
                                 <RouterLink to="/Sucursal">
                                     <Button variant="outlined">Cancelar</Button>
                                 </RouterLink>
-                                <Button type="submit" variant="contained">
+                                <Button loading={loading} loadingPosition="start" type="submit" variant="contained">
                                     Guardar
                                 </Button>
                             </Stack>
@@ -254,6 +290,13 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                     </Stack>
                 </form>
             </FormProvider>
+
+            <BranchDeleteModalConfirmation
+                isModalOpen={openModalConfirmation}
+                toggleIsOpen={() => setOpenModalConfirmation(!openModalConfirmation)}
+                branchId={branchData?.id ?? 0}
+                title={branchData?.name ?? ""}
+            />
         </Page>
     );
 }

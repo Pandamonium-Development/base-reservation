@@ -1,11 +1,13 @@
 import { useState } from "react"
+import { applyPhoneMask } from "utils/util"
+import { Menu, MenuItem } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import { Branch } from "types/api-basereservation"
 import { DataTable } from "components/Table/DataTable"
 import { ErrorProcess } from "components/Error/ErrorProcess"
 import { OptionsBullet } from "components/Table/OptionsBullet"
-import { CircularProgress, Menu, MenuItem } from "@mui/material"
-import { useGetBranches } from "hooks/api-basereservation/useGetBranches"
+import { useGetBranches } from "hooks/api-basereservation/branch/useGetBranches"
+import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
 import { GridColDef, GridEventListener, GridRenderCellParams, GridRowParams } from "@mui/x-data-grid"
 
 export const BranchTable = () => {
@@ -37,6 +39,11 @@ export const BranchTable = () => {
             field: 'telephone',
             headerName: 'Teléfono',
             minWidth: 170,
+            renderCell: (params: GridRenderCellParams<Branch>) => {
+                return (
+                    <>{applyPhoneMask(String(params.row.telephone))}</>
+                )
+            }
         },
         {
             field: 'email',
@@ -44,7 +51,7 @@ export const BranchTable = () => {
             minWidth: 300,
         },
         {
-            field: '',
+            field: 'opciones',
             align: 'right',
             headerName: 'Opciones',
             minWidth: 150,
@@ -74,7 +81,7 @@ export const BranchTable = () => {
     ]
 
     if (branchItemsQuery.isPending) {
-        return <CircularProgress />
+        return <CircularLoadingProgress />
     }
 
     if (branchItemsQuery.isError) {
@@ -87,6 +94,8 @@ export const BranchTable = () => {
 
     return (
         <DataTable
+            sortFieldName="id"
+            sort="desc"
             columns={columns}
             rows={branchItemsQuery.data}
             onRowClick={selectRow}

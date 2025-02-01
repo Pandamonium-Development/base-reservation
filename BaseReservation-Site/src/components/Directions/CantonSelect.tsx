@@ -1,8 +1,9 @@
-import { useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Canton } from "types/api-basereservation"
 import { ErrorProcess } from "components/Error/ErrorProcess"
+import { InputLabel, MenuItem, Select, Stack } from "@mui/material"
 import { useGetCantons } from "hooks/api-basereservation/useGetCantons"
-import { CircularProgress, InputLabel, MenuItem, Select, Stack } from "@mui/material"
+import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
 
 interface CantonSelectProps {
     selectedProvince: number
@@ -12,30 +13,51 @@ interface CantonSelectProps {
 
 export const CantonSelect = ({ selectedProvince, selectedCanton, onCantonChange }: CantonSelectProps) => {
     const { data: cantons, isLoading, isError, refetch } = useGetCantons(selectedProvince)
+    const [localSelectedCanton, setLocalSelectedCanton] = useState<number>(selectedCanton);
+
+    const initialCantonRef = useRef<number>(selectedCanton);
 
     useEffect(() => {
         if (selectedProvince) {
             refetch();
         }
-    }, [selectedProvince, refetch])
+    }, [selectedProvince, refetch]);
+
+    useEffect(() => {
+        if (cantons && cantons.length > 0) {
+            if (!cantons.some(canton => canton.id === selectedCanton)) {
+                setLocalSelectedCanton(0);
+            } else {
+                if (initialCantonRef.current === selectedCanton) {
+                    setLocalSelectedCanton(selectedCanton);
+                }
+            }
+        } else {
+            setLocalSelectedCanton(0);
+        }
+    }, [cantons, selectedCanton]);
 
     if (isLoading) {
-        return <CircularProgress />
+        return <CircularLoadingProgress />;
     }
 
     if (isError) {
-        return <ErrorProcess />
+        return <ErrorProcess />;
     }
 
     return (
         <Stack direction='column' gap={1}>
-            <InputLabel htmlFor='canton' required>
+            <InputLabel sx={{ fontSize: '1rem' }} htmlFor='canton' required>
                 Cantón
             </InputLabel>
             <Select
                 id='canton'
-                value={selectedCanton != 0 && cantons?.length == 0 ? 0 : selectedCanton}
-                onChange={(e) => onCantonChange(Number(e.target.value))}
+                value={localSelectedCanton}  // Usamos el valor local para la selección
+                onChange={(e) => {
+                    const newCanton = Number(e.target.value);
+                    setLocalSelectedCanton(newCanton);  // Actualizamos el valor local
+                    onCantonChange(newCanton);  // Propagamos el cambio hacia el padre
+                }}
             >
                 <MenuItem key={0} value={0}>
                     Seleccione el cantón

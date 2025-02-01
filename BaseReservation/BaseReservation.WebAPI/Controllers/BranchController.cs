@@ -104,7 +104,7 @@ public class BranchController(IServiceBranch serviceBranch) : ControllerBase
     /// <param name="branchId">The ID of the branch to delete.</param>
     /// <returns>The deleted branch.</returns>
     [HttpDelete("{branchId}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseBranchDto))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> DeleteBranchAsync(byte branchId)
