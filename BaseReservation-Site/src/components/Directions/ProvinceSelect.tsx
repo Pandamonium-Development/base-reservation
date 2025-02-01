@@ -44,7 +44,7 @@ export const ProvinceSelect = ({ selectedProvince, onProvinceChange }: ProvinceS
                 <MenuItem key={0} value={0}>
                     Seleccione la provincia
                 </MenuItem>
-                {provinces.map((province) => (
+                {provinces?.map((province) => (
                     <MenuItem key={province.id} value={province.id}>
                         {province.name}
                     </MenuItem>

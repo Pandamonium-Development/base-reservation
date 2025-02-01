@@ -21,6 +21,7 @@ export const LoginForm = () => {
     const createLoginWrapper = useCallback((data: LoginTypeForm) => {
         setLoading(true)
         login(data);
+        setLoading(false)
     }, [login]);
 
     useEffect(() => {

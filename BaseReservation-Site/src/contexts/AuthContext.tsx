@@ -2,11 +2,10 @@
 /* eslint-disable react-refresh/only-export-components */
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
-import { ReactNode, useCallback } from 'react';
 import { useSnackbar } from 'stores/useSnackbar';
 import { LoginTypeForm } from 'pages/Login/LoginSchema';
-import { createContext, useState, useContext, useEffect } from 'react';
 import { Authentication, BaseReservationErrorDetails } from 'types/api-basereservation';
+import { createContext, ReactNode, useCallback, useState, useContext, useEffect, useMemo } from 'react';
 import { usePostAuthentication } from 'hooks/api-basereservation/authentication/usePostAuthentication';
 import { usePostRefreshAuthentication } from 'hooks/api-basereservation/authentication/usePostRefreshAuthentication';
 
@@ -52,13 +51,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         },
     });
 
-    const login = async (data: LoginTypeForm) => {
+    const login = useCallback(async (data: LoginTypeForm) => {
         try {
             postAuthenticationUser(data);
         } catch (error) {
             setSnackbarMessage(`Error al intentar iniciar sesión: ${error}`, 'error');
         }
-    };
+    }, [postAuthenticationUser, setSnackbarMessage]);
 
     const logout = useCallback(() => {
         Cookies.remove('access_token');
@@ -134,8 +133,16 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setAuthLoaded(true);
     }, [getToken, getRefreshToken, logout, refreshTokens, setSnackbarMessage]);
 
+    const contextValue = useMemo(() => ({
+        isAuthenticated,
+        login,
+        logout,
+        refreshTokens,
+        authLoaded
+    }), [isAuthenticated, login, logout, refreshTokens, authLoaded]);
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, refreshTokens, authLoaded }}>
+        <AuthContext.Provider value={contextValue}>
             {children}
         </AuthContext.Provider>
     );

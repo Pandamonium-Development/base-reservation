@@ -59,7 +59,7 @@ export const DistrictSelect = ({ selectedProvince, selectedCanton, selectedDistr
                     <MenuItem key={0} value={0}>
                         Seleccione el distrito
                     </MenuItem>
-                    {districts && districts.map((district: District) => (
+                    {districts?.map((district: District) => (
                         <MenuItem key={district.id} value={district.id}>
                             {district.name}
                         </MenuItem>

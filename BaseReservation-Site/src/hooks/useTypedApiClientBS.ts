@@ -54,10 +54,10 @@ export const castRequestBody = <
             return data as never;
         }
 
-        const pathParams = path.match(/{(.*?)}/g);
+        const pathParams = path.match(/{([^}]+)}/g);
         if (pathParams) {
             const pathObj = pathParams.reduce((acc, param) => {
-                const paramName = param.replace(/{|}/g, '');
+                const paramName = param.replace(/[{}]/g, '');
                 if (typeof data === 'object' && data !== null && paramName in (data as Record<string, unknown>)) {
                     acc[paramName] = (data as Record<string, unknown>)[paramName];
                 }

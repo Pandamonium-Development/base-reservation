@@ -141,7 +141,7 @@ export const MobileDataTable = <RowModelT extends GridValidRowModel>({
                     <Typography variant="h3">{headerName}</Typography>
                 </Box>
             )}
-            {rows && rows.map((row) => (
+            {rows?.map((row) => (
                 <Box
                     key={row.id}
                     bgcolor={

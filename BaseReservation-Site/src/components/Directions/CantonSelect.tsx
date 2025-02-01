@@ -62,7 +62,7 @@ export const CantonSelect = ({ selectedProvince, selectedCanton, onCantonChange 
                 <MenuItem key={0} value={0}>
                     Seleccione el cantón
                 </MenuItem>
-                {cantons && cantons.map((canton: Canton) => (
+                {cantons?.map((canton: Canton) => (
                     <MenuItem key={canton.id} value={canton.id}>
                         {canton.name}
                     </MenuItem>

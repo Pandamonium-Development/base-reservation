@@ -35,7 +35,7 @@ export const ToolbarOptionList = ({ OptionName, Options }: { OptionName: string,
                 onClose={closeMenu}
             >
                 {Options.map((option, index) => (
-                    <MenuItem key={index} onClick={() => handleMenuItemClick(option.Route)}>
+                    <MenuItem key={`${option.Name}-${index}`} onClick={() => handleMenuItemClick(option.Route)}>
                         <ListItemText primary={option.Name} />
                     </MenuItem>
                 ))}
