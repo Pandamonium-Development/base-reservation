@@ -54,7 +54,7 @@ export const castRequestBody = <
             return data as never;
         }
 
-        const pathParams = path.match(/{([^}]+)}/g);
+        const pathParams = path.match(/{([^{}]+)}/g);
         if (pathParams) {
             const pathObj = pathParams.reduce((acc, param) => {
                 const paramName = param.replace(/[{}]/g, '');
