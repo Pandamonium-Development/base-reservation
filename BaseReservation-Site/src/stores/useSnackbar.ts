@@ -13,7 +13,7 @@ interface SnackbarState {
     anchorOrigin?: SnackbarOrigin
 }
 
-const defaultAnchorOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'right' };
+const defaultAnchorOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'center' };
 
 export const useSnackbar = create<SnackbarState>((set) => ({
     visible: false,

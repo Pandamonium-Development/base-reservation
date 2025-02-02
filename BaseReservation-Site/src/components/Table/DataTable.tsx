@@ -62,7 +62,7 @@ export const DataTable = <RowModelT extends GridValidRowModel>({
         <DataGrid<RowModelT>
             sx={{
                 '& .MuiDataGrid-columnHeader': {
-                    backgroundColor: 'text.secondary',
+                    backgroundColor: '#4a6e6f',
                     color: 'white',
                 },
                 '& .MuiDataGrid-columnHeader:focus': {

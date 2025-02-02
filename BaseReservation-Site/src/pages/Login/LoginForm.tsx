@@ -39,7 +39,7 @@ export const LoginForm = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'background.default',
+                backgroundColor: '#e6e6e6',
                 borderRadius: '10px',
                 xs: { width: 'calc(100vh - 80px - 2rem)' },
                 md: { width: 'calc(100vh - 80px - 10rem)' },

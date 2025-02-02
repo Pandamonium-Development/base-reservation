@@ -1,6 +1,5 @@
-import { Box, Button, Typography } from "@mui/material"
 import { Modal } from "components/Modal/Modal"
-
+import { Box, Button, Typography } from "@mui/material"
 
 interface ConfirmModalProps {
     isModalOpen: boolean,

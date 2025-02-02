@@ -18,7 +18,6 @@ export const Snackbar = () => {
             open={isVisible}
             onClose={handleClose}
             anchorOrigin={anchorOrigin}
-            sx={{ paddingTop: '4%' }}
         >
             <Alert severity={severity}>{message}</Alert>
         </MuiSnackbar>

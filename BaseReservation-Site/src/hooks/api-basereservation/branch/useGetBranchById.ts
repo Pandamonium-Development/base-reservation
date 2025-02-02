@@ -15,6 +15,7 @@ export const useGetBranchById = (branchId: string | undefined): UseQueryResult<B
             const { data } = await getBranch(castRequestBody({ branchId: Number(branchId) }, "/api/Branch/{branchId}", "get"));
             return data
         },
+        retry: false,
         enabled: isPresent(branchId),
         staleTime: 0,
     })

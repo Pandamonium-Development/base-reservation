@@ -5,8 +5,8 @@ import { jwtDecode } from 'jwt-decode';
 import { useSnackbar } from 'stores/useSnackbar';
 import { LoginTypeForm } from 'pages/Login/LoginSchema';
 import { Authentication, BaseReservationErrorDetails } from 'types/api-basereservation';
-import { createContext, ReactNode, useCallback, useState, useContext, useEffect, useMemo } from 'react';
 import { usePostAuthentication } from 'hooks/api-basereservation/authentication/usePostAuthentication';
+import { createContext, ReactNode, useCallback, useState, useContext, useEffect, useMemo } from 'react';
 import { usePostRefreshAuthentication } from 'hooks/api-basereservation/authentication/usePostRefreshAuthentication';
 
 interface AuthContextType {
