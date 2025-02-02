@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Modal } from "components/Modal/Modal";
 import { useSnackbar } from "stores/useSnackbar"
 import { ModalBody } from "components/Modal/ModalBody";
@@ -7,7 +8,6 @@ import { ModalFooter } from "components/Modal/ModalFooter";
 import { ModalHeader } from "components/Modal/ModalHeader";
 import { BaseReservationErrorDetails } from "types/api-basereservation";
 import { useDeleteBranch } from "hooks/api-basereservation/branch/useDeleteBranchById";
-import { useNavigate } from "react-router-dom";
 
 interface BranchDeleteModalConfirmationProps {
     isModalOpen: boolean
@@ -51,7 +51,7 @@ export const BranchDeleteModalConfirmation = ({
             isOpen={isModalOpen}
             toggleIsOpen={toggleIsOpen}
             sx={{
-                width: { xs: '90vw', sm: '60%' },
+                width: { xs: '90vw', sm: '50%' },
                 height: 'auto'
             }}
         >

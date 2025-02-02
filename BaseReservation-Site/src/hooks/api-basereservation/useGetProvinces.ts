@@ -1,6 +1,6 @@
 import { Province } from "types/api-basereservation";
-import { useTypedApiClientBS } from "../useTypedApiClientBS";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { castRequestBody, useTypedApiClientBS } from "../useTypedApiClientBS";
 
 export const useGetProvinces = (): UseQueryResult<Array<Province>> => {
     const getProvinces = useTypedApiClientBS({
@@ -11,7 +11,7 @@ export const useGetProvinces = (): UseQueryResult<Array<Province>> => {
     return useQuery({
         queryKey: ["Provinces"],
         queryFn: async () => {
-            const { data } = await getProvinces({});
+            const { data } = await getProvinces(castRequestBody({}, "/api/Province", "get"));
             return data
         },
         enabled: true

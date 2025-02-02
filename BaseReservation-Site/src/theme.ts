@@ -1,23 +1,22 @@
 import { createTheme } from '@mui/material/styles';
-import paintedWallBackground from 'assets/painted-wall-background.webp';;
 
 export const theme = createTheme({
     typography: {
         fontFamily: `'Satoshi', sans-serif`,
         h1: {
-            fontFamily: `'Angel Rhapsody', serif`,
+            fontFamily: `'Satoshi', serif`,
             fontSize: '7rem', // Equivalent to --h1-font-size
         },
         h2: {
-            fontFamily: `'Angel Rhapsody', serif`,
+            fontFamily: `'Satoshi', serif`,
             fontSize: '4rem', // Equivalent to --h2-font-size
         },
         h3: {
-            fontFamily: `'Angel Rhapsody', serif`,
+            fontFamily: `'Satoshi', serif`,
             fontSize: '2rem', // Equivalent to --h3-font-size
         },
         h4: {
-            fontFamily: `'Angel Rhapsody', serif`,
+            fontFamily: `'Satoshi', serif`,
             fontSize: '1.5rem', // Equivalent to --h4-font-size
         },
         body1: {
@@ -46,36 +45,39 @@ export const theme = createTheme({
             white: '#fff',
         },
         primary: {
-            main: '#2A2722',
+            main: '#1b2c3f',
         },
         secondary: {
             main: '#ff4081',
         },
         background: {
-            default: '#1E1C17',
+            default: '#fff',
             paper: '#FFF4EB',
         },
         text: {
-            primary: '#FFF4EB',
-            secondary: '#B77B56'
+            primary: '#000',
+            secondary: '#80838b',
         }
     },
     components: {
         MuiCssBaseline: {
             styleOverrides: {
                 body: {
-                    backgroundImage: `url(${paintedWallBackground})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundColor: 'transparent',
-                    color: '#fff',
+
                 },
             },
+        },
+        MuiToolbar: {
+            styleOverrides: {
+                root: {
+                    justifyContent: 'space-between'
+                }
+            }
         },
         MuiMenu: {
             styleOverrides: {
                 paper: {
-                    backgroundColor: '#2A2722',
+                    backgroundColor: '#fff',
                 }
             }
         },
@@ -83,7 +85,7 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     '&:hover': {
-                        backgroundColor: '#3D3B36',
+                        backgroundColor: '#E1E1E1',
                     },
                 },
             },
@@ -93,64 +95,49 @@ export const theme = createTheme({
                 paper: {
                     width: '70%',
                     maxWidth: '70%',
-                    backgroundColor: '#2A2722',
-                    paddingTop: '2rem',
-                    paddingLeft: '1rem'
+                    overflow: 'hidden',
+                    background: '#1b2c3f',
+                    color: '#8590a5'
                 },
             },
         },
         MuiButton: {
             styleOverrides: {
                 containedPrimary: {
-                    backgroundColor: '#DB9F6A',
+                    backgroundColor: '#3c5c5b',
                     height: '3rem',
                     color: '#fff',
                     fontWeight: 'bold',
                     '&:hover': {
-                        backgroundColor: '#B77B56'
+                        backgroundColor: '#5a7f7f'
                     }
                 },
                 outlinedPrimary: {
                     height: '3rem',
-                    color: '#fff',
-                    borderColor: 'white',
+                    color: '#000',
+                    borderColor: '#000',
                     fontWeight: 'bold',
                     '&:hover': {
-                        backgroundColor: '#3D3B36'
+                        backgroundColor: '#b3aea6'
                     }
                 }
-            },
-        },
-        MuiLink: {
-            styleOverrides: {
-                root: {
-                    color: 'white',
-                    textDecoration: 'none',
-                    '&:hover': {
-                        color: '#ff4081',
-                        textDecoration: 'underline',
-                    },
-                },
             },
         },
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
-                    '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: 'white',
-                    },
                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#B77B56',
+                        borderColor: '#3c5c5b',
                     },
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#DB9F6A',
+                        borderColor: '#3c5c5b',
                     },
                 },
                 input: {
-                    fontSize: '1rem', // Adjust the font size as needed
+                    fontSize: '1rem',
                 },
                 inputSizeSmall: {
-                    fontSize: '0.75rem', // Adjust the font size for small input as needed
+                    fontSize: '0.75rem',
                 },
             },
         },
@@ -159,7 +146,7 @@ export const theme = createTheme({
                 root: {
                     fontSize: '1.25rem', // Adjust the font size as needed
                     '&.Mui-focused': {
-                        color: '#DB9F6A',
+                        color: '#3c5c5b',
                         fontSize: '1.25rem',
                     },
                 },
@@ -175,35 +162,12 @@ export const theme = createTheme({
                 },
             },
         },
-        MuiSwitch: {
-            styleOverrides: {
-                switchBase: {
-                    color: 'grey',
-                    '&.Mui-checked': {
-                        color: '#B77B56',
-                    },
-                    '&.Mui-checked + .MuiSwitch-track': {
-                        backgroundColor: '#B77B56',
-                    },
-                },
-                track: {
-                    backgroundColor: 'lightGrey',
-                },
-            },
-        },
         MuiSelect: {
             styleOverrides: {
                 icon: {
-                    color: 'white',
+                    color: '#3c5c5b',
                 },
             },
         },
-        MuiDivider: {
-            styleOverrides: {
-                root: {
-                    borderColor: "white"
-                }
-            }
-        }
     },
 });

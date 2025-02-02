@@ -1,6 +1,6 @@
 import { District } from "types/api-basereservation";
-import { useTypedApiClientBS } from "../useTypedApiClientBS";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { castRequestBody, useTypedApiClientBS } from "../useTypedApiClientBS";
 
 export const useGetDistricts = (cantonId: number): UseQueryResult<Array<District>> => {
     const getDistricts = useTypedApiClientBS({
@@ -11,7 +11,7 @@ export const useGetDistricts = (cantonId: number): UseQueryResult<Array<District
     return useQuery({
         queryKey: ["Districts"],
         queryFn: async () => {
-            const { data } = await getDistricts({ cantonId: cantonId });
+            const { data } = await getDistricts(castRequestBody({ cantonId: cantonId }, '/api/Canton/{cantonId}/District', 'get'));
             return data
         },
         enabled: true

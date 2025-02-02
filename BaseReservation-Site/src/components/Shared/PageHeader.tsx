@@ -23,8 +23,11 @@ export const PageHeader = ({
 }: PageHeaderProps) => {
     const { isMobile } = useLayout()
     return (
-        <Box mt={4}>
-            <Box>
+        <Box>
+            <Box
+                py={4}
+                px={6}
+            >
                 {!isNil(backPath) && (
                     <Link to={backPath} style={{ textDecoration: 'none' }}>
                         <Box
@@ -34,9 +37,9 @@ export const PageHeader = ({
                             gap='1'
                             mb={4}
                             sx={{
-                                color: 'white',
+                                color: '#5a7f7f',
                                 '&:hover': {
-                                    color: 'text.secondary',
+                                    color: '#3c5c5b',
                                 },
                             }}
                         >

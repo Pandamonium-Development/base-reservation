@@ -1,8 +1,8 @@
 import { isEmpty, isNil } from "lodash";
-import { useEffect, useRef, useState } from "react";
 import { useLayout } from "hooks/useLayout";
 import { Page } from "components/Shared/Page";
 import { useSnackbar } from "stores/useSnackbar";
+import { useEffect, useRef, useState } from "react";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PageHeader } from "components/Shared/PageHeader";
 import { CantonSelect } from "components/Directions/CantonSelect";
@@ -136,7 +136,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                     backText="Sucursales"
                     backPath="/Sucursal"
                     actionButton={
-                        <Button variant="contained" size="large" fullWidth onClick={() => setOpenModalConfirmation(true)}>
+                        <Button sx={{ display: `${isExisting ? 'block' : 'none'}` }} variant="contained" size="large" fullWidth onClick={() => setOpenModalConfirmation(true)}>
                             Eliminar
                         </Button>
                     }

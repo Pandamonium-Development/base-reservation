@@ -1,5 +1,6 @@
-import { Header } from "components/Header/Header"
-import { Box, CssBaseline, Stack } from "@mui/material"
+import { APP_BAR_HEIGHT, AppBar } from "components/AppBar/AppBar"
+import { Box, Container, CssBaseline, Stack } from "@mui/material"
+import { NAVIGATION_BAR_WIDTH, NavigationBar } from "components/NavigationBar/NavigationBar"
 
 export const Page = (props: {
     children: React.ReactNode,
@@ -8,37 +9,29 @@ export const Page = (props: {
     return (
         <>
             <CssBaseline />
-            <Header />
+            <Container maxWidth={false} disableGutters>
+                <AppBar />
+            </Container>
+
             <Stack direction={'row'}
-                sx={{
-                    my: { xs: '5rem', sm: '3rem', md: '5rem' },
-                    mx: { xs: '1rem', sm: '3rem', md: '5rem' },
-                    px: '3rem',
-                    py: '1rem',
-                    backgroundColor: 'background.default',
-                    borderRadius: '32px',
-                    xs: { width: 'calc(100vh - 80px - 2rem)' },
-                    sm: { width: 'calc(100vh - 80px - 6rem)' },
-                    md: { width: 'calc(100vh - 80px - 10rem)' },
-                    maxWidth: '100vw',
-                    minHeight: { xs: 'calc(100vh - 80px - 4rem)', md: 'calc(100vh - 80px - 4rem)' },
-                    boxSizing: 'border-box',
-                    overflowX: 'hidden',
-                }}
             >
+                <NavigationBar />
                 <Box
                     sx={{
                         flex: 1,
                         position: 'relative',
-                        overflowY: 'auto',
+                        top: `${APP_BAR_HEIGHT}px`,
+                        ml: { xs: 0, sm: `${NAVIGATION_BAR_WIDTH}px` },
+                        pb: { xs: '21px', sm: '14px' },
                         overflowX: 'hidden',
-                        width: '100%',
-                        boxSizing: 'border-box',
-                    }}>
+                        overflowY: 'auto',
+                    }}
+                >
                     {props.header}
                     <Box
+                        px={{ xs: '16px', sm: '48px' }}
                         pt={{ xs: '21px', sm: 4 }}
-                        pb='2%'
+                        pb={{ xs: '21px', sm: '32px' }}
                     >
                         {props.children}
                     </Box>
