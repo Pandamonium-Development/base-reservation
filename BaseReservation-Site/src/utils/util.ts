@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ApiError } from "openapi-typescript-fetch";
+import { BaseReservationErrorDetails } from "types/api-basereservation";
 
 export const telephoneMaskRegex = /^\d{4}-\d{4}$/;
 
@@ -42,3 +44,8 @@ export const transformErrorKeys = (error: Record<string, any>): Record<string, a
     }
     return transformedError;
 };
+
+export const getErrorMessage = (error: ApiError) => {
+    const errorDetail = transformErrorKeys(error.data as BaseReservationErrorDetails);
+    return errorDetail.message;
+}

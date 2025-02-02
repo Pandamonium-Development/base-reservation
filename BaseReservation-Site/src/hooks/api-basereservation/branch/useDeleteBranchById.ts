@@ -25,19 +25,17 @@ export const useDeleteBranch = ({
     onError,
     onSettled
 }: useDeleteBranch) => {
-    const deleteBranch = useTypedApiClientBS({
-        path: '/api/Branch/{branchId}',
-        method: 'delete'
-    })
+    const path = '/api/Branch/{branchId}';
+    const method = 'delete';
+
+    const deleteBranch = useTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const deleteBranchMutation = useMutation({
-        mutationKey: ['PutBranch'],
-        mutationFn: async (data: number) => {
-            const response = await deleteBranch(castRequestBody({
-                branchId: Number(data)
-            }, "/api/Branch/{branchId}", "delete"))
-            return response.data;
+        mutationKey: ['DeleteBranch'],
+        mutationFn: async (branchId: number) => {
+            const { data } = await deleteBranch(castRequestBody({ branchId }, path, method))
+            return data;
         },
         onSuccess: async (data: boolean, variables: number) => {
             await queryClient.invalidateQueries({

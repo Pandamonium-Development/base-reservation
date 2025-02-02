@@ -25,19 +25,17 @@ export const usePutBranch = ({
     onError,
     onSettled
 }: usePutBranchProps) => {
-    const putBranch = useTypedApiClientBS({
-        path: '/api/Branch/{branchId}',
-        method: 'put'
-    })
+    const path = '/api/Branch/{branchId}';
+    const method = 'put';
+
+    const putBranch = useTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const updateBranchMutation = useMutation({
         mutationKey: ['PutBranch'],
-        mutationFn: async (data: BranchRequest) => {
-            const response = await putBranch(castRequestBody({
-                branchId: Number(data.id), ...data
-            }, "/api/Branch/{branchId}", "put"));
-            return response.data;
+        mutationFn: async (branch: BranchRequest) => {
+            const { data } = await putBranch(castRequestBody({ branchId: Number(branch.id), ...branch }, path, method));
+            return data;
         },
         onSuccess: async (data: Branch, variables: BranchRequest) => {
             await queryClient.invalidateQueries({

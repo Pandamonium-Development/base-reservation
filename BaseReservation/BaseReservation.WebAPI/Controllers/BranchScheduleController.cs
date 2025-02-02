@@ -38,7 +38,7 @@ public class BranchScheduleController(IServiceBranchSchedule serviceBranchSchedu
     /// </summary>
     /// <param name="branchId">Branch id</param>
     /// <returns>IActionResult</returns>
-    [HttpGet("~/api/Branch/{branchId}/Horario")]
+    [HttpGet("~/api/Branch/{branchId}/Schedule")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseBranchScheduleDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
@@ -54,7 +54,7 @@ public class BranchScheduleController(IServiceBranchSchedule serviceBranchSchedu
     /// <param name="branchId">Branch id</param>
     /// <param name="branchSchedule">List of schedules</param>
     /// <returns>IActionResult</returns>
-    [HttpPost("~/api/Branch/{branchId}/Horario")]
+    [HttpPost("~/api/Branch/{branchId}/Schedule")]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]

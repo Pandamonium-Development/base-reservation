@@ -25,17 +25,17 @@ export const usePostBranch = ({
     onError,
     onSettled
 }: usePostBranchProps) => {
-    const postBranch = useTypedApiClientBS({
-        path: '/api/Branch',
-        method: 'post'
-    })
+    const path = '/api/Branch';
+    const method = 'post';
+
+    const postBranch = useTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const createBranchMutation = useMutation({
         mutationKey: ['PostBranch'],
-        mutationFn: async (data: BranchRequest) => {
-            const response = await postBranch(castRequestBody(data, "/api/Branch", "post"))
-            return response.data;
+        mutationFn: async (branch: BranchRequest) => {
+            const { data } = await postBranch(castRequestBody(branch, path, method))
+            return data;
         },
         onSuccess: async (data: Branch, variables: BranchRequest) => {
             await queryClient.invalidateQueries({

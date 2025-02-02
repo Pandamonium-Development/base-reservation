@@ -2,6 +2,8 @@ import { type components } from "api/base-reservation/api";
 
 export type Branch = components['schemas']['ResponseBranchDto']
 export type BranchRequest = components['schemas']['RequestBranchDto']
+export type BranchSchedule = components['schemas']['ResponseBranchScheduleDto']
+export type BranchScheduleRequest = components['schemas']['RequestBranchScheduleDto']
 
 export type Province = components['schemas']['ResponseProvinceDto']
 export type Canton = components['schemas']['ResponseCantonDto']

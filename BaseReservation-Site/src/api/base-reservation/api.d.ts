@@ -833,7 +833,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/Branch/{branchId}/Horario": {
+    "/api/Branch/{branchId}/Schedule": {
         parameters: {
             query?: never;
             header?: never;

@@ -239,7 +239,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                                             field.onChange(newDistrict);
                                             setDistrict(newDistrict);
                                         }}
-                                        error={!!errors.districtId}
+                                        errorForm={!!errors.districtId}
                                     />
                                 )}
                             />
