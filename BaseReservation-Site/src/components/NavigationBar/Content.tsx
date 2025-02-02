@@ -59,6 +59,7 @@ export const Content = () => {
                                         primary={<Typography variant="body2">{key}</Typography>}
                                     >
                                         <img
+                                            alt="display-item"
                                             src={ChevronDown}
                                             className={
                                                 openCollapse[key as keyof SnackbarState]
