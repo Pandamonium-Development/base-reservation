@@ -1,21 +1,14 @@
 import { isNil } from "lodash";
 import { useEffect, useState } from "react";
+import { getErrorMessage } from "utils/util";
 import { BranchNewEdit } from "./BranchNewEdit";
 import { useSnackbar } from "stores/useSnackbar";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetBranchById } from "hooks/api-basereservation/branch/useGetBranchById";
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
-import { BaseReservationErrorDetails } from "types/api-basereservation";
-import { transformErrorKeys } from "utils/util";
-import { ApiError } from "openapi-typescript-fetch";
-
-const getErrorMessage = (error: ApiError) => {
-    const errorDetail = transformErrorKeys(error.data as BaseReservationErrorDetails);
-    return errorDetail.message;
-}
 
 export const BranchNewEditWrapper = () => {
-    const { id: branchId } = useParams<{ id?: string }>();
+    const { branchId } = useParams<{ branchId?: string }>();
     const navigate = useNavigate();
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
@@ -23,7 +16,7 @@ export const BranchNewEditWrapper = () => {
 
     const [loading, setLoading] = useState<boolean>(true);
 
-    const isValidBranchId = isNil(branchId) || !isNil(branchId) && !isNaN(Number(branchId));
+    const isValidBranchId = isNil(branchId) || !isNaN(Number(branchId));
 
     useEffect(() => {
         if (!isValidBranchId) {
@@ -32,7 +25,7 @@ export const BranchNewEditWrapper = () => {
         }
         if (isError) {
             navigate('/Sucursal');
-            setSnackbarMessage(`${getErrorMessage(error as ApiError)}`, 'error')
+            setSnackbarMessage(`${getErrorMessage(error)}`, 'error')
             return;
         }
         setLoading(false)
@@ -45,5 +38,4 @@ export const BranchNewEditWrapper = () => {
     return (
         <BranchNewEdit branchData={data} />
     );
-
 }

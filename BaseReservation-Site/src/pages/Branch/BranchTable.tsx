@@ -14,9 +14,17 @@ export const BranchTable = () => {
     const navigate = useNavigate()
     const branchItemsQuery = useGetBranches()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+    const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
-    const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => { setAnchorEl(event.currentTarget) }
-    const handleMenuClose = () => { setAnchorEl(null) }
+    const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
+        setAnchorEl(event.currentTarget)
+        setSelectedRowId(id)
+    }
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        setSelectedRowId(null)
+    }
 
     const columns: GridColDef[] = [
         {
@@ -58,16 +66,16 @@ export const BranchTable = () => {
             renderCell: (params: GridRenderCellParams<Branch>) => {
                 return (
                     <>
-                        <OptionsBullet handleMenuOpen={handleMenuOpen} />
+                        <OptionsBullet handleMenuOpen={(e) => handleMenuOpen(e, Number(params.row.id))} />
                         <Menu
                             anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
+                            open={selectedRowId === params.row.id}
                             onClose={handleMenuClose}
                         >
                             <MenuItem
                                 onClick={() => {
                                     handleMenuClose()
-                                    navigate(`/Sucursal/${params.id}/Horario`)
+                                    navigate(`/Sucursal/${params.row.id}/Horario`)
                                 }}
                             >
                                 Horarios

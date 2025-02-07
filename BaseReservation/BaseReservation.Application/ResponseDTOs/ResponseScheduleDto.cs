@@ -13,5 +13,7 @@ public record ResponseScheduleDto : BaseEntity
 
     public TimeOnly EndHour { get; set; }
 
+    public bool Active { get; set; }
+
     public virtual ICollection<ResponseBranchScheduleDto> BranchSchedules { get; set; } = new List<ResponseBranchScheduleDto>();
 }

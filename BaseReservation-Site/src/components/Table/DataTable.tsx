@@ -1,9 +1,10 @@
 import { isEmpty } from "lodash"
 import { useState } from "react"
 import { useLayout } from "hooks/useLayout"
+import { getNestedField } from "utils/util"
 import { MobileDataTable } from "./MobileDataTable"
 import { NoDataIndicador } from "components/NoDataIndicator/NoDataIndicador"
-import { DataGrid, DataGridProps, GridSortModel, GridValidRowModel } from "@mui/x-data-grid"
+import { DataGrid, DataGridProps, GridRenderCellParams, GridSortModel, GridValidRowModel } from "@mui/x-data-grid"
 
 export const DataTable = <RowModelT extends GridValidRowModel>({
     sortFieldName,
@@ -21,8 +22,8 @@ export const DataTable = <RowModelT extends GridValidRowModel>({
 }) => {
     const { isMobile } = useLayout()
     const {
-        columns,
         rows,
+        columns,
         onRowClick,
         checkboxSelection,
         onRowSelectionModelChange,
@@ -57,6 +58,24 @@ export const DataTable = <RowModelT extends GridValidRowModel>({
             />
         )
     }
+
+    const modifiedColumns = columns.map((col) => {
+        if (!col.renderCell) {
+            return {
+                ...col,
+                renderCell: (params: GridRenderCellParams<RowModelT>) => {
+                    if (typeof col.field === 'string' && col.field.includes('.')) {
+                        const value = getNestedField(params.row, col.field);
+                        return value ?? 'No disponible';
+                    }
+                    return params.row[col.field];
+                }
+            };
+        }
+
+        return col;
+    });
+
 
     return (
         <DataGrid<RowModelT>
@@ -93,6 +112,7 @@ export const DataTable = <RowModelT extends GridValidRowModel>({
             hideFooter={props.rows && props.rows.length <= 25}
             pageSizeOptions={[25, 50, 100]}
             {...props}
+            columns={modifiedColumns}
         />
     )
 }

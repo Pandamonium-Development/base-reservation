@@ -81,6 +81,10 @@ public class RepositoryBranchScheduleBlock(BaseReservationContext context) : IRe
         var keyProperty = context.Model.FindEntityType(typeof(BranchScheduleBlock))!.FindPrimaryKey()!.Properties[0];
 
         return await context.Set<BranchScheduleBlock>()
+            .Include(m => m.BranchScheduleIdNavigation)
+            .ThenInclude(m => m.BranchIdNavigation)
+            .Include(m => m.BranchScheduleIdNavigation)
+            .ThenInclude(m => m.ScheduleIdNavigation)
             .AsNoTracking()
             .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id);
     }
@@ -116,5 +120,17 @@ public class RepositoryBranchScheduleBlock(BaseReservationContext context) : IRe
 
         var response = await FindByIdAsync(branchScheduleBlock.Id);
         return response!;
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> DeleteBranchScheduleBlockAsync(long id)
+    {
+        var block = await FindByIdAsync(id);
+        block!.Active = false;
+
+        context.BranchScheduleBlocks.Update(block);
+
+        var rowsAffected = await context.SaveChangesAsync();
+        return rowsAffected > 0;
     }
 }

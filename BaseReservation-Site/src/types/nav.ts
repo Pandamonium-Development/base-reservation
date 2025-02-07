@@ -1,6 +1,10 @@
 import { type ReactNode } from 'react'
 
-export type NavRoutes = '/Inicio' | '/Sucursal';
+export type NavRoutes =
+    '/Inicio' |
+    '/Sucursal' |
+    '/General' |
+    '/General/Horario';
 
 export interface NavBarDef {
     path: NavRoutes

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useSnackbar } from "stores/useSnackbar"
 import { Province } from "types/api-basereservation"
 import { ErrorProcess } from "components/Error/ErrorProcess"
 import { InputLabel, MenuItem, Select, Stack } from "@mui/material"
@@ -12,22 +13,26 @@ interface ProvinceSelectProps {
 
 export const ProvinceSelect = ({ selectedProvince, onProvinceChange }: ProvinceSelectProps) => {
     const [provinces, setProvinces] = useState<Array<Province>>([])
-    const provinceItemsQuery = useGetProvinces()
+    const setSnackbarMessage = useSnackbar((state) => state.setMessage);
+    const { data: provinceItemsQuery, isError, isPending, error } = useGetProvinces()
 
     useEffect(() => {
-        if (provinceItemsQuery.data) {
-            setProvinces(provinceItemsQuery.data)
+        if (provinceItemsQuery) {
+            setProvinces(provinceItemsQuery)
         }
-    }, [provinceItemsQuery.data, selectedProvince])
+        if (isError) {
+            setSnackbarMessage(error.message, 'error');
+        }
+    }, [provinceItemsQuery, selectedProvince, isError, setSnackbarMessage, error])
 
     const isValidProvince = provinces.some(province => province.id === selectedProvince)
     const valueToShow = isValidProvince ? selectedProvince : 0
 
-    if (provinceItemsQuery.isPending) {
+    if (isPending) {
         return <CircularLoadingProgress />
     }
 
-    if (provinceItemsQuery.isError) {
+    if (isError) {
         return <ErrorProcess />
     }
 

@@ -1,32 +1,74 @@
 import { Home } from "pages/Home/Home";
 import { Route } from "react-router-dom";
 import { Branch } from "pages/Branch/Branch";
+import { Schedule } from "pages/Settings/Schedule/Schedule";
 import { BranchNewEditWrapper } from "pages/Branch/BranchNewEditWrapper";
+import { Schedule as BranchSchedule } from "pages/Branch/Schedule/Schedule";
+import { Block as BranchScheduleBlock } from "pages/Branch/Schedule/Block/Block";
+import { ScheduleNewEditWrapper } from "pages/Settings/Schedule/ScheduleNewEditWrapper";
+import { ScheduleManagement as BranchScheduleManagement } from "pages/Branch/Schedule/ScheduleManagement";
+import { BlockNewEditWrapper as BranchScheduleBlockNewEditWrapper } from "pages/Branch/Schedule/Block/BlockNewEditWrapper";
 
 export const routesProtected = [
     {
         name: 'Inicio',
         path: '/Inicio',
-        showInMenu: true,
         element: <Home />
     },
     {
         name: 'Sucursal',
         path: '/Sucursal',
-        showInMenu: true,
         element: <Branch />
     },
     {
-        name: 'Crear Sucursal',
-        showInMenu: false,
+        name: 'CrearSucursal',
         path: '/Sucursal/Nueva',
         element: <BranchNewEditWrapper />
     },
     {
-        name: 'Editar Sucursal',
-        showInMenu: false,
-        path: '/Sucursal/:id',
+        name: 'EditarSucursal',
+        path: '/Sucursal/:branchId',
         element: <BranchNewEditWrapper />
+    },
+    {
+        name: 'Horario',
+        path: '/General/Horario',
+        element: <Schedule />
+    },
+    {
+        name: 'CrearHorario',
+        path: '/General/Horario/Nuevo',
+        element: <ScheduleNewEditWrapper />
+    },
+    {
+        name: 'EditarHorario',
+        path: '/General/Horario/:scheduleId',
+        element: <ScheduleNewEditWrapper />
+    },
+    {
+        name: 'SucursalHorarios',
+        path: '/Sucursal/:branchId/Horario',
+        element: <BranchSchedule />
+    },
+    {
+        name: 'SucursalHorariosGestion',
+        path: '/Sucursal/:branchId/Horario/Gestion',
+        element: <BranchScheduleManagement />
+    },
+    {
+        name: 'SucursalHorarioBloqueos',
+        path: '/Sucursal/:branchId/Horario/:scheduleId/Bloqueo',
+        element: <BranchScheduleBlock />
+    },
+    {
+        name: 'CrearSucursalHorarioBloqueo',
+        path: '/Sucursal/:branchId/Horario/:scheduleId/Bloqueo/Nuevo',
+        element: <BranchScheduleBlockNewEditWrapper />
+    },
+    {
+        name: 'EditarSucursalHorarioBloqueo',
+        path: '/Sucursal/:branchId/Horario/:scheduleId/Bloqueo/:blockId',
+        element: <BranchScheduleBlockNewEditWrapper />
     }
 ]
 

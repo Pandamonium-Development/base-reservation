@@ -37,7 +37,7 @@ public class RepositoryBranchSchedule(BaseReservationContext context) : IReposit
                     context.BranchSchedules.AddRange(branchSchedules);
                     rowsAffected = await context.SaveChangesAsync();
 
-                    if (rowsAffected == 0)
+                    if (rowsAffected == 0 && branchSchedules.Any())
                     {
                         await transaccion.RollbackAsync();
                         result = false;
@@ -88,7 +88,7 @@ public class RepositoryBranchSchedule(BaseReservationContext context) : IReposit
         return await context.Set<BranchSchedule>()
                 .Include(m => m.ScheduleIdNavigation)
                 .Include(m => m.BranchIdNavigation)
-                .Include(m => m.BranchScheduleBlocks)
+                .Include(m => m.BranchScheduleBlocks.Where(x => x.Active))
                 .AsNoTracking()
                 .FirstOrDefaultAsync(a => EF.Property<short>(a, keyProperty.Name) == id);
     }

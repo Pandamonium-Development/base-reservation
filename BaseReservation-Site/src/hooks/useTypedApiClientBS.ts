@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import { paths } from "../api/base-reservation/api";
-import { Fetcher, type TypedFetch } from "openapi-typescript-fetch";
+import { Fetcher, Middleware, type TypedFetch } from "openapi-typescript-fetch";
 
 const getHeaders = (disableAuth: boolean, token: string): Record<string, string> => {
     if (disableAuth) {
@@ -12,6 +12,17 @@ const getHeaders = (disableAuth: boolean, token: string): Record<string, string>
         Authorization: `Bearer ${token}`
     }
 }
+
+const arrayWrapperMiddleware: Middleware = async (url, init, next) => {
+    if (init?.body) {
+        const body = JSON.parse(init.body as string);
+        const keys = Object.keys(body);
+        if (keys.length === 1 && Array.isArray(body[String(keys[0])])) {
+            init.body = JSON.stringify(body[String(keys[0])]);
+        }
+    }
+    return next(url, init);
+};
 
 export const useTypedApiClientBS = <
     PathT extends keyof paths,
@@ -32,7 +43,10 @@ export const useTypedApiClientBS = <
         init: {
             headers: getHeaders(disableAuth, token ?? ''),
         },
+        use: [arrayWrapperMiddleware]
     });
+
+
 
     return fetcher.path(path).method(method).create({}) as TypedFetch<paths[PathT][MethodT]>;
 }

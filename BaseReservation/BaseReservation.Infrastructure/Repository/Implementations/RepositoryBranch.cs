@@ -40,6 +40,8 @@ public class RepositoryBranch(BaseReservationContext context) : IRepositoryBranc
             .Include(m => m.UserBranches)
             .ThenInclude(m => m.UserIdNavigation)
             .ThenInclude(m => m.RoleIdNavigation)
+            .Include(m => m.BranchSchedules)
+            .ThenInclude(m => m.ScheduleIdNavigation)
             .AsNoTracking()
             .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id);
     }

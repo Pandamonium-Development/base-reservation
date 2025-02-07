@@ -19,16 +19,16 @@ export const usePostAuthentication = ({
     onSuccess,
     onError
 }: usePostAuthenticationProps) => {
-    const postAuthentication = useTypedApiClientBS({
-        path: '/api/Authentication',
-        method: 'post'
-    })
+    const path = '/api/Authentication';
+    const method = 'post';
+
+    const postAuthentication = useTypedApiClientBS({ path, method })
 
     return useMutation({
         mutationFn: async (
             loginUserInformation: LoginUserRequest
         ) => {
-            const { data } = await postAuthentication(castRequestBody(loginUserInformation, "/api/Authentication", "post"))
+            const { data } = await postAuthentication(castRequestBody(loginUserInformation, path, method))
             return data;
         },
         onSuccess,

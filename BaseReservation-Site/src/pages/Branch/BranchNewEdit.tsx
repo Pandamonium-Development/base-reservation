@@ -1,12 +1,13 @@
 import { isEmpty, isNil } from "lodash";
 import { useLayout } from "hooks/useLayout";
 import { Page } from "components/Shared/Page";
+import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "stores/useSnackbar";
 import { useEffect, useRef, useState } from "react";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PageHeader } from "components/Shared/PageHeader";
+import { FormButtons } from "components/Shared/FormButtons";
 import { CantonSelect } from "components/Directions/CantonSelect";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { BranchDefaultValues, BranchSchema } from "./BranchSchema";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { Alert, Box, Button, Stack, TextField } from "@mui/material";
@@ -239,7 +240,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                                             field.onChange(newDistrict);
                                             setDistrict(newDistrict);
                                         }}
-                                        error={!!errors.districtId}
+                                        errorForm={!!errors.districtId}
                                     />
                                 )}
                             />
@@ -262,31 +263,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
                             )}
                         </Box>
 
-                        {isMobile && (
-                            <Box display='flex' justifyContent='space-between' maxWidth='90vw' gap='8px'>
-                                <Box flex={1} px={1} pr={2} sx={{ pl: 0 }}>
-                                    <RouterLink to="/Sucursal">
-                                        <Button variant="outlined" fullWidth>Cancelar</Button>
-                                    </RouterLink>
-                                </Box>
-                                <Box flex={1} px={1} pl={2} sx={{ pr: 0 }}>
-                                    <Button loading={loading} loadingPosition="start" type="submit" variant="contained" fullWidth>
-                                        Guardar
-                                    </Button>
-                                </Box>
-                            </Box>
-                        )}
-
-                        {!isMobile && (
-                            <Stack direction='row' spacing={2} justifyContent='flex-end'>
-                                <RouterLink to="/Sucursal">
-                                    <Button variant="outlined">Cancelar</Button>
-                                </RouterLink>
-                                <Button loading={loading} loadingPosition="start" type="submit" variant="contained">
-                                    Guardar
-                                </Button>
-                            </Stack>
-                        )}
+                        <FormButtons backPath="/Sucursal" loadingIndicator={loading} />
                     </Stack>
                 </form>
             </FormProvider>
