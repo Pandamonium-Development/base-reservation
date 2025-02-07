@@ -1,25 +1,24 @@
 
-import dayjs from "dayjs"
 import { isNil } from "lodash"
 import { useState } from "react"
 import { useLayout } from "hooks/useLayout"
+import { getDayInSpanish } from "utils/util"
 import { Page } from "components/Shared/Page"
 import { useSnackbar } from "stores/useSnackbar"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { FormProvider, useForm } from "react-hook-form"
 import { PageHeader } from "components/Shared/PageHeader"
 import { useNavigate, useParams } from "react-router-dom"
 import { Alert, Box, Button, Stack } from "@mui/material"
+import { LocalizationProvider } from "@mui/x-date-pickers"
 import { FormButtons } from "components/Shared/FormButtons"
 import { BranchScheduleBlock } from "types/api-basereservation"
 import { BlockDefaultValues, BlockSchema } from "./BlockSchema"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { Controller, FormProvider, useForm } from "react-hook-form"
-import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers"
-import { FormFieldErrorMessage } from "components/FormFieldErrorMessage"
-import { usePostScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/usePostScheduleBlock"
-import { usePutScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/usePutScheduleBlock"
+import { TimePickerField } from "components/DateTimePickers/TimePickerField"
 import { BlockDeleteModalConfirmation } from "./BlockDeleteModalConfirmation"
-import { getDayInSpanish } from "utils/util"
+import { usePutScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/usePutScheduleBlock"
+import { usePostScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/usePostScheduleBlock"
 
 export const BlockNewEdit = ({ branchScheduleBlockData }: { branchScheduleBlockData: BranchScheduleBlock | undefined | null }) => {
     const { branchId, scheduleId, blockId } = useParams<{ branchId?: string, scheduleId?: string, blockId?: string }>();
@@ -137,42 +136,18 @@ export const BlockNewEdit = ({ branchScheduleBlockData }: { branchScheduleBlockD
                                     gap: 2,
                                 }}
                             >
-                                <Box sx={{ flex: 1 }}>
-                                    <Controller
-                                        name="startHour"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <TimePicker
-                                                label="Hora de inicio"
-                                                sx={{ width: '100%' }}
-                                                value={field.value ? dayjs(field.value, 'HH:mm') : null}
-                                                onChange={(newValue) => field.onChange(newValue?.format('HH:mm'))}
-                                                format="HH:mm"
-                                            />
-                                        )}
-                                    />
-                                    {errors.startHour?.message && (
-                                        <FormFieldErrorMessage message={errors.startHour.message} />
-                                    )}
-                                </Box>
-                                <Box sx={{ flex: 1 }}>
-                                    <Controller
-                                        name="endHour"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <TimePicker
-                                                label="Hora de fin"
-                                                sx={{ width: '100%' }}
-                                                value={field.value ? dayjs(field.value, 'HH:mm') : null}
-                                                onChange={(newValue) => field.onChange(newValue?.format('HH:mm'))}
-                                                format="HH:mm"
-                                            />
-                                        )}
-                                    />
-                                    {errors.endHour?.message && (
-                                        <FormFieldErrorMessage message={errors.endHour.message} />
-                                    )}
-                                </Box>
+                                <TimePickerField
+                                    name="startHour"
+                                    label="Hora de inicio"
+                                    control={control}
+                                    errors={errors}
+                                />
+                                <TimePickerField
+                                    name="endHour"
+                                    label="Hora de fin"
+                                    control={control}
+                                    errors={errors}
+                                />
                             </Box>
                         </LocalizationProvider>
                         <FormButtons backPath={`/Sucursal/${branchId}/Horario/${scheduleId}/Bloqueo`} loadingIndicator={loading} />

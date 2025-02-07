@@ -1,11 +1,9 @@
-import dayjs from 'dayjs';
 import { isNil } from "lodash";
 import { useState } from "react";
 import { useLayout } from "hooks/useLayout";
 import { getDayInSpanish } from 'utils/util';
 import { Page } from "components/Shared/Page";
 import { useNavigate } from "react-router-dom";
-import { TimePicker } from "@mui/x-date-pickers";
 import { useSnackbar } from "stores/useSnackbar";
 import { DiaSelect } from "components/Misc/DiaSelect";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,6 +15,7 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import { ScheduleRequest, WeeklyDay } from "types/api-basereservation";
 import { ScheduleDefaultValues, ScheduleSchema } from "./ScheduleSchema";
 import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
+import { TimePickerField } from 'components/DateTimePickers/TimePickerField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { usePutSchedule } from "hooks/api-basereservation/schedule/usePutSchedule";
 import { usePostSchedule } from "hooks/api-basereservation/schedule/usePostSchedule";
@@ -153,42 +152,18 @@ export const ScheduleNewEdit = ({ scheduleData }: { scheduleData: ScheduleReques
                                     gap: 2,
                                 }}
                             >
-                                <Box sx={{ flex: 1 }}>
-                                    <Controller
-                                        name="startHour"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <TimePicker
-                                                label="Hora de inicio"
-                                                sx={{ width: '100%' }}
-                                                value={field.value ? dayjs(field.value, 'HH:mm') : null}
-                                                onChange={(newValue) => field.onChange(newValue?.format('HH:mm'))}
-                                                format="HH:mm"
-                                            />
-                                        )}
-                                    />
-                                    {errors.startHour?.message && (
-                                        <FormFieldErrorMessage message={errors.startHour.message} />
-                                    )}
-                                </Box>
-                                <Box sx={{ flex: 1 }}>
-                                    <Controller
-                                        name="endHour"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <TimePicker
-                                                label="Hora de fin"
-                                                sx={{ width: '100%' }}
-                                                value={field.value ? dayjs(field.value, 'HH:mm') : null}
-                                                onChange={(newValue) => field.onChange(newValue?.format('HH:mm'))}
-                                                format="HH:mm"
-                                            />
-                                        )}
-                                    />
-                                    {errors.endHour?.message && (
-                                        <FormFieldErrorMessage message={errors.endHour.message} />
-                                    )}
-                                </Box>
+                                <TimePickerField
+                                    name="startHour"
+                                    label="Hora de inicio"
+                                    control={control}
+                                    errors={errors}
+                                />
+                                <TimePickerField
+                                    name="endHour"
+                                    label="Hora de fin"
+                                    control={control}
+                                    errors={errors}
+                                />
                             </Box>
                         </LocalizationProvider>
                         <FormButtons backPath="/General/Horario" loadingIndicator={loading} />
