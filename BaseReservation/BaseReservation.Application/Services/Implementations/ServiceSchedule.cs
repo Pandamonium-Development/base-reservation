@@ -39,7 +39,7 @@ public class ServiceSchedule(IRepositorySchedule repository, IMapper mapper,
     public async Task<ResponseScheduleDto> FindByIdAsync(short id)
     {
         var schedule = await repository.FindByIdAsync(id);
-        if (schedule == null) throw new NotFoundException("Horario no encontrada.");
+        if (schedule == null) throw new NotFoundException("Horario no encontrado.");
 
         return mapper.Map<ResponseScheduleDto>(schedule);
     }

@@ -798,9 +798,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                        "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
-                        "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                        "text/plain": boolean;
+                        "application/json": boolean;
+                        "text/json": boolean;
                     };
                 };
                 /** @description Unprocessable Content */
@@ -955,6 +955,136 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/BranchScheduleBlock/{branchSchedule\u00DFlockId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get block with specific id */
+        get: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Block id */
+                    "branchSchedule\u00DFlockId": number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                        "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                        "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/Schedule/{scheduleId}/Block": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get blocks by schedule */
+        get: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Schedule id */
+                    scheduleId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseBranchScheduleBlockDto"][];
+                        "application/json": components["schemas"]["ResponseBranchScheduleBlockDto"][];
+                        "text/json": components["schemas"]["ResponseBranchScheduleBlockDto"][];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/BranchScheduleBlock": {
         parameters: {
             query?: never;
@@ -1025,7 +1155,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/BranchScheduleBlock/{idBranchScheduleBlock}": {
+    "/api/BranchScheduleBlock/{blockId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1042,7 +1172,7 @@ export interface paths {
                 };
                 path: {
                     /** @description Block branch's schedule id */
-                    idBranchScheduleBlock: number;
+                    blockId: number;
                 };
                 cookie?: never;
             };
@@ -1103,7 +1233,56 @@ export interface paths {
             };
         };
         post?: never;
-        delete?: never;
+        /** Deletes a block by its ID. */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description The ID of the block to delete. */
+                    blockId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": boolean;
+                        "application/json": boolean;
+                        "text/json": boolean;
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -6334,6 +6513,7 @@ export interface components {
             startHour?: string;
             /** Format: time */
             endHour?: string;
+            active?: boolean;
         };
         RequestServiceDto: {
             /** Format: int32 */
@@ -6921,6 +7101,7 @@ export interface components {
             startHour?: string;
             /** Format: time */
             endHour?: string;
+            active?: boolean;
             branchSchedules?: components["schemas"]["ResponseBranchScheduleDto"][] | null;
             /** Format: date-time */
             created?: string;

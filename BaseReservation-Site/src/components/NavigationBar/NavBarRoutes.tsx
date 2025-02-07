@@ -1,5 +1,6 @@
 import { has } from 'lodash';
 import HomeIcon from '@mui/icons-material/Home'
+import SettingsIcon from '@mui/icons-material/Settings';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 import { type NavBarRouteDef, type NavBarDefWithChildren } from 'types/nav'
 
@@ -21,5 +22,22 @@ export const NavBarRoutes: Record<string, NavBarRouteDef> = {
         icon: (
             <HolidayVillageIcon />
         ),
+    },
+    'General': {
+        path: '/General',
+        icon: (
+            <SettingsIcon />
+        ),
+        childrenRoutes: [
+            {
+                title: 'Horario',
+                path: '/General/Horario',
+                icon: null,
+                associatedPageUrls: [
+                    '/General/Horario/Nuevo',
+                    '/General/Horario/:id',
+                ]
+            }
+        ]
     }
 }

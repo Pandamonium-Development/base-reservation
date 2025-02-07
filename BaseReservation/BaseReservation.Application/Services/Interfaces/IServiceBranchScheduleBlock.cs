@@ -41,4 +41,11 @@ public interface IServiceBranchScheduleBlock
     /// <param name="branchScheduleBlock">Branch schedule block request model to be updated</param>
     /// <returns>ResponseBranchScheduleBlockDto</returns>
     Task<ResponseBranchScheduleBlockDto> UpdateBranchScheduleBlockAsync(long id, RequestBranchScheduleBlockDto branchScheduleBlock);
+
+    /// <summary>
+    /// Deletes a branch schedule block based on the provided Id.
+    /// </summary>
+    /// <param name="id">Id of the block to delete.</param>
+    /// <returns>True if successful, otherwise false.</returns>
+    Task<bool> DeleteBranchScheduleBlockAsync(long id);
 }

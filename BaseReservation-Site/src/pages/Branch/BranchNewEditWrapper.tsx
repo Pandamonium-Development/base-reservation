@@ -8,7 +8,7 @@ import { useGetBranchById } from "hooks/api-basereservation/branch/useGetBranchB
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
 
 export const BranchNewEditWrapper = () => {
-    const { id: branchId } = useParams<{ id?: string }>();
+    const { branchId } = useParams<{ branchId?: string }>();
     const navigate = useNavigate();
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 

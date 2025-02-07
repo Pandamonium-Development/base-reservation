@@ -1285,17 +1285,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseBranchScheduleBlockDto"
+                  "type": "boolean"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseBranchScheduleBlockDto"
+                  "type": "boolean"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResponseBranchScheduleBlockDto"
+                  "type": "boolean"
                 }
               }
             }
@@ -1556,6 +1556,193 @@
         }
       }
     },
+    "/api/BranchScheduleBlock/{branchScheduleßlockId}": {
+      "get": {
+        "tags": [
+          "BranchScheduleBlock"
+        ],
+        "summary": "Get block with specific id",
+        "parameters": [
+          {
+            "name": "branchScheduleßlockId",
+            "in": "path",
+            "description": "Block id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBranchScheduleBlockDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBranchScheduleBlockDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBranchScheduleBlockDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Schedule/{scheduleId}/Block": {
+      "get": {
+        "tags": [
+          "BranchScheduleBlock"
+        ],
+        "summary": "Get blocks by schedule",
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Schedule id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseBranchScheduleBlockDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseBranchScheduleBlockDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseBranchScheduleBlockDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/BranchScheduleBlock": {
       "post": {
         "tags": [
@@ -1660,7 +1847,7 @@
         }
       }
     },
-    "/api/BranchScheduleBlock/{idBranchScheduleBlock}": {
+    "/api/BranchScheduleBlock/{blockId}": {
       "put": {
         "tags": [
           "BranchScheduleBlock"
@@ -1668,7 +1855,7 @@
         "summary": "Update existing block of branch's schedule",
         "parameters": [
           {
-            "name": "idBranchScheduleBlock",
+            "name": "blockId",
             "in": "path",
             "description": "Block branch's schedule id",
             "required": true,
@@ -1753,6 +1940,93 @@
           },
           "422": {
             "description": "Unprocessable Content",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDetailsBaseReservation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BranchScheduleBlock"
+        ],
+        "summary": "Deletes a block by its ID.",
+        "parameters": [
+          {
+            "name": "blockId",
+            "in": "path",
+            "description": "The ID of the block to delete.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -10962,6 +11236,9 @@
           "endHour": {
             "type": "string",
             "format": "time"
+          },
+          "active": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -12655,6 +12932,9 @@
           "endHour": {
             "type": "string",
             "format": "time"
+          },
+          "active": {
+            "type": "boolean"
           },
           "branchSchedules": {
             "type": "array",

@@ -15,6 +15,7 @@ export const useGetBranches = (): UseQueryResult<Array<Branch>, ApiError> => {
             const { data } = await getBranches(castRequestBody({}, path, method));
             return data
         },
-        enabled: true
+        enabled: true,
+        staleTime: 0,
     })
 }

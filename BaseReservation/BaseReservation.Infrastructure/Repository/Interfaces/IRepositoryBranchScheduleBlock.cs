@@ -53,4 +53,11 @@ public interface IRepositoryBranchScheduleBlock
     /// <param name="id">Branch schedule block Id</param>
     /// <returns>True if exists, if not, false</returns>
     Task<bool> ExistsBranchScheduleBlockAsync(long id);
+
+    /// <summary>
+    /// Deletes a branch schedule block based on the provided Id.
+    /// </summary>
+    /// <param name="id">Id of the block to delete.</param>
+    /// <returns>True if successful, otherwise false.</returns>
+    Task<bool> DeleteBranchScheduleBlockAsync(long id);
 }

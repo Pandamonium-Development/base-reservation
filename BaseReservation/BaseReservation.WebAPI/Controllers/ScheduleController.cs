@@ -14,7 +14,6 @@ namespace BaseReservation.WebAPI.Controllers;
 /// </summary>
 /// <param name="serviceSchedule">The service used for schedule operations.</param>
 [ApiController]
-[AllowAnonymous]
 [BaseReservationAuthorize]
 [ApiVersion("1.0")]
 [Route("api/[controller]")]

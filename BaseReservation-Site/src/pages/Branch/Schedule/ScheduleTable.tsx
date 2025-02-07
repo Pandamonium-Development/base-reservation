@@ -1,63 +1,48 @@
-import { Menu, MenuItem } from "@mui/material";
-import { GridColDef, GridEventListener, GridRenderCellParams, GridRowParams } from "@mui/x-data-grid";
-import { ErrorProcess } from "components/Error/ErrorProcess";
-import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
-import { DataTable } from "components/Table/DataTable";
-import { OptionsBullet } from "components/Table/OptionsBullet";
-import { useGetBranchSchedules } from "hooks/api-basereservation/branch/schedule/useGetBranchSchedules";
-import { isNil } from "lodash";
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import { getDayInSpanish } from "utils/util";
 import { useNavigate } from "react-router-dom"
-import { useSnackbar } from "stores/useSnackbar";
+import { Menu, MenuItem } from "@mui/material";
+import { DataTable } from "components/Table/DataTable";
 import { BranchSchedule } from "types/api-basereservation";
-import { getErrorMessage } from "utils/util";
+import { OptionsBullet } from "components/Table/OptionsBullet";
+import { GridColDef, GridEventListener, GridRenderCellParams, GridRowParams } from "@mui/x-data-grid";
 
-export const ScheduleTable = ({ branchId }: { branchId: number }) => {
+export const ScheduleTable = ({ branchId, schedules }: { branchId: number, schedules: BranchSchedule[] }) => {
     const navigate = useNavigate();
-    const setSnackbarMessage = useSnackbar((state) => state.setMessage);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-    const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => { setAnchorEl(event.currentTarget) }
-    const handleMenuClose = () => { setAnchorEl(null) }
+    const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
-    const { data, isLoading, isError, error } = useGetBranchSchedules(branchId);
+    const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
+        setAnchorEl(event.currentTarget)
+        setSelectedRowId(id)
+    }
 
-    const [loading, setLoading] = useState<boolean>(true);
-
-    const isValidBranchId = isNil(branchId) || !isNil(branchId) && !isNaN(Number(branchId));
-
-    useEffect(() => {
-        if (!isValidBranchId) {
-            navigate('/Sucursal');
-            return;
-        }
-        if (isError) {
-            navigate('/Sucursal');
-            setSnackbarMessage(`${getErrorMessage(error)}`, 'error')
-            return;
-        }
-        setLoading(false)
-    }, [isError, navigate, setSnackbarMessage, isValidBranchId, error]);
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        setSelectedRowId(null)
+    }
 
     const columns: GridColDef[] = [
-        {
-            field: 'id',
-            headerName: 'Id',
-            minWidth: 20,
-        },
         {
             field: 'schedule.day',
             headerName: 'Día',
             minWidth: 200,
+            renderCell: (params: GridRenderCellParams<BranchSchedule>) => {
+                return getDayInSpanish(params.row.schedule?.day)
+            },
+            flex: 1
         },
         {
             field: 'schedule.startHour',
             headerName: 'Inicio',
             minWidth: 250,
+            flex: 1
         },
         {
             field: 'schedule.endHour',
             headerName: 'Fin',
             minWidth: 250,
+            flex: 1
         },
         {
             field: 'opciones',
@@ -67,16 +52,16 @@ export const ScheduleTable = ({ branchId }: { branchId: number }) => {
             renderCell: (params: GridRenderCellParams<BranchSchedule>) => {
                 return (
                     <>
-                        <OptionsBullet handleMenuOpen={handleMenuOpen} />
+                        <OptionsBullet handleMenuOpen={(e) => handleMenuOpen(e, Number(params.row.id))} />
                         <Menu
                             anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
+                            open={selectedRowId === params.row.id}
                             onClose={handleMenuClose}
                         >
                             <MenuItem
                                 onClick={() => {
                                     handleMenuClose()
-                                    navigate(`/Sucursal/${branchId}/Horario/${params.id}/Bloqueos`)
+                                    navigate(`/Sucursal/${branchId}/Horario/${params.id}/Bloqueo`)
                                 }}
                             >
                                 Bloqueos
@@ -85,7 +70,8 @@ export const ScheduleTable = ({ branchId }: { branchId: number }) => {
                         </Menu>
                     </>
                 )
-            }
+            },
+            flex: 1
         }
     ]
 
@@ -93,19 +79,11 @@ export const ScheduleTable = ({ branchId }: { branchId: number }) => {
         navigate(`/Sucursal/${params.id}`)
     }
 
-    if (isLoading || loading) {
-        return <CircularLoadingProgress />
-    }
-    if (isError) {
-        return <ErrorProcess />
-    }
-
     return (
         <DataTable
-            sortFieldName="id"
-            sort="desc"
+            sort="asc"
             columns={columns}
-            rows={data}
+            rows={schedules}
             onRowClick={selectRow}
         />
     )

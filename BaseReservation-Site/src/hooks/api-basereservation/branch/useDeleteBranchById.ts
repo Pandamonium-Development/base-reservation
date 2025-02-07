@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BaseReservationErrorDetails } from "types/api-basereservation";
 import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
 
-interface useDeleteBranch {
+interface useDeleteBranchProps {
     onSuccess?: (
         data: boolean,
         variables: number
@@ -24,7 +24,7 @@ export const useDeleteBranch = ({
     onSuccess,
     onError,
     onSettled
-}: useDeleteBranch) => {
+}: useDeleteBranchProps) => {
     const path = '/api/Branch/{branchId}';
     const method = 'delete';
 

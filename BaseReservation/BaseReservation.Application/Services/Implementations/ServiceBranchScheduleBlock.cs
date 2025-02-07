@@ -54,13 +54,20 @@ public class ServiceBranchScheduleBlock(IRepositoryBranchScheduleBlock repositor
     /// <inheritdoc />
     public async Task<ResponseBranchScheduleBlockDto> UpdateBranchScheduleBlockAsync(long id, RequestBranchScheduleBlockDto branchScheduleBlock)
     {
-        if (!await repository.ExistsBranchScheduleBlockAsync(id)) throw new NotFoundException("Horario bloqueo no encontrada.");
+        if (!await repository.ExistsBranchScheduleBlockAsync(id)) throw new NotFoundException("Horario bloqueo no encontrado.");
 
         var block = await ValidateBranchScheduleBlock(branchScheduleBlock);
         block.Id = id;
         var result = await repository.UpdateBranchScheduleBlockAsync(block);
 
         return mapper.Map<ResponseBranchScheduleBlockDto>(result);
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> DeleteBranchScheduleBlockAsync(long id)
+    {
+        if (!await repository.ExistsBranchScheduleBlockAsync(id)) throw new NotFoundException("Horario bloqueo no encontrado.");
+        return await repository.DeleteBranchScheduleBlockAsync(id);
     }
 
     /// <inheritdoc />

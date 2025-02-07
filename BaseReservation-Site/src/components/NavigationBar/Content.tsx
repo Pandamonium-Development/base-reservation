@@ -35,6 +35,7 @@ export const Content = () => {
         >
             {map(NavBarRoutes, (routeDef, key) => {
                 if (isChildrenRouteDef(routeDef)) {
+                    const parent = `/${key}`;
                     return (
                         <Box key={`children-routes-box-${key}`}>
                             <ListItem
@@ -44,31 +45,39 @@ export const Content = () => {
                                 <ListItemButton
                                     key={`children-routes-button-${key}`}
                                     onClick={() => setOpenCollapse(key)}
+                                    sx={{
+                                        '&.Mui-selected': {
+                                            color: '#d7e4ec'
+                                        }
+                                    }}
+                                    selected={
+                                        startsWith(location.pathname, parent)
+                                    }
                                 >
                                     <ListItemIcon
                                         key={`children-routes-icon-${key}`}
                                         sx={{
                                             justifyContent: 'center',
-                                            alignItems: 'center'
+                                            alignItems: 'center',
+                                            color: `${startsWith(location.pathname, parent) ? '#d7e4ec' : '#8590a5'}`
                                         }}
                                     >
                                         {routeDef.icon}
                                     </ListItemIcon>
                                     <ListItemText
-                                        key={`children-routes-text-${key}`}
+                                        key={`children- routes - text - ${key}`}
                                         primary={<Typography variant="body2">{key}</Typography>}
-                                    >
-                                        <img
-                                            alt="display-item"
-                                            src={ChevronDown}
-                                            className={
-                                                openCollapse[key as keyof SnackbarState]
-                                                    ? 'rotate-180'
-                                                    : '' + 'pl-2'
-                                            }
-                                            key={`children-routes-img-${key}`}
-                                        />
-                                    </ListItemText>
+                                    />
+                                    <img
+                                        alt="display-item"
+                                        src={ChevronDown}
+                                        className={
+                                            openCollapse[key as keyof SnackbarState]
+                                                ? 'rotate-180'
+                                                : '' + 'pl-2'
+                                        }
+                                        key={`children-routes-img-${key}`}
+                                    />
                                 </ListItemButton>
                             </ListItem>
                             <Collapse
@@ -102,7 +111,6 @@ export const Content = () => {
                                                     key={`children-routes-listbutton-${childRoute.path}`}
                                                     onClick={() => {
                                                         navigate(childRoute.path)
-                                                        close()
                                                     }}
                                                     sx={{
                                                         '&.Mui-selected': {
@@ -117,7 +125,8 @@ export const Content = () => {
                                                         key={`children-routes-icon-${childRoute.path}`}
                                                         sx={{
                                                             justifyContent: 'center',
-                                                            alignItems: 'center'
+                                                            alignItems: 'center',
+                                                            color: `${startsWith(location.pathname, childRoute.path) ? '#d7e4ec' : '#8590a5'}`
                                                         }}
                                                     />
                                                     <ListItemText
@@ -157,7 +166,6 @@ export const Content = () => {
                                 key={`listitem-standard-routes-button-${key}`}
                                 onClick={() => {
                                     navigate(routeDef.path);
-                                    close();
                                 }}
                                 sx={{
                                     '&.Mui-selected': {

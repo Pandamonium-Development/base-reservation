@@ -117,4 +117,16 @@ public class RepositoryBranchScheduleBlock(BaseReservationContext context) : IRe
         var response = await FindByIdAsync(branchScheduleBlock.Id);
         return response!;
     }
+
+    /// <inheritdoc />
+    public async Task<bool> DeleteBranchScheduleBlockAsync(long id)
+    {
+        var block = await FindByIdAsync(id);
+        block!.Active = false;
+
+        context.BranchScheduleBlocks.Update(block);
+
+        var rowsAffected = await context.SaveChangesAsync();
+        return rowsAffected > 0;
+    }
 }

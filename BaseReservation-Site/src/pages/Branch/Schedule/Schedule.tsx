@@ -10,9 +10,10 @@ import { PageHeader } from "components/Shared/PageHeader";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetBranchById } from "hooks/api-basereservation/branch/useGetBranchById";
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
+import { ErrorProcess } from "components/Error/ErrorProcess";
 
 export const Schedule = () => {
-    const { id: branchId } = useParams<{ id?: string }>();
+    const { branchId } = useParams<{ branchId?: string }>();
     const navigate = useNavigate();
 
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
@@ -38,17 +39,26 @@ export const Schedule = () => {
         return <CircularLoadingProgress />
     }
 
+    if (isError) {
+        return <ErrorProcess />
+    }
+
     return (
         <Page
             header={
-                <PageHeader title="Horarios sucursal" subtitle={`${data?.name ?? ''}`} actionButton={
-                    <Link to={`/Sucursal/${Number(branchId)}/Nuevo`}>
-                        <Button variant="contained" size="large" fullWidth startIcon={<AddIcon />}>Agregar horario</Button>
-                    </Link>
-                } />
+                <PageHeader
+                    title="Horarios sucursal"
+                    subtitle={`${data?.name ?? ''}`}
+                    backPath={`/Sucursal`}
+                    backText="Sucursales"
+                    actionButton={
+                        <Link to={`/Sucursal/${Number(branchId)}/Horario/Gestion`}>
+                            <Button variant="contained" size="large" fullWidth startIcon={<AddIcon />}>Gestión de horario</Button>
+                        </Link>
+                    } />
             }
         >
-            <ScheduleTable branchId={Number(branchId)} />
+            <ScheduleTable branchId={Number(branchId)} schedules={data?.branchSchedules ?? []} />
         </Page>
     );
 }

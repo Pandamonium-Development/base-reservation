@@ -72,6 +72,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
             Cookies.set('refresh_token', String(data.refreshToken), { expires: 30 });
             setUserName(jwtDecode<DecodedToken>(String(data.token)))
             setIsAuthenticated(true);
+            setSnackbarMessage(`Token actualizado correctamente`)
         },
         onError: (data: BaseReservationErrorDetails) => {
             setSnackbarMessage(`Error actualizando tokens: ${data.message}`, 'error');

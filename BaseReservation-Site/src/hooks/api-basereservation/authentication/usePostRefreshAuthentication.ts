@@ -28,7 +28,7 @@ export const usePostRefreshAuthentication = ({
         mutationFn: async (
             tokenRefreshModel: UserTokenRefreshRequest
         ) => {
-            const { data } = await postRefreshToken(castRequestBody({ tokenRefreshModel }, path, method));
+            const { data } = await postRefreshToken(castRequestBody(tokenRefreshModel, path, method));
             return data;
         },
         onSuccess,
