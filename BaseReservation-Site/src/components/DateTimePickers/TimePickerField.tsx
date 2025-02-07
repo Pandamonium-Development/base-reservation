@@ -1,4 +1,3 @@
-// TimePickerField.tsx
 import dayjs from 'dayjs';
 import { Box } from '@mui/material';
 import { TimePicker } from "@mui/x-date-pickers"
@@ -9,7 +8,7 @@ interface TimePickerFieldProps<T extends FieldValues> {
     name: Path<T>;
     label: string;
     control: Control<T>;
-    errors: FieldErrors<T>; //
+    errors: FieldErrors<T>;
 }
 
 export const TimePickerField = <T extends FieldValues>({ name, label, control, errors }: TimePickerFieldProps<T>) => {
