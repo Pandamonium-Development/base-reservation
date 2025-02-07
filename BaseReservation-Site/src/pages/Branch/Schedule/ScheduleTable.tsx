@@ -5,7 +5,7 @@ import { Menu, MenuItem } from "@mui/material";
 import { DataTable } from "components/Table/DataTable";
 import { BranchSchedule } from "types/api-basereservation";
 import { OptionsBullet } from "components/Table/OptionsBullet";
-import { GridColDef, GridEventListener, GridRenderCellParams, GridRowParams } from "@mui/x-data-grid";
+import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 
 export const ScheduleTable = ({ branchId, schedules }: { branchId: number, schedules: BranchSchedule[] }) => {
     const navigate = useNavigate();
