@@ -16,7 +16,7 @@ export const BranchNewEditWrapper = () => {
 
     const [loading, setLoading] = useState<boolean>(true);
 
-    const isValidBranchId = !isNil(branchId) && !isNaN(Number(branchId));
+    const isValidBranchId = isNil(branchId) || !isNaN(Number(branchId));
 
     useEffect(() => {
         if (!isValidBranchId) {

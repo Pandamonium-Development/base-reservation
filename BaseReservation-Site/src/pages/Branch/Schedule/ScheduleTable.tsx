@@ -75,16 +75,11 @@ export const ScheduleTable = ({ branchId, schedules }: { branchId: number, sched
         }
     ]
 
-    const selectRow: GridEventListener<'rowClick'> = (params: GridRowParams) => {
-        navigate(`/Sucursal/${params.id}`)
-    }
-
     return (
         <DataTable
             sort="asc"
             columns={columns}
             rows={schedules}
-            onRowClick={selectRow}
         />
     )
 }

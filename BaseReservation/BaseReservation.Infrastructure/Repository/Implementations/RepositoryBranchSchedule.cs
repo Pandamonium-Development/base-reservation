@@ -88,7 +88,7 @@ public class RepositoryBranchSchedule(BaseReservationContext context) : IReposit
         return await context.Set<BranchSchedule>()
                 .Include(m => m.ScheduleIdNavigation)
                 .Include(m => m.BranchIdNavigation)
-                .Include(m => m.BranchScheduleBlocks)
+                .Include(m => m.BranchScheduleBlocks.Where(x => x.Active))
                 .AsNoTracking()
                 .FirstOrDefaultAsync(a => EF.Property<short>(a, keyProperty.Name) == id);
     }

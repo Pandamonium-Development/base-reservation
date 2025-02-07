@@ -93,7 +93,7 @@ export const BlockNewEdit = ({ branchScheduleBlockData }: { branchScheduleBlockD
         }
 
         putBranchScheduleBlock({
-            id: data.id,
+            id: Number(blockId),
             ...formatedData,
         })
     })

@@ -81,6 +81,10 @@ public class RepositoryBranchScheduleBlock(BaseReservationContext context) : IRe
         var keyProperty = context.Model.FindEntityType(typeof(BranchScheduleBlock))!.FindPrimaryKey()!.Properties[0];
 
         return await context.Set<BranchScheduleBlock>()
+            .Include(m => m.BranchScheduleIdNavigation)
+            .ThenInclude(m => m.BranchIdNavigation)
+            .Include(m => m.BranchScheduleIdNavigation)
+            .ThenInclude(m => m.ScheduleIdNavigation)
             .AsNoTracking()
             .FirstOrDefaultAsync(a => EF.Property<byte>(a, keyProperty.Name) == id);
     }

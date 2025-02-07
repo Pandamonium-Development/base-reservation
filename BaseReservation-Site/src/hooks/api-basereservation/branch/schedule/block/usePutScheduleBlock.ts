@@ -25,7 +25,7 @@ export const usePutScheduleBlock = ({
     onError,
     onSettled
 }: usePutScheduleBlockProps) => {
-    const path = '/api/Branch/{branchId}';
+    const path = '/api/BranchScheduleBlock/{blockId}';
     const method = 'put';
 
     const putBranchScheduleBlock = useTypedApiClientBS({ path, method })
@@ -34,7 +34,7 @@ export const usePutScheduleBlock = ({
     const updateBranchScheduleBlockMutation = useMutation({
         mutationKey: ['PutBranchScheduleBlock'],
         mutationFn: async (branchScheduleBlock: BranchScheduleBlockRequest) => {
-            const { data } = await putBranchScheduleBlock(castRequestBody({ branchScheduleId: Number(branchScheduleBlock.id), ...branchScheduleBlock }, path, method));
+            const { data } = await putBranchScheduleBlock(castRequestBody({ blockId: Number(branchScheduleBlock.id), ...branchScheduleBlock }, path, method));
             return data;
         },
         onSuccess: async (data: BranchScheduleBlock, variables: BranchScheduleBlockRequest) => {

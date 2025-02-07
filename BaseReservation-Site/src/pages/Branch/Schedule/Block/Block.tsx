@@ -64,7 +64,7 @@ export const Block = () => {
                     } />
             }
         >
-            <BlockTable blocks={data?.branchScheduleBlocks ?? []} />
+            <BlockTable branchId={Number(branchId)} scheduleId={Number(scheduleId)} blocks={data?.branchScheduleBlocks ?? []} />
         </Page>
     )
 }
