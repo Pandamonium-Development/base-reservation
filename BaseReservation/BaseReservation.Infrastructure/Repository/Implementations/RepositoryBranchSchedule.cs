@@ -37,7 +37,7 @@ public class RepositoryBranchSchedule(BaseReservationContext context) : IReposit
                     context.BranchSchedules.AddRange(branchSchedules);
                     rowsAffected = await context.SaveChangesAsync();
 
-                    if (rowsAffected == 0 && branchSchedules.Count() != 0)
+                    if (rowsAffected == 0 && branchSchedules.Any())
                     {
                         await transaccion.RollbackAsync();
                         result = false;

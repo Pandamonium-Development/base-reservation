@@ -15,6 +15,10 @@ interface ListViewProps<T extends keyof components['schemas']> {
     fieldForSecondaryText?: keyof SchemaType<T> | ((item: SchemaType<T>) => string) | null
 }
 
+const removeItemFromSelection = (prev: number[], id: number) => {
+    return prev.filter((itemId) => itemId !== id);
+};
+
 export const ListViewWithDelete = <T extends keyof components['schemas']>({
     title,
     data,
@@ -24,7 +28,7 @@ export const ListViewWithDelete = <T extends keyof components['schemas']>({
     enableSecondaryText = false,
     fieldForSecondaryText = null
 }: ListViewProps<T>) => {
-    const [selectedItems, setSelectedItems] = useState<number[]>([]); // Estado para filas seleccionadas
+    const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const [selectAll, setSelectAll] = useState(false);
 
     const generate = (item: JSX.Element) => {
@@ -38,26 +42,28 @@ export const ListViewWithDelete = <T extends keyof components['schemas']>({
     };
 
     const handleDeleteById = (id: number) => {
-        onDelete([id]); // Eliminar solo el ID de esta fila
+        onDelete([id]);
     };
 
     const handleSelectAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const checked = event.target.checked;
         setSelectAll(checked);
         if (checked) {
-            setSelectedItems(data.map((item) => (item as { id: number }).id)); // Seleccionar todas
+            setSelectedItems(data.map((item) => (item as { id: number }).id));
         } else {
-            setSelectedItems([]); // Deseleccionar todas
+            setSelectedItems([]);
         }
     };
 
     const handleCheckboxChange = (id: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
         const checked = event.target.checked;
-        if (checked) {
-            setSelectedItems((prev) => [...prev, id]);
-        } else {
-            setSelectedItems((prev) => prev.filter((itemId) => itemId !== id));
-        }
+        setSelectedItems((prev) => {
+            if (checked) {
+                return [...prev, id];
+            } else {
+                return removeItemFromSelection(prev, id);
+            }
+        });
     };
 
     const getPrimaryText = (item: SchemaType<T>) => {
@@ -150,7 +156,7 @@ export const ListViewWithDelete = <T extends keyof components['schemas']>({
                             return (
                                 generate(
                                     <ListItem
-                                        key={index}
+                                        key={`${id}-${index}`}
                                         sx={{
                                             px: 1,
                                             py: '1rem',

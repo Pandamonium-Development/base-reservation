@@ -3,7 +3,7 @@ import { isNil } from "lodash";
 import { ApiError } from "openapi-typescript-fetch";
 import { BaseReservationErrorDetails, WeeklyDay } from "types/api-basereservation";
 
-export const timeRegex = /^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/;
+export const timeRegex = /^([01]?\d|2[0-3]):([0-5]?\d)$/;
 
 export const telephoneMaskRegex = /^\d{4}-\d{4}$/;
 export const weekDays: WeeklyDay[] = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
