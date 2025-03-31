@@ -1,6 +1,5 @@
 ﻿using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Infrastructure.Models;
 
 namespace BaseReservation.Application.Services.Interfaces;
 
@@ -20,7 +19,7 @@ public interface IServiceHoliday
     /// <param name="id">The identifier of the holiday to delete.</param>
     /// <returns>>Returns `true` if the holiday was successfully deleted, otherwise `false`</returns>
     /// <exception cref="NotFoundException"></exception>
-    Task<bool> DeleteHolidayAsync(byte id);
+    Task<bool> DeleteHolidayAsync(long id);
 
     /// <summary>
     /// Finds a feriado by its unique ID.
@@ -28,7 +27,7 @@ public interface IServiceHoliday
     /// <param name="id">The identifier of the holiday to retrieve.</param>
     /// <returns>ResponseHolidayDto</returns>
     /// <exception cref="NotFoundException"></exception>
-    Task<ResponseHolidayDto> FindByIdAsync(byte id);
+    Task<ResponseHolidayDto> FindByIdAsync(long id);
 
     /// <summary>
     /// Get a list of all holidays
@@ -43,5 +42,5 @@ public interface IServiceHoliday
     /// <param name="holidayDto">The data transfer object containing the updated holiday information.</param>
     /// <returns>RequestHolidayDto</returns>
     /// <exception cref="NotFoundException"></exception>
-    Task<ResponseHolidayDto> UpdateHolidayAsync(byte id, RequestHolidayDto holidayDto);
+    Task<ResponseHolidayDto> UpdateHolidayAsync(long id, RequestHolidayDto holidayDto);
 }

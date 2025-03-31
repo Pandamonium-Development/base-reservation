@@ -1,6 +1,4 @@
-﻿using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Infrastructure.Models;
+﻿using BaseReservation.Application.ResponseDTOs;
 
 namespace BaseReservation.Application.Services.Interfaces;
 
@@ -17,12 +15,12 @@ public interface IServiceCustomer
     /// </summary>
     /// <param name="id">The ID of the customer.</param>
     /// <returns>ResponseCustomerDto</returns>
-    Task<ResponseCustomerDto?> FindByIdAsync(short id);
+    Task<ResponseCustomerDto?> FindByIdAsync(long id);
 
     /// <summary>
     /// Deletes a customer based on the provided Id.
     /// </summary>
     /// <param name="id">Id of the customer to delete.</param>
     /// <returns>True if successful, otherwise false.</returns>
-    Task<bool> DeleteCustomerAsync(short id);
+    Task<bool> DeleteCustomerAsync(long id);
 }

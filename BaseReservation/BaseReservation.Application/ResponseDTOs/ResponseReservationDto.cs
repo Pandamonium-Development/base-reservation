@@ -4,21 +4,17 @@ namespace BaseReservation.Application.ResponseDTOs;
 
 public record ResponseReservationDto : BaseEntity
 {
-    public int Id { get; set; }
-
     public DateOnly Date { get; set; }
 
     public TimeOnly Hour { get; set; }
 
-    public byte BranchId { get; set; }
+    public long BranchId { get; set; }
 
-    public short CustomerId { get; set; }
+    public long CustomerId { get; set; }
 
     public string CustomerName { get; set; } = null!;
 
     public string Status { get; set; } = null!;
-
-    public bool Active { get; set; }
 
     public virtual ResponseBranchDto Branch { get; set; } = null!;
 

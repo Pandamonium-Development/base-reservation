@@ -9,7 +9,7 @@ public interface IServiceDistrict
     /// </summary>
     /// <param name="cantonId">The identifier of the ResponseDistrictDto</param>
     /// <returns>ICollection of ResponseDistrictDto</returns>
-    Task<ICollection<ResponseDistrictDto>> ListAllByCantonAsync(byte cantonId);
+    Task<ICollection<ResponseDistrictDto>> ListAllByCantonAsync(long cantonId);
 
     /// <summary>
     ///  Finds a district by its unique ID.
@@ -17,5 +17,5 @@ public interface IServiceDistrict
     /// <param name="id">The ID of the ResponseDistrictDto to retrieve.</param>
     /// <returns>ResponseDistrictDto</returns>
     /// <exception cref="NotFoundException"></exception>
-    Task<ResponseDistrictDto> FindByIdAsync(byte id);
+    Task<ResponseDistrictDto> FindByIdAsync(long id);
 }

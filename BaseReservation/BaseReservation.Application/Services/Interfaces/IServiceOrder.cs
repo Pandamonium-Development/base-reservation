@@ -13,6 +13,13 @@ public interface IServiceOrder
     Task<ResponseOrderDto> CreateOrderAsync(RequestOrderDto orderDto);
 
     /// <summary>
+    /// Validate if order exists
+    /// </summary>
+    /// <param name="id">Order id</param>
+    /// <returns>True if exists, false if not</returns>
+    Task<bool> ExistsOrderAsync(long id);
+
+    /// <summary>
     /// Get list of all orders
     /// </summary>
     /// <returns>ICollection of ResponseOrderDto</returns>

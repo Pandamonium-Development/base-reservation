@@ -15,5 +15,5 @@ public interface IServiceRole
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseRoleDto</returns>
-    Task<ResponseRoleDto> FindByIdAsync(byte id);
+    Task<ResponseRoleDto> FindByIdAsync(long id);
 }

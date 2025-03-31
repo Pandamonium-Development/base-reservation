@@ -14,5 +14,5 @@ public interface IServiceProvince
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseProvinceDto</returns>
-    Task<ResponseProvinceDto> FindByIdAsync(byte id);
+    Task<ResponseProvinceDto> FindByIdAsync(long id);
 }

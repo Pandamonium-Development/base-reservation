@@ -1,10 +1,10 @@
 using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using BaseReservation.WebAPI.Configuration;
 using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Application.ResponseDTOs.Enums;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.WebAPI.Configuration;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BaseReservation.WebAPI.Controllers;
 
@@ -16,7 +16,7 @@ namespace BaseReservation.WebAPI.Controllers;
 [ApiVersion("1.0")]
 [Route("api/[controller]")]
 [Authorize(Policy = "BaseReservation")]
-public class UserController(IServiceUser serviceUser) : ControllerBase
+public class UserController(IServiceUser serviceUser, IServiceUserBranch serviceUserBranch) : ControllerBase
 {
     /// <summary>
     /// Get list of all users
@@ -57,7 +57,7 @@ public class UserController(IServiceUser serviceUser) : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> IsAvailableAsync(short id, byte branchId)
     {
-        var available = await serviceUser.IsAvailableAsync(id, branchId);
+        var available = await serviceUserBranch.IsAvailableAsync(id, branchId);
         return StatusCode(StatusCodes.Status200OK, available);
     }
 }

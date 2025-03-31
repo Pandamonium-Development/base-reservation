@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel;
+using BaseReservation.Application.ResponseDTOs.Base;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseOrderDetailProductDto
+public record ResponseOrderDetailProductDto : BaseSimpleEntity
 {
-    public long Id { get; set; }
-
     public long OrderDetailId { get; set; }
 
-    public short ProductId { get; set; }
+    public long ProductId { get; set; }
 
     public decimal Quantity { get; set; }
 

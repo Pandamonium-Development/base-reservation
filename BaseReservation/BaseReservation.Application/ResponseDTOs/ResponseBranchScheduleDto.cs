@@ -1,12 +1,12 @@
+using BaseReservation.Application.ResponseDTOs.Base;
+
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseBranchScheduleDto
+public record ResponseBranchScheduleDto : BaseSimpleEntity
 {
-    public short Id { get; set; }
+    public long BranchId { get; set; }
 
-    public byte BranchId { get; set; }
-
-    public short ScheduleId { get; set; }
+    public long ScheduleId { get; set; }
 
     public virtual ResponseScheduleDto Schedule { get; set; } = null!;
 

@@ -1,17 +1,21 @@
-﻿using BaseReservation.Application.Common;
+﻿using AutoMapper;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceTypeService(IRepositoryTypeService repository, IMapper mapper) : IServiceTypeService
+public class ServiceTypeService(ICoreService<TypeService> coreService, IMapper mapper) : IServiceTypeService
 {
     /// <inheritdoc />
-    public async Task<ResponseTypeServiceDto> FindByIdAsync(byte id)
+    public async Task<ResponseTypeServiceDto> FindByIdAsync(long id)
     {
-        var typeService = await repository.FindByIdAsync(id);
-        if (typeService == null) throw new NotFoundException("Tipo de servicio no encontrado.");
+        if (!await coreService.UnitOfWork.Repository<TypeService>().ExistsAsync(id)) throw new NotFoundException("Tipo de servicio no encontrado.");
+
+        var spec = new BaseSpecification<TypeService>(x => x.Id == id);
+        var typeService = await coreService.UnitOfWork.Repository<TypeService>().FirstOrDefaultAsync(spec);
 
         return mapper.Map<ResponseTypeServiceDto>(typeService);
     }
@@ -19,9 +23,7 @@ public class ServiceTypeService(IRepositoryTypeService repository, IMapper mappe
     /// <inheritdoc />
     public async Task<ICollection<ResponseTypeServiceDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseTypeServiceDto>>(list);
-
-        return collection;
+        var typesService = await coreService.UnitOfWork.Repository<TypeService>().ListAllAsync();
+        return mapper.Map<ICollection<ResponseTypeServiceDto>>(typesService);
     }
 }

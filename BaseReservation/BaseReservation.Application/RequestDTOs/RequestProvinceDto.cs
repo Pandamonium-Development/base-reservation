@@ -1,8 +1,6 @@
 ﻿namespace BaseReservation.Application.RequestDTOs;
 
-public record RequestProvinceDto
+public record RequestProvinceDto : RequestBaseDto
 {
-    public byte Id { get; set; }
-
     public string Name { get; set; } = null!;
 }

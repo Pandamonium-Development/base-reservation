@@ -1,44 +1,48 @@
-﻿using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceReservationDetail(IRepositoryReservationDetail repository, IMapper mapper,
+public class ServiceReservationDetail(ICoreService<ReservationDetail> coreService, IMapper mapper,
                                     IValidator<ReservationDetail> detalleReservaValidator) : IServiceReservationDetail
 {
     /// <inheritdoc />
-    public async Task<bool> CreateReservationDetailAsync(int reservationId, IEnumerable<RequestReservationDetailDto> reservationDetails)
+    public async Task<bool> CreateReservationDetailAsync(long reservationId, IEnumerable<RequestReservationDetailDto> reservationDetails)
     {
         var validatedReservationDetails = await ValidateReservationDetailAsync(reservationId, reservationDetails);
 
-        var result = await repository.CreateReservationDetailAsync(reservationId, validatedReservationDetails);
-        if (!result) throw new ListNotAddedException("Error al guardar detalles de reserva.");
+        var results = await coreService.UnitOfWork.Repository<ReservationDetail>().AddRangeAsync(validatedReservationDetails.ToList());
+        await coreService.UnitOfWork.SaveChangesAsync();
+        if (results == null) throw new ListNotAddedException("Error al guardar detalles de reserva.");
 
-        return result;
+        return true;
     }
 
     /// <inheritdoc />
-    public async Task<ResponseReservationDetailDto?> FindByIdAsync(int id)
+    public async Task<ResponseReservationDetailDto?> FindByIdAsync(long id)
     {
-        var reservationDetail = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<ReservationDetail>(x => x.Id == id);
+        var reservationDetail = await coreService.UnitOfWork.Repository<ReservationDetail>().FirstOrDefaultAsync(spec);
+
         if (reservationDetail == null) throw new NotFoundException("Detalle de reserva no encontrado.");
 
         return mapper.Map<ResponseReservationDetailDto>(reservationDetail);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseReservationDetailDto>> ListAllByReservationAsync(int reservationId)
+    public async Task<ICollection<ResponseReservationDetailDto>> ListAllByReservationAsync(long reservationId)
     {
-        var list = await repository.ListAllByReservationAsync(reservationId);
-        var collection = mapper.Map<ICollection<ResponseReservationDetailDto>>(list);
+        var spec = new BaseSpecification<ReservationDetail>(x => x.ReservationId == reservationId);
+        var reservationDetails = await coreService.UnitOfWork.Repository<ReservationDetail>().ListAsync(spec);
 
-        return collection;
+        return mapper.Map<ICollection<ResponseReservationDetailDto>>(reservationDetails);
     }
 
     /// <summary>
@@ -47,7 +51,7 @@ public class ServiceReservationDetail(IRepositoryReservationDetail repository, I
     /// <param name="reservationId">Branch id</param>
     /// <param name="reservationDetails">List of reservation details to be validated</param>
     /// <returns>IEnumerable of ReservationDetail</returns>
-    private async Task<IEnumerable<ReservationDetail>> ValidateReservationDetailAsync(int reservationId, IEnumerable<RequestReservationDetailDto> reservationDetails)
+    private async Task<IEnumerable<ReservationDetail>> ValidateReservationDetailAsync(long reservationId, IEnumerable<RequestReservationDetailDto> reservationDetails)
     {
         var mappedReservationDetails = mapper.Map<List<ReservationDetail>>(reservationDetails);
         foreach (var item in mappedReservationDetails)

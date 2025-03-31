@@ -6,7 +6,6 @@ using BaseReservation.Utils.Converter;
 using BaseReservation.WebAPI.Configuration;
 using BaseReservation.WebAPI.Authorization;
 using BaseReservation.Application.Configuration;
-using BaseReservation.Infrastructure.Configuration;
 
 var BaseReservationSpecificOrigins = "_BaseReservationSpecificOrigins";
 
@@ -37,11 +36,8 @@ builder.Services.ConfigureApiVersioning();
 // Add HttpContextAccessor
 builder.Services.AddHttpContextAccessor();
 
-//Configure Infrastructure IoC
-builder.Services.ConfigureInfraestructure();
-
 //Configure Application, Mapper and Fluent Validation
-builder.Services.ConfigureApplication();
+builder.Services.ConfigureIoC();
 builder.Services.ConfigureAutoMapper();
 builder.Services.ConfigureFluentValidation();
 

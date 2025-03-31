@@ -2,8 +2,6 @@
 
 public record RequestCustomerDto : RequestBaseDto
 {
-    public short Id { get; set; }
-
     public string FirstName { get; set; } = null!;
 
     public string LastName { get; set; } = null!;
@@ -12,7 +10,7 @@ public record RequestCustomerDto : RequestBaseDto
 
     public int Telephone { get; set; }
 
-    public short DistrictId { get; set; }
+    public long DistrictId { get; set; }
 
     public string? Address { get; set; }
 

@@ -22,7 +22,14 @@ public interface IServiceBranch
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseBranchDto</returns>
-    Task<ResponseBranchDto> FindByIdAsync(byte id);
+    Task<ResponseBranchDto> FindByIdAsync(long id);
+
+    /// <summary>
+    /// Validte if branch exists
+    /// </summary>
+    /// <param name="id">Id to look for</param>
+    /// <returns>ResponseBranchDto</returns>
+    Task<bool> ExistsBranchAsync(long id);
 
     /// <summary>
     /// Create branch
@@ -37,12 +44,12 @@ public interface IServiceBranch
     /// <param name="id">Id to identify record</param>
     /// <param name="branchDTO">Request branch model to be updated</param>
     /// <returns>ResponseBranchDto</returns>
-    Task<ResponseBranchDto> UpdateBranchAsync(byte id, RequestBranchDto branchDTO);
+    Task<ResponseBranchDto> UpdateBranchAsync(long id, RequestBranchDto branchDTO);
 
     /// <summary>
     /// Deletes a branch based on the provided Id.
     /// </summary>
     /// <param name="id">Id of the branch to delete.</param>
     /// <returns>True if successful, otherwise false.</returns>
-    Task<bool> DeleteBranchAsync(byte id);
+    Task<bool> DeleteBranchAsync(long id);
 }

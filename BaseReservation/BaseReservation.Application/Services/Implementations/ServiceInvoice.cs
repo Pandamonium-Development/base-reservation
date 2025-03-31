@@ -1,32 +1,58 @@
 ﻿using AutoMapper;
-using BaseReservation.Application.Common;
+using KeyedSemaphores;
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using FluentValidation;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceInvoice(IRepositoryInvoice repository, IRepositoryOrder repositoryOrder, IServiceOrder serviceOrder,
+public class ServiceInvoice(ICoreService<Inventory> coreService, IServiceOrder serviceOrder,
                             IMapper mapper, IValidator<Invoice> invoiceValidator) : IServiceInvoice
 {
     /// <inheritdoc />
     public async Task<ResponseInvoiceDto> CreateInvoiceAsync(RequestInvoiceDto invoiceDto)
     {
         var invoice = await ValidateInvoice(invoiceDto);
+        ResponseInvoiceDto result = null!;
 
         ResponseOrderDto? pedido = null;
-        if (invoiceDto.OrderId != null && await repositoryOrder.ExistsOrderAsync(invoiceDto.OrderId.Value))
+        if (invoiceDto.OrderId != null && await serviceOrder.ExistsOrderAsync(invoiceDto.OrderId.Value))
         {
             pedido = await serviceOrder.FindByIdAsync(invoiceDto.OrderId.Value);
-            pedido.StatusOrderId = 1; // TODO: change this
-            invoiceDto.BranchId = pedido.BranchId;
+            pedido.StatusOrderId = 'A'; // TODO: change this
+            invoice.BranchId = pedido.BranchId;
         }
 
-        var result = await repository.CreateAsync(invoice, mapper.Map<Order>(pedido));
-        if (result == null) throw new NotFoundException("Factura no creada.");
+        using var keyedSemaphore = await KeyedSemaphore.LockAsync($"CreateInvoice-{invoiceDto.BranchId}");
+        var executionStrategy = coreService.UnitOfWork.CreateExecutionStrategy();
+        await executionStrategy.ExecuteAsync(async () =>
+        {
+            using var transaction = await coreService.UnitOfWork.BeginTransactionAsync();
+            try
+            {
+                var result = await coreService.UnitOfWork.Repository<Invoice>().AddAsync(invoice);
+                if (result == null) throw new NotFoundException("Factura no creada.");
+
+                if (pedido != null)
+                {
+                    var orderMapped = mapper.Map<Order>(pedido);
+                    coreService.UnitOfWork.Repository<Order>().Update(orderMapped);
+                }
+
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        });
 
         return mapper.Map<ResponseInvoiceDto>(result);
     }
@@ -34,7 +60,8 @@ public class ServiceInvoice(IRepositoryInvoice repository, IRepositoryOrder repo
     /// <inheritdoc />
     public async Task<ResponseInvoiceDto> FindByIdAsync(long id)
     {
-        var invoice = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<Invoice>(x => x.Id == id);
+        var invoice = await coreService.UnitOfWork.Repository<Invoice>().FirstOrDefaultAsync(spec);
         if (invoice == null) throw new NotFoundException("Factura no encontrada.");
 
         return mapper.Map<ResponseInvoiceDto>(invoice);
@@ -43,9 +70,9 @@ public class ServiceInvoice(IRepositoryInvoice repository, IRepositoryOrder repo
     /// <inheritdoc />
     public async Task<ICollection<ResponseInvoiceDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        list = list.OrderByDescending(x => x.Date).ToList();
-        var collection = mapper.Map<ICollection<ResponseInvoiceDto>>(list);
+        var invoices = await coreService.UnitOfWork.Repository<Invoice>().ListAllAsync();
+        invoices = invoices.OrderByDescending(x => x.Date).ToList();
+        var collection = mapper.Map<ICollection<ResponseInvoiceDto>>(invoices);
 
         return collection;
     }

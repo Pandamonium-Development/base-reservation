@@ -1,7 +1,6 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using BaseReservation.Application.Common;
 using BaseReservation.WebAPI.Configuration;
 using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;

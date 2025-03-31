@@ -16,5 +16,5 @@ public interface IServiceCategory
     /// Get a list of all categories
     /// </summary>
     /// <returns>ICollection of ResponseCategoryDto</returns>
-    Task<ResponseCategoryDto> FindByIdAsync(byte id);
+    Task<ResponseCategoryDto> FindByIdAsync(long id);
 }

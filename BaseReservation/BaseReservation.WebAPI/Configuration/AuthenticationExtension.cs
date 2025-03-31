@@ -65,8 +65,6 @@ public static class AuthenticationExtension
 
         services.AddTransient<CurrentUserIdResolverAdd>();
         services.AddTransient<CurrentUserIdResolverModify>();
-        services.AddTransient<CurrentUserIdResolverBaseEntityAdd>();
-        services.AddTransient<CurrentUserIdResolverBaseEntityModify>();
         services.AddScoped<IAuthorizationHandler, UserIdentityHandler>();
     }
 }

@@ -1,5 +1,5 @@
-﻿using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
+﻿using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
 
 namespace BaseReservation.Application.Services.Interfaces;
 
@@ -11,14 +11,14 @@ public interface IServiceProduct
     /// <param name="excludeProductsInventory">Indicator to excludes products from specific inventory</param>
     /// <param name="inventoryId">Inventory id to be excluded</param>
     /// <returns>ICollection of ResponseProductDto</returns>
-    Task<ICollection<ResponseProductDto>> ListAllAsync(bool excludeProductsInventory = false, short inventoryId = 0);
+    Task<ICollection<ResponseProductDto>> ListAllAsync(bool excludeProductsInventory = false, long inventoryId = 0);
 
     /// <summary>
     /// Get producto with specific id
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseProductDto</returns>
-    Task<ResponseProductDto> FindByIdAsync(short id);
+    Task<ResponseProductDto> FindByIdAsync(long id);
 
     /// <summary>
     /// Create product
@@ -33,5 +33,5 @@ public interface IServiceProduct
     /// <param name="id">Product if</param>
     /// <param name="productDTO">Product request model to be updated</param>
     /// <returns>ResponseProductDto</returns>
-    Task<ResponseProductDto> UpdateProductAsync(short id, RequestProductDto productDTO);
+    Task<ResponseProductDto> UpdateProductAsync(long id, RequestProductDto productDTO);
 }

@@ -16,14 +16,14 @@ public interface IServiceInventory
     /// </summary>
     /// <param name="branchId">Branch id</param>
     /// <returns>ICollection of ResponseInventoryDto</returns>
-    Task<ICollection<ResponseInventoryDto>> ListAllByBranchAsync(byte branchId);
+    Task<ICollection<ResponseInventoryDto>> ListAllByBranchAsync(long branchId);
 
     /// <summary>
     /// Finds Inventory by its unique identifier
     /// </summary>
     /// <param name="id">The Inventory entity id</param>
     /// <returns>ResponseInventoryDto if founded, otherwise null</returns>
-    Task<ResponseInventoryDto> FindByIdAsync(short id);
+    Task<ResponseInventoryDto> FindByIdAsync(long id);
 
     /// <summary>
     /// Create inventario
@@ -31,7 +31,7 @@ public interface IServiceInventory
     /// <param name="branchId">Branch id</param>
     /// <param name="inventoryDto">Inventory model request to be added</param>
     /// <returns>ResponseInventoryDto</returns>
-    Task<ResponseInventoryDto> CreateInventoryAsync(byte branchId, RequestInventoryDto inventoryDto);
+    Task<ResponseInventoryDto> CreateInventoryAsync(long branchId, RequestInventoryDto inventoryDto);
 
     /// <summary>
     /// Update existing inventarory
@@ -40,12 +40,12 @@ public interface IServiceInventory
     /// <param name="id">Inventary id</param>
     /// <param name="inventoryDto">Inventory model request to be updated</param>
     /// <returns>ResponseInventoryDto</returns>
-    Task<ResponseInventoryDto> UpdateInventoryAsync(byte branchId, short id, RequestInventoryDto inventoryDto);
+    Task<ResponseInventoryDto> UpdateInventoryAsync(long branchId, long id, RequestInventoryDto inventoryDto);
 
     /// <summary>
     /// Delete inventory
     /// </summary>
     /// <param name="id">Inventory id to be deleted</param>
     /// <returns>True if was deleted successfully, if not, false</returns>
-    Task<bool> DeleteInventoryAsync(short id);
+    Task<bool> DeleteInventoryAsync(long id);
 }

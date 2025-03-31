@@ -1,18 +1,22 @@
 ﻿using AutoMapper;
-using BaseReservation.Application.Common;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Repository.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceInvoiceDetail(IRepositoryInvoiceDetail repository, IMapper mapper) : IServiceInvoiceDetail
+public class ServiceInvoiceDetail(ICoreService<InvoiceDetail> coreService, IMapper mapper) : IServiceInvoiceDetail
 {
     /// <inheritdoc />
     public async Task<ResponseInvoiceDetailDto> FindByIdAsync(long id)
     {
-        var invoiceDetail = await repository.FindByIdAsync(id);
-        if (invoiceDetail == null) throw new NotFoundException("Detalle Factura no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<InvoiceDetail>().ExistsAsync(id)) throw new NotFoundException("Detalle Factura no encontrado.");
+
+        var spec = new BaseSpecification<InvoiceDetail>(x => x.Id == id);
+        var invoiceDetail = await coreService.UnitOfWork.Repository<InvoiceDetail>().FirstOrDefaultAsync(spec);
 
         return mapper.Map<ResponseInvoiceDetailDto>(invoiceDetail);
     }
@@ -20,9 +24,9 @@ public class ServiceInvoiceDetail(IRepositoryInvoiceDetail repository, IMapper m
     /// <inheritdoc />
     public async Task<ICollection<ResponseInvoiceDetailDto>> ListAllByInvoiceAsync(long invoiceId)
     {
-        var list = await repository.ListAllByInvoiceAsync(invoiceId);
-        var collection = mapper.Map<ICollection<ResponseInvoiceDetailDto>>(list);
+        var spec = new BaseSpecification<InvoiceDetail>(x => x.InvoiceId == invoiceId);
+        var invoiceDetails = await coreService.UnitOfWork.Repository<InvoiceDetail>().ListAsync(spec);
 
-        return collection;
+        return mapper.Map<ICollection<ResponseInvoiceDetailDto>>(invoiceDetails);
     }
 }

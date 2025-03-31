@@ -1,27 +1,31 @@
 ﻿using AutoMapper;
-using BaseReservation.Application.Common;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Repository.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceDistrict(IRepositoryDistrict repository, IMapper mapper) : IServiceDistrict
+public class ServiceDistrict(ICoreService<District> coreService, IMapper mapper) : IServiceDistrict
 {
     /// <inheritdoc />
-    public async Task<ResponseDistrictDto> FindByIdAsync(byte id)
+    public async Task<ResponseDistrictDto> FindByIdAsync(long id)
     {
-        var district = await repository.FindByIdAsync(id);
-        if (district == null) throw new NotFoundException("District no encontrado.");
+        if(!await coreService.UnitOfWork.Repository<District>().ExistsAsync(id)) throw new NotFoundException("District no encontrado.");
 
+        var spec = new BaseSpecification<District>(x => x.Id == id);
+        var district = await coreService.UnitOfWork.Repository<District>().FirstOrDefaultAsync(spec);
+        
         return mapper.Map<ResponseDistrictDto>(district);
     }
     /// <inheritdoc />
-    public async Task<ICollection<ResponseDistrictDto>> ListAllByCantonAsync(byte cantonId)
+    public async Task<ICollection<ResponseDistrictDto>> ListAllByCantonAsync(long cantonId)
     {
-        var list = await repository.ListAllByCantonAsync(cantonId);
-        var collection = mapper.Map<ICollection<ResponseDistrictDto>>(list);
-
-        return collection;
+        var spec = new BaseSpecification<District>(x => x.CantonId == cantonId);
+        var districts = await coreService.UnitOfWork.Repository<District>().ListAsync(spec);
+        
+        return mapper.Map<ICollection<ResponseDistrictDto>>(districts);
     }
 }

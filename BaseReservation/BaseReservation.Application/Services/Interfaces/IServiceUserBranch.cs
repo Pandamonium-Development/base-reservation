@@ -1,4 +1,5 @@
 using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
 
 namespace BaseReservation.Application.Services.Interfaces;
 
@@ -10,5 +11,13 @@ public interface IServiceUserBranch
     /// <param name="branchId">Branch id that receives list of users</param>
     /// <param name="branchUsers">List of branch's users</param>
     /// <returns>bool</returns>
-    Task<bool> CreateUserBranchAsync(byte branchId, IEnumerable<RequestUserBranchDto> branchUsers);
+    Task<bool> CreateUserBranchAsync(long branchId, IEnumerable<RequestUserBranchDto> branchUsers);
+
+    // <summary>
+    /// Validate if the user can be assigned to another branch
+    /// </summary>
+    /// <param name="id">User id</param>
+    /// <param name="branchId">Branch to be assigned</param>
+    /// <returns>True if is available, if not, false</returns>
+    Task<bool> IsAvailableAsync(long userId, long branchId);
 }

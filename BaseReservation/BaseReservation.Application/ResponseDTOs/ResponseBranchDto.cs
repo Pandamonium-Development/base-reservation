@@ -4,8 +4,6 @@ namespace BaseReservation.Application.ResponseDTOs;
 
 public record ResponseBranchDto : BaseEntity
 {
-    public byte Id { get; set; }
-
     public string Name { get; set; } = null!;
 
     public string Description { get; set; } = null!;
@@ -14,11 +12,9 @@ public record ResponseBranchDto : BaseEntity
 
     public string Email { get; set; } = null!;
 
-    public short DistrictId { get; set; }
+    public long DistrictId { get; set; }
 
     public string? Address { get; set; }
-
-    public bool Active { get; set; }
 
     public virtual ResponseDistrictDto? District { get; set; } = null!;
 

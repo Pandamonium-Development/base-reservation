@@ -1,16 +1,18 @@
-﻿using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
+﻿using AutoMapper;
+using FluentValidation;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
 using BaseReservation.Application.Services.Interfaces.Authorization;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
-using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceBranch(IRepositoryBranch repository, IMapper mapper,
+public class ServiceBranch(ICoreService<Branch> coreService, IMapper mapper,
                             IValidator<Branch> branchValidator,
                             IServiceUserAuthorization serviceUserAuthorization) : IServiceBranch
 {
@@ -19,48 +21,50 @@ public class ServiceBranch(IRepositoryBranch repository, IMapper mapper,
     {
         var branch = await ValidateBranch(branchDTO);
 
-        var result = await repository.CreateBranchAsync(branch);
+        var result = await coreService.UnitOfWork.Repository<Branch>().AddAsync(branch);
+        await coreService.UnitOfWork.SaveChangesAsync();
+
         if (result == null) throw new NotFoundException("Sucursal no se ha creado.");
 
         return mapper.Map<ResponseBranchDto>(result);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseBranchDto> UpdateBranchAsync(byte id, RequestBranchDto branchDTO)
+    public async Task<ResponseBranchDto> UpdateBranchAsync(long id, RequestBranchDto branchDTO)
     {
-        if (!await repository.ExistsBranchAsync(id)) throw new NotFoundException("Sucursal no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<Branch>().ExistsAsync(id)) throw new NotFoundException("Sucursal no encontrada.");
 
         var branch = await ValidateBranch(branchDTO);
         branch.Id = id;
-        var result = await repository.UpdateBranchAsync(branch);
 
-        return mapper.Map<ResponseBranchDto>(result);
+        coreService.UnitOfWork.Repository<Branch>().Update(branch);
+        await coreService.UnitOfWork.SaveChangesAsync();
+
+        return await FindByIdAsync(id);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseBranchDto> FindByIdAsync(byte id)
+    public async Task<ResponseBranchDto> FindByIdAsync(long id)
     {
-        var branch = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<Branch>(x => x.Id == id);
+        var branch = await coreService.UnitOfWork.Repository<Branch>().FirstOrDefaultAsync(spec);
         if (branch == null) throw new NotFoundException("Sucursal no encontrada.");
 
         return mapper.Map<ResponseBranchDto>(branch);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseBranchDto>> ListAllAsync()
+    public async Task<bool> ExistsBranchAsync(long id)
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseBranchDto>>(list);
-
-        return collection;
+        return await coreService.UnitOfWork.Repository<Branch>().ExistsAsync(id);
     }
 
     /// <inheritdoc />
-    private async Task<Branch> ValidateBranch(RequestBranchDto branchDTO)
+    public async Task<ICollection<ResponseBranchDto>> ListAllAsync()
     {
-        var branch = mapper.Map<Branch>(branchDTO);
-        await branchValidator.ValidateAndThrowAsync(branch);
-        return branch;
+        var list = await coreService.UnitOfWork.Repository<Branch>().ListAllAsync();
+
+        return mapper.Map<ICollection<ResponseBranchDto>>(list);
     }
 
     /// <inheritdoc />
@@ -68,16 +72,41 @@ public class ServiceBranch(IRepositoryBranch repository, IMapper mapper,
     {
         var user = await serviceUserAuthorization.GetLoggedUser();
 
-        var list = await repository.ListAllByRoleAsync(user.Role.Description);
-        var collection = mapper.Map<ICollection<ResponseBranchDto>>(list);
+        var existingBranches = await (from a in coreService.UnitOfWork.Repository<UserBranch>().AsQueryable()
+                                      join b in coreService.UnitOfWork.Repository<User>().AsQueryable() on a.BranchId equals b.Id
+                                      join c in coreService.UnitOfWork.Repository<Role>().AsQueryable() on b.RoleId equals c.Id
+                                      where c.Description == user.Role.Description
+                                      select a.BranchId).Distinct().ToListAsync();
 
-        return collection;
+        existingBranches = existingBranches ?? new List<long>();
+
+        var query = from a in coreService.UnitOfWork.Repository<Branch>().AsQueryable()
+                    where existingBranches.Contains(a.Id)
+                    select a;
+
+        var branches = await coreService.UnitOfWork.Repository<Branch>().ListAsync(query, ["DistrictIdNavigation", "CantonIdNavigation", "ProvinceIdNavigation"]);
+
+        return mapper.Map<ICollection<ResponseBranchDto>>(branches);
     }
 
     /// <inheritdoc />
-    public async Task<bool> DeleteBranchAsync(byte id)
+    public async Task<bool> DeleteBranchAsync(long id)
     {
-        if (!await repository.ExistsBranchAsync(id)) throw new NotFoundException("Sucursal no encontrada.");
-        return await repository.DeleteBranchAsync(id);
+        if (!await coreService.UnitOfWork.Repository<Branch>().ExistsAsync(id)) throw new NotFoundException("Sucursal no encontrada.");
+
+        var spec = new BaseSpecification<Branch>(x => x.Id == id);
+        var branch = await coreService.UnitOfWork.Repository<Branch>().FirstOrDefaultAsync(spec);
+        branch!.Active = false;
+
+        coreService.UnitOfWork.Repository<Branch>().Update(branch);
+        return await coreService.UnitOfWork.SaveChangesAsync() != 0;
+    }
+
+    private async Task<Branch> ValidateBranch(RequestBranchDto branchDTO)
+    {
+        var branch = mapper.Map<Branch>(branchDTO);
+        await branchValidator.ValidateAndThrowAsync(branch);
+
+        return branch;
     }
 }

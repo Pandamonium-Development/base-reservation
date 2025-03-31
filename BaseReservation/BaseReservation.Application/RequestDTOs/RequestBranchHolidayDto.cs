@@ -2,11 +2,9 @@
 
 public record RequestBranchHolidayDto
 {
-    public short Id { get; set; }
+    public long HolidayId { get; set; }
 
-    public byte HolidayId { get; set; }
-
-    public byte BranchId { get; set; }
+    public long BranchId { get; set; }
 
     public DateOnly Date { get; set; }
 

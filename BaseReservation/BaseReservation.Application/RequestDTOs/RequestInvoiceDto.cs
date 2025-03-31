@@ -2,10 +2,9 @@
 
 public record RequestInvoiceDto : RequestBaseDto
 {
-    public long Id { get; set; }
-    public byte BranchId { get; set; }
+    public long BranchId { get; set; }
 
-    public short CustomerId { get; set; }
+    public long CustomerId { get; set; }
 
     public string CustomerName { get; set; } = null!;
 
@@ -13,11 +12,11 @@ public record RequestInvoiceDto : RequestBaseDto
 
     public DateOnly Date { get; set; }
 
-    public byte PaymentTypeId { get; set; }
+    public long PaymentTypeId { get; set; }
 
     public short Number { get; set; }
 
-    public byte TaxId { get; set; }
+    public long TaxId { get; set; }
 
     public decimal TaxRate { get; set; }
 

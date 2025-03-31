@@ -1,37 +1,52 @@
-﻿using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceService(IRepositoryService repository, IMapper mapper,
+public class ServiceService(ICoreService<Service> coreService, IMapper mapper,
                                 IValidator<Service> serviceValidator) : IServiceService
 {
     /// <inheritdoc />
     public async Task<ResponseServiceDto> CreateServiceAsync(RequestServiceDto serviceDto)
     {
-        var result = await repository.CreateServiceAsync(mapper.Map<Service>(serviceDto));
+        var service = await ValidateService(serviceDto);
+
+        var result = await coreService.UnitOfWork.Repository<Service>().AddAsync(service);
+        await coreService.UnitOfWork.SaveChangesAsync();
         if (result == null) throw new NotFoundException("Servicio no creado.");
 
         return mapper.Map<ResponseServiceDto>(result);
     }
 
     /// <inheritdoc />
-    public async Task<bool> DeleteServiceAsync(byte id)
+    public async Task<bool> DeleteServiceAsync(long id)
     {
-        if (!await repository.ExistsServiceAsync(id)) throw new NotFoundException("Servicio no encontrado.");
-        return await repository.DeleteServiceAsync(id);
+        if (!await coreService.UnitOfWork.Repository<Service>().ExistsAsync(id)) throw new NotFoundException("Servicio no encontrado.");
+
+        var spec = new BaseSpecification<Service>(x => x.Id == id);
+        var service = await coreService.UnitOfWork.Repository<Service>().FirstOrDefaultAsync(spec);
+        service!.Active = false;
+
+        coreService.UnitOfWork.Repository<Service>().Update(service);
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+
+        if (rowsAffected == 0) throw new NotFoundException("Servicio no eliminado.");
+
+        return true;
     }
 
     /// <inheritdoc />
-    public async Task<ResponseServiceDto> FindByIdAsync(byte id)
+    public async Task<ResponseServiceDto> FindByIdAsync(long id)
     {
-        var service = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<Service>(x => x.Id == id);
+        var service = await coreService.UnitOfWork.Repository<Service>().FirstOrDefaultAsync(spec);
         if (service == null) throw new NotFoundException("Servicio no encontrado.");
 
         return mapper.Map<ResponseServiceDto>(service);
@@ -40,22 +55,24 @@ public class ServiceService(IRepositoryService repository, IMapper mapper,
     /// <inheritdoc />
     public async Task<ICollection<ResponseServiceDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseServiceDto>>(list);
+        var services = await coreService.UnitOfWork.Repository<Service>().ListAllAsync();
 
-        return collection;
+        return mapper.Map<ICollection<ResponseServiceDto>>(services);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseServiceDto> UpdateServiceAsync(byte id, RequestServiceDto serviceDto)
+    public async Task<ResponseServiceDto> UpdateServiceAsync(long id, RequestServiceDto serviceDto)
     {
-        if (!await repository.ExistsServiceAsync(id)) throw new NotFoundException("Servicio no encontrado.");
+        if (!await coreService.UnitOfWork.Repository<Service>().ExistsAsync(id)) throw new NotFoundException("Servicio no encontrado.");
 
         var service = await ValidateService(serviceDto);
         service.Id = id;
-        var result = await repository.UpdateServiceAsync(service);
 
-        return mapper.Map<ResponseServiceDto>(result);
+        coreService.UnitOfWork.Repository<Service>().Update(service);
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+        if (rowsAffected == 0) throw new NotFoundException("Servicio no actualizado.");
+
+        return await FindByIdAsync(id);
     }
 
     /// <inheritdoc />

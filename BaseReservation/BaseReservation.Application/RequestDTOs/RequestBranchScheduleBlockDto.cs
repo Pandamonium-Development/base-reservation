@@ -2,9 +2,7 @@
 
 public class RequestBranchScheduleBlockDto
 {
-    public long Id { get; set; }
-
-    public short BranchScheduleId { get; set; }
+    public long BranchScheduleId { get; set; }
 
     public TimeOnly StartHour { get; set; }
 

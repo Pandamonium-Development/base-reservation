@@ -1,37 +1,72 @@
-using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
 using AutoMapper;
+using KeyedSemaphores;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
+using BaseReservation.Domain.Core.Specifications;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceOrder(IRepositoryOrder repository, IServiceReservation serviceReservation,
+public class ServiceOrder(ICoreService<Order> coreService, IServiceReservation serviceReservation,
                             IMapper mapper, IValidator<Order> orderValidator) : IServiceOrder
 {
     /// <inheritdoc />
     public async Task<ResponseOrderDto> CreateOrderAsync(RequestOrderDto orderDto)
     {
         var order = await ValidateOrderAsync(orderDto);
+        Order result = null!;
 
         if (!await serviceReservation.ExistsReservationAsync(orderDto.ReservationId)) throw new NotFoundException("Reserva no existe.");
-        var reservation = await serviceReservation.FindByIdAsync(orderDto.ReservationId);
-        reservation!.Status = "A";
-        order.BranchId = reservation!.BranchId;
 
-        var result = await repository.CreateOrderAsync(order, mapper.Map<Reservation>(reservation));
-        if (result == null) throw new NotFoundException("Pedido no creado.");
+        var reservation = await serviceReservation.FindByIdAsync(orderDto.ReservationId);
+        if (reservation == null) throw new NotFoundException("Reserva no existe.");
+
+        using var keyedSemaphore = await KeyedSemaphore.LockAsync($"CreateOrder-{reservation.Id}");
+
+        var executionStrategy = coreService.UnitOfWork.CreateExecutionStrategy();
+        await executionStrategy.ExecuteAsync(async () =>
+        {
+            using var transaction = await coreService.UnitOfWork.BeginTransactionAsync();
+            try
+            {
+                var reservationMapped = mapper.Map<Reservation>(reservation);
+
+                reservationMapped!.Status = "A";
+                order.BranchId = reservationMapped.BranchId;
+
+                result = await coreService.UnitOfWork.Repository<Order>().AddAsync(order);
+                if (result == null) throw new NotFoundException("Pedido no creado.");
+
+                coreService.UnitOfWork.Repository<Reservation>().Update(reservationMapped);
+
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        });
 
         return mapper.Map<ResponseOrderDto>(result);
+    }
+
+    public async Task<bool> ExistsOrderAsync(long id)
+    {
+        return await coreService.UnitOfWork.Repository<Order>().ExistsAsync(id);
     }
 
     /// <inheritdoc />
     public async Task<ResponseOrderDto> FindByIdAsync(long id)
     {
-        var order = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<Order>(x => x.Id == id);
+
+        var order = await coreService.UnitOfWork.Repository<Order>().FirstOrDefaultAsync(spec);
         if (order == null) throw new NotFoundException("Proforma no encontrada.");
 
         return mapper.Map<ResponseOrderDto>(order);
@@ -40,10 +75,9 @@ public class ServiceOrder(IRepositoryOrder repository, IServiceReservation servi
     /// <inheritdoc />
     public async Task<ICollection<ResponseOrderDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseOrderDto>>(list);
+        var orders = await coreService.UnitOfWork.Repository<Order>().ListAllAsync();
 
-        return collection;
+        return mapper.Map<ICollection<ResponseOrderDto>>(orders);
     }
 
     /// <summary>

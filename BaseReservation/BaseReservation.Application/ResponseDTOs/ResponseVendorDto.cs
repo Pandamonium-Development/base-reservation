@@ -4,8 +4,6 @@ namespace BaseReservation.Application.ResponseDTOs;
 
 public record ResponseVendorDto : BaseEntity
 {
-    public byte Id { get; set; }
-
     public string Name { get; set; } = null!;
 
     public string CardId { get; set; } = null!;
@@ -16,11 +14,9 @@ public record ResponseVendorDto : BaseEntity
 
     public string Email { get; set; } = null!;
 
-    public short DistrictId { get; set; }
+    public long DistrictId { get; set; }
 
     public string? Address { get; set; }
-
-    public bool Active { get; set; }
 
     public virtual ICollection<ResponseContactDto> Contacts { get; set; } = new List<ResponseContactDto>();
 

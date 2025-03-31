@@ -1,18 +1,22 @@
-﻿using BaseReservation.Application.Common;
+﻿using AutoMapper;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceProvince(IRepositoryProvince repository, IMapper mapper) : IServiceProvince
+public class ServiceProvince(ICoreService<Province> coreService, IMapper mapper) : IServiceProvince
 {
     /// <inheritdoc />
-    public async Task<ResponseProvinceDto> FindByIdAsync(byte id)
+    public async Task<ResponseProvinceDto> FindByIdAsync(long id)
     {
-        var province = await repository.FindByIdAsync(id);
-        if (province == null) throw new NotFoundException("Provincia no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<Province>().ExistsAsync(id)) throw new NotFoundException("Provincia no encontrada.");
+
+        var spec = new BaseSpecification<Province>(x => x.Id == id);
+        var province = await coreService.UnitOfWork.Repository<Province>().FirstOrDefaultAsync(spec);
 
         return mapper.Map<ResponseProvinceDto>(province);
     }
@@ -20,9 +24,7 @@ public class ServiceProvince(IRepositoryProvince repository, IMapper mapper) : I
     /// <inheritdoc />
     public async Task<ICollection<ResponseProvinceDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseProvinceDto>>(list);
-
-        return collection;
+        var provinces = await coreService.UnitOfWork.Repository<Province>().ListAllAsync();
+        return mapper.Map<ICollection<ResponseProvinceDto>>(provinces);
     }
 }

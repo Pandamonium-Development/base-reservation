@@ -1,12 +1,12 @@
+using BaseReservation.Application.ResponseDTOs.Base;
+
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseDistrictDto
+public record ResponseDistrictDto : BaseSimpleEntity
 {
-    public short Id { get; set; }
-
     public string Name { get; set; } = null!;
 
-    public byte CantonId { get; set; }
+    public long CantonId { get; set; }
 
     public virtual ICollection<ResponseCustomerDto> Customers { get; set; } = new List<ResponseCustomerDto>();
 

@@ -1,10 +1,8 @@
 ﻿namespace BaseReservation.Application.RequestDTOs;
 
-public record RequestUserBranchDto
+public record RequestUserBranchDto : RequestBaseDto
 {
-    public short Id { get; set; }
+    public long UserId { get; set; }
 
-    public short UserId { get; set; }
-
-    public byte BranchId { get; set; }
+    public long BranchId { get; set; }
 }

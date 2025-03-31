@@ -1,14 +1,14 @@
-﻿namespace BaseReservation.Application.ResponseDTOs;
+﻿using BaseReservation.Application.ResponseDTOs.Base;
 
-public record ResponseOrderDetailDto
+namespace BaseReservation.Application.ResponseDTOs;
+
+public record ResponseOrderDetailDto : BaseSimpleEntity
 {
-    public long Id { get; set; }
-
     public long OrderId { get; set; }
 
-    public byte? ServiceId { get; set; }
+    public long? ServiceId { get; set; }
 
-    public short? ProductId { get; set; }
+    public long? ProductId { get; set; }
 
     public byte LineNumber { get; set; }
 

@@ -4,8 +4,6 @@ namespace BaseReservation.Application.RequestDTOs;
 
 public record RequestScheduleDto : RequestBaseDto
 {
-    public short Id { get; set; }
-
     public WeekDayApplication Day { get; set; }
 
     public TimeOnly StartHour { get; set; }

@@ -17,14 +17,14 @@ public interface IServiceInventoryProduct
     /// </summary>
     /// <param name="inventoryId">Inventory id</param>
     /// <returns>ICollection of ResponseInventoryProductDto</returns>
-    Task<ICollection<ResponseInventoryProductDto>> ListAllByInventoryAsync(short inventoryId);
+    Task<ICollection<ResponseInventoryProductDto>> ListAllByInventoryAsync(long inventoryId);
 
     /// <summary>
     /// Get list of all inventory product by product
     /// </summary>
     /// <param name="productId">Product id</param>
     /// <returns>ICollection of ResponseInventoryProductDto</returns>
-    Task<ICollection<ResponseInventoryProductDto>> ListAllByProductAsync(short productId);
+    Task<ICollection<ResponseInventoryProductDto>> ListAllByProductAsync(long productId);
 
     /// <summary>
     /// Create inventory product

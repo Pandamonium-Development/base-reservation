@@ -2,9 +2,7 @@
 
 public record RequestReservationQuestionDto : RequestBaseDto
 {
-    public int Id { get; set; }
-
-    public int ReservationId { get; set; }
+    public long ReservationId { get; set; }
 
     public string Question { get; set; } = null!;
 

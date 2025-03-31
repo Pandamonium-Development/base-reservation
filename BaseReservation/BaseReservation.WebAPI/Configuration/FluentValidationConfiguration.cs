@@ -1,6 +1,6 @@
-using BaseReservation.Application.Validations;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using BaseReservation.Domain.Validations;
 
 namespace BaseReservation.WebAPI.Configuration;
 

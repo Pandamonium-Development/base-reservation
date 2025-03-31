@@ -15,5 +15,5 @@ public interface IServiceReservationQuestion
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseReservationQuestionDto</returns>
-    Task<ResponseReservationQuestionDto> FindByIdAsync(int id);
+    Task<ResponseReservationQuestionDto> FindByIdAsync(long id);
 }

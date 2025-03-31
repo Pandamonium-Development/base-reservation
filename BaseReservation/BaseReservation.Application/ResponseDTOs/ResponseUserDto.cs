@@ -1,12 +1,9 @@
 ﻿using BaseReservation.Application.ResponseDTOs.Base;
-using BaseReservation.Infrastructure.Models;
 
 namespace BaseReservation.Application.ResponseDTOs;
 
 public record ResponseUserDto : BaseEntity
 {
-    public short Id { get; set; }
-
     public string CardId { get; set; } = null!;
 
     public string FirstName { get; set; } = null!;
@@ -17,7 +14,7 @@ public record ResponseUserDto : BaseEntity
 
     public string Email { get; set; } = null!;
 
-    public short DistrictId { get; set; }
+    public long DistrictId { get; set; }
 
     public string? Address { get; set; }
 
@@ -25,19 +22,17 @@ public record ResponseUserDto : BaseEntity
 
     public string Password { get; set; } = null!;
 
-    public byte GenderId { get; set; }
-
-    public bool Active { get; set; }
+    public long GenderId { get; set; }
 
     public string? ProfilePictureUrl { get; set; }
 
-    public byte RoleId { get; set; }
+    public long RoleId { get; set; }
 
-    public virtual District District { get; set; } = null!;
+    public virtual ResponseDistrictDto District { get; set; } = null!;
 
-    public virtual Gender Gender { get; set; } = null!;
+    public virtual ResponseGenderDto Gender { get; set; } = null!;
 
-    public virtual Role Role { get; set; } = null!;
+    public virtual ResponseRoleDto Role { get; set; } = null!;
 
-    public virtual ICollection<UserBranch> UserBranches { get; set; } = new List<UserBranch>();
+    public virtual ICollection<ResponseUserBranchDto> UserBranches { get; set; } = new List<ResponseUserBranchDto>();
 }

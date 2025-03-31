@@ -2,8 +2,6 @@
 
 public record RequestContactDto : RequestBaseDto
 {
-    public short Id { get; set; }
-
     public string FirstName { get; set; } = null!;
 
     public string LastName { get; set; } = null!;
@@ -12,7 +10,7 @@ public record RequestContactDto : RequestBaseDto
 
     public string Email { get; set; } = null!;
 
-    public byte VendorId { get; set; }
+    public long VendorId { get; set; }
 
     public bool Active { get; set; }
 }

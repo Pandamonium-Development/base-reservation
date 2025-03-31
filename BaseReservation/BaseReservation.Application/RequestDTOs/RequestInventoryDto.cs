@@ -4,11 +4,9 @@ namespace BaseReservation.Application.RequestDTOs;
 
 public record RequestInventoryDto : RequestBaseDto
 {
-    public short Id { get; set; }
-
     public string Name { get; set; } = null!;
 
-    public byte BranchId { get; set; }
+    public long BranchId { get; set; }
 
     public TypeInventoryApplication TypeInventory { get; set; }
 

@@ -1,28 +1,30 @@
-﻿using BaseReservation.Application.Common;
+﻿using AutoMapper;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceRole(IRepositoryRole repository, IMapper mapper) : IServiceRole
+public class ServiceRole(ICoreService<Role> coreService, IMapper mapper) : IServiceRole
 {
     /// <inheritdoc />
-    public async Task<ResponseRoleDto> FindByIdAsync(byte id)
+    public async Task<ResponseRoleDto> FindByIdAsync(long id)
     {
-        var rol = await repository.FindByIdAsync(id);
-        if (rol == null) throw new NotFoundException("Rol no encontrado.");
+        if (!await coreService.UnitOfWork.Repository<Role>().ExistsAsync(id)) throw new NotFoundException("Rol no encontrado.");
 
-        return mapper.Map<ResponseRoleDto>(rol);
+        var spec = new BaseSpecification<Role>(x => x.Id == id);
+        var role = await coreService.UnitOfWork.Repository<Role>().FirstOrDefaultAsync(spec);
+
+        return mapper.Map<ResponseRoleDto>(role);
     }
 
     /// <inheritdoc />
     public async Task<ICollection<ResponseRoleDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseRoleDto>>(list);
-
-        return collection;
+        var roles = await coreService.UnitOfWork.Repository<Role>().ListAllAsync();
+        return mapper.Map<ICollection<ResponseRoleDto>>(roles);
     }
 }

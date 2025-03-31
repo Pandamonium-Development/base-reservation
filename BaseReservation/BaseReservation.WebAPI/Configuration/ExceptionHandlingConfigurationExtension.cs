@@ -1,7 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
-using BaseReservation.Application.Common;
 using System.ComponentModel.DataAnnotations;
+using BaseReservation.Domain.Exceptions;
 
 namespace BaseReservation.WebAPI.Configuration;
 

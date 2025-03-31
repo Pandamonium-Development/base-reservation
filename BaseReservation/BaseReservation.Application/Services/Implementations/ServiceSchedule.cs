@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
-using BaseReservation.Application.Common;
+using FluentValidation;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using FluentValidation;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceSchedule(IRepositorySchedule repository, IMapper mapper,
+public class ServiceSchedule(ICoreService<Schedule> coreService, IMapper mapper,
                             IValidator<Schedule> scheduleValidator) : IServiceSchedule
 {
     /// <inheritdoc />
@@ -17,28 +18,33 @@ public class ServiceSchedule(IRepositorySchedule repository, IMapper mapper,
     {
         var schedule = await ValidateSchedule(scheduleDto);
 
-        var result = await repository.CreateScheduleAsync(schedule);
+        var result = await coreService.UnitOfWork.Repository<Schedule>().AddAsync(schedule);
+        await coreService.UnitOfWork.SaveChangesAsync();
         if (result == null) throw new NotFoundException("Horario no se ha creado.");
 
         return mapper.Map<ResponseScheduleDto>(result);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseScheduleDto> UpdateScheduleAsync(short id, RequestScheduleDto scheduleDto)
+    public async Task<ResponseScheduleDto> UpdateScheduleAsync(long id, RequestScheduleDto scheduleDto)
     {
-        if (!await repository.ExistsScheduleAsync(id)) throw new NotFoundException("Horario no encontrado.");
+        if (!await coreService.UnitOfWork.Repository<Schedule>().ExistsAsync(id)) throw new NotFoundException("Horario no encontrado.");
 
         var schedule = await ValidateSchedule(scheduleDto);
         schedule.Id = id;
-        var result = await repository.UpdateScheduleAsync(schedule);
 
-        return mapper.Map<ResponseScheduleDto>(result);
+        coreService.UnitOfWork.Repository<Schedule>().Update(schedule);
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+        if (rowsAffected == 0) throw new NotFoundException("Horario no actualizado.");
+
+        return await FindByIdAsync(id);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseScheduleDto> FindByIdAsync(short id)
+    public async Task<ResponseScheduleDto> FindByIdAsync(long id)
     {
-        var schedule = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<Schedule>(x => x.Id == id);
+        var schedule = await coreService.UnitOfWork.Repository<Schedule>().FirstOrDefaultAsync(spec);
         if (schedule == null) throw new NotFoundException("Horario no encontrado.");
 
         return mapper.Map<ResponseScheduleDto>(schedule);
@@ -47,22 +53,28 @@ public class ServiceSchedule(IRepositorySchedule repository, IMapper mapper,
     /// <inheritdoc />
     public async Task<ICollection<ResponseScheduleDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseScheduleDto>>(list);
+        var schedules = await coreService.UnitOfWork.Repository<Schedule>().ListAllAsync();
 
-        return collection;
+        return mapper.Map<ICollection<ResponseScheduleDto>>(schedules);
     }
 
     /// <inheritdoc />
-    public async Task<bool> DeleteScheduleAsync(short id)
+    public async Task<bool> DeleteScheduleAsync(long id)
     {
-        var schedule = await repository.FindByIdAsync(id);
-        if (schedule == null) throw new NotFoundException("Horario no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<Schedule>().ExistsAsync(id)) throw new NotFoundException("Horario no encontrado.");
+
+        var spec = new BaseSpecification<Schedule>(x => x.Id == id);
+        var schedule = await coreService.UnitOfWork.Repository<Schedule>().FirstOrDefaultAsync(spec, ["BranchSchedules"]);
+        schedule!.Active = false;
 
         if (schedule.BranchSchedules.Count > 0) throw new BaseReservationException("Horario asignado en sucursales.");
 
-        var result = await repository.DeleteScheduleAsync(id);
-        return result;
+        coreService.UnitOfWork.Repository<Schedule>().Update(schedule);
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+
+        if (rowsAffected == 0) throw new NotFoundException("Horario no eliminado.");
+
+        return true;
     }
 
     /// <summary>

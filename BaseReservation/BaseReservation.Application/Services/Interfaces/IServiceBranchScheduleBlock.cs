@@ -1,5 +1,5 @@
-﻿using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
+﻿using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
 
 namespace BaseReservation.Application.Services.Interfaces;
 
@@ -10,7 +10,14 @@ public interface IServiceBranchScheduleBlock
     /// </summary>
     /// <param name="branchScheduleId">Branch schedule id</param>
     /// <returns>ICollection of ResponseBranchScheduleBlockDto</returns>
-    Task<ICollection<ResponseBranchScheduleBlockDto>> ListAllByBranchScheduleAsync(short branchScheduleId);
+    Task<ICollection<ResponseBranchScheduleBlockDto>> ListAllByBranchScheduleAsync(long branchScheduleId);
+
+    /// <summary>
+    /// Get list of all blocks by branch schedule
+    /// </summary>
+    /// <param name="branchId">Branch id</param>
+    /// <returns>ICollection of ResponseBranchScheduleBlockDto</returns>
+    Task<ICollection<ResponseBranchScheduleBlockDto>> ListAllByBranchAsync(long branchId);
 
     /// <summary>
     /// Get Branch schedule block with specific id
@@ -32,7 +39,7 @@ public interface IServiceBranchScheduleBlock
     /// <param name="branchScheduleId">Branch schedule id that receive blocks</param>
     /// <param name="branchScheduleBlocks">List of Branch schedule's blocks will be added</param>
     /// <returns>bool</returns>
-    Task<bool> CreateBranchScheduleBlockAsync(short branchScheduleId, IEnumerable<RequestBranchScheduleBlockDto> branchScheduleBlocks);
+    Task<bool> CreateBranchScheduleBlockAsync(long branchScheduleId, IEnumerable<RequestBranchScheduleBlockDto> branchScheduleBlocks);
 
     /// <summary>
     /// Update branch schedule block

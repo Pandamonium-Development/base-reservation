@@ -18,7 +18,7 @@ public interface IServiceSchedule
     /// <param name="id">Schedule id to identity record</param>
     /// <param name="scheduleDto">Schedule request model to be updated</param>
     /// <returns>ResponseScheduleDto</returns>
-    Task<ResponseScheduleDto> UpdateScheduleAsync(short id, RequestScheduleDto scheduleDto);
+    Task<ResponseScheduleDto> UpdateScheduleAsync(long id, RequestScheduleDto scheduleDto);
 
     /// <summary>
     /// Get list of all ResponseScheduleDto.
@@ -31,12 +31,12 @@ public interface IServiceSchedule
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseScheduleDto</returns>
-    Task<ResponseScheduleDto> FindByIdAsync(short id);
+    Task<ResponseScheduleDto> FindByIdAsync(long id);
 
     /// <summary>
     /// Delete existing schedule
     /// </summary>
     /// <param name="id">Schedule id to look for</param>
     /// <returns>bool</returns>
-    Task<bool> DeleteScheduleAsync(short id);
+    Task<bool> DeleteScheduleAsync(long id);
 }

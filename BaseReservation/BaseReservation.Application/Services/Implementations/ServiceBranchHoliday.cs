@@ -1,49 +1,60 @@
-using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
 using AutoMapper;
 using FluentValidation;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceBranchHoliday(IRepositoryBranchHoliday repository, IMapper mapper,
+public class ServiceBranchHoliday(ICoreService<BranchHoliday> coreService, IMapper mapper,
                                     IValidator<BranchHoliday> branchHolidayValidator) : IServiceBranchHoliday
 {
     /// <inheritdoc />
-    public async Task<bool> CreateBranchHolidaysAsync(byte branchId, IEnumerable<RequestBranchHolidayDto> branchHolidays)
+    public async Task<bool> CreateBranchHolidaysAsync(long branchId, IEnumerable<RequestBranchHolidayDto> branchHolidays)
     {
-        var holidays = await ValidateFeriados(branchId, branchHolidays);
+        var holidays = await ValidateHolidays(branchId, branchHolidays);
 
-        var result = await repository.CreateBranchHolidaysAsync(branchId, holidays);
-        if (!result) throw new ListNotAddedException("Error al guardar feriados");
+        var result = await coreService.UnitOfWork.Repository<BranchHoliday>().AddRangeAsync(holidays.ToList());
+        await coreService.UnitOfWork.SaveChangesAsync();
+        if (result == null) throw new ListNotAddedException("Error al guardar feriados");
 
-        return result;
+        return true;
     }
 
     /// <inheritdoc />
-    public async Task<ResponseBranchHolidayDto> FindByIdAsync(short id)
+    public async Task<ResponseBranchHolidayDto> FindByIdAsync(long id)
     {
-        var branchHoliday = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<BranchHoliday>(x => x.Id == id);
+        var branchHoliday = await coreService.UnitOfWork.Repository<BranchHoliday>().FirstOrDefaultAsync(spec);
         if (branchHoliday == null) throw new NotFoundException("Feriado en sucursal no encontrado.");
 
         return mapper.Map<ResponseBranchHolidayDto>(branchHoliday);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseBranchHolidayDto>> ListAllByBranchAsync(byte branchId, short? year)
+    public async Task<ICollection<ResponseBranchHolidayDto>> ListAllByBranchAsync(long branchId, short? year)
     {
-        var list = year == null ? await repository.ListAllByBranchAsync(branchId) :
-                               await repository.ListAllByBranchAsync(branchId, year.Value);
-        var collection = mapper.Map<ICollection<ResponseBranchHolidayDto>>(list);
+        var spec = new BaseSpecification<BranchHoliday>(x => x.BranchId == branchId && x.Date.Year == (year ?? x.Date.Year));
+        var holidays = await coreService.UnitOfWork.Repository<BranchHoliday>().ListAsync(spec);
 
-        return collection;
+        return mapper.Map<ICollection<ResponseBranchHolidayDto>>(holidays);
     }
 
     /// <inheritdoc />
-    private async Task<IEnumerable<BranchHoliday>> ValidateFeriados(byte branchId, IEnumerable<RequestBranchHolidayDto> branchHolidays)
+    public async Task<ICollection<ResponseBranchHolidayDto>> ListAllByBranchAsync(long branchId, DateOnly startDate, DateOnly endDate)
+    {
+        var spec = new BaseSpecification<BranchHoliday>(x => x.BranchId == branchId && x.Date >= startDate && x.Date <= endDate);
+        var holidays = await coreService.UnitOfWork.Repository<BranchHoliday>().ListAsync(spec);
+
+        return mapper.Map<ICollection<ResponseBranchHolidayDto>>(holidays);
+    }
+
+    /// <inheritdoc />
+    private async Task<IEnumerable<BranchHoliday>> ValidateHolidays(long branchId, IEnumerable<RequestBranchHolidayDto> branchHolidays)
     {
         var holidays = mapper.Map<List<BranchHoliday>>(branchHolidays);
         foreach (var item in holidays)

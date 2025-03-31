@@ -4,8 +4,6 @@ namespace BaseReservation.Application.RequestDTOs;
 
 public record RequestInventoryProductTransactionDto : RequestBaseDto
 {
-    public long Id { get; set; }
-
     public long InventoryProductId { get; set; }
 
     public TransactionTypeInventoryApplication TransactionType { get; set; }

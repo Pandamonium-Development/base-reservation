@@ -1,28 +1,29 @@
-﻿using BaseReservation.Application.Common;
-using BaseReservation.Application.Configuration.Authentication;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.ResponseDTOs.Authentication;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
+﻿using System.Text;
+using System.Security.Claims;
 using BaseReservation.Utils;
 using Microsoft.IdentityModel.Tokens;
+using BaseReservation.Infrastructure;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
+using BaseReservation.Application.ResponseDTOs.Authentication;
+using BaseReservation.Application.Configuration.Authentication;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceIdentity(AuthenticationConfiguration authenticationConfiguration, IRepositoryUser repository,
-                                IRepositoryTokenMaster repositoryTokenMaster, TokenValidationParameters tokenValidationParameters) : IServiceIdentity
+public class ServiceIdentity(AuthenticationConfiguration authenticationConfiguration, ICoreService<TokenMaster> coreService,
+                                IServiceUser serviceUser, TokenValidationParameters tokenValidationParameters) : IServiceIdentity
 {
     /// <inheritdoc />    
     public async Task<TokenModel> LoginAsync(RequestUserLoginDto login)
     {
         string md5Password = Hashing.HashMd5(login.Password);
-        var loginUser = await repository.LoginAsync(login.Email, md5Password);
 
-        if (loginUser == null) throw new UnAuthorizedException("Correo electrónico o contraseña inválido");
+        var loginUser = await serviceUser.LoginAsync(login.Email, md5Password);
 
         return await AuthenticateAsync(loginUser);
     }
@@ -45,7 +46,7 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
     /// </summary>
     /// <param name="user">User information</param>
     /// <returns>AuthenticationResult</returns>
-    private async Task<AuthenticationResult> AuthenticateAsync(User user)
+    private async Task<AuthenticationResult> AuthenticateAsync(ResponseUserDto user)
     {
         var authenticationResult = new AuthenticationResult();
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -59,7 +60,8 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
 
         var refreshToken = GenerateTokenMaster(token.Id, user.Id);
 
-        var tokenMaster = await repositoryTokenMaster.CreateTokenMasterAsync(refreshToken);
+        var tokenMaster = await coreService.UnitOfWork.Repository<TokenMaster>().AddAsync(refreshToken);
+        await coreService.UnitOfWork.SaveChangesAsync();
         if (tokenMaster == null) throw new NotFoundException("Token no almacenado");
 
         authenticationResult.RefreshToken = refreshToken.Token;
@@ -73,7 +75,7 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
     /// </summary>
     /// <param name="user">User information</param>
     /// <returns>ClaimsIdentity</returns>
-    private ClaimsIdentity GenerateClaims(User user)
+    private ClaimsIdentity GenerateClaims(ResponseUserDto user)
     {
         return new ClaimsIdentity(new Claim[]
         {
@@ -82,7 +84,7 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
             new Claim("LastName", user.LastName),
             new Claim("FullName", $"{user.FirstName} {user.LastName}"),
             new Claim("Email", user.Email),
-            new Claim(ClaimTypes.Role, user.RoleIdNavigation.Description),
+            new Claim(ClaimTypes.Role, user.Role.Description),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         });
     }
@@ -106,7 +108,7 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
     /// <param name="tokenId">Token id</param>
     /// <param name="userId">User id</param>
     /// <returns>TokenMaster</returns>
-    private TokenMaster GenerateTokenMaster(string tokenId, short userId) =>
+    private TokenMaster GenerateTokenMaster(string tokenId, long userId) =>
         new TokenMaster
         {
             Token = Guid.NewGuid().ToString(),
@@ -133,8 +135,11 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
 
         if (expiryDateTimeUtc > DateTime.UtcNow) return new AuthenticationResult { Errors = new[] { "Token aun no ha expirado" } };
 
-        if (!await repositoryTokenMaster.ExistsTokenMasterAsync(refreshToken)) throw new NotFoundException("Token no encontrado.");
-        var existingRefreshToken = await repositoryTokenMaster.FindByTokenAsync(refreshToken);
+        var spec = new BaseSpecification<TokenMaster>(x => x.Token == token);
+        if (await coreService.UnitOfWork.Repository<TokenMaster>().FirstOrDefaultAsync(spec) == null) throw new NotFoundException("Token no encontrado.");
+
+        spec = new BaseSpecification<TokenMaster>(x => x.Token == refreshToken);
+        var existingRefreshToken = await coreService.UnitOfWork.Repository<TokenMaster>().FirstOrDefaultAsync(spec);
 
         if (existingRefreshToken == null) return new AuthenticationResult { Errors = new[] { "Token no existe" } };
         if (DateTime.UtcNow > existingRefreshToken.ExpireAt) return new AuthenticationResult { Errors = new[] { "El token de actualización ya expiró" } };
@@ -142,7 +147,11 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
         if (existingRefreshToken.JwtId != validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value) return new AuthenticationResult { Errors = new[] { "El token de actualización no coincide con el JWt" } };
 
         existingRefreshToken.Used = true;
-        await repositoryTokenMaster.UpdateTokenMasterAsync(existingRefreshToken);
+
+        coreService.UnitOfWork.Repository<TokenMaster>().Update(existingRefreshToken);
+        var rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+        if (rowsAffected == 0) throw new BaseReservationException("Error al actualizar el token");
+
         var user = await GetUserAsync(validatedToken.Claims.Single(x => x.Type == "UserId").Value);
 
         return await AuthenticateAsync(user);
@@ -153,14 +162,12 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
     /// </summary>
     /// <param name="userId">Id to look for</param>
     /// <returns>Usuario</returns>
-    private async Task<User> GetUserAsync(string userId)
+    private async Task<ResponseUserDto> GetUserAsync(string userId)
     {
         short userIdParsed;
         short.TryParse(userId, out userIdParsed);
-        var user = await repository.FindByIdAsync(userIdParsed);
-        if (user == null) throw new NotFoundException("Usuario no encontrado.");
 
-        return user;
+        return await serviceUser.FindByIdAsync(userIdParsed);
     }
 
     /// <summary>

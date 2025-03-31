@@ -1,18 +1,22 @@
-﻿using BaseReservation.Application.Common;
+﻿using AutoMapper;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceReservationQuestion(IRepositoryReservationQuestion repository, IMapper mapper) : IServiceReservationQuestion
+public class ServiceReservationQuestion(ICoreService<ReservationQuestion> coreService, IMapper mapper) : IServiceReservationQuestion
 {
     /// <inheritdoc />
-    public async Task<ResponseReservationQuestionDto> FindByIdAsync(int id)
+    public async Task<ResponseReservationQuestionDto> FindByIdAsync(long id)
     {
-        var reservationQuestion = await repository.FindByIdAsync(id);
-        if (reservationQuestion == null) throw new NotFoundException("Pregunta no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<ReservationQuestion>().ExistsAsync(id)) throw new NotFoundException("Pregunta no encontrada.");
+
+        var spec = new BaseSpecification<ReservationQuestion>(x => x.Id == id);
+        var reservationQuestion = await coreService.UnitOfWork.Repository<ReservationQuestion>().FirstOrDefaultAsync(spec);
 
         return mapper.Map<ResponseReservationQuestionDto>(reservationQuestion);
     }
@@ -20,9 +24,7 @@ public class ServiceReservationQuestion(IRepositoryReservationQuestion repositor
     /// <inheritdoc />
     public async Task<ICollection<ResponseReservationQuestionDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseReservationQuestionDto>>(list);
-
-        return collection;
+        var reservationQuestions = await coreService.UnitOfWork.Repository<ReservationQuestion>().ListAllAsync();
+        return mapper.Map<ICollection<ResponseReservationQuestionDto>>(reservationQuestions);
     }
 }

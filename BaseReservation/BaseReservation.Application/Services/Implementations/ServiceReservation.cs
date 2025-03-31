@@ -1,22 +1,22 @@
-﻿using System.Globalization;
-using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Enums;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using BaseReservation.Utils;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
-using App = BaseReservation.Application.ResponseDTOs.Enums;
-using Infra = BaseReservation.Infrastructure.Enums;
+using System.Globalization;
+using BaseReservation.Utils;
+using BaseReservation.Infrastructure;
+using BaseReservation.Application.Enums;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Infrastructure.Enums;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceReservation(IRepositoryReservation repository, IRepositoryBranchScheduleBlock repositoryBranchScheduleBlock,
-                            IRepositoryBranchHoliday repositoryBranchHoliday, IMapper mapper,
-                            IValidator<Reservation> reservationValidator, IRepositoryBranchSchedule repositoryBranchSchedule) : IServiceReservation
+public class ServiceReservation(ICoreService<Reservation> coreService, IServiceBranchScheduleBlock serviceBranchScheduleBlock,
+                            IServiceBranchHoliday serviceBranchHoliday, IServiceBranchSchedule serviceBranchSchedule,
+                            IMapper mapper, IValidator<Reservation> reservationValidator) : IServiceReservation
 {
     const string dateFormat = "yyyy-MM-dd";
 
@@ -25,28 +25,34 @@ public class ServiceReservation(IRepositoryReservation repository, IRepositoryBr
     {
         var reservation = await ValidateReservationAsync(reservationDTO);
 
-        var result = await repository.CreateReservationAsync(reservation);
+        var result = await coreService.UnitOfWork.Repository<Reservation>().AddAsync(reservation);
+        await coreService.UnitOfWork.SaveChangesAsync();
+
         if (result == null) throw new NotFoundException("Reserva no se ha creado.");
 
         return mapper.Map<ResponseReservationDto>(result);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseReservationDto> UpdateReservationAsync(int id, RequestReservationDto reservationDTO)
+    public async Task<ResponseReservationDto> UpdateReservationAsync(long id, RequestReservationDto reservationDTO)
     {
-        if (!await repository.ExistsReservationAsync(id)) throw new NotFoundException("Reserva no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<Reservation>().ExistsAsync(id)) throw new NotFoundException("Reserva no encontrada.");
 
         var reservation = await ValidateReservationAsync(reservationDTO);
         reservation.Id = id;
-        var result = await repository.UpdateReservationAsync(reservation);
 
-        return mapper.Map<ResponseReservationDto>(result);
+        coreService.UnitOfWork.Repository<Reservation>().Update(reservation);
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+        if (rowsAffected == 0) throw new NotFoundException("Reserva no se ha actualizado.");
+
+        return await FindByIdAsync(id);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseReservationDto> FindByIdAsync(int id)
+    public async Task<ResponseReservationDto> FindByIdAsync(long id)
     {
-        var reservation = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<Reservation>(x => x.Id == id);
+        var reservation = await coreService.UnitOfWork.Repository<Reservation>().FirstOrDefaultAsync(spec);
         if (reservation == null) throw new NotFoundException("Reserva no encontrada.");
 
         return mapper.Map<ResponseReservationDto>(reservation);
@@ -55,16 +61,20 @@ public class ServiceReservation(IRepositoryReservation repository, IRepositoryBr
     /// <inheritdoc />
     public async Task<ICollection<ResponseReservationDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseReservationDto>>(list);
+        var reservations = await coreService.UnitOfWork.Repository<Reservation>().ListAllAsync();
 
-        return collection;
+        return mapper.Map<ICollection<ResponseReservationDto>>(reservations);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseReservationCalendarAgendaDto>> ListAllByBranchAsync(byte branchId, DateOnly? startDate, DateOnly? endDate)
+    public async Task<ICollection<ResponseReservationCalendarAgendaDto>> ListAllByBranchAsync(long branchId, DateOnly? startDate, DateOnly? endDate)
     {
-        var list = startDate == null || endDate == null ? await repository.ListAllByBranchAsync(branchId) : await repository.ListAllByBranchAsync(branchId, startDate.Value, endDate.Value);
+        var spec = new BaseSpecification<Reservation>(x => x.BranchId == branchId);
+        if (startDate != null && endDate != null)
+        {
+            spec = new BaseSpecification<Reservation>(x => x.BranchId == branchId && x.Date >= startDate && x.Date <= endDate);
+        }
+        var list = await coreService.UnitOfWork.Repository<Reservation>().ListAsync(spec, ["BranchIdNavigation", "CustomerIdNavigation"]);
 
         var calendarAgenda = (from a in list
                               select new ResponseReservationCalendarAgendaDto
@@ -77,36 +87,35 @@ public class ServiceReservation(IRepositoryReservation repository, IRepositoryBr
         if (startDate != null && endDate != null)
         {
             var blocksAgenda = await GetScheduleBlocksAsync(branchId, startDate.Value, endDate.Value);
-            var feriados = await GetScheduleHolidaysAsync(branchId, startDate.Value, endDate.Value);
+            var holidays = await GetScheduleHolidaysAsync(branchId, startDate.Value, endDate.Value);
 
-            if (feriados.Any()) blocksAgenda = blocksAgenda.Except(blocksAgenda.Where(m => feriados.Exists(z => z.Start.ToString(dateFormat) == m.Start.ToString(dateFormat))).ToList()).ToList();
+            if (holidays.Any()) blocksAgenda = blocksAgenda.Except(blocksAgenda.Where(m => holidays.Exists(z => z.Start.ToString(dateFormat) == m.Start.ToString(dateFormat))).ToList()).ToList();
 
             calendarAgenda.AddRange(blocksAgenda);
-            calendarAgenda.AddRange(feriados);
+            calendarAgenda.AddRange(holidays);
         }
 
         return calendarAgenda;
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseReservationDto>> ListAllByBranchAsync(byte branchId, DateOnly date)
+    public async Task<ICollection<ResponseReservationDto>> ListAllByBranchAsync(long branchId, DateOnly date)
     {
-        var list = await repository.ListAllByBranchAsync(branchId, date);
-        var collection = mapper.Map<ICollection<ResponseReservationDto>>(list);
+        var spec = new BaseSpecification<Reservation>(x => x.BranchId == branchId && x.Date == date);
+        var reservations = await coreService.UnitOfWork.Repository<Reservation>().ListAsync(spec);
 
-        return collection;
+        return mapper.Map<ICollection<ResponseReservationDto>>(reservations);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<TimeOnly>> ScheduleAvailabilityBranchAsync(byte branchId, DateOnly date)
+    public async Task<ICollection<TimeOnly>> ScheduleAvailabilityBranchAsync(long branchId, DateOnly date)
     {
         var weekDayName = DateHourManipulation.GetDayWeekCultureCostaRica(date);
-        WeekDay diaSemana = (WeekDay)Enum.Parse(typeof(WeekDay), weekDayName);
+        WeekDayApplication weekDay = (WeekDayApplication)Enum.Parse(typeof(WeekDayApplication), weekDayName);
 
-        var branchSchedule = await repositoryBranchSchedule.FindByWeekDayAsync(branchId, mapper.Map<Infra.WeekDay>(diaSemana));
-        if (branchSchedule == null) throw new NotFoundException("No se encontro horario en la sucursal.");
-
-        var scheduleRange = DateHourManipulation.GetHoursAsync(branchSchedule.ScheduleIdNavigation.StartHour, branchSchedule.ScheduleIdNavigation.EndHour.AddHours(-1));
+        var branchSchedule = await serviceBranchSchedule.FindByWeekDayAsync(branchId, weekDay);
+        
+        var scheduleRange = DateHourManipulation.GetHoursAsync(branchSchedule.Schedule.StartHour, branchSchedule.Schedule.EndHour.AddHours(-1));
 
         foreach (var item in branchSchedule.BranchScheduleBlocks)
         {
@@ -140,13 +149,13 @@ public class ServiceReservation(IRepositoryReservation repository, IRepositoryBr
     /// <param name="startDate">Start date</param>
     /// <param name="endDate">End date</param>
     /// <returns>List of ResponseReservationCalendarAgendaDto</returns>
-    private async Task<List<ResponseReservationCalendarAgendaDto>> GetScheduleBlocksAsync(byte branchId, DateOnly startDate, DateOnly endDate)
+    private async Task<List<ResponseReservationCalendarAgendaDto>> GetScheduleBlocksAsync(long branchId, DateOnly startDate, DateOnly endDate)
     {
-        var blocks = await repositoryBranchScheduleBlock.ListAllByBranchAsync(branchId);
+        var blocks = await serviceBranchScheduleBlock.ListAllByBranchAsync(branchId);
         var daysDiference = DateHourManipulation.GetDaysAsync(startDate, endDate);
         var blocksAgenda = from a in blocks
                            from b in daysDiference
-                           where b.ToString("dddd", new CultureInfo("es-CR")).Capitalize().Replace("é", "e").Replace("á", "a") == Enum.GetName(typeof(WeekDay), a.BranchScheduleIdNavigation.ScheduleIdNavigation.Day)!
+                           where b.ToString("dddd", new CultureInfo("es-CR")).Capitalize().Replace("é", "e").Replace("á", "a") == Enum.GetName(typeof(WeekDay), a.BranchSchedule.Schedule.Day)!
                            select new ResponseReservationCalendarAgendaDto
                            {
                                Title = "",
@@ -165,13 +174,13 @@ public class ServiceReservation(IRepositoryReservation repository, IRepositoryBr
     /// <param name="startDate">Start date</param>
     /// <param name="endDate">End date</param>
     /// <returns>List of ResponseReservationCalendarAgendaDto</returns>
-    private async Task<List<ResponseReservationCalendarAgendaDto>> GetScheduleHolidaysAsync(byte branchId, DateOnly startDate, DateOnly endDate)
+    private async Task<List<ResponseReservationCalendarAgendaDto>> GetScheduleHolidaysAsync(long branchId, DateOnly startDate, DateOnly endDate)
     {
-        var holidays = await repositoryBranchHoliday.ListAllByBranchAsync(branchId, startDate, endDate);
+        var holidays = await serviceBranchHoliday.ListAllByBranchAsync(branchId, startDate, endDate);
         var holidaysAgenda = from a in holidays
                              select new ResponseReservationCalendarAgendaDto
                              {
-                                 Title = $"Feriado: {a.HolidayIdNavigation.Name}",
+                                 Title = $"Feriado: {a.Holiday.Name}",
                                  Start = DateTime.ParseExact(a.Date.ToString(dateFormat), dateFormat, CultureInfo.InvariantCulture),
                                  Display = "background",
                                  ClassNames = "bg-warning",
@@ -181,5 +190,5 @@ public class ServiceReservation(IRepositoryReservation repository, IRepositoryBr
         return holidaysAgenda.ToList();
     }
 
-    public async Task<bool> ExistsReservationAsync(int id) => await repository.ExistsReservationAsync(id);
+    public async Task<bool> ExistsReservationAsync(long id) => await coreService.UnitOfWork.Repository<Reservation>().ExistsAsync(id);
 }

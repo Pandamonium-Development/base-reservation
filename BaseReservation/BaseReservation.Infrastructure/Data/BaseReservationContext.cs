@@ -1,7 +1,6 @@
 ﻿using System.Data;
-using BaseReservation.Infrastructure.Enums;
-using BaseReservation.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
+using BaseReservation.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BaseReservation.Infrastructure.Data;

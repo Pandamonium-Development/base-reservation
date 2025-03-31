@@ -1,9 +1,9 @@
+using BaseReservation.Application.ResponseDTOs.Base;
+
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseProvinceDto
+public record ResponseProvinceDto : BaseSimpleEntity
 {
-    public byte Id { get; set; }
-
     public string Name { get; set; } = null!;
 
     public virtual ICollection<ResponseCantonDto> Cantons { get; set; } = new List<ResponseCantonDto>();

@@ -15,5 +15,5 @@ public interface IServiceTypeService
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseTypeServiceDto</returns>
-    Task<ResponseTypeServiceDto> FindByIdAsync(byte id);
+    Task<ResponseTypeServiceDto> FindByIdAsync(long id);
 }

@@ -1,18 +1,22 @@
 ﻿using AutoMapper;
-using BaseReservation.Application.Common;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Repository.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceCategory(IRepositoryCategory repository, IMapper mapper) : IServiceCategory
+public class ServiceCategory(ICoreService<Category> coreService, IMapper mapper) : IServiceCategory
 {
     /// <inheritdoc />
-    public async Task<ResponseCategoryDto> FindByIdAsync(byte id)
+    public async Task<ResponseCategoryDto> FindByIdAsync(long id)
     {
-        var category = await repository.FindByIdAsync(id);
-        if (category == null) throw new NotFoundException("Categoría no se ha encontrado.");
+        if (!await coreService.UnitOfWork.Repository<Category>().ExistsAsync(id)) throw new NotFoundException("Categoría no encontrada.");
+
+        var spec = new BaseSpecification<Category>(x => x.Id == id);
+        var category = await coreService.UnitOfWork.Repository<Category>().FirstOrDefaultAsync(spec);
 
         return mapper.Map<ResponseCategoryDto>(category);
     }
@@ -20,7 +24,7 @@ public class ServiceCategory(IRepositoryCategory repository, IMapper mapper) : I
     /// <inheritdoc />
     public async Task<ICollection<ResponseCategoryDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
+        var list = await coreService.UnitOfWork.Repository<Category>().ListAllAsync();
         var collection = mapper.Map<ICollection<ResponseCategoryDto>>(list);
 
         return collection;

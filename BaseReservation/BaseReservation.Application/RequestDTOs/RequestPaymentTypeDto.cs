@@ -1,9 +1,7 @@
 ﻿namespace BaseReservation.Application.RequestDTOs;
 
-public record RequestPaymentTypeDto
+public record RequestPaymentTypeDto : RequestBaseDto
 {
-    public byte Id { get; set; }
-
     public string Description { get; set; } = null!;
 
     public int ReferenceNumber { get; set; }

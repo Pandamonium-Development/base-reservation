@@ -1,15 +1,16 @@
-using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
 using AutoMapper;
 using FluentValidation;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceInventoryProduct(IRepositoryInventoryProduct repository, IMapper mapper,
+public class ServiceInventoryProduct(ICoreService<InventoryProduct> coreService, IMapper mapper,
                                     IValidator<InventoryProduct> inventoryProductValidator) : IServiceInventoryProduct
 {
     /// <inheritdoc />
@@ -17,7 +18,9 @@ public class ServiceInventoryProduct(IRepositoryInventoryProduct repository, IMa
     {
         var inventoryProduct = await ValidateInventoryProductAsync(inventoryProductDto);
 
-        var result = await repository.CreateInventoryProductAsync(inventoryProduct);
+        var result = await coreService.UnitOfWork.Repository<InventoryProduct>().AddAsync(inventoryProduct);
+        await coreService.UnitOfWork.SaveChangesAsync();
+
         if (result == null) throw new NotFoundException("Inventario producto no creado.");
 
         return mapper.Map<ResponseInventoryProductDto>(result);
@@ -27,49 +30,56 @@ public class ServiceInventoryProduct(IRepositoryInventoryProduct repository, IMa
     public async Task<bool> CreateInventoryProductAsync(IEnumerable<RequestInventoryProductDto> inventoryProductsDto)
     {
         var inventoryProducts = await ValidateInventoryProductAsync(inventoryProductsDto);
-        var result = await repository.CreateInventoryProductAsync(inventoryProducts);
-        if (!result) throw new ListNotAddedException("Error al guardar inventario productos.");
 
-        return result;
+        var result = await coreService.UnitOfWork.Repository<InventoryProduct>().AddRangeAsync(inventoryProducts.ToList());
+        await coreService.UnitOfWork.SaveChangesAsync();
+
+        if (result == null) throw new ListNotAddedException("Error al guardar inventario productos.");
+
+        return true;
     }
 
     /// <inheritdoc />
     public async Task<ResponseInventoryProductDto> FindByIdAsync(long id)
     {
-        var inventoryProduct = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<InventoryProduct>(x => x.Id == id);
+        var inventoryProduct = await coreService.UnitOfWork.Repository<InventoryProduct>().FirstOrDefaultAsync(spec);
         if (inventoryProduct == null) throw new NotFoundException("Inventario producto no encontrado.");
 
         return mapper.Map<ResponseInventoryProductDto>(inventoryProduct);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseInventoryProductDto>> ListAllByInventoryAsync(short inventoryId)
+    public async Task<ICollection<ResponseInventoryProductDto>> ListAllByInventoryAsync(long inventoryId)
     {
-        var list = await repository.ListAllByInventoryAsync(inventoryId);
-        var collection = mapper.Map<ICollection<ResponseInventoryProductDto>>(list);
+        var spec = new BaseSpecification<InventoryProduct>(x => x.InventoryId == inventoryId);
+        var inventoryProducts = await coreService.UnitOfWork.Repository<InventoryProduct>().ListAsync(spec);
 
-        return collection;
+        return mapper.Map<ICollection<ResponseInventoryProductDto>>(inventoryProducts);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseInventoryProductDto>> ListAllByProductAsync(short productId)
+    public async Task<ICollection<ResponseInventoryProductDto>> ListAllByProductAsync(long productId)
     {
-        var list = await repository.ListAllByProductAsync(productId);
-        var collection = mapper.Map<ICollection<ResponseInventoryProductDto>>(list);
+        var spec = new BaseSpecification<InventoryProduct>(x => x.ProductId == productId);
+        var inventoryProducts = await coreService.UnitOfWork.Repository<InventoryProduct>().ListAsync(spec);
 
-        return collection;
+        return mapper.Map<ICollection<ResponseInventoryProductDto>>(inventoryProducts);
     }
 
     /// <inheritdoc />
     public async Task<ResponseInventoryProductDto> UpdateInventoryProductAsync(long inventoryProductId, RequestInventoryProductDto inventoryProductDto)
     {
-        if (!await repository.ExistsInventoryProductAsync(inventoryProductId)) throw new NotFoundException("Inventario producto no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<InventoryProduct>().ExistsAsync(inventoryProductId)) throw new NotFoundException("Inventario producto no encontrada.");
 
         var inventoryProduct = await ValidateInventoryProductAsync(inventoryProductDto);
         inventoryProduct.Id = inventoryProductId;
-        var result = await repository.UpdateInventoryProductAsync(inventoryProduct);
 
-        return mapper.Map<ResponseInventoryProductDto>(result);
+        coreService.UnitOfWork.Repository<InventoryProduct>().Update(inventoryProduct);
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+        if (rowsAffected == 0) throw new BaseReservationException("Error al actualizar inventario producto");
+
+        return await FindByIdAsync(inventoryProductId);
     }
 
     /// <summary>

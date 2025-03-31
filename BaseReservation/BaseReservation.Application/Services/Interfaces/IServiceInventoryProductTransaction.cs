@@ -10,14 +10,14 @@ public interface IServiceInventoryProductTransaction
     /// </summary>
     /// <param name="inventoryId">Inventory id</param>
     /// <returns>ICollection of ResponseInventoryProductTransactionDto</returns>
-    Task<ICollection<ResponseInventoryProductTransactionDto>> ListAllByInventoryAsync(short inventoryId);
+    Task<ICollection<ResponseInventoryProductTransactionDto>> ListAllByInventoryAsync(long inventoryId);
 
     /// <summary>
     /// Get list of all inventory product movements by product
     /// </summary>
     /// <param name="productId">Product id</param>
     /// <returns>ICollection of ResponseInventoryProductTransactionDto</returns>
-    Task<ICollection<ResponseInventoryProductTransactionDto>> ListAllByProductAsync(short productId);
+    Task<ICollection<ResponseInventoryProductTransactionDto>> ListAllByProductAsync(long productId);
 
     /// <summary>
     /// Create inventory product movement

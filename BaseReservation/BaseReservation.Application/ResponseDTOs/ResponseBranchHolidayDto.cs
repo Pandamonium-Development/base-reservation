@@ -1,12 +1,12 @@
-﻿namespace BaseReservation.Application.ResponseDTOs;
+﻿using BaseReservation.Application.ResponseDTOs.Base;
 
-public record ResponseBranchHolidayDto
+namespace BaseReservation.Application.ResponseDTOs;
+
+public record ResponseBranchHolidayDto : BaseSimpleEntity
 {
-    public short Id { get; set; }
+    public long HolidayId { get; set; }
 
-    public byte HolidayId { get; set; }
-
-    public byte BranchId { get; set; }
+    public long BranchId { get; set; }
 
     public DateOnly Date { get; set; }
 

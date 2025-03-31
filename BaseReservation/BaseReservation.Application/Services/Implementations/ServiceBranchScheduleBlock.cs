@@ -1,52 +1,67 @@
-﻿using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceBranchScheduleBlock(IRepositoryBranchScheduleBlock repository,
-                                                 IValidator<BranchScheduleBlock> blockValidator, IMapper mapper) : IServiceBranchScheduleBlock
+public class ServiceBranchScheduleBlock(ICoreService<BranchScheduleBlock> coreService,
+                                            IValidator<BranchScheduleBlock> blockValidator, IMapper mapper) : IServiceBranchScheduleBlock
 {
     /// <inheritdoc />
     public async Task<ResponseBranchScheduleBlockDto> CreateBranchScheduleBlockAsync(RequestBranchScheduleBlockDto branchScheduleBlock)
     {
         var block = await ValidateBranchScheduleBlock(branchScheduleBlock);
 
-        var result = await repository.CreateBranchScheduleBlockAsync(block);
+        var result = await coreService.UnitOfWork.Repository<BranchScheduleBlock>().AddAsync(block);
+        await coreService.UnitOfWork.SaveChangesAsync();
+
         if (result == null) throw new NotFoundException("Horario bloqueo no se ha creado.");
 
         return mapper.Map<ResponseBranchScheduleBlockDto>(result);
     }
 
     /// <inheritdoc />
-    public async Task<bool> CreateBranchScheduleBlockAsync(short branchScheduleId, IEnumerable<RequestBranchScheduleBlockDto> branchScheduleBlocks)
+    public async Task<bool> CreateBranchScheduleBlockAsync(long branchScheduleId, IEnumerable<RequestBranchScheduleBlockDto> branchScheduleBlocks)
     {
         var blocksGuardar = await ValidateBranchScheduleBlock(branchScheduleId, branchScheduleBlocks);
 
-        var result = await repository.CreateBranchScheduleBlockAsync(branchScheduleId, blocksGuardar);
-        if (!result) throw new ListNotAddedException("Error al guardar bloqueos");
+        await coreService.UnitOfWork.Repository<BranchScheduleBlock>().AddRangeAsync(blocksGuardar.ToList());
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+        if (rowsAffected == 0) throw new ListNotAddedException("Error al guardar bloqueos");
 
-        return result;
+        return true;
     }
 
     /// <inheritdoc />
     public async Task<ResponseBranchScheduleBlockDto> FindByIdAsync(long id)
     {
-        var block = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<BranchScheduleBlock>(x => x.Id == id);
+        var block = await coreService.UnitOfWork.Repository<BranchScheduleBlock>().FirstOrDefaultAsync(spec);
         if (block == null) throw new NotFoundException("Horario bloqueo no encontrado.");
 
         return mapper.Map<ResponseBranchScheduleBlockDto>(block);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseBranchScheduleBlockDto>> ListAllByBranchScheduleAsync(short branchScheduleId)
+    public async Task<ICollection<ResponseBranchScheduleBlockDto>> ListAllByBranchScheduleAsync(long branchScheduleId)
     {
-        var blocks = await repository.ListAllByBranchScheduleAsync(branchScheduleId);
+        var spec = new BaseSpecification<BranchScheduleBlock>(x => x.BranchScheduleId == branchScheduleId);
+        var blocks = await coreService.UnitOfWork.Repository<BranchScheduleBlock>().ListAsync(spec);
+
+        return mapper.Map<ICollection<ResponseBranchScheduleBlockDto>>(blocks);
+    }
+
+    /// <inheritdoc />
+    public async Task<ICollection<ResponseBranchScheduleBlockDto>> ListAllByBranchAsync(long branchId)
+    {
+        var spec = new BaseSpecification<BranchScheduleBlock>(x => x.BranchScheduleIdNavigation.BranchId == branchId);
+        var blocks = await coreService.UnitOfWork.Repository<BranchScheduleBlock>().ListAsync(spec, ["BranchScheduleIdNavigation"]);
 
         return mapper.Map<ICollection<ResponseBranchScheduleBlockDto>>(blocks);
     }
@@ -54,20 +69,33 @@ public class ServiceBranchScheduleBlock(IRepositoryBranchScheduleBlock repositor
     /// <inheritdoc />
     public async Task<ResponseBranchScheduleBlockDto> UpdateBranchScheduleBlockAsync(long id, RequestBranchScheduleBlockDto branchScheduleBlock)
     {
-        if (!await repository.ExistsBranchScheduleBlockAsync(id)) throw new NotFoundException("Horario bloqueo no encontrado.");
+        if (!await coreService.UnitOfWork.Repository<BranchScheduleBlock>().ExistsAsync(id)) throw new NotFoundException("Horario bloqueo no encontrado.");
 
         var block = await ValidateBranchScheduleBlock(branchScheduleBlock);
         block.Id = id;
-        var result = await repository.UpdateBranchScheduleBlockAsync(block);
+        coreService.UnitOfWork.Repository<BranchScheduleBlock>().Update(block);
 
-        return mapper.Map<ResponseBranchScheduleBlockDto>(result);
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+        if (rowsAffected == 0) throw new BaseReservationException("Error al actualizar horario bloqueo");
+
+        return await FindByIdAsync(id);
     }
 
     /// <inheritdoc />
     public async Task<bool> DeleteBranchScheduleBlockAsync(long id)
     {
-        if (!await repository.ExistsBranchScheduleBlockAsync(id)) throw new NotFoundException("Horario bloqueo no encontrado.");
-        return await repository.DeleteBranchScheduleBlockAsync(id);
+        if (!await coreService.UnitOfWork.Repository<BranchScheduleBlock>().ExistsAsync(id)) throw new NotFoundException("Horario bloqueo no encontrado.");
+
+        var spec = new BaseSpecification<BranchScheduleBlock>(x => x.Id == id);
+        var block = await coreService.UnitOfWork.Repository<BranchScheduleBlock>().FirstOrDefaultAsync(spec);
+        block!.Active = false;
+
+        coreService.UnitOfWork.Repository<BranchScheduleBlock>().Update(block);
+
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+        if (rowsAffected == 0) throw new ListNotAddedException("Error al eliminar horario bloqueo");
+
+        return true;
     }
 
     /// <inheritdoc />
@@ -84,7 +112,7 @@ public class ServiceBranchScheduleBlock(IRepositoryBranchScheduleBlock repositor
     /// <param name="branchScheduleId">Branch schedule id that receive blocks</param>
     /// <param name="blocksDto">List of branch schedule's blocks request model will be validated</param>
     /// <returns>IEnumerable of BranchScheduleBlock</returns>
-    private async Task<IEnumerable<BranchScheduleBlock>> ValidateBranchScheduleBlock(short branchScheduleId, IEnumerable<RequestBranchScheduleBlockDto> branchScheduleBlocks)
+    private async Task<IEnumerable<BranchScheduleBlock>> ValidateBranchScheduleBlock(long branchScheduleId, IEnumerable<RequestBranchScheduleBlockDto> branchScheduleBlocks)
     {
         var blocks = mapper.Map<List<BranchScheduleBlock>>(branchScheduleBlocks);
         foreach (var item in blocks)

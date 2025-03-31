@@ -1,10 +1,10 @@
-﻿namespace BaseReservation.Application.ResponseDTOs;
+﻿using BaseReservation.Application.ResponseDTOs.Base;
 
-public record ResponseBranchScheduleBlockDto
+namespace BaseReservation.Application.ResponseDTOs;
+
+public record ResponseBranchScheduleBlockDto : BaseSimpleEntity
 {
-    public long Id { get; set; }
-
-    public short BranchScheduleId { get; set; }
+    public long BranchScheduleId { get; set; }
 
     public TimeOnly StartHour { get; set; }
 

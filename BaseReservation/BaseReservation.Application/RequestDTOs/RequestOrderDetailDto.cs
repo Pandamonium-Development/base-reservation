@@ -1,14 +1,12 @@
 ﻿namespace BaseReservation.Application.RequestDTOs;
 
-public record RequestOrderDetailDto
+public record RequestOrderDetailDto : RequestBaseDto
 {
-    public long Id { get; set; }
-
     public long OrderId { get; set; }
 
-    public byte? ServiceId { get; set; }
+    public long? ServiceId { get; set; }
 
-    public short? ProductId { get; set; }
+    public long? ProductId { get; set; }
 
     public byte LineNumber { get; set; }
 

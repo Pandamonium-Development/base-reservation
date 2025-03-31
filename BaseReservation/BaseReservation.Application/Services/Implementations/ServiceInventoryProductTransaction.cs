@@ -1,16 +1,17 @@
-using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Infrastructure.Enums;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
 using AutoMapper;
 using FluentValidation;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Infrastructure.Enums;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceInventoryProductTransaction(IRepositoryInventoryProductTransaction repository, IRepositoryInventoryProduct repositoryInventoryProduct,
+public class ServiceInventoryProductTransaction(ICoreService<InventoryProductTransaction> coreService, IServiceInventoryProduct serviceInventoryProduct,
                                                 IMapper mapper, IValidator<InventoryProductTransaction> inventoryProductTransactionValidator) : IServiceInventoryProductTransaction
 {
     /// <inheritdoc />
@@ -18,43 +19,45 @@ public class ServiceInventoryProductTransaction(IRepositoryInventoryProductTrans
     {
         var inventoryProductTransaction = await ValidateInventoryProductTransactionAsync(inventoryProductTransactionDto);
 
-        var inventarioProducto = await repositoryInventoryProduct.FindByIdAsync(inventoryProductTransaction.InventoryProductId);
-        if (inventarioProducto == null) throw new NotFoundException("Inventario producto no creado.");
+        var inventoryProduct = await serviceInventoryProduct.FindByIdAsync(inventoryProductTransaction.InventoryProductId);
+        if (inventoryProduct == null) throw new NotFoundException("Inventario producto no creado.");
 
-        if (inventoryProductTransaction.TransactionType == TransactionTypeInventory.Salida && inventarioProducto.Assignable - inventoryProductTransaction.Quantity < 0)
+        if (inventoryProductTransaction.TransactionType == TransactionTypeInventory.Out && inventoryProduct.Assignable - inventoryProductTransaction.Quantity < 0)
             throw new BaseReservationException("No puede generar un movimiento de inventario con una cantidad mayor a la disponible.");
 
         var newAssignableQuantity = inventoryProductTransactionDto.TransactionType == Enums.TransactionTypeInventoryApplication.Entrada ?
-                            inventoryProductTransaction.Quantity : inventoryProductTransaction.Quantity * -1 + inventarioProducto.Assignable;
+                            inventoryProductTransaction.Quantity : inventoryProductTransaction.Quantity * -1 + inventoryProduct.Assignable;
 
-        if (newAssignableQuantity > inventarioProducto.Maximum)
+        if (newAssignableQuantity > inventoryProduct.Maximum)
             throw new BaseReservationException("Cantidad nueva disponible excede el máximo asignado.");
 
-        if (newAssignableQuantity < inventarioProducto.Mininum)
+        if (newAssignableQuantity < inventoryProduct.Minimum)
             throw new BaseReservationException("Cantidad nueva disponible es menor al mínimo asignado.");
 
-        var result = await repository.CreateInventoryProductTransactionAsync(inventoryProductTransaction);
-        if (!result) throw new NotFoundException("Movimiento inventario no creado.");
+        var result = await coreService.UnitOfWork.Repository<InventoryProductTransaction>().AddAsync(inventoryProductTransaction);
+        await coreService.UnitOfWork.SaveChangesAsync();
 
-        return result;
+        if (result == null) throw new NotFoundException("Movimiento inventario no creado.");
+
+        return true;
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseInventoryProductTransactionDto>> ListAllByInventoryAsync(short inventoryId)
+    public async Task<ICollection<ResponseInventoryProductTransactionDto>> ListAllByInventoryAsync(long inventoryId)
     {
-        var list = await repository.ListAllByInventoryAsync(inventoryId);
-        var collection = mapper.Map<ICollection<ResponseInventoryProductTransactionDto>>(list);
+        var spec = new BaseSpecification<InventoryProductTransaction>(x => x.InventoryProductIdNavigation.InventoryId == inventoryId);
+        var transactions = await coreService.UnitOfWork.Repository<InventoryProductTransaction>().ListAsync(spec);
 
-        return collection;
+        return mapper.Map<ICollection<ResponseInventoryProductTransactionDto>>(transactions);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseInventoryProductTransactionDto>> ListAllByProductAsync(short productId)
+    public async Task<ICollection<ResponseInventoryProductTransactionDto>> ListAllByProductAsync(long productId)
     {
-        var list = await repository.ListAllByProductAsync(productId);
-        var collection = mapper.Map<ICollection<ResponseInventoryProductTransactionDto>>(list);
+        var spec = new BaseSpecification<InventoryProductTransaction>(x => x.InventoryProductIdNavigation.ProductId == productId);
+        var transactions = await coreService.UnitOfWork.Repository<InventoryProductTransaction>().ListAsync(spec);
 
-        return collection;
+        return mapper.Map<ICollection<ResponseInventoryProductTransactionDto>>(transactions);
     }
 
     /// <summary>

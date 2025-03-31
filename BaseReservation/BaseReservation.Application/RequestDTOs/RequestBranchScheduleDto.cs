@@ -2,9 +2,7 @@
 
 public record RequestBranchScheduleDto
 {
-    public short Id { get; set; }
+    public long BranchId { get; set; }
 
-    public byte BranchId { get; set; }
-
-    public short ScheduleId { get; set; }
+    public long ScheduleId { get; set; }
 }

@@ -5,15 +5,11 @@ namespace BaseReservation.Application.ResponseDTOs;
 
 public record ResponseInventoryDto : BaseEntity
 {
-    public short Id { get; set; }
-
     public string Name { get; set; } = null!;
 
-    public byte IdSucursal { get; set; }
+    public long BranchId { get; set; }
 
     public TypeInventoryApplication TypeInventory { get; set; }
-
-    public bool Active { get; set; }
 
     public virtual ResponseBranchDto Branch { get; set; } = null!;
 

@@ -17,18 +17,18 @@ namespace BaseReservation.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Branch", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Branch", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -52,8 +52,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<short>("DistrictId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("DistrictId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -82,22 +82,22 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Branch");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchHoliday", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.BranchHoliday", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<byte>("BranchId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("BranchId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
 
-                    b.Property<byte>("HolidayId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("HolidayId")
+                        .HasColumnType("bigint");
 
                     b.Property<short>("Year")
                         .HasColumnType("smallint");
@@ -111,19 +111,19 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("BranchHoliday");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchSchedule", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.BranchSchedule", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<byte>("BranchId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("BranchId")
+                        .HasColumnType("bigint");
 
-                    b.Property<short>("ScheduleId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("ScheduleId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -134,7 +134,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("BranchSchedule");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchScheduleBlock", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.BranchScheduleBlock", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -147,8 +147,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<short>("BranchScheduleId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("BranchScheduleId")
+                        .HasColumnType("bigint");
 
                     b.Property<TimeOnly>("EndHour")
                         .HasColumnType("time");
@@ -163,21 +163,21 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("BranchScheduleBlock");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Canton", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Canton", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<byte>("ProvinceId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("ProvinceId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -186,13 +186,16 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Canton");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Category", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Category", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -224,13 +227,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Contact", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Contact", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -270,8 +273,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<byte>("VendorId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("VendorId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -280,13 +283,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Contact");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Customer", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Customer", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -305,8 +308,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<short>("DistrictId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("DistrictId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -340,16 +343,16 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.District", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.District", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<byte>("CantonId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("CantonId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -363,13 +366,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("District");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Gender", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Gender", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -381,13 +384,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Gender");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Holiday", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Holiday", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -427,19 +430,19 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Holiday");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Inventory", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Inventory", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<byte>("BranchId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("BranchId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -471,13 +474,16 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Inventory");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProduct", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InventoryProduct", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Assignable")
                         .HasColumnType("decimal(18, 2)");
@@ -490,11 +496,11 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<short>("IdProducto")
-                        .HasColumnType("smallint");
+                    b.Property<long>("IdProducto")
+                        .HasColumnType("bigint");
 
-                    b.Property<short>("InventoryId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("InventoryId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("Maximum")
                         .HasColumnType("decimal(18, 2)");
@@ -502,8 +508,8 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<decimal>("Mininum")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.Property<short>("ProductId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime");
@@ -523,13 +529,16 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("InventoryProduct");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProductTransaction", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InventoryProductTransaction", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -563,7 +572,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("InventoryProductTransaction");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Invoice", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Invoice", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -571,8 +580,11 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<byte>("BranchId")
-                        .HasColumnType("tinyint");
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("BranchId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -582,8 +594,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<short>("CustomerId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -599,8 +611,8 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<long?>("OrderId")
                         .HasColumnType("bigint");
 
-                    b.Property<byte>("PaymentTypeId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("PaymentTypeId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("money");
@@ -608,8 +620,8 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<decimal>("Tax")
                         .HasColumnType("money");
 
-                    b.Property<byte>("TaxId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("TaxId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("TaxRate")
                         .HasColumnType("decimal(5, 2)");
@@ -639,7 +651,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Invoice");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetail", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InvoiceDetail", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -653,14 +665,14 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<byte>("LineNumber")
                         .HasColumnType("tinyint");
 
-                    b.Property<short?>("ProductId")
-                        .HasColumnType("smallint");
+                    b.Property<long?>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<short>("Quantity")
                         .HasColumnType("smallint");
 
-                    b.Property<byte?>("ServiceId")
-                        .HasColumnType("tinyint");
+                    b.Property<long?>("ServiceId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("money");
@@ -685,7 +697,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("InvoiceDetail");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetailProduct", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InvoiceDetailProduct", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -696,8 +708,8 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<long>("InvoiceDetailId")
                         .HasColumnType("bigint");
 
-                    b.Property<short>("ProductId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(6, 2)");
@@ -711,7 +723,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("InvoiceDetailProduct");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Order", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Order", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -719,8 +731,11 @@ namespace BaseReservation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<byte>("BranchId")
-                        .HasColumnType("tinyint");
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("BranchId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -730,8 +745,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<short>("CustomerId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -744,14 +759,14 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<short>("Number")
                         .HasColumnType("smallint");
 
-                    b.Property<byte>("PaymentTypeId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("PaymentTypeId")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
+                    b.Property<long>("ReservationId")
+                        .HasColumnType("bigint");
 
-                    b.Property<byte>("StatusOrderId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("StatusOrderId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("money");
@@ -759,8 +774,8 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<decimal>("Tax")
                         .HasColumnType("money");
 
-                    b.Property<byte>("TaxId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("TaxId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("TaxRate")
                         .HasColumnType("decimal(5, 2)");
@@ -792,7 +807,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetail", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.OrderDetail", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -806,14 +821,14 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<long>("OrderId")
                         .HasColumnType("bigint");
 
-                    b.Property<short?>("ProductId")
-                        .HasColumnType("smallint");
+                    b.Property<long?>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<short>("Quantity")
                         .HasColumnType("smallint");
 
-                    b.Property<byte?>("ServiceId")
-                        .HasColumnType("tinyint");
+                    b.Property<long?>("ServiceId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("money");
@@ -838,7 +853,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("OrderDetail");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetailProduct", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.OrderDetailProduct", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -849,8 +864,8 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<long>("OrderDetailId")
                         .HasColumnType("bigint");
 
-                    b.Property<short>("ProductId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(6, 2)");
@@ -864,13 +879,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("OrderDetailProduct");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.PaymentType", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.PaymentType", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -887,13 +902,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("PaymentType");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Product", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Product", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -905,8 +920,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<byte>("CategoryId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("CategoryId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -935,8 +950,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("SKU");
 
-                    b.Property<byte>("UnitMeasureId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("UnitMeasureId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime");
@@ -954,13 +969,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Province", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Province", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -972,21 +987,21 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Province");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Reservation", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Reservation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<byte>("BranchId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("BranchId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -996,8 +1011,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<short>("CustomerId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -1035,22 +1050,22 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Reservation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservationDetail", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.ReservationDetail", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<short?>("ProductId")
-                        .HasColumnType("smallint");
+                    b.Property<long?>("ProductId")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
+                    b.Property<long>("ReservationId")
+                        .HasColumnType("bigint");
 
-                    b.Property<byte?>("ServiceId")
-                        .HasColumnType("tinyint");
+                    b.Property<long?>("ServiceId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -1063,13 +1078,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("ReservationDetail");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservationQuestion", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.ReservationQuestion", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -1093,8 +1108,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
+                    b.Property<long>("ReservationId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime");
@@ -1110,13 +1125,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("ReservationQuestion");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Role", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Role", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -1153,13 +1168,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Role");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Schedule", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Schedule", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -1196,13 +1211,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Schedule");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Service", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Service", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -1234,8 +1249,8 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
 
-                    b.Property<byte>("TypeServiceId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("TypeServiceId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime");
@@ -1251,10 +1266,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Service");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.StatusOrder", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.StatusOrder", b =>
                 {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -1266,13 +1284,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("StatusOrder");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Tax", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Tax", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1287,7 +1305,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Tax");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TokenMaster", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.TokenMaster", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -1314,8 +1332,8 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Property<bool>("Used")
                         .HasColumnType("bit");
 
-                    b.Property<short>("UserId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -1324,13 +1342,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("TokenMaster");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TypeService", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.TypeService", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<TimeOnly>("BaseDuration")
                         .HasColumnType("time");
@@ -1345,13 +1363,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("TypeService");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UnitMeasure", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.UnitMeasure", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1369,13 +1387,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("UnitMeasure");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.User", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.User", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -1402,8 +1420,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<short>("DistrictId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("DistrictId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -1415,8 +1433,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<byte>("GenderId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("GenderId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -1433,8 +1451,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<byte>("RoleId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Telephone")
                         .HasColumnType("int");
@@ -1457,19 +1475,19 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UserBranch", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.UserBranch", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<byte>("BranchId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("BranchId")
+                        .HasColumnType("bigint");
 
-                    b.Property<short>("UserId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -1480,13 +1498,13 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("UserBranch");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Vendor", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Vendor", b =>
                 {
-                    b.Property<byte>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .ValueGeneratedOnAdd()
@@ -1505,8 +1523,8 @@ namespace BaseReservation.Infrastructure.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<short>("DistrictId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("DistrictId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -1545,9 +1563,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.ToTable("Vendor");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Branch", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Branch", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.District", "DistrictIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.District", "DistrictIdNavigation")
                         .WithMany("Branches")
                         .HasForeignKey("DistrictId")
                         .IsRequired()
@@ -1556,15 +1574,15 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("DistrictIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchHoliday", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.BranchHoliday", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Branch", "BranchIdNavigation")
                         .WithMany("BranchHolidays")
                         .HasForeignKey("BranchId")
                         .IsRequired()
                         .HasConstraintName("FK_BranchHoliday_Sucursal");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Holiday", "HolidayIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Holiday", "HolidayIdNavigation")
                         .WithMany("BranchHolidays")
                         .HasForeignKey("HolidayId")
                         .IsRequired()
@@ -1575,15 +1593,15 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("HolidayIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchSchedule", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.BranchSchedule", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Branch", "BranchIdNavigation")
                         .WithMany("BranchSchedules")
                         .HasForeignKey("BranchId")
                         .IsRequired()
                         .HasConstraintName("FK_BranchSchedule_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Schedule", "ScheduleIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Schedule", "ScheduleIdNavigation")
                         .WithMany("BranchSchedules")
                         .HasForeignKey("ScheduleId")
                         .IsRequired()
@@ -1594,9 +1612,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ScheduleIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchScheduleBlock", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.BranchScheduleBlock", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.BranchSchedule", "BranchScheduleIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.BranchSchedule", "BranchScheduleIdNavigation")
                         .WithMany("BranchScheduleBlocks")
                         .HasForeignKey("BranchScheduleId")
                         .IsRequired()
@@ -1605,9 +1623,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("BranchScheduleIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Canton", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Canton", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Province", "ProvinceIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Province", "ProvinceIdNavigation")
                         .WithMany("Cantons")
                         .HasForeignKey("ProvinceId")
                         .IsRequired()
@@ -1616,9 +1634,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ProvinceIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Contact", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Contact", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Vendor", "VendorIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Vendor", "VendorIdNavigation")
                         .WithMany("Contacts")
                         .HasForeignKey("VendorId")
                         .IsRequired()
@@ -1627,9 +1645,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("VendorIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Customer", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Customer", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.District", "DistrictIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.District", "DistrictIdNavigation")
                         .WithMany("Customers")
                         .HasForeignKey("DistrictId")
                         .IsRequired()
@@ -1638,9 +1656,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("DistrictIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.District", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.District", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Canton", "CantonIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Canton", "CantonIdNavigation")
                         .WithMany("Districts")
                         .HasForeignKey("CantonId")
                         .IsRequired()
@@ -1649,9 +1667,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("CantonIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Inventory", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Inventory", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Branch", "BranchIdNavigation")
                         .WithMany("Inventories")
                         .HasForeignKey("BranchId")
                         .IsRequired()
@@ -1660,15 +1678,15 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("BranchIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProduct", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InventoryProduct", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Product", "ProductIdNavigation")
                         .WithMany("InventoryProducts")
                         .HasForeignKey("IdProducto")
                         .IsRequired()
                         .HasConstraintName("FK_InventoryProduct_Product");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Inventory", "InventoryIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Inventory", "InventoryIdNavigation")
                         .WithMany("InventoryProducts")
                         .HasForeignKey("InventoryId")
                         .IsRequired()
@@ -1679,9 +1697,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ProductIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProductTransaction", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InventoryProductTransaction", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.InventoryProduct", "InventoryProductIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.InventoryProduct", "InventoryProductIdNavigation")
                         .WithMany("InventoryProductTransactions")
                         .HasForeignKey("InventoryProductId")
                         .IsRequired()
@@ -1690,32 +1708,32 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("InventoryProductIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Invoice", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Invoice", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Branch", "BranchIdNavigation")
                         .WithMany("Invoices")
                         .HasForeignKey("BranchId")
                         .IsRequired()
                         .HasConstraintName("FK_Invoice_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Customer", "CustomerIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Customer", "CustomerIdNavigation")
                         .WithMany("Invoices")
                         .HasForeignKey("CustomerId")
                         .IsRequired()
                         .HasConstraintName("FK_Invoice_Customer");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Order", "OrderIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Order", "OrderIdNavigation")
                         .WithMany("Invoices")
                         .HasForeignKey("OrderId")
                         .HasConstraintName("FK_Invoice_Order");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.PaymentType", "PaymentTypeIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.PaymentType", "PaymentTypeIdNavigation")
                         .WithMany("Invoices")
                         .HasForeignKey("PaymentTypeId")
                         .IsRequired()
                         .HasConstraintName("FK_Invoice_PaymentType");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Tax", "TaxIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Tax", "TaxIdNavigation")
                         .WithMany("Invoices")
                         .HasForeignKey("TaxId")
                         .IsRequired()
@@ -1732,20 +1750,20 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("TaxIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetail", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InvoiceDetail", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Invoice", "InvoiceIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Invoice", "InvoiceIdNavigation")
                         .WithMany("InvoiceDetails")
                         .HasForeignKey("InvoiceId")
                         .IsRequired()
                         .HasConstraintName("FK_InvoiceDetail_Invoice");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Product", "ProductIdNavigation")
                         .WithMany("InvoiceDetails")
                         .HasForeignKey("ProductId")
                         .HasConstraintName("FK_InvoiceDetail_Product");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Service", "ServiceIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Service", "ServiceIdNavigation")
                         .WithMany("InvoiceDetails")
                         .HasForeignKey("ServiceId")
                         .HasConstraintName("FK_InvoiceDetail_Service");
@@ -1757,15 +1775,15 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ServiceIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetailProduct", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InvoiceDetailProduct", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.InvoiceDetail", "InvoiceDetailIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.InvoiceDetail", "InvoiceDetailIdNavigation")
                         .WithMany("InvoiceDetailProducts")
                         .HasForeignKey("InvoiceDetailId")
                         .IsRequired()
                         .HasConstraintName("FK_InvoiceDetailProduct_InvoiceDetail");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Product", "ProductIdNavigation")
                         .WithMany("InvoiceDetailProducts")
                         .HasForeignKey("ProductId")
                         .IsRequired()
@@ -1776,39 +1794,39 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ProductIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Order", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Order", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Branch", "BranchIdNavigation")
                         .WithMany("Orders")
                         .HasForeignKey("BranchId")
                         .IsRequired()
                         .HasConstraintName("FK_Order_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Customer", "CustomerIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Customer", "CustomerIdNavigation")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .IsRequired()
                         .HasConstraintName("FK_Order_Customer");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.PaymentType", "PaymentTypeIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.PaymentType", "PaymentTypeIdNavigation")
                         .WithMany("Orders")
                         .HasForeignKey("PaymentTypeId")
                         .IsRequired()
                         .HasConstraintName("FK_Order_PaymentType");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Reservation", "ReservationIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Reservation", "ReservationIdNavigation")
                         .WithMany("Orders")
                         .HasForeignKey("ReservationId")
                         .IsRequired()
                         .HasConstraintName("FK_Order_Reservation");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.StatusOrder", "StatusOrderIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.StatusOrder", "StatusOrderIdNavigation")
                         .WithMany("Orders")
                         .HasForeignKey("StatusOrderId")
                         .IsRequired()
                         .HasConstraintName("FK_Order_StatusOrder");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Tax", "TaxIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Tax", "TaxIdNavigation")
                         .WithMany("Orders")
                         .HasForeignKey("TaxId")
                         .IsRequired()
@@ -1827,20 +1845,20 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("TaxIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetail", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.OrderDetail", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Order", "OrderIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Order", "OrderIdNavigation")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .IsRequired()
                         .HasConstraintName("FK_OrderDetail_Order");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Product", "ProductIdNavigation")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
                         .HasConstraintName("FK_OrderDetail_Product");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Service", "ServiceIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Service", "ServiceIdNavigation")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ServiceId")
                         .HasConstraintName("FK_OrderDetail_Service");
@@ -1852,15 +1870,15 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ServiceIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetailProduct", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.OrderDetailProduct", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.OrderDetail", "OrderDetailIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.OrderDetail", "OrderDetailIdNavigation")
                         .WithMany("OrderDetailProducts")
                         .HasForeignKey("OrderDetailId")
                         .IsRequired()
                         .HasConstraintName("FK_OrderDetailProduct_OrderDetail");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Product", "ProductIdNavigation")
                         .WithMany("OrderDetailProducts")
                         .HasForeignKey("ProductId")
                         .IsRequired()
@@ -1871,15 +1889,15 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ProductIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Product", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Product", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Category", "CategoryIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Category", "CategoryIdNavigation")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .IsRequired()
                         .HasConstraintName("FK_Product_Category");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.UnitMeasure", "UnitMeasureIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.UnitMeasure", "UnitMeasureIdNavigation")
                         .WithMany("Products")
                         .HasForeignKey("UnitMeasureId")
                         .IsRequired()
@@ -1890,15 +1908,15 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("UnitMeasureIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Reservation", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Reservation", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Branch", "BranchIdNavigation")
                         .WithMany("Reservations")
                         .HasForeignKey("BranchId")
                         .IsRequired()
                         .HasConstraintName("FK_Reservation_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Customer", "CustomerIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Customer", "CustomerIdNavigation")
                         .WithMany("Reservations")
                         .HasForeignKey("CustomerId")
                         .IsRequired()
@@ -1909,20 +1927,20 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("CustomerIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservationDetail", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.ReservationDetail", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Product", "ProductIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Product", "ProductIdNavigation")
                         .WithMany("ReservationDetails")
                         .HasForeignKey("ProductId")
                         .HasConstraintName("FK_ReservationDetail_Product");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Reservation", "ReservationIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Reservation", "ReservationIdNavigation")
                         .WithMany("ReservationDetails")
                         .HasForeignKey("ReservationId")
                         .IsRequired()
                         .HasConstraintName("FK_ReservationDetail_Reservation");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Service", "ServiceIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Service", "ServiceIdNavigation")
                         .WithMany("ReservationDetails")
                         .HasForeignKey("ServiceId")
                         .HasConstraintName("FK_ReservationDetail_Service");
@@ -1934,9 +1952,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ServiceIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.ReservationQuestion", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.ReservationQuestion", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Reservation", "ReservationIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Reservation", "ReservationIdNavigation")
                         .WithMany("ReservationQuestions")
                         .HasForeignKey("ReservationId")
                         .IsRequired()
@@ -1945,9 +1963,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ReservationIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Service", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Service", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.TypeService", "TypeServiceIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.TypeService", "TypeServiceIdNavigation")
                         .WithMany("Services")
                         .HasForeignKey("TypeServiceId")
                         .IsRequired()
@@ -1956,9 +1974,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("TypeServiceIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TokenMaster", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.TokenMaster", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.User", "UserIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.User", "UserIdNavigation")
                         .WithMany("TokenMasters")
                         .HasForeignKey("UserId")
                         .IsRequired()
@@ -1967,21 +1985,21 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("UserIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.User", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.User", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.District", "DistrictIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.District", "DistrictIdNavigation")
                         .WithMany("Users")
                         .HasForeignKey("DistrictId")
                         .IsRequired()
                         .HasConstraintName("FK_User_District");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Gender", "GenderIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Gender", "GenderIdNavigation")
                         .WithMany("Users")
                         .HasForeignKey("GenderId")
                         .IsRequired()
                         .HasConstraintName("FK_User_Gender");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.Role", "RoleIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Role", "RoleIdNavigation")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .IsRequired()
@@ -1994,15 +2012,15 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("RoleIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UserBranch", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.UserBranch", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.Branch", "BranchIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.Branch", "BranchIdNavigation")
                         .WithMany("UserBranches")
                         .HasForeignKey("BranchId")
                         .IsRequired()
                         .HasConstraintName("FK_UserBranch_Branch");
 
-                    b.HasOne("BaseReservation.Infrastructure.Models.User", "UserIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.User", "UserIdNavigation")
                         .WithMany("UserBranches")
                         .HasForeignKey("UserId")
                         .IsRequired()
@@ -2013,9 +2031,9 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("UserIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Vendor", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Vendor", b =>
                 {
-                    b.HasOne("BaseReservation.Infrastructure.Models.District", "DistrictIdNavigation")
+                    b.HasOne("BaseReservation.Infrastructure.District", "DistrictIdNavigation")
                         .WithMany("Vendors")
                         .HasForeignKey("DistrictId")
                         .IsRequired()
@@ -2024,7 +2042,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("DistrictIdNavigation");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Branch", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Branch", b =>
                 {
                     b.Navigation("BranchHolidays");
 
@@ -2041,22 +2059,22 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("UserBranches");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.BranchSchedule", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.BranchSchedule", b =>
                 {
                     b.Navigation("BranchScheduleBlocks");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Canton", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Canton", b =>
                 {
                     b.Navigation("Districts");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Category", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Customer", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Customer", b =>
                 {
                     b.Navigation("Invoices");
 
@@ -2065,7 +2083,7 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("Reservations");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.District", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.District", b =>
                 {
                     b.Navigation("Branches");
 
@@ -2076,56 +2094,56 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("Vendors");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Gender", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Gender", b =>
                 {
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Holiday", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Holiday", b =>
                 {
                     b.Navigation("BranchHolidays");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Inventory", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Inventory", b =>
                 {
                     b.Navigation("InventoryProducts");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InventoryProduct", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InventoryProduct", b =>
                 {
                     b.Navigation("InventoryProductTransactions");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Invoice", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Invoice", b =>
                 {
                     b.Navigation("InvoiceDetails");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.InvoiceDetail", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.InvoiceDetail", b =>
                 {
                     b.Navigation("InvoiceDetailProducts");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Order", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Order", b =>
                 {
                     b.Navigation("Invoices");
 
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.OrderDetail", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.OrderDetail", b =>
                 {
                     b.Navigation("OrderDetailProducts");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.PaymentType", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.PaymentType", b =>
                 {
                     b.Navigation("Invoices");
 
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Product", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Product", b =>
                 {
                     b.Navigation("InventoryProducts");
 
@@ -2140,12 +2158,12 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ReservationDetails");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Province", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Province", b =>
                 {
                     b.Navigation("Cantons");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Reservation", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Reservation", b =>
                 {
                     b.Navigation("Orders");
 
@@ -2154,17 +2172,17 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ReservationQuestions");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Role", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Role", b =>
                 {
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Schedule", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Schedule", b =>
                 {
                     b.Navigation("BranchSchedules");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Service", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Service", b =>
                 {
                     b.Navigation("InvoiceDetails");
 
@@ -2173,36 +2191,36 @@ namespace BaseReservation.Infrastructure.Migrations
                     b.Navigation("ReservationDetails");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.StatusOrder", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.StatusOrder", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Tax", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Tax", b =>
                 {
                     b.Navigation("Invoices");
 
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.TypeService", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.TypeService", b =>
                 {
                     b.Navigation("Services");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.UnitMeasure", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.UnitMeasure", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.User", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.User", b =>
                 {
                     b.Navigation("TokenMasters");
 
                     b.Navigation("UserBranches");
                 });
 
-            modelBuilder.Entity("BaseReservation.Infrastructure.Models.Vendor", b =>
+            modelBuilder.Entity("BaseReservation.Infrastructure.Vendor", b =>
                 {
                     b.Navigation("Contacts");
                 });

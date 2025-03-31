@@ -1,12 +1,12 @@
+using BaseReservation.Application.ResponseDTOs.Base;
+
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseCantonDto
+public record ResponseCantonDto : BaseSimpleEntity
 {
-    public byte Id { get; set; }
-
     public string Name { get; set; } = null!;
 
-    public byte ProvinceId { get; set; }
+    public long ProvinceId { get; set; }
 
     public virtual ICollection<ResponseDistrictDto> Districts { get; set; } = new List<ResponseDistrictDto>();
 

@@ -24,7 +24,7 @@ public interface IServiceVendor
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseVendorDto</returns>
-    Task<ResponseVendorDto> FindByIdAsync(byte id);
+    Task<ResponseVendorDto> FindByIdAsync(long id);
 
     /// <summary>
     /// Create vendor
@@ -39,12 +39,12 @@ public interface IServiceVendor
     /// <param name="id">Vendor id</param>
     /// <param name="vendorDto">Vendor request model to be updated</param>
     /// <returns>ResponseVendorDto</returns>
-    Task<ResponseVendorDto> UpdateVendorAsync(byte id, RequestVendorDto vendorDto);
+    Task<ResponseVendorDto> UpdateVendorAsync(long id, RequestVendorDto vendorDto);
 
     /// <summary>
     /// Delete existing vendor
     /// </summary>
     /// <param name="id">Vendor id</param>
     /// <returns>bool</returns>
-    Task<bool> DeleteVendorAsync(byte id);
+    Task<bool> DeleteVendorAsync(long id);
 }

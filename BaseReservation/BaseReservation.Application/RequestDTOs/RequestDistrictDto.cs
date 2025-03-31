@@ -1,10 +1,8 @@
 ﻿namespace BaseReservation.Application.RequestDTOs;
 
-public record RequestDistrictDto
+public record RequestDistrictDto : RequestBaseDto
 {
-    public short Id { get; set; }
-
     public string Name { get; set; } = null!;
 
-    public byte CantonId { get; set; }
+    public long CantonId { get; set; }
 }

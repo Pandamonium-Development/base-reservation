@@ -1,5 +1,6 @@
-﻿using BaseReservation.Application.ResponseDTOs;
+﻿using BaseReservation.Application.Enums;
 using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
 
 namespace BaseReservation.Application.Services.Interfaces
 {
@@ -10,14 +11,22 @@ namespace BaseReservation.Application.Services.Interfaces
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <returns>ICollection of ResponseBranchScheduleDto</returns>
-        Task<ICollection<ResponseBranchScheduleDto>> ListAllByBranchAsync(byte branchId);
+        Task<ICollection<ResponseBranchScheduleDto>> ListAllByBranchAsync(long branchId);
+
+        /// <summary>
+        /// Find all branch's schedules by week day
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="weekDay">Week day</param>
+        /// <returns>ICollection of ResponseBranchScheduleDto</returns>
+        Task<ResponseBranchScheduleDto> FindByWeekDayAsync(long branchId, WeekDayApplication weekDay);
 
         /// <summary>
         /// Get branch schedule with specific id
         /// </summary>
         /// <param name="id">Branch scheduel id to look for</param>
         /// <returns>ResponseBranchScheduleDto</returns>
-        Task<ResponseBranchScheduleDto?> FindByIdAsync(short id);
+        Task<ResponseBranchScheduleDto?> FindByIdAsync(long id);
 
         /// <summary>
         /// Create branch's schedules
@@ -25,6 +34,6 @@ namespace BaseReservation.Application.Services.Interfaces
         /// <param name="branchId">Branch id that receive schedules</param>
         /// <param name="branchSchedules">List of Branch's schedules will be added</param>
         /// <returns>bool</returns>
-        Task<bool> CreateBranchScheduleAsync(byte branchId, IEnumerable<RequestBranchScheduleDto> branchSchedules);
+        Task<bool> CreateBranchScheduleAsync(long branchId, IEnumerable<RequestBranchScheduleDto> branchSchedules);
     }
 }

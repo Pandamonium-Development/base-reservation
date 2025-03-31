@@ -1,9 +1,9 @@
-﻿namespace BaseReservation.Application.ResponseDTOs;
+﻿using BaseReservation.Application.ResponseDTOs.Base;
 
-public record ResponseUnitMeasureDto
+namespace BaseReservation.Application.ResponseDTOs;
+
+public record ResponseUnitMeasureDto : BaseSimpleEntity
 {
-    public byte Id { get; set; }
-
     public string Name { get; set; } = null!;
 
     public string Symbol { get; set; } = null!;

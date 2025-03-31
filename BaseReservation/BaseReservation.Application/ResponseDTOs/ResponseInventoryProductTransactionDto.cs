@@ -5,9 +5,7 @@ namespace BaseReservation.Application.ResponseDTOs;
 
 public record ResponseInventoryProductTransactionDto : BaseEntity
 {
-    public long Id { get; set; }
-
-    public long IdInventarioProducto { get; set; }
+    public long InventoryProductId { get; set; }
 
     public TransactionTypeInventoryApplication TransactionType { get; set; }
 

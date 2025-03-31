@@ -1,12 +1,12 @@
+using BaseReservation.Application.ResponseDTOs.Base;
+
 namespace BaseReservation.Application.ResponseDTOs;
 
-public record ResponseInvoiceDetailProductDto
+public record ResponseInvoiceDetailProductDto : BaseSimpleEntity
 {
-    public long Id { get; set; }
-
     public long InvoiceDetailId { get; set; }
 
-    public short ProductId { get; set; }
+    public long ProductId { get; set; }
 
     public decimal Quantity { get; set; }
 

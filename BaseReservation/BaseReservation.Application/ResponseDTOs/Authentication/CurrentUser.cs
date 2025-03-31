@@ -4,7 +4,7 @@ namespace BaseReservation.Application.ResponseDTOs.Authentication;
 
 public record CurrentUser
 {
-    public short UserId { get; init; }
+    public long UserId { get; init; }
 
     public string? Email { get; init; }
 

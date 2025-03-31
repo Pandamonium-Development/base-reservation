@@ -16,7 +16,7 @@ public interface IServiceService
     /// </summary>
     /// <param name="id">Id to look for</param>
     /// <returns>ResponseServiceDto</returns>
-    Task<ResponseServiceDto> FindByIdAsync(byte id);
+    Task<ResponseServiceDto> FindByIdAsync(long id);
 
     /// <summary>
     /// Create a service
@@ -31,12 +31,12 @@ public interface IServiceService
     /// <param name="id">Id to identify record</param>
     /// <param name="serviceDto">Request service model to be updated</param>
     /// <returns>ResponseServiceDto</returns>
-    Task<ResponseServiceDto> UpdateServiceAsync(byte id, RequestServiceDto serviceDto);
+    Task<ResponseServiceDto> UpdateServiceAsync(long id, RequestServiceDto serviceDto);
 
     /// <summary>
     /// Deletes a service based on the provided Id.
     /// </summary>
     /// <param name="id">Id of the service to delete.</param>
     /// <returns>True if successful, otherwise false.</returns>
-    Task<bool> DeleteServiceAsync(byte id);
+    Task<bool> DeleteServiceAsync(long id);
 }

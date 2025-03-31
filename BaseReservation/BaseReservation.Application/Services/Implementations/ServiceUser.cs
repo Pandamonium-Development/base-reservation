@@ -1,33 +1,34 @@
-﻿using BaseReservation.Application.Common;
+﻿using AutoMapper;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.ResponseDTOs.Enums;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceUser(IRepositoryUser repository, IRepositoryBranch repositoryBranch, IMapper mapper) : IServiceUser
+public class ServiceUser(ICoreService<User> coreService, IMapper mapper) : IServiceUser
 {
     /// <inheritdoc />
-    public async Task<ResponseUserDto> FindByIdAsync(short id)
+    public async Task<ResponseUserDto> FindByIdAsync(long id)
     {
-        var user = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<User>(x => x.Id == id);
+        var user = await coreService.UnitOfWork.Repository<User>().FirstOrDefaultAsync(spec);
         if (user == null) throw new NotFoundException("Usuario no encontrado.");
 
         return mapper.Map<ResponseUserDto>(user);
     }
 
     /// <inheritdoc />
-    public async Task<bool> IsAvailableAsync(short id, byte branchId)
+    public async Task<ResponseUserDto> FindByEmailAsync(string email)
     {
-        var user = await repository.ExistsUserAsync(id);
-        if (!user) throw new NotFoundException("Usuario no encontrado.");
+        var spec = new BaseSpecification<User>(x => x.Email == email);
+        var user = await coreService.UnitOfWork.Repository<User>().FirstOrDefaultAsync(spec);
+        if (user == null) throw new NotFoundException("Usuario no encontrado.");
 
-        var branch = await repositoryBranch.ExistsBranchAsync(branchId);
-        if (!branch) throw new NotFoundException("Sucursal no encontrada.");
-
-        return await repository.IsAvailableAsync(id, branchId);
+        return mapper.Map<ResponseUserDto>(user);
     }
 
     /// <inheritdoc />
@@ -35,16 +36,33 @@ public class ServiceUser(IRepositoryUser repository, IRepositoryBranch repositor
     {
         if (role == null)
         {
-            var list = await repository.ListAllAsync();
+            var list = await coreService.UnitOfWork.Repository<User>().ListAllAsync();
             return mapper.Map<ICollection<ResponseUserDto>>(list);
         }
 
         RoleApplication roleEnum;
         if (!Enum.TryParse(role, out roleEnum)) throw new BaseReservationException("Rol Inválido");
 
-        var listFilter = await repository.ListAllByRoleAsync((byte)roleEnum);
+        var spec = new BaseSpecification<User>(x => x.RoleId == (long)roleEnum);
+        var listFilter = await coreService.UnitOfWork.Repository<User>().ListAsync(spec);
         var collection = mapper.Map<ICollection<ResponseUserDto>>(listFilter);
 
         return collection;
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> ExistsUserAsync(long id)
+    {
+        return await coreService.UnitOfWork.Repository<User>().ExistsAsync(id);
+    }
+
+    /// <inheritdoc />
+    public async Task<ResponseUserDto> LoginAsync(string email, string password)
+    {
+        var spec = new BaseSpecification<User>(x => x.Email == email && x.Password == password && x.Active);
+        var user = await coreService.UnitOfWork.Repository<User>().FirstOrDefaultAsync(spec);
+        if (user == null) throw new NotFoundException("Email o contraseña incorrecta.");
+
+        return mapper.Map<ResponseUserDto>(user);
     }
 }

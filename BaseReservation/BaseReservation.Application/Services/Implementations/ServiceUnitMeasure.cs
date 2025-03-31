@@ -1,28 +1,31 @@
-﻿using BaseReservation.Application.Common;
+﻿using AutoMapper;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceUnitMeasure(IRepositoryUnitMeasure repository, IMapper mapper) : IServiceUnitMeasure
+public class ServiceUnitMeasure(ICoreService<UnitMeasure> coreService, IMapper mapper) : IServiceUnitMeasure
 {
     /// <inheritdoc />
     public async Task<ResponseUnitMeasureDto> FindByIdAsync(byte id)
     {
-        var unidad = await repository.FindByIdAsync(id);
-        if (unidad == null) throw new NotFoundException("Unidad de medida no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<UnitMeasure>().ExistsAsync(id)) throw new NotFoundException("Unidad de medida no encontrada.");
 
-        return mapper.Map<ResponseUnitMeasureDto>(unidad);
+        var spec = new BaseSpecification<UnitMeasure>(x => x.Id == id);
+        var unitMeasure = await coreService.UnitOfWork.Repository<UnitMeasure>().FirstOrDefaultAsync(spec);
+
+        return mapper.Map<ResponseUnitMeasureDto>(unitMeasure);
     }
 
     /// <inheritdoc />
     public async Task<ICollection<ResponseUnitMeasureDto>> ListAllAsync()
     {
-        var list = await repository.ListAllAsync();
-        var collection = mapper.Map<ICollection<ResponseUnitMeasureDto>>(list);
+        var unitMeasures = await coreService.UnitOfWork.Repository<UnitMeasure>().ListAllAsync();
 
-        return collection;
+        return mapper.Map<ICollection<ResponseUnitMeasureDto>>(unitMeasures);
     }
 }

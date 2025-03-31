@@ -1,15 +1,16 @@
-﻿using BaseReservation.Application.Common;
-using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Infrastructure.Models;
-using BaseReservation.Infrastructure.Repository.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
+using BaseReservation.Infrastructure;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
+using BaseReservation.Application.Core.Interfaces;
+using BaseReservation.Application.Services.Interfaces;
 
 namespace BaseReservation.Application.Services.Implementations;
 
-public class ServiceProduct(IRepositoryProduct repository, IMapper mapper,
+public class ServiceProduct(ICoreService<Product> coreService, IMapper mapper,
                                   IValidator<Product> productValidator) : IServiceProduct
 {
     /// <inheritdoc />
@@ -17,40 +18,57 @@ public class ServiceProduct(IRepositoryProduct repository, IMapper mapper,
     {
         var product = await ValidateProductAsync(productDTO);
 
-        var result = await repository.CreateProductAsync(product);
+        var result = await coreService.UnitOfWork.Repository<Product>().AddAsync(product);
+        await coreService.UnitOfWork.SaveChangesAsync();
         if (result == null) throw new NotFoundException("Producto no creado.");
 
         return mapper.Map<ResponseProductDto>(result);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseProductDto> UpdateProductAsync(short id, RequestProductDto productDTO)
+    public async Task<ResponseProductDto> UpdateProductAsync(long id, RequestProductDto productDTO)
     {
-        if (!await repository.ExistsProductAsync(id)) throw new NotFoundException("Product no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<Product>().ExistsAsync(id)) throw new NotFoundException("Product no encontrada.");
 
         var product = await ValidateProductAsync(productDTO);
         product.Id = id;
-        var result = await repository.UpdateProductAsync(product);
-
-        return mapper.Map<ResponseProductDto>(result);
+        coreService.UnitOfWork.Repository<Product>().Update(product);
+        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+        if (rowsAffected == 0) throw new NotFoundException("Producto no actualizado.");
+        
+        return await FindByIdAsync(id);
     }
 
     /// <inheritdoc />
-    public async Task<ResponseProductDto> FindByIdAsync(short id)
+    public async Task<ResponseProductDto> FindByIdAsync(long id)
     {
-        var product = await repository.FindByIdAsync(id);
+        var spec = new BaseSpecification<Product>(x => x.Id == id);
+        var product = await coreService.UnitOfWork.Repository<Product>().FirstOrDefaultAsync(spec);
         if (product == null) throw new NotFoundException("Producto no encontrado.");
 
         return mapper.Map<ResponseProductDto>(product);
     }
 
     /// <inheritdoc />
-    public async Task<ICollection<ResponseProductDto>> ListAllAsync(bool excludeProductsInventory = false, short inventoryId = 0)
+    public async Task<ICollection<ResponseProductDto>> ListAllAsync(bool excludeProductsInventory = false, long inventoryId = 0)
     {
-        var list = await repository.ListAllAsync(excludeProductsInventory, inventoryId);
-        var collection = mapper.Map<ICollection<ResponseProductDto>>(list);
+        if(!excludeProductsInventory)
+        {
+            var products = await coreService.UnitOfWork.Repository<Product>().ListAllAsync();
+            return mapper.Map<ICollection<ResponseProductDto>>(products);
+        }
 
-        return collection;
+        var queryExcluded = from a in coreService.UnitOfWork.Repository<Product>().AsQueryable()
+                    join b in coreService.UnitOfWork.Repository<InventoryProduct>().AsQueryable() on a.Id equals b.ProductId
+                    join c in coreService.UnitOfWork.Repository<Inventory>().AsQueryable() on b.InventoryId equals c.Id
+                    where c.Id == inventoryId
+                    select a;
+
+        var query = coreService.UnitOfWork.Repository<Product>().AsQueryable().Except(queryExcluded);
+
+        var productsFiltered = await coreService.UnitOfWork.Repository<Product>().ListAsync(query);
+
+        return mapper.Map<ICollection<ResponseProductDto>>(productsFiltered);
     }
 
     /// <summary>
