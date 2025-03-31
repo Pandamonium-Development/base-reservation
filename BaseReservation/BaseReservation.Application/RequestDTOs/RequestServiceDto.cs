@@ -11,6 +11,4 @@ public record RequestServiceDto : RequestBaseDto
     public decimal Price { get; set; }
 
     public string? Observation { get; set; }
-
-    public bool Active { get; set; }
 }

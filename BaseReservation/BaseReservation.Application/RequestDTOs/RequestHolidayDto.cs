@@ -6,8 +6,6 @@ public record RequestHolidayDto : RequestBaseDto
 {
     public string Name { get; set; } = null!;
 
-    public bool Active { get; set; }
-
     public MonthApplication Month { get; set; }
 
     public byte Day { get; set; }

@@ -1,11 +1,11 @@
-using BaseReservation.Application.ResponseDTOs.Authentication;
-using BaseReservation.Application.ResponseDTOs.Enums;
 using Microsoft.AspNetCore.Authorization;
+using BaseReservation.Application.ResponseDTOs.Enums;
+using BaseReservation.Application.ResponseDTOs.Authentication;
 
 namespace BaseReservation.WebAPI.Authorization;
 
 /// <summary>
-/// User identity hanlder class
+/// User identity handler class
 /// </summary>
 public class UserIdentityHandler : AuthorizationHandler<IdentifiedUser>
 {
@@ -31,6 +31,7 @@ public class UserIdentityHandler : AuthorizationHandler<IdentifiedUser>
         }
 
         context.Succeed(requirement);
+
         return Task.CompletedTask;
     }
 }

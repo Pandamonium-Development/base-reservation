@@ -5,7 +5,6 @@ using BaseReservation.WebAPI.Swagger;
 using BaseReservation.Utils.Converter;
 using BaseReservation.WebAPI.Configuration;
 using BaseReservation.WebAPI.Authorization;
-using BaseReservation.Application.Configuration;
 
 var BaseReservationSpecificOrigins = "_BaseReservationSpecificOrigins";
 
@@ -30,24 +29,21 @@ builder.Services.AddAuthorization(opts =>
     });
 });
 
-//Configure api versioning
+builder.Services.ConfigureDataBase(configuration);
+
+builder.Services.ConfigureAuthentication(configuration);
+
 builder.Services.ConfigureApiVersioning();
 
-// Add HttpContextAccessor
 builder.Services.AddHttpContextAccessor();
 
-//Configure Application, Mapper and Fluent Validation
 builder.Services.ConfigureIoC();
+
 builder.Services.ConfigureAutoMapper();
+
 builder.Services.ConfigureFluentValidation();
 
 builder.Services.ConfigureSwagger();
-
-//Configure database 
-builder.Services.ConfigureDataBase(configuration);
-
-//Configure authentication
-builder.Services.ConfigureAuthentication(configuration);
 
 builder.Services.AddCors(options =>
 {

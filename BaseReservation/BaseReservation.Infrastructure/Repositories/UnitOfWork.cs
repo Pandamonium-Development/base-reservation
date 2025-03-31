@@ -1,16 +1,16 @@
+using Dapper;
 using System.Data;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using BaseReservation.Application.Core.Interfaces;
-using BaseReservation.Common.Extensions;
-using BaseReservation.Domain.Core.Models;
-using BaseReservation.Domain.Exceptions;
-using BaseReservation.Infrastructure.Data;
-using Dapper;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
+using BaseReservation.Common.Extensions;
+using BaseReservation.Domain.Exceptions;
+using BaseReservation.Domain.Core.Models;
+using BaseReservation.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore.Storage;
+using BaseReservation.Application.Core.Interfaces;
 
 namespace BaseReservation.Infrastructure.Repositories;
 

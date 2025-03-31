@@ -1,6 +1,5 @@
-﻿using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.ResponseDTOs.Enums;
-using BaseReservation.Application.RequestDTOs;
+﻿using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
 
 namespace BaseReservation.Application.Services.Interfaces;
 

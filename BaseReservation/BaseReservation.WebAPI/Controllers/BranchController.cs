@@ -1,12 +1,11 @@
 using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using BaseReservation.WebAPI.Configuration;
 using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Application.ResponseDTOs.Enums;
-using BaseReservation.Application.Services.Implementations;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.WebAPI.Configuration;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BaseReservation.WebAPI.Controllers;
 

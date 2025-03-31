@@ -3,11 +3,9 @@ using FluentValidation;
 using BaseReservation.Infrastructure;
 using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.RequestDTOs;
-using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Domain.Core.Specifications;
 using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Application.Services.Interfaces.Authorization;
 
 namespace BaseReservation.Application.Services.Implementations;
 

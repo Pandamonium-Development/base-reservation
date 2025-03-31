@@ -1,6 +1,6 @@
 ﻿using System.Text;
-using System.Security.Claims;
 using BaseReservation.Utils;
+using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using BaseReservation.Infrastructure;
 using System.IdentityModel.Tokens.Jwt;

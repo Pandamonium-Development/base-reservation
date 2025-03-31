@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using BaseReservation.Application.Configuration.Authentication;
-using BaseReservation.Application.Services.Implementations;
-using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Application.ValueResolvers;
-using BaseReservation.WebAPI.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
+using BaseReservation.WebAPI.Authorization;
+using BaseReservation.Application.ValueResolvers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using BaseReservation.Application.Services.Interfaces;
+using BaseReservation.Application.Services.Implementations;
+using BaseReservation.Application.Configuration.Authentication;
 
 namespace BaseReservation.WebAPI.Configuration;
 

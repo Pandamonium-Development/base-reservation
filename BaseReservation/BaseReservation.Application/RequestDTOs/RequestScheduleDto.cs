@@ -9,6 +9,4 @@ public record RequestScheduleDto : RequestBaseDto
     public TimeOnly StartHour { get; set; }
 
     public TimeOnly EndHour { get; set; }
-
-    public bool Active { get; set; }
 }

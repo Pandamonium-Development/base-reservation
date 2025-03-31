@@ -10,26 +10,26 @@ public static class ErrorHandling
     /// <summary>
     /// Get message exception
     /// </summary>
-    /// <param name="excepcion">Exception handled</param>
+    /// <param name="exception">Exception handled</param>
     /// <returns>string</returns>
-    public static string? GetMessageException(Exception excepcion)
+    public static string? GetMessageException(Exception exception)
     {
-        if (excepcion == null) return null;
+        if (exception == null) return null;
 
         var errorMessage = new StringBuilder();
-        errorMessage.Append(excepcion.Message);
-        return excepcion.InnerException != null ? GetInnerMessageExceptions(excepcion) : errorMessage.ToString();
+        errorMessage.Append(exception.Message);
+        return exception.InnerException != null ? GetInnerMessageExceptions(exception) : errorMessage.ToString();
     }
 
     /// <summary>
     /// Get the inner message exception
     /// </summary>
-    /// <param name="excepcion">Exception handled</param>
+    /// <param name="exception">Exception handled</param>
     /// <returns>string</returns>
-    private static string GetInnerMessageExceptions(Exception excepcion)
+    private static string GetInnerMessageExceptions(Exception exception)
     {
-        if (excepcion.InnerException == null) return excepcion.Message;
+        if (exception.InnerException == null) return exception.Message;
 
-        return $"{excepcion.Message} : {GetInnerMessageExceptions(excepcion.InnerException)}";
+        return $"{exception.Message} : {GetInnerMessageExceptions(exception.InnerException)}";
     }
 }

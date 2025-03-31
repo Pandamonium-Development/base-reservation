@@ -1,6 +1,6 @@
-using BaseReservation.Application.ResponseDTOs.Enums;
 using BaseReservation.Utils;
 using Microsoft.AspNetCore.Authorization;
+using BaseReservation.Application.ResponseDTOs.Enums;
 
 namespace BaseReservation.WebAPI.Configuration;
 

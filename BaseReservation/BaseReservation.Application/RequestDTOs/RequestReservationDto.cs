@@ -14,8 +14,6 @@ public record RequestReservationDto : RequestBaseDto
 
     public string Status { get; set; } = null!;
 
-    public bool Active { get; set; }
-
     public List<RequestReservationQuestionDto> ReservationQuestion { get; set; } = null!;
 
     public List<RequestReservationDetailDto> ReservationDetails { get; set; } = null!;

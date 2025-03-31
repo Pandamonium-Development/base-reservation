@@ -15,6 +15,4 @@ public record RequestProductDto : RequestBaseDto
     public string Sku { get; set; } = null!;
 
     public long UnitMeasureId { get; set; }
-
-    public bool Active { get; set; }
 }

@@ -1,17 +1,17 @@
 ﻿using Asp.Versioning;
-using BaseReservation.Application.Configuration.Pagination;
+using BaseReservation.Utils;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using BaseReservation.WebAPI.Configuration;
 using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Utils;
-using BaseReservation.WebAPI.Configuration;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using BaseReservation.Application.Configuration.Pagination;
 
 namespace BaseReservation.WebAPI.Controllers;
 
 /// <summary>
-/// Controller for managing suppliers (Vendores).
+/// Controller for managing suppliers (Vendors).
 /// </summary>
 /// <param name="serviceVendor">The service used for supplier operations.</param>
 [ApiController]
@@ -46,7 +46,7 @@ public class VendorController(IServiceVendor serviceVendor) : ControllerBase
             paginated.HasPrevious
         };
 
-        Response.Headers.Add("X-Pagination", Serialization.Serialize(metadata));
+        Response.Headers.Append("X-Pagination", Serialization.Serialize(metadata));
 
         return StatusCode(StatusCodes.Status200OK, paginated);
     }

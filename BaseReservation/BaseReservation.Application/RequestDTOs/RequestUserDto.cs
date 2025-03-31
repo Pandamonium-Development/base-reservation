@@ -22,8 +22,6 @@ public record RequestUserDto : RequestBaseDto
 
     public long GenderId { get; set; }
 
-    public bool Active { get; set; }
-
     public string? ProfilePictureUrl { get; set; }
 
     public long RoleId { get; set; }

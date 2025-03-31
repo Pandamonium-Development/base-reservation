@@ -1,7 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
-using System.ComponentModel.DataAnnotations;
 using BaseReservation.Domain.Exceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace BaseReservation.WebAPI.Configuration;
 
@@ -38,7 +38,7 @@ public static class ExceptionHandlingConfigurationExtension
     }
 
     /// <summary>
-    /// Get details of the error catched
+    /// Get details of the error thrown
     /// </summary>
     /// <param name="exception">Exception handler feature</param>
     /// <returns>ErrorDetailsBaseReservation</returns>

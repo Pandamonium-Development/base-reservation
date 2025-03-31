@@ -460,6 +460,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
     public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken)
     {
         OnBeforeSaving();
+
         return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 
@@ -518,6 +519,8 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
 
     private static void GenerateModified(EntityEntry entry, string createdByName, string updatedByName, string updatedBy, DateTime updated)
     {
+        string activeName = "Active";
+        
         if (entry.State == EntityState.Modified)
         {
             if (entry.Entity.GetType().GetProperty(UPDATEDNAME) != null) entry.Property(UPDATEDNAME).CurrentValue = updated;
@@ -525,6 +528,8 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
             if (entry.Entity.GetType().GetProperty(updatedByName) != null) entry.Property(updatedByName).CurrentValue = updatedBy;
             if (entry.Entity.GetType().GetProperty(CREATEDNAME) != null) entry.Property(CREATEDNAME).IsModified = false;
             if (entry.Entity.GetType().GetProperty(createdByName) != null) entry.Property(createdByName).IsModified = false;
+
+            if (entry.Entity.GetType().GetProperty(activeName) == null) entry.Property(activeName).CurrentValue = entry.Property(activeName).CurrentValue;
         }
     }
 }

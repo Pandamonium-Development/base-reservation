@@ -1,7 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using BaseReservation.Common.Extensions;
 using BaseReservation.Domain.Core.Models;
 using BaseReservation.Domain.Core.Specifications;
-using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Infrastructure.Repositories;
 

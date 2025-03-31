@@ -1,5 +1,4 @@
 ﻿using BaseReservation.Application.ResponseDTOs;
-using BaseReservation.Application.ResponseDTOs.Enums;
 
 namespace BaseReservation.Application.Services.Interfaces;
 

@@ -9,6 +9,4 @@ public record RequestInventoryDto : RequestBaseDto
     public long BranchId { get; set; }
 
     public TypeInventoryApplication TypeInventory { get; set; }
-
-    public bool Active { get; set; }
 }

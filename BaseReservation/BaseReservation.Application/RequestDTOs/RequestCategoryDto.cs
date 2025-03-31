@@ -1,6 +1,6 @@
 ﻿namespace BaseReservation.Application.RequestDTOs;
 
-public record RequestCategoriaDto : RequestBaseDto
+public record RequestCategoryDto : RequestBaseDto
 {
     public string Code { get; set; } = null!;
 

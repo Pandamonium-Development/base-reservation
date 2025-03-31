@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
+using BaseReservation.Application.Core.Services;
+using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
 using BaseReservation.Application.Services.Implementations;
 using BaseReservation.Application.Services.Interfaces.Authorization;
 using BaseReservation.Application.Services.Implementations.Authorization;
-using BaseReservation.Application.Core.Interfaces;
-using BaseReservation.Application.Core.Services;
 
 namespace BaseReservation.Application.Configuration;
 

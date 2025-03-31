@@ -6,7 +6,5 @@ public record RequestReservationQuestionDto : RequestBaseDto
 
     public string Question { get; set; } = null!;
 
-    public bool Active { get; set; }
-
     public string? Answer { get; set; }
 }

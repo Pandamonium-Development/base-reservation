@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using BaseReservation.Infrastructure;
 using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.RequestDTOs;
@@ -8,7 +9,6 @@ using BaseReservation.Domain.Core.Specifications;
 using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
 using BaseReservation.Application.Services.Interfaces.Authorization;
-using Microsoft.EntityFrameworkCore;
 
 namespace BaseReservation.Application.Services.Implementations;
 

@@ -15,6 +15,4 @@ public record RequestVendorDto : RequestBaseDto
     public long DistrictId { get; set; }
 
     public string? Address { get; set; }
-
-    public bool Active { get; set; }
 }

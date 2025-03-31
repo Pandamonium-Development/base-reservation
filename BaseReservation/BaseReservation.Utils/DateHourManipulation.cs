@@ -34,18 +34,18 @@ public static class DateHourManipulation
     /// <returns>List<DateOnly></returns>
     public static List<DateOnly> GetDaysAsync(DateOnly startDate, DateOnly endDate)
     {
-        List<DateOnly> dias = new List<DateOnly>();
+        List<DateOnly> days = new List<DateOnly>();
 
         DateOnly diaActual = startDate;
 
         while (diaActual <= endDate)
         {
-            dias.Add(diaActual);
+            days.Add(diaActual);
 
             diaActual = diaActual.AddDays(1);
         }
 
-        return dias;
+        return days;
     }
 
     /// <summary>

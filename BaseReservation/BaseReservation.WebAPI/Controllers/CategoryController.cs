@@ -1,14 +1,14 @@
 ﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using BaseReservation.WebAPI.Configuration;
 using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.WebAPI.Configuration;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BaseReservation.WebAPI.Controllers;
 
 /// <summary>
-/// Initializes a new instance of the CategoriaController with the specified category service.
+/// Initializes a new instance of the CategoryController with the specified category service.
 /// </summary>
 /// <param name="serviceCategory">The service responsible for category operations.</param>
 [ApiController]

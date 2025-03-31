@@ -11,6 +11,4 @@ public record RequestContactDto : RequestBaseDto
     public string Email { get; set; } = null!;
 
     public long VendorId { get; set; }
-
-    public bool Active { get; set; }
 }

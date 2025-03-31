@@ -1,6 +1,6 @@
-using BaseReservation.Application.Configuration.Pagination;
-using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Application.RequestDTOs;
+using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Application.Configuration.Pagination;
 
 namespace BaseReservation.Application.Services.Interfaces;
 

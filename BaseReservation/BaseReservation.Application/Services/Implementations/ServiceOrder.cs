@@ -6,9 +6,9 @@ using BaseReservation.Infrastructure;
 using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.RequestDTOs;
 using BaseReservation.Application.ResponseDTOs;
+using BaseReservation.Domain.Core.Specifications;
 using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using BaseReservation.Domain.Core.Specifications;
 
 namespace BaseReservation.Application.Services.Implementations;
 

@@ -8,7 +8,7 @@ public record RequestInventoryProductDto : RequestBaseDto
 
     public decimal Assignable { get; set; }
 
-    public decimal Mininum { get; set; }
+    public decimal Minimum { get; set; }
 
     public decimal Maximum { get; set; }
 }
