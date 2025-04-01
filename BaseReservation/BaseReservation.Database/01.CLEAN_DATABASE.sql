@@ -5,66 +5,66 @@ BEGIN TRANSACTION ClearDatabase
     WITH MARK N'Cleaning database';
 
 BEGIN TRY
-    -- Facturas
-    DELETE FROM DetalleFacturaProducto;
-    DELETE FROM DetalleFactura;
-    DELETE FROM Factura;
+  -- Invoices
+    DELETE FROM InvoiceDetailProduct;
+    DELETE FROM InvoiceDetail;
+    DELETE FROM Invoice;
 
-    -- Pedido
-    DELETE FROM DetallePedidoProducto;
-    DELETE FROM DetallePedido;
-    DELETE FROM Pedido;
+    -- Order
+    DELETE FROM OrderDetailProduct;
+    DELETE FROM OrderDetail;
+    DELETE FROM [Order];
 
-    -- Reserva
-    DELETE FROM ReservaPregunta;
-    DELETE FROM ReservaServicio;
-    DELETE FROM Reserva;
+    -- Reservation
+    DELETE FROM ReservationQuestion;
+    DELETE FROM ReservationService;
+    DELETE FROM Reservation;
 
-    -- Inventario
-    DELETE FROM InventarioProductoMovimiento;
-    DELETE FROM InventarioProducto;
-    DELETE FROM Inventario;
+    -- Inventory
+    DELETE FROM InventoryProductTransaction;
+    DELETE FROM InventoryProduct;
+    DELETE FROM Inventory;
 
-    -- Proveedor
-    DELETE FROM Contacto;
-    DELETE FROM Proveedor;
+    -- Supplier
+    DELETE FROM Contact;
+    DELETE FROM Supplier;
 
-    -- Producto
-    DELETE FROM Producto;
-    DELETE FROM Categoria;
-    DELETE FROM UnidadMedida;
+    -- Product
+    DELETE FROM Product;
+    DELETE FROM Category;
+    DELETE FROM UnitOfMeasure;
 
-    --Servicio
-    DELETE FROM Servicio;
-    DELETE FROM TipoServicio;
+    -- Service
+    DELETE FROM Service;
+    DELETE FROM ServiceType;
 
-    -- Cliente
-    DELETE FROM Cliente;
+    -- Client
+    DELETE FROM Customer;
 
-    -- Usuario/Seguridad
+    -- User/Security
     DELETE FROM TokenMaster;
-    DELETE FROM UsuarioSucursal;
-    DELETE FROM Usuario;
-    DELETE FROM Rol;
+    DELETE FROM UserBranch;
+    DELETE FROM [User];
+    DELETE FROM Role;
 
-    -- Sucursal
-    DELETE FROM SucursalHorarioBloqueo;
-    DELETE FROM SucursalHorario;
-    DELETE FROM SucursalFeriado;
-    DELETE FROM Horario;
-    DELETE FROM Feriado;
-    DELETE FROM Sucursal;
+    -- Branch
+    DELETE FROM BranchScheduleBlock;
+    DELETE FROM BranchSchedule;
+    DELETE FROM BranchHoliday;
+    DELETE FROM Schedule;
+    DELETE FROM Holiday;
+    DELETE FROM Branch;
 
     -- General
-    DELETE FROM TipoPago;
-    DELETE FROM Genero;
-    DELETE FROM Impuesto;
-    DELETE FROM UnidadMedida;
+    DELETE FROM PaymentType;
+    DELETE FROM Gender;
+    DELETE FROM Tax;
+    DELETE FROM UnitMeasure;
 
-    -- Direcciones
-    DELETE FROM Distrito;
+    -- Addresses
+    DELETE FROM District;
     DELETE FROM Canton;
-    DELETE FROM Provincia;
+    DELETE FROM Province;
 
     EXEC sp_MSForEachTable '
     IF OBJECTPROPERTY(object_id(''?''), ''TableHasIdentity'') = 1
