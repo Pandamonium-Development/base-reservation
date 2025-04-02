@@ -15,7 +15,7 @@ using BaseReservation.Application.Core.Interfaces;
 
 namespace BaseReservation.Infrastructure.Repositories;
 
-public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservationContext dbContext) : IBaseRepositoryAsync<T> where T : BaseEntity
+public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservationContext dbContext) : IBaseRepositoryAsync<T> where T : BaseSimpleDto
 {
     private readonly ILogger<BaseRepositoryAsync<T>> _logger = loggerFactory.CreateLogger<BaseRepositoryAsync<T>>();
 
@@ -49,7 +49,16 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         return query;
     }
 
-    public async Task<int> CountAsync(ISpecification<T> spect) => await ApplySpecification(spect).Where(m => m.Active).CountAsync();
+    public async Task<int> CountAsync(ISpecification<T> spec)
+    {
+        var query = ApplySpecification(spec);
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.CountAsync();
+    }
 
     public void Delete(T entity, bool disableTracking = true)
     {
@@ -94,8 +103,13 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
 
     public async Task<bool> ExistsAsync(long id)
     {
-        var query = await _dbContext.Set<T>().FindAsync(id);
-        if (query == null || (query != null && !query.Active)) return false;
+        var entity = await _dbContext.Set<T>().FindAsync(id);
+        if (entity == null) return false;
+
+        if (entity is BaseEntity baseEntity)
+        {
+            return baseEntity.Active;
+        }
 
         return true;
     }
@@ -107,7 +121,14 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         var query = _dbContext.Set<T>().AsQueryable();
         query = query.AddIncludes(includes);
 
-        return await ApplySpecification(spec, query).Where(m => m.Active).FirstOrDefaultAsync();
+        query = ApplySpecification(spec, query);
+
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<T?> FirstOrDefaultAsync(ISpecification<T> spec, params Expression<Func<T, object>>[]? includes)
@@ -115,7 +136,14 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         var query = _dbContext.Set<T>().AsQueryable();
         query = query.AddIncludes(includes!);
 
-        return await ApplySpecification(spec, query).Where(m => m.Active).FirstOrDefaultAsync();
+        query = ApplySpecification(spec, query);
+
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<T?> FirstOrDefaultAsync(IQueryable<T> query) => await FirstOrDefaultAsync(query, null as string[]);
@@ -123,28 +151,49 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
     public async Task<T?> FirstOrDefaultAsync(IQueryable<T> query, params Expression<Func<T, object>>[]? includes)
     {
         query = query.AddIncludes(includes ?? []);
-        return await query.Where(m => m.Active).FirstOrDefaultAsync();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<T?> FirstOrDefaultAsync(IQueryable<T> query, params string[]? includes)
     {
         query = query.AddIncludes(includes);
-        return await query.Where(m => m.Active).FirstOrDefaultAsync();
+
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<TResult?> FirstOrDefaultAsync<Tkey, TResult>(IQueryable<T> query, Expression<Func<T, Tkey>> grouping, Expression<Func<IGrouping<Tkey, T>, TResult>> resultSelector, params Expression<Func<T, object>>[]? includes)
     {
         query = query.AddIncludes(includes ?? []);
-        return await query.Where(m => m.Active).GroupBy(grouping).Select(resultSelector).FirstOrDefaultAsync();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.GroupBy(grouping).Select(resultSelector).FirstOrDefaultAsync();
     }
 
     public virtual async Task<IList<T>> FromSqlAsync(FormattableString sql)
     {
         using var connection = new SqlConnection(_dbContext.Database.GetConnectionString());
         connection.Open();
-        var result = await connection.QueryAsync<T>(sql.GetSQL(), new { });
+        var result = (await connection.QueryAsync<T>(sql.GetSQL(), new { })).ToList();
 
-        return result.Where(m => m.Active).ToList();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            result = result.Where(m => ((BaseEntity)(object)m).Active).ToList();
+        }
+
+        return result;
     }
 
     public async Task<T?> GetByIdAsync(long id) => await GetByIdAsync(id, false, []);
@@ -154,7 +203,12 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         var query = _dbContext.Set<T>().AsQueryable();
         query = includes != null && includes.HasItems() ? query.AddIncludes(includes).AsNoTrackingWithIdentityResolution() : query.AsNoTracking();
 
-        return await query.Where(m => m.Active).FirstOrDefaultAsync(m => m.Id == id);
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.FirstOrDefaultAsync(m => m.Id == id);
     }
 
     public async Task<T?> GetByIdAsync(long id, params string[]? includes) => await GetByIdAsync(id, false, includes!);
@@ -173,7 +227,12 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         }
         if (forceNoTracking) query.AsNoTracking();
 
-        return await query.Where(m => m.Active).FirstOrDefaultAsync(m => m.Id == id);
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.FirstOrDefaultAsync(m => m.Id == id);
     }
 
     public PageResultDto<T> GetPageResult(IQueryable<T> query, PagingDetails pagingDetails)
@@ -188,7 +247,12 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         var pageCount = (response.RowCount + response.PageSize - 1) / response.PageSize;
         response.PageCount = pageCount;
         var skip = (response.CurrentPage - 1) * response.PageSize;
-        response.Results = [.. query.Where(m => m.Active).Skip(skip).Take(response.PageSize)];
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        response.Results = query.Skip(skip).Take(response.PageSize).ToList();
 
         return response;
     }
@@ -206,7 +270,12 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         response.PageCount = pageCount;
         var skip = (response.CurrentPage - 1) * response.PageSize;
 
-        response.Results = data?.Where(m => m.Active).Skip(skip).Take(response.PageSize).ToList();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)) && data != null)
+        {
+            data = data.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        response.Results = data?.Skip(skip).Take(response.PageSize).ToList();
 
         return response;
     }
@@ -219,14 +288,29 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         _dbContext.Entry(entity).Property(fieldName).IsModified = false;
     }
 
-    public async Task<IList<T>> ListAllAsync() => await _dbContext.Set<T>().Where(m => m.Active).ToListAsync();
+    public async Task<IList<T>> ListAllAsync()
+    {
+        var query = _dbContext.Set<T>().AsQueryable();
+
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.ToListAsync();
+    }
 
     public async Task<IList<T>> ListAllAsync(params Expression<Func<T, object>>[] includes)
     {
         var query = _dbContext.Set<T>().AsQueryable();
         query = query.AddIncludes(includes);
 
-        return await query.Where(m => m.Active).ToListAsync();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.ToListAsync();
     }
 
     public async Task<IList<T>> ListAllAsync(params string[] includes)
@@ -234,17 +318,39 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         var query = _dbContext.Set<T>().AsQueryable();
         query = query.AddIncludes(includes);
 
-        return await query.Where(m => m.Active).ToListAsync();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.ToListAsync();
     }
 
-    public async Task<IList<T>> ListAsync(ISpecification<T> spec) => await ApplySpecification(spec).Where(m => m.Active).ToListAsync();
+    public async Task<IList<T>> ListAsync(ISpecification<T> spec)
+    {
+        var query = ApplySpecification(spec);
+
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.ToListAsync();
+    }
 
     public async Task<IList<T>> ListAsync(ISpecification<T> spec, params Expression<Func<T, object>>[] includes)
     {
         var query = _dbContext.Set<T>().AsQueryable();
         query = query.AddIncludes(includes);
 
-        return await ApplySpecification(spec).Where(m => m.Active).ToListAsync();
+        query = ApplySpecification(spec, query);
+
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.ToListAsync();
     }
 
     public async Task<IList<T>> ListAsync(ISpecification<T> spec, params string[] includes)
@@ -252,19 +358,36 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         var query = _dbContext.Set<T>().AsQueryable();
         query = query.AddIncludes(includes);
 
-        return await ApplySpecification(spec).Where(m => m.Active).ToListAsync();
+        query = ApplySpecification(spec, query);
+
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.ToListAsync();
     }
 
     public async Task<IList<TResult>> ListAsync<Tkey, TResult>(ISpecification<T> spec, Expression<Func<T, Tkey>> grouping, Expression<Func<IGrouping<Tkey, T>, TResult>> resultSelector)
     {
         var query = ApplySpecification(spec);
-        return await query.Where(m => m.Active).GroupBy(grouping).Select(resultSelector).ToListAsync();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.GroupBy(grouping).Select(resultSelector).ToListAsync();
     }
 
     public async Task<IList<TResult>> ListAsync<Tkey, TResult>(IQueryable<T> query, Expression<Func<T, Tkey>> grouping, Expression<Func<IGrouping<Tkey, T>, TResult>> resultSelector, params Expression<Func<T, object>>[] includes)
     {
         query = query.AddIncludes(includes ?? []);
-        return await query.Where(m => m.Active).GroupBy(grouping).Select(resultSelector).ToListAsync();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.GroupBy(grouping).Select(resultSelector).ToListAsync();
     }
 
     public async Task<IList<T>> ListAsync(IQueryable<T> query) => await ListAsync(query, null as string[]);
@@ -272,13 +395,23 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
     public async Task<IList<T>> ListAsync(IQueryable<T> query, params string[]? includes)
     {
         query = query.AddIncludes(includes);
-        return await query.Where(m => m.Active).ToListAsync();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.ToListAsync();
     }
 
     public async Task<IList<T>> ListAsync(IQueryable<T> query, params Expression<Func<T, object>>[]? includes)
     {
         query = query.AddIncludes(includes ?? []);
-        return await query.Where(m => m.Active).ToListAsync();
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(m => ((BaseEntity)(object)m).Active);
+        }
+
+        return await query.ToListAsync();
     }
 
     public void RemoveRange(IList<T> collection) => _dbContext.Set<T>().RemoveRange(collection);
@@ -370,7 +503,7 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
     {
         Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> updateFields = calls => calls;
         updateFields = AppendSetProperty(updateFields, expression);
-        updateFields = AppendSetProperty(updateFields, m => m.SetProperty(x => x.Updated, DateTime.Now));
+        updateFields = AppendSetProperty(updateFields, m => m.SetProperty(x => (x as BaseEntity)!.Updated, DateTime.Now));
         return updateFields;
     }
 

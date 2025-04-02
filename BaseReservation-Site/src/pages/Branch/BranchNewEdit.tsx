@@ -117,14 +117,13 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
             address: isEmpty(data.address) ? null : data.address,
         }
         if (!isExisting) {
-            postBranch({ ...formatedData, active: true });
+            postBranch({ ...formatedData });
             return;
         }
 
         putBranch({
             id: data.id,
-            ...formatedData,
-            active: true,
+            ...formatedData
         })
     });
 

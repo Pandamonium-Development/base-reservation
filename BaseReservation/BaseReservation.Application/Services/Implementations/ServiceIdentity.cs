@@ -59,6 +59,7 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
         authenticationResult.Token = tokenHandler.WriteToken(token);
 
         var refreshToken = GenerateTokenMaster(token.Id, user.Id);
+        refreshToken.CreatedBy = user.Email;
 
         var tokenMaster = await coreService.UnitOfWork.Repository<TokenMaster>().AddAsync(refreshToken);
         await coreService.UnitOfWork.SaveChangesAsync();

@@ -53,7 +53,8 @@ public class ServiceSchedule(ICoreService<Schedule> coreService, IMapper mapper,
     /// <inheritdoc />
     public async Task<ICollection<ResponseScheduleDto>> ListAllAsync()
     {
-        var schedules = await coreService.UnitOfWork.Repository<Schedule>().ListAllAsync();
+        var spec = new BaseSpecification<Schedule>(x => x.Active);
+        var schedules = await coreService.UnitOfWork.Repository<Schedule>().ListAsync(spec);
 
         return mapper.Map<ICollection<ResponseScheduleDto>>(schedules);
     }

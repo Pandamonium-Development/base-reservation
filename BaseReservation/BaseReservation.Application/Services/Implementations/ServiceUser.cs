@@ -60,7 +60,7 @@ public class ServiceUser(ICoreService<User> coreService, IMapper mapper) : IServ
     public async Task<ResponseUserDto> LoginAsync(string email, string password)
     {
         var spec = new BaseSpecification<User>(x => x.Email == email && x.Password == password && x.Active);
-        var user = await coreService.UnitOfWork.Repository<User>().FirstOrDefaultAsync(spec);
+        var user = await coreService.UnitOfWork.Repository<User>().FirstOrDefaultAsync(spec, ["RoleIdNavigation"]);
         if (user == null) throw new NotFoundException("Email o contraseña incorrecta.");
 
         return mapper.Map<ResponseUserDto>(user);

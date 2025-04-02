@@ -7,7 +7,7 @@ namespace BaseReservation.Infrastructure;
 
 [Table("TokenMaster")]
 [Index("UserId", Name = "IX_TokenMaster_UserId")]
-public partial class TokenMaster : BaseSimpleDto
+public partial class TokenMaster : BaseEntity
 {
     [StringLength(250)]
     public string Token { get; set; } = null!;

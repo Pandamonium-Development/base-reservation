@@ -47,7 +47,7 @@ public class ServiceBranch(ICoreService<Branch> coreService, IMapper mapper,
     public async Task<ResponseBranchDto> FindByIdAsync(long id)
     {
         var spec = new BaseSpecification<Branch>(x => x.Id == id);
-        var branch = await coreService.UnitOfWork.Repository<Branch>().FirstOrDefaultAsync(spec);
+        var branch = await coreService.UnitOfWork.Repository<Branch>().FirstOrDefaultAsync(spec, ["DistrictIdNavigation", "DistrictIdNavigation.CantonIdNavigation", "DistrictIdNavigation.CantonIdNavigation.ProvinceIdNavigation"]);
         if (branch == null) throw new NotFoundException("Sucursal no encontrada.");
 
         return mapper.Map<ResponseBranchDto>(branch);

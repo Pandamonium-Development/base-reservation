@@ -5,7 +5,7 @@ import { endHourValidation, hourValidation } from "components/Shared/SchemaValid
 
 export const ScheduleDefaultValues = {
     id: 0,
-    day: '',
+    day: 'Lunes',
     startHour: '',
     endHour: ''
 };

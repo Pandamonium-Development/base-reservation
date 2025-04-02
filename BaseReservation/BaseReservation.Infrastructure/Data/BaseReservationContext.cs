@@ -484,8 +484,8 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
             if (entry.Entity.GetType().GetProperty(createdByName) != null) createdBy = entry.Property(createdByName).CurrentValue!.ToString()!;
             if (entry.Entity.GetType().GetProperty(updatedByName) != null)
             {
-                var modificacion = entry.Property(updatedByName).CurrentValue;
-                if (modificacion != null) updatedBy = modificacion.ToString()!;
+                var modification = entry.Property(updatedByName).CurrentValue;
+                if (modification != null) updatedBy = modification.ToString()!;
             }
 
             if (entry.State == EntityState.Added)
@@ -520,7 +520,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
     private static void GenerateModified(EntityEntry entry, string createdByName, string updatedByName, string updatedBy, DateTime updated)
     {
         string activeName = "Active";
-        
+
         if (entry.State == EntityState.Modified)
         {
             if (entry.Entity.GetType().GetProperty(UPDATEDNAME) != null) entry.Property(UPDATEDNAME).CurrentValue = updated;

@@ -34,6 +34,8 @@ export const ScheduleNewEdit = ({ scheduleData }: { scheduleData: ScheduleReques
 
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
 
+    console.log('day', day);
+
     const formMethods = useForm({
         resolver: yupResolver(ScheduleSchema),
         defaultValues: isNil(scheduleData) ? {

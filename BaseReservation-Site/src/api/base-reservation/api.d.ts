@@ -5827,147 +5827,6 @@ export interface components {
             token?: string | null;
             refreshToken?: string | null;
         };
-        Branch: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            description: string;
-            /** Format: int32 */
-            telephone: number;
-            /** Format: email */
-            email: string;
-            /** Format: int32 */
-            districtId: number;
-            address?: string | null;
-            active?: boolean;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            districtIdNavigation?: components["schemas"]["District"];
-            inventories?: components["schemas"]["Inventory"][] | null;
-            orders?: components["schemas"]["Order"][] | null;
-            reservations?: components["schemas"]["Reservation"][] | null;
-            branchHolidays?: components["schemas"]["BranchHoliday"][] | null;
-            branchSchedules?: components["schemas"]["BranchSchedule"][] | null;
-            userBranches?: components["schemas"]["UserBranch"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        BranchHoliday: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            holidayId: number;
-            /** Format: int32 */
-            branchId: number;
-            /** Format: int32 */
-            year?: number;
-            /** Format: date */
-            date?: string;
-            holidayIdNavigation?: components["schemas"]["Holiday"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-        };
-        BranchSchedule: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId: number;
-            /** Format: int32 */
-            scheduleId: number;
-            scheduleIdNavigation?: components["schemas"]["Schedule"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-            branchScheduleBlocks?: components["schemas"]["BranchScheduleBlock"][] | null;
-        };
-        BranchScheduleBlock: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchScheduleId: number;
-            /** Format: time */
-            startHour: string;
-            /** Format: time */
-            endHour: string;
-            active?: boolean;
-            branchScheduleIdNavigation?: components["schemas"]["BranchSchedule"];
-        };
-        Canton: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            provinceId?: number;
-            districts?: components["schemas"]["District"][] | null;
-            provinceIdNavigation?: components["schemas"]["Province"];
-        };
-        Category: {
-            /** Format: int32 */
-            id?: number;
-            code?: string | null;
-            name?: string | null;
-            products?: components["schemas"]["Product"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Contact: {
-            /** Format: int32 */
-            id?: number;
-            firstName?: string | null;
-            lastName?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            vendorId?: number;
-            active?: boolean;
-            vendorIdNavigation?: components["schemas"]["Vendor"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Customer: {
-            /** Format: int32 */
-            id?: number;
-            firstName?: string | null;
-            lastName?: string | null;
-            email?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            active?: boolean;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            districtIdNavigation?: components["schemas"]["District"];
-            orders?: components["schemas"]["Order"][] | null;
-            reservations?: components["schemas"]["Reservation"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        District: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: int32 */
-            cantonId?: number;
-            customers?: components["schemas"]["Customer"][] | null;
-            cantonIdNavigation?: components["schemas"]["Canton"];
-            vendors?: components["schemas"]["Vendor"][] | null;
-            branches?: components["schemas"]["Branch"][] | null;
-            users?: components["schemas"]["User"][] | null;
-        };
         /** @description Class to specify error properties for exceptions */
         ErrorDetailsBaseReservation: {
             /** @description Type identifier */
@@ -5983,310 +5842,26 @@ export interface components {
             detail?: string | null;
             logLevel?: components["schemas"]["LogLevel"];
         };
-        Gender: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            users?: components["schemas"]["User"][] | null;
-        };
-        Holiday: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            month?: components["schemas"]["Month"];
-            /** Format: int32 */
-            day?: number;
-            active?: boolean;
-            branchHolidays?: components["schemas"]["BranchHoliday"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Inventory: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            name?: string | null;
-            typeInventory?: components["schemas"]["TypeInventory"];
-            active?: boolean;
-            branchIdNavigation?: components["schemas"]["Branch"];
-            inventoryProducts?: components["schemas"]["InventoryProduct"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        InventoryProduct: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            inventoryId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            assignable?: number;
-            /** Format: double */
-            mininum?: number;
-            /** Format: double */
-            maximum?: number;
-            inventoryIdNavigation?: components["schemas"]["Inventory"];
-            productIdNavigation?: components["schemas"]["Product"];
-            inventoryProductTransactions?: components["schemas"]["InventoryProductTransaction"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        InventoryProductTransaction: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            inventoryProductId?: number;
-            transactionType?: components["schemas"]["TransactionTypeInventory"];
-            /** Format: double */
-            quantity?: number;
-            inventoryProductIdNavigation?: components["schemas"]["InventoryProduct"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Invoice: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int64 */
-            orderId?: number | null;
-            /** Format: int32 */
-            customerId?: number;
-            customerName: string;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
-            customerIdNavigation?: components["schemas"]["Customer"];
-            taxIdNavigation?: components["schemas"]["Tax"];
-            orderIdNavigation?: components["schemas"]["Order"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-            paymentTypeIdNavigation?: components["schemas"]["PaymentType"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        InvoiceDetail: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            invoiceId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            invoiceDetailProducts?: components["schemas"]["InvoiceDetailProduct"][] | null;
-            invoiceIdNavigation?: components["schemas"]["Invoice"];
-            productIdNavigation?: components["schemas"]["Product"];
-            serviceIdNavigation?: components["schemas"]["Service"];
-        };
-        InvoiceDetailProduct: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            invoiceDetailId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            quantity?: number;
-            invoiceDetailIdNavigation?: components["schemas"]["InvoiceDetail"];
-            productIdNavigation?: components["schemas"]["Product"];
-        };
         /** @enum {string} */
         LogLevel: "Trace" | "Debug" | "Information" | "Warning" | "Error" | "Critical" | "None";
         /** @enum {string} */
-        Month: "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
-        /** @enum {string} */
         MonthApplication: "Enero" | "Febrero" | "Marzo" | "Abril" | "Mayo" | "Junio" | "Julio" | "Agosto" | "Septiembre" | "Octubre" | "Noviembre" | "Diciembre";
-        Order: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            paymentTypeId?: number;
-            /** Format: int32 */
-            number?: number;
-            /** Format: int32 */
-            taxId?: number;
-            /** Format: double */
-            taxRate?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            /** Format: int32 */
-            statusOrderId?: number;
-            orderDetails?: components["schemas"]["OrderDetail"][] | null;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            customerIdNavigation?: components["schemas"]["Customer"];
-            statusOrderIdNavigation?: components["schemas"]["StatusOrder"];
-            taxIdNavigation?: components["schemas"]["Tax"];
-            reservationIdNavigation?: components["schemas"]["Reservation"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-            paymentTypeIdNavigation?: components["schemas"]["PaymentType"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        OrderDetail: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            orderId?: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            /** Format: int32 */
-            lineNumber?: number;
-            /** Format: int32 */
-            quantity?: number;
-            /** Format: double */
-            unitPrice?: number;
-            /** Format: double */
-            subTotal?: number;
-            /** Format: double */
-            tax?: number;
-            /** Format: double */
-            total?: number;
-            orderDetailProducts?: components["schemas"]["OrderDetailProduct"][] | null;
-            orderIdNavigation?: components["schemas"]["Order"];
-            productIdNavigation?: components["schemas"]["Product"];
-            serviceIdNavigation?: components["schemas"]["Service"];
-        };
-        OrderDetailProduct: {
-            /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            orderDetailId?: number;
-            /** Format: int32 */
-            productId?: number;
-            /** Format: double */
-            quantity?: number;
-            orderDetailIdNavigation?: components["schemas"]["OrderDetail"];
-            productIdNavigation?: components["schemas"]["Product"];
-        };
-        PaymentType: {
-            /** Format: int32 */
-            id?: number;
-            description?: string | null;
-            referenceNumber?: string | null;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            orders?: components["schemas"]["Order"][] | null;
-        };
-        Product: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            description: string;
-            brand: string;
-            /** Format: int32 */
-            categoryId: number;
-            /** Format: double */
-            price?: number;
-            sku: string;
-            /** Format: int32 */
-            unitMeasureId: number;
-            active?: boolean;
-            invoiceDetailProducts?: components["schemas"]["InvoiceDetailProduct"][] | null;
-            invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
-            orderDetailProducts?: components["schemas"]["OrderDetailProduct"][] | null;
-            orderDetails?: components["schemas"]["OrderDetail"][] | null;
-            reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
-            categoryIdNavigation?: components["schemas"]["Category"];
-            unitMeasureIdNavigation?: components["schemas"]["UnitMeasure"];
-            inventoryProducts?: components["schemas"]["InventoryProduct"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Province: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            cantons?: components["schemas"]["Canton"][] | null;
-        };
         RequestBranchDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             description?: string | null;
             /** Format: int32 */
             telephone?: number;
             email?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             districtId?: number;
             address?: string | null;
-            active?: boolean;
+            /** Format: int64 */
+            id?: number;
         };
         RequestBranchHolidayDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             holidayId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
             /** Format: date */
             date?: string;
@@ -6295,72 +5870,63 @@ export interface components {
         };
         RequestBranchScheduleBlockDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
             branchScheduleId?: number;
             /** Format: time */
             startHour?: string;
             /** Format: time */
             endHour?: string;
-            active?: boolean;
         };
         RequestBranchScheduleDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             scheduleId?: number;
         };
         RequestHolidayDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
-            active?: boolean;
             month?: components["schemas"]["MonthApplication"];
             /** Format: int32 */
             day?: number;
+            /** Format: int64 */
+            id?: number;
         };
         RequestInventoryDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
             typeInventory?: components["schemas"]["TypeInventoryApplication"];
-            active?: boolean;
+            /** Format: int64 */
+            id?: number;
         };
         RequestInventoryProductDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
             inventoryId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number;
             /** Format: double */
             assignable?: number;
             /** Format: double */
-            mininum?: number;
+            minimum?: number;
             /** Format: double */
             maximum?: number;
-        };
-        RequestInventoryProductTransactionDto: {
             /** Format: int64 */
             id?: number;
+        };
+        RequestInventoryProductTransactionDto: {
             /** Format: int64 */
             inventoryProductId?: number;
             transactionType?: components["schemas"]["TransactionTypeInventoryApplication"];
             /** Format: double */
             quantity?: number;
+            /** Format: int64 */
+            id?: number;
         };
         RequestInvoiceDetailDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
             invoiceId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             serviceId?: number | null;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number | null;
             /** Format: int32 */
             lineNumber?: number;
@@ -6374,24 +5940,24 @@ export interface components {
             tax?: number;
             /** Format: double */
             total?: number;
+            /** Format: int64 */
+            id?: number;
         };
         RequestInvoiceDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
             branchId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             customerId?: number;
             customerName?: string | null;
             /** Format: int64 */
             orderId?: number | null;
             /** Format: date */
             date?: string;
-            /** Format: int32 */
+            /** Format: int64 */
             paymentTypeId?: number;
             /** Format: int32 */
             number?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             taxId?: number;
             /** Format: double */
             taxRate?: number;
@@ -6402,15 +5968,15 @@ export interface components {
             /** Format: double */
             total?: number;
             invoiceDetails?: components["schemas"]["RequestInvoiceDetailDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         RequestOrderDetailDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
             orderId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             serviceId?: number | null;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number | null;
             /** Format: int32 */
             lineNumber?: number;
@@ -6424,22 +5990,22 @@ export interface components {
             tax?: number;
             /** Format: double */
             total?: number;
+            /** Format: int64 */
+            id?: number;
         };
         RequestOrderDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
             customerId?: number;
             customerName?: string | null;
             /** Format: date */
             date?: string;
-            /** Format: int32 */
+            /** Format: int64 */
             paymentTypeId?: number;
             /** Format: int32 */
             number?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             taxId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             reservationId?: number;
             /** Format: double */
             taxRate?: number;
@@ -6450,176 +6016,114 @@ export interface components {
             /** Format: double */
             total?: number;
             statusOrderId?: string;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
             orderDetails?: components["schemas"]["RequestOrderDetailDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         RequestProductDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             description?: string | null;
             brand?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             categoryId?: number;
             /** Format: double */
             price?: number;
             sku?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             unitMeasureId?: number;
-            active?: boolean;
+            /** Format: int64 */
+            id?: number;
         };
         RequestReservationDetailDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             reservationId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             serviceId?: number | null;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number | null;
+            /** Format: int64 */
+            id?: number;
         };
         RequestReservationDto: {
-            /** Format: int32 */
-            id?: number;
             /** Format: date */
             date?: string;
             /** Format: time */
             hour?: string;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             customerId?: number;
             customerName?: string | null;
             status?: string | null;
-            active?: boolean;
             reservationQuestion?: components["schemas"]["RequestReservationQuestionDto"][] | null;
             reservationDetails?: components["schemas"]["RequestReservationDetailDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         RequestReservationQuestionDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             reservationId?: number;
             question?: string | null;
-            active?: boolean;
             answer?: string | null;
+            /** Format: int64 */
+            id?: number;
         };
         RequestScheduleDto: {
-            /** Format: int32 */
-            id?: number;
             day?: components["schemas"]["WeekDayApplication"];
             /** Format: time */
             startHour?: string;
             /** Format: time */
             endHour?: string;
-            active?: boolean;
+            /** Format: int64 */
+            id?: number;
         };
         RequestServiceDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             description?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             typeServiceId?: number;
             /** Format: double */
             price?: number;
             observation?: string | null;
-            active?: boolean;
+            /** Format: int64 */
+            id?: number;
         };
         RequestUserBranchDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             userId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
+            /** Format: int64 */
+            id?: number;
         };
         RequestUserLoginDto: {
             email?: string | null;
             password?: string | null;
         };
         RequestVendorDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             fiscalNumber?: string | null;
             socialReason?: string | null;
             /** Format: int32 */
             telephone?: number;
             email?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             districtId?: number;
             address?: string | null;
-            active?: boolean;
-        };
-        Reservation: {
-            /** Format: int32 */
+            /** Format: int64 */
             id?: number;
-            /** Format: int32 */
-            branchId?: number;
-            /** Format: int32 */
-            customerId?: number;
-            customerName?: string | null;
-            /** Format: date */
-            date: string;
-            /** Format: time */
-            hour: string;
-            status?: string | null;
-            active?: boolean;
-            reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
-            customerIdNavigation?: components["schemas"]["Customer"];
-            branchIdNavigation?: components["schemas"]["Branch"];
-            orders?: components["schemas"]["Order"][] | null;
-            reservationQuestions?: components["schemas"]["ReservationQuestion"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        ReservationDetail: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId: number;
-            /** Format: int32 */
-            serviceId?: number | null;
-            /** Format: int32 */
-            productId?: number | null;
-            productIdNavigation?: components["schemas"]["Product"];
-            reservationIdNavigation?: components["schemas"]["Reservation"];
-            serviceIdNavigation?: components["schemas"]["Service"];
-        };
-        ReservationQuestion: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            reservationId?: number;
-            question?: string | null;
-            answer?: string | null;
-            active?: boolean;
-            reservationIdNavigation?: components["schemas"]["Reservation"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
         };
         ResponseBranchDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             description?: string | null;
             /** Format: int32 */
             telephone?: number;
             email?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             districtId?: number;
             address?: string | null;
-            active?: boolean;
             district?: components["schemas"]["ResponseDistrictDto"];
             inventories?: components["schemas"]["ResponseInventoryDto"][] | null;
             branchSchedules?: components["schemas"]["ResponseBranchScheduleDto"][] | null;
@@ -6628,19 +6132,20 @@ export interface components {
             reservas?: components["schemas"]["ResponseReservationDto"][] | null;
             orders?: components["schemas"]["ResponseOrderDto"][] | null;
             invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseBranchHolidayDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             holidayId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
             /** Format: date */
             date?: string;
@@ -6648,11 +6153,11 @@ export interface components {
             year?: number;
             holiday?: components["schemas"]["ResponseHolidayDto"];
             branch?: components["schemas"]["ResponseBranchDto"];
+            /** Format: int64 */
+            id?: number;
         };
         ResponseBranchScheduleBlockDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
             branchScheduleId?: number;
             /** Format: time */
             startHour?: string;
@@ -6660,132 +6165,139 @@ export interface components {
             endHour?: string;
             active?: boolean;
             branchSchedule?: components["schemas"]["ResponseBranchScheduleDto"];
+            /** Format: int64 */
+            id?: number;
         };
         ResponseBranchScheduleDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             scheduleId?: number;
             schedule?: components["schemas"]["ResponseScheduleDto"];
             branch?: components["schemas"]["ResponseBranchDto"];
             branchScheduleBlocks?: components["schemas"]["ResponseBranchScheduleBlockDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         ResponseCantonDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             provinceId?: number;
             districts?: components["schemas"]["ResponseDistrictDto"][] | null;
             province?: components["schemas"]["ResponseProvinceDto"];
+            /** Format: int64 */
+            id?: number;
         };
         ResponseCategoryDto: {
-            /** Format: int32 */
-            id?: number;
             code?: string | null;
             name?: string | null;
             products?: components["schemas"]["ResponseProductDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseContactDto: {
-            /** Format: int32 */
-            id?: number;
             firstName?: string | null;
             lastName?: string | null;
             /** Format: int32 */
             telephone?: number;
             email?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             vendorId?: number;
-            active?: boolean;
             vendor?: components["schemas"]["ResponseVendorDto"];
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseCustomerDto: {
-            /** Format: int32 */
-            id?: number;
             firstName?: string | null;
             lastName?: string | null;
             email?: string | null;
             /** Format: int32 */
             telephone?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             districtId?: number;
             address?: string | null;
-            active?: boolean;
             invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
             reservations?: components["schemas"]["ResponseReservationDto"][] | null;
             district?: components["schemas"]["ResponseDistrictDto"];
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseDistrictDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             cantonId?: number;
             customers?: components["schemas"]["ResponseCustomerDto"][] | null;
             canton?: components["schemas"]["ResponseCantonDto"];
             vendors?: components["schemas"]["ResponseVendorDto"][] | null;
             branches?: components["schemas"]["ResponseBranchDto"][] | null;
             users?: components["schemas"]["ResponseUserDto"][] | null;
+            /** Format: int64 */
+            id?: number;
+        };
+        ResponseGenderDto: {
+            name?: string | null;
+            users?: components["schemas"]["ResponseUserDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         ResponseHolidayDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
-            active?: boolean;
             month?: components["schemas"]["MonthApplication"];
             /** Format: int32 */
             day?: number;
             branchHolidays?: components["schemas"]["ResponseBranchHolidayDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseInventoryDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
-            /** Format: int32 */
-            idSucursal?: number;
+            /** Format: int64 */
+            branchId?: number;
             typeInventory?: components["schemas"]["TypeInventoryApplication"];
-            active?: boolean;
             branch?: components["schemas"]["ResponseBranchDto"];
             inventoryProducts?: components["schemas"]["ResponseInventoryProductDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseInventoryProductDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
             inventoryId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number;
             /** Format: double */
             assignable?: number;
@@ -6795,37 +6307,39 @@ export interface components {
             maximum?: number;
             inventory?: components["schemas"]["ResponseInventoryDto"];
             product?: components["schemas"]["ResponseProductDto"];
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseInventoryProductTransactionDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
-            idInventarioProducto?: number;
+            inventoryProductId?: number;
             transactionType?: components["schemas"]["TransactionTypeInventoryApplication"];
             /** Format: double */
             quantity?: number;
             inventoryProduct?: components["schemas"]["ResponseInventoryProductDto"];
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseInvoiceDetailDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
             invoiceId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             serviceId?: number | null;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number | null;
             /** Format: int32 */
             lineNumber?: number;
@@ -6842,34 +6356,34 @@ export interface components {
             invoiceDetailProducts?: components["schemas"]["ResponseInvoiceDetailProductDto"][] | null;
             invoice?: components["schemas"]["ResponseInvoiceDto"];
             service?: components["schemas"]["ResponseServiceDto"];
+            /** Format: int64 */
+            id?: number;
         };
         ResponseInvoiceDetailProductDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
             invoiceDetailId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number;
             /** Format: double */
             quantity?: number;
             invoiceDetail?: components["schemas"]["ResponseInvoiceDetailDto"];
             product?: components["schemas"]["ResponseProductDto"];
+            /** Format: int64 */
+            id?: number;
         };
         ResponseInvoiceDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
             customerId?: number;
             customerName?: string | null;
             /** Format: int64 */
             orderId?: number | null;
             /** Format: date */
             date?: string;
-            /** Format: int32 */
+            /** Format: int64 */
             paymentTypeId?: number;
             /** Format: int32 */
             number?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             taxId?: number;
             /** Format: double */
             taxRate?: number;
@@ -6879,29 +6393,30 @@ export interface components {
             tax?: number;
             /** Format: double */
             total?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
             invoiceDetails?: components["schemas"]["ResponseInvoiceDetailDto"][] | null;
             customer?: components["schemas"]["ResponseCustomerDto"];
             taxInfo?: components["schemas"]["ResponseTaxDto"];
             paymentType?: components["schemas"]["ResponsePaymentTypeDto"];
             order?: components["schemas"]["ResponseOrderDto"];
-            branch?: components["schemas"]["Branch"];
+            branch?: components["schemas"]["ResponseBranchDto"];
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseOrderDetailDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
             orderId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             serviceId?: number | null;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number | null;
             /** Format: int32 */
             lineNumber?: number;
@@ -6918,34 +6433,34 @@ export interface components {
             orderDetailProducts?: components["schemas"]["ResponseOrderDetailProductDto"][] | null;
             order?: components["schemas"]["ResponseOrderDto"];
             service?: components["schemas"]["ResponseServiceDto"];
+            /** Format: int64 */
+            id?: number;
         };
         ResponseOrderDetailProductDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int64 */
             orderDetailId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number;
             /** Format: double */
             quantity?: number;
             orderDetail?: components["schemas"]["ResponseOrderDetailDto"];
             product?: components["schemas"]["ResponseProductDto"];
+            /** Format: int64 */
+            id?: number;
         };
         ResponseOrderDto: {
             /** Format: int64 */
-            id?: number;
-            /** Format: int32 */
             customerId?: number;
             customerName?: string | null;
             /** Format: date */
             date?: string;
-            /** Format: int32 */
+            /** Format: int64 */
             paymentTypeId?: number;
             /** Format: int32 */
             number?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             taxId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             reservationId?: number;
             /** Format: double */
             taxRate?: number;
@@ -6955,9 +6470,8 @@ export interface components {
             tax?: number;
             /** Format: double */
             total?: number;
-            /** Format: int32 */
-            statusOrderId?: number;
-            /** Format: int32 */
+            statusOrderId?: string;
+            /** Format: int64 */
             branchId?: number;
             orderDetails?: components["schemas"]["ResponseOrderDetailDto"][] | null;
             customer?: components["schemas"]["ResponseCustomerDto"];
@@ -6965,52 +6479,55 @@ export interface components {
             paymentType?: components["schemas"]["ResponsePaymentTypeDto"];
             reservation?: components["schemas"]["ResponseReservationDto"];
             branch?: components["schemas"]["ResponseBranchDto"];
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponsePaymentTypeDto: {
-            /** Format: int32 */
-            id?: number;
             description?: string | null;
             /** Format: int32 */
             referenceNumber?: number;
             invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         ResponseProductDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             description?: string | null;
             brand?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             categoryId?: number;
             /** Format: double */
             price?: number;
             sku?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             unitMeasureId?: number;
-            active?: boolean;
             invoiceDetailProducts?: components["schemas"]["ResponseInvoiceDetailProductDto"][] | null;
             category?: components["schemas"]["ResponseCategoryDto"];
             unitMeasure?: components["schemas"]["ResponseUnitMeasureDto"];
             inventarios?: components["schemas"]["ResponseInventoryDto"][] | null;
             inventoryProducts?: components["schemas"]["ResponseInventoryProductDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseProvinceDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             cantons?: components["schemas"]["ResponseCantonDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         ResponseReservationCalendarAgendaDto: {
             title?: string | null;
@@ -7025,376 +6542,207 @@ export interface components {
             display?: string | null;
         };
         ResponseReservationDetailDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             reservationId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             serviceId?: number | null;
-            /** Format: int32 */
+            /** Format: int64 */
             productId?: number | null;
             reservation?: components["schemas"]["ResponseReservationDto"];
             service?: components["schemas"]["ResponseServiceDto"];
             product?: components["schemas"]["ResponseProductDto"];
+            /** Format: int64 */
+            id?: number;
         };
         ResponseReservationDto: {
-            /** Format: int32 */
-            id?: number;
             /** Format: date */
             date?: string;
             /** Format: time */
             hour?: string;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             customerId?: number;
             customerName?: string | null;
             status?: string | null;
-            active?: boolean;
             branch?: components["schemas"]["ResponseBranchDto"];
             customer?: components["schemas"]["ResponseCustomerDto"];
             reservationQuestions?: components["schemas"]["ResponseReservationQuestionDto"][] | null;
             reservationDetails?: components["schemas"]["ResponseReservationDetailDto"][] | null;
             orders?: components["schemas"]["ResponseOrderDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseReservationQuestionDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             reservationId?: number;
             question?: string | null;
-            active?: boolean;
             answer?: string | null;
             reservation?: components["schemas"]["ResponseReservationDto"];
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseRoleDto: {
-            /** Format: int32 */
-            id?: number;
             description?: string | null;
             type?: string | null;
-            active?: boolean;
             users?: components["schemas"]["ResponseUserDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseScheduleDto: {
-            /** Format: int32 */
-            id?: number;
             day?: components["schemas"]["WeekDayApplication"];
             /** Format: time */
             startHour?: string;
             /** Format: time */
             endHour?: string;
-            active?: boolean;
             branchSchedules?: components["schemas"]["ResponseBranchScheduleDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseServiceDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             description?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             typeServiceId?: number;
             /** Format: double */
             price?: number;
             observation?: string | null;
-            active?: boolean;
             invoiceDetails?: components["schemas"]["ResponseInvoiceDetailDto"][] | null;
             typeService?: components["schemas"]["ResponseTypeServiceDto"];
             detalleReservas?: components["schemas"]["ResponseReservationDetailDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseTaxDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             /** Format: double */
             rate?: number;
             invoices?: components["schemas"]["ResponseInvoiceDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         ResponseTypeServiceDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             /** Format: time */
             duration?: string;
             services?: components["schemas"]["ResponseServiceDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         ResponseUnitMeasureDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             symbol?: string | null;
             products?: components["schemas"]["ResponseProductDto"][] | null;
+            /** Format: int64 */
+            id?: number;
         };
         ResponseUserBranchDto: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             userId?: number;
-            /** Format: int32 */
+            /** Format: int64 */
             branchId?: number;
             branch?: components["schemas"]["ResponseBranchDto"];
             user?: components["schemas"]["ResponseUserDto"];
+            /** Format: int64 */
+            id?: number;
         };
         ResponseUserDto: {
-            /** Format: int32 */
-            id?: number;
             cardId?: string | null;
             firstName?: string | null;
             lastName?: string | null;
             /** Format: int32 */
             telephone?: number;
             email?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             districtId?: number;
             address?: string | null;
             /** Format: date */
             birthday?: string;
             password?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             genderId?: number;
-            active?: boolean;
             profilePictureUrl?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             roleId?: number;
-            district?: components["schemas"]["District"];
-            gender?: components["schemas"]["Gender"];
-            role?: components["schemas"]["Role"];
-            userBranches?: components["schemas"]["UserBranch"][] | null;
+            district?: components["schemas"]["ResponseDistrictDto"];
+            gender?: components["schemas"]["ResponseGenderDto"];
+            role?: components["schemas"]["ResponseRoleDto"];
+            userBranches?: components["schemas"]["ResponseUserBranchDto"][] | null;
+            /** Format: int64 */
+            id?: number;
             /** Format: date-time */
             created?: string;
             createdBy?: string | null;
             /** Format: date-time */
             updated?: string | null;
             updatedBy?: string | null;
+            active?: boolean;
         };
         ResponseVendorDto: {
-            /** Format: int32 */
-            id?: number;
             name?: string | null;
             cardId?: string | null;
             socialReason?: string | null;
             /** Format: int32 */
             telephone?: number;
             email?: string | null;
-            /** Format: int32 */
+            /** Format: int64 */
             districtId?: number;
             address?: string | null;
-            active?: boolean;
             contacts?: components["schemas"]["ResponseContactDto"][] | null;
             district?: components["schemas"]["ResponseDistrictDto"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Role: {
-            /** Format: int32 */
-            id?: number;
-            description?: string | null;
-            type?: string | null;
-            active?: boolean;
-            users?: components["schemas"]["User"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Schedule: {
-            /** Format: int32 */
-            id?: number;
-            day?: components["schemas"]["WeekDay"];
-            /** Format: time */
-            startHour: string;
-            /** Format: time */
-            endHour: string;
-            active?: boolean;
-            branchSchedules?: components["schemas"]["BranchSchedule"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        Service: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            description: string;
-            /** Format: int32 */
-            typeServiceId: number;
-            /** Format: double */
-            price: number;
-            observation: string;
-            active?: boolean;
-            invoiceDetails?: components["schemas"]["InvoiceDetail"][] | null;
-            orderDetails?: components["schemas"]["OrderDetail"][] | null;
-            reservationDetails?: components["schemas"]["ReservationDetail"][] | null;
-            typeServiceIdNavigation?: components["schemas"]["TypeService"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        StatusOrder: {
-            /** Format: int32 */
-            id?: number;
-            description?: string | null;
-            orders?: components["schemas"]["Order"][] | null;
-        };
-        Tax: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: double */
-            rate?: number;
-            invoices?: components["schemas"]["Invoice"][] | null;
-            orders?: components["schemas"]["Order"][] | null;
-        };
-        TokenMaster: {
             /** Format: int64 */
             id?: number;
-            token?: string | null;
-            jwtId?: string | null;
             /** Format: date-time */
-            createdAt?: string;
+            created?: string;
+            createdBy?: string | null;
             /** Format: date-time */
-            expireAt?: string;
-            used?: boolean;
-            /** Format: int32 */
-            userId?: number;
-            userIdNavigation?: components["schemas"]["User"];
+            updated?: string | null;
+            updatedBy?: string | null;
+            active?: boolean;
         };
         TokenModel: {
             token?: string | null;
             refreshToken?: string | null;
         };
         /** @enum {string} */
-        TransactionTypeInventory: "Entrada" | "Salida";
-        /** @enum {string} */
         TransactionTypeInventoryApplication: "Entrada" | "Salida";
         /** @enum {string} */
-        TypeInventory: "Venta" | "Compra";
-        /** @enum {string} */
         TypeInventoryApplication: "Venta" | "Compra";
-        TypeService: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            /** Format: time */
-            baseDuration?: string;
-            services?: components["schemas"]["Service"][] | null;
-        };
-        UnitMeasure: {
-            /** Format: int32 */
-            id?: number;
-            name?: string | null;
-            symbol?: string | null;
-            products?: components["schemas"]["Product"][] | null;
-        };
-        User: {
-            /** Format: int32 */
-            id?: number;
-            cardId?: string | null;
-            firstName?: string | null;
-            lastName?: string | null;
-            /** Format: int32 */
-            telephone?: number;
-            email?: string | null;
-            /** Format: int32 */
-            districtId?: number;
-            address?: string | null;
-            /** Format: date */
-            birthday?: string;
-            password?: string | null;
-            /** Format: int32 */
-            genderId?: number;
-            active?: boolean;
-            profilePictureUrl?: string | null;
-            /** Format: int32 */
-            roleId?: number;
-            districtIdNavigation?: components["schemas"]["District"];
-            genderIdNavigation?: components["schemas"]["Gender"];
-            roleIdNavigation?: components["schemas"]["Role"];
-            tokenMasters?: components["schemas"]["TokenMaster"][] | null;
-            userBranches?: components["schemas"]["UserBranch"][] | null;
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        UserBranch: {
-            /** Format: int32 */
-            id?: number;
-            /** Format: int32 */
-            userId?: number;
-            /** Format: int32 */
-            branchId?: number;
-            branchIdNavigation?: components["schemas"]["Branch"];
-            userIdNavigation?: components["schemas"]["User"];
-        };
-        Vendor: {
-            /** Format: int32 */
-            id?: number;
-            name: string;
-            fiscalNumber: string;
-            socialReason: string;
-            /** Format: int32 */
-            telephone: number;
-            /** Format: email */
-            email: string;
-            /** Format: int32 */
-            districtId: number;
-            address?: string | null;
-            active?: boolean;
-            contacts?: components["schemas"]["Contact"][] | null;
-            districtIdNavigation?: components["schemas"]["District"];
-            /** Format: date-time */
-            created?: string;
-            createdBy?: string | null;
-            /** Format: date-time */
-            updated?: string | null;
-            updatedBy?: string | null;
-        };
-        /** @enum {string} */
-        WeekDay: "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
         /** @enum {string} */
         WeekDayApplication: "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes" | "Sabado" | "Domingo";
     };
