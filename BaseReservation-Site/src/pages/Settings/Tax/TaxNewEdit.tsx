@@ -3,30 +3,29 @@ import { useState } from "react";
 import { isPresent } from 'utils/util';
 import { UseLayout } from "hooks/UseLayout";
 import { Page } from "components/Shared/Page";
-import { useNavigate } from "react-router-dom";
-import { useSnackbar } from "stores/useSnackbar";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { TaxRequest } from "types/api-basereservation";
 import { FormProvider, useForm } from "react-hook-form";
 import { PageHeader } from "components/Shared/PageHeader";
 import { TaxDefaultValues, TaxSchema } from "./TaxSchema";
 import { FormButtons } from "components/Shared/FormButtons";
+import { UseMutationCallbacks } from "hooks/UseMutationCallbacks";
 import { UsePutTax } from "hooks/api-basereservation/tax/UsePutTax";
 import { Alert, Box, Button, Stack, TextField } from "@mui/material";
 import { UsePostTax } from "hooks/api-basereservation/tax/UsePostTax";
 import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
 import { TaxDeleteModalConfirmation } from './TaxDeleteModalConfirmation';
-import { BaseReservationErrorDetails, TaxRequest } from "types/api-basereservation";
 
 export const TaxNewEdit = ({ taxData }: { taxData: TaxRequest | undefined }) => {
-    const navigate = useNavigate();
     const { isMobile } = UseLayout();
-    const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
     const [loading, setLoading] = useState(false);
     const formTitle = isNil(taxData) ? 'Crear nuevo impuesto' : `Editar impuesto número ${taxData.id}`;
     const isExisting = !isNil(taxData);
 
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
+
+    const closeLoading = () => setLoading(false);
 
     const formMethods = useForm({
         resolver: yupResolver(TaxSchema),
@@ -47,21 +46,8 @@ export const TaxNewEdit = ({ taxData }: { taxData: TaxRequest | undefined }) => 
         formState: { errors },
     } = formMethods;
 
-    const getMutationCallbacks = (successMessage: string) => ({
-        onSuccess: () => {
-            setSnackbarMessage(successMessage);
-            navigate('/General/Impuesto');
-        },
-        onError: (data: BaseReservationErrorDetails) => {
-            setSnackbarMessage(`${data.message}`, 'error');
-        },
-        onSettled: () => {
-            setLoading(false);
-        }
-    });
-
-    const { mutate: postTax } = UsePostTax(getMutationCallbacks('Impuesto creado correctamente'));
-    const { mutate: putTax } = UsePutTax(getMutationCallbacks('Impuesto actualizado correctamente'));
+    const { mutate: postTax } = UsePostTax(UseMutationCallbacks('Impuesto creado correctamente', '/General/Impuesto', closeLoading));
+    const { mutate: putTax } = UsePutTax(UseMutationCallbacks('Impuesto actualizado correctamente', '/General/Impuesto', closeLoading));
 
     const createTaxWrapper = handleSubmit((data) => {
         const formattedData = {
