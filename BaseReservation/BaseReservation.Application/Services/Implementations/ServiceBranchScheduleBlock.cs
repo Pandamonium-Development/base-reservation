@@ -33,8 +33,7 @@ public class ServiceBranchScheduleBlock(ICoreService<BranchScheduleBlock> coreSe
         var blocksGuardar = await ValidateBranchScheduleBlock(branchScheduleId, branchScheduleBlocks);
 
         await coreService.UnitOfWork.Repository<BranchScheduleBlock>().AddRangeAsync(blocksGuardar.ToList());
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new ListNotAddedException("Error al guardar bloqueos");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return true;
     }
@@ -76,8 +75,7 @@ public class ServiceBranchScheduleBlock(ICoreService<BranchScheduleBlock> coreSe
         block.Id = id;
         coreService.UnitOfWork.Repository<BranchScheduleBlock>().Update(block);
 
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new BaseReservationException("Error al actualizar horario bloqueo");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return await FindByIdAsync(id);
     }
@@ -93,8 +91,7 @@ public class ServiceBranchScheduleBlock(ICoreService<BranchScheduleBlock> coreSe
 
         coreService.UnitOfWork.Repository<BranchScheduleBlock>().Update(block);
 
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new ListNotAddedException("Error al eliminar horario bloqueo");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return true;
     }

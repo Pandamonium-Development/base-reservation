@@ -44,8 +44,7 @@ public class ServiceReservation(ICoreService<Reservation> coreService, IServiceB
         reservation.Id = id;
 
         coreService.UnitOfWork.Repository<Reservation>().Update(reservation);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new NotFoundException("Reserva no se ha actualizado.");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return await FindByIdAsync(id);
     }

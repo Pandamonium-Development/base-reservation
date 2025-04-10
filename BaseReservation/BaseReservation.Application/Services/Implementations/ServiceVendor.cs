@@ -37,9 +37,7 @@ public class ServiceVendor(ICoreService<Vendor> coreService, IMapper mapper, IVa
         vendor!.Active = false;
 
         coreService.UnitOfWork.Repository<Vendor>().Update(vendor);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-
-        if (rowsAffected == 0) throw new NotFoundException("Proveedor no eiminado.");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return true;
     }
@@ -82,9 +80,7 @@ public class ServiceVendor(ICoreService<Vendor> coreService, IMapper mapper, IVa
         vendor.Id = id;
 
         coreService.UnitOfWork.Repository<Vendor>().Update(vendor);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-
-        if (rowsAffected == 0) throw new NotFoundException("Proveedor no actualizado.");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return await FindByIdAsync(id);
     }

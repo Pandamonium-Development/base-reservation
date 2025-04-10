@@ -35,9 +35,7 @@ public class ServiceService(ICoreService<Service> coreService, IMapper mapper,
         service!.Active = false;
 
         coreService.UnitOfWork.Repository<Service>().Update(service);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-
-        if (rowsAffected == 0) throw new NotFoundException("Servicio no eliminado.");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return true;
     }
@@ -69,8 +67,7 @@ public class ServiceService(ICoreService<Service> coreService, IMapper mapper,
         service.Id = id;
 
         coreService.UnitOfWork.Repository<Service>().Update(service);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new NotFoundException("Servicio no actualizado.");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return await FindByIdAsync(id);
     }

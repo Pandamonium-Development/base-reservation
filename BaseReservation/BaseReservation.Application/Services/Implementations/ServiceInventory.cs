@@ -38,8 +38,7 @@ public class ServiceInventory(ICoreService<Inventory> coreService, IMapper mappe
 
         inventory.Active = false;
         coreService.UnitOfWork.Repository<Inventory>().Update(inventory);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new BaseReservationException("Error al eliminar inventario");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return true;
     }
@@ -75,14 +74,13 @@ public class ServiceInventory(ICoreService<Inventory> coreService, IMapper mappe
     public async Task<ResponseInventoryDto> UpdateInventoryAsync(long branchId, long id, RequestInventoryDto inventoryDto)
     {
         if (!await coreService.UnitOfWork.Repository<Inventory>().ExistsAsync(id)) throw new NotFoundException("Inventario no encontrada.");
-        
+
         var inventory = await ValidateInventoryAsync(inventoryDto);
         inventory.BranchId = branchId;
         inventory.Id = id;
 
         coreService.UnitOfWork.Repository<Inventory>().Update(inventory);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new BaseReservationException("Error al actualizar inventario");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return await FindByIdAsync(id);
     }

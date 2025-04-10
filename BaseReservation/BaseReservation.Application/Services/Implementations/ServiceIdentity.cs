@@ -149,8 +149,7 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
         existingRefreshToken.Used = true;
 
         coreService.UnitOfWork.Repository<TokenMaster>().Update(existingRefreshToken);
-        var rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new BaseReservationException("Error al actualizar el token");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         var user = await GetUserAsync(validatedToken.Claims.Single(x => x.Type == "UserId").Value);
 

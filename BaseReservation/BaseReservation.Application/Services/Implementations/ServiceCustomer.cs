@@ -20,8 +20,7 @@ public class ServiceCustomer(ICoreService<Customer> coreService, IMapper mapper)
         customer!.Active = false;
 
         coreService.UnitOfWork.Repository<Customer>().Update(customer);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new BaseReservationException("No se pudo eliminar el cliente.");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return true;
     }

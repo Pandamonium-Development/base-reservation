@@ -63,13 +63,7 @@ public class ServiceBranchSchedule(ICoreService<BranchSchedule> coreService, IMa
 
                 coreService.UnitOfWork.Repository<BranchSchedule>().Delete(existingBranchSchedules);
                 await coreService.UnitOfWork.Repository<BranchSchedule>().AddRangeAsync(schedules);
-                int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-
-                if (rowsAffected == 0)
-                {
-                    await transaction.RollbackAsync();
-                    throw new NotFoundException("No se han creado horarios en la sucursal.");
-                }
+                await coreService.UnitOfWork.SaveChangesAsync();
 
                 await transaction.CommitAsync();
                 return true;

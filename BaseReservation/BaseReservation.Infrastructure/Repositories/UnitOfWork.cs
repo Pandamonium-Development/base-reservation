@@ -4,6 +4,8 @@ using System.Linq.Expressions;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Concurrent;
+using System.Text.RegularExpressions;
 using System.Runtime.CompilerServices;
 using BaseReservation.Common.Extensions;
 using BaseReservation.Domain.Exceptions;
@@ -20,7 +22,7 @@ public class UnitOfWork(ILoggerFactory loggerFactory, BaseReservationContext dbC
 
     private readonly BaseReservationContext _dbContext = dbContext;
 
-    private readonly Dictionary<Type, dynamic> _repositories = [];
+    private readonly ConcurrentDictionary<Type, object> _repositories = new();
 
     public IDbConnection SqlConnection => new SqlConnection(_dbContext.Connection.ConnectionString);
 
@@ -48,6 +50,12 @@ public class UnitOfWork(ILoggerFactory loggerFactory, BaseReservationContext dbC
     {
         FormattableString sqlExclude;
         sqlExclude = $"1=1";
+
+        if (!Regex.IsMatch(tableName, @"^[a-zA-Z0-9_]+$"))
+        {
+            throw new ArgumentException("El nombre de la tabla contiene caracteres no permitidos.");
+        }
+
         if (excludeColumnsList != null && excludeColumnsList.HasItems())
         {
             sqlExclude = FormattableStringFactory.Create("Name NOT IN({0})", string.Join(".", excludeColumnsList.Select(m => "'" + m + "'")));
@@ -72,17 +80,15 @@ public class UnitOfWork(ILoggerFactory loggerFactory, BaseReservationContext dbC
     public IBaseRepositoryAsync<T> Repository<T>() where T : BaseSimpleDto
     {
         var entityType = typeof(T);
-        dynamic repositoryExisting;
-        if (_repositories.TryGetValue(entityType, out repositoryExisting!))
+
+        var repositoryLazy = (Lazy<IBaseRepositoryAsync<T>>)_repositories.GetOrAdd(entityType, type => new Lazy<IBaseRepositoryAsync<T>>(() =>
         {
-            return repositoryExisting;
-        }
+            var repositoryType = typeof(BaseRepositoryAsync<>);
+            var repository = Activator.CreateInstance(repositoryType.MakeGenericType(type), _loggerFactory, _dbContext);
+            return (IBaseRepositoryAsync<T>)repository!;
+        }));
 
-        var repositoryType = typeof(BaseRepositoryAsync<>);
-        var repository = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _loggerFactory, _dbContext);
-        _repositories.Add(entityType, repository!);
-
-        return (IBaseRepositoryAsync<T>)repository!;
+        return repositoryLazy.Value;
     }
 
     public async Task RollbackChangesAsync() => await _dbContext.Database.RollbackTransactionAsync();
@@ -90,7 +96,8 @@ public class UnitOfWork(ILoggerFactory loggerFactory, BaseReservationContext dbC
     public async Task<int> SaveChangesAsync()
     {
         int rowsAffected = await _dbContext.SaveChangesAsync();
-        if (rowsAffected == 0) throw new BaseReservationException("No rows were affected");
+        if (rowsAffected == 0) throw new BaseReservationException("Proceso no se ha podido completar.");
+
         return rowsAffected;
     }
 }

@@ -36,8 +36,7 @@ public class ServiceHoliday(ICoreService<Holiday> coreService, IMapper mapper,
         holiday.Active = true;
         coreService.UnitOfWork.Repository<Holiday>().Update(holiday);
 
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new BaseReservationException("Error al actualizar feriado");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return await FindByIdAsync(id);
     }
@@ -52,8 +51,7 @@ public class ServiceHoliday(ICoreService<Holiday> coreService, IMapper mapper,
         holiday!.Active = false;
 
         coreService.UnitOfWork.Repository<Holiday>().Update(holiday);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new BaseReservationException("Error al eliminar feriado");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return true;
     }

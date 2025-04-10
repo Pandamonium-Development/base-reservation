@@ -33,9 +33,8 @@ public class ServiceProduct(ICoreService<Product> coreService, IMapper mapper,
         var product = await ValidateProductAsync(productDTO);
         product.Id = id;
         coreService.UnitOfWork.Repository<Product>().Update(product);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new NotFoundException("Producto no actualizado.");
-        
+        await coreService.UnitOfWork.SaveChangesAsync();
+
         return await FindByIdAsync(id);
     }
 
@@ -52,17 +51,17 @@ public class ServiceProduct(ICoreService<Product> coreService, IMapper mapper,
     /// <inheritdoc />
     public async Task<ICollection<ResponseProductDto>> ListAllAsync(bool excludeProductsInventory = false, long inventoryId = 0)
     {
-        if(!excludeProductsInventory)
+        if (!excludeProductsInventory)
         {
             var products = await coreService.UnitOfWork.Repository<Product>().ListAllAsync();
             return mapper.Map<ICollection<ResponseProductDto>>(products);
         }
 
         var queryExcluded = from a in coreService.UnitOfWork.Repository<Product>().AsQueryable()
-                    join b in coreService.UnitOfWork.Repository<InventoryProduct>().AsQueryable() on a.Id equals b.ProductId
-                    join c in coreService.UnitOfWork.Repository<Inventory>().AsQueryable() on b.InventoryId equals c.Id
-                    where c.Id == inventoryId
-                    select a;
+                            join b in coreService.UnitOfWork.Repository<InventoryProduct>().AsQueryable() on a.Id equals b.ProductId
+                            join c in coreService.UnitOfWork.Repository<Inventory>().AsQueryable() on b.InventoryId equals c.Id
+                            where c.Id == inventoryId
+                            select a;
 
         var query = coreService.UnitOfWork.Repository<Product>().AsQueryable().Except(queryExcluded);
 

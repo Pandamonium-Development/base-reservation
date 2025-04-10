@@ -76,8 +76,7 @@ public class ServiceInventoryProduct(ICoreService<InventoryProduct> coreService,
         inventoryProduct.Id = inventoryProductId;
 
         coreService.UnitOfWork.Repository<InventoryProduct>().Update(inventoryProduct);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new BaseReservationException("Error al actualizar inventario producto");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return await FindByIdAsync(inventoryProductId);
     }

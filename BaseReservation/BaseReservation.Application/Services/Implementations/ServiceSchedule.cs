@@ -34,10 +34,10 @@ public class ServiceSchedule(ICoreService<Schedule> coreService, IMapper mapper,
 
         var schedule = await ValidateSchedule(scheduleDto);
         schedule.Id = id;
+        schedule.Active = true;
 
         coreService.UnitOfWork.Repository<Schedule>().Update(schedule);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new NotFoundException("Horario no actualizado.");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return await FindByIdAsync(id);
     }
@@ -72,9 +72,7 @@ public class ServiceSchedule(ICoreService<Schedule> coreService, IMapper mapper,
         if (schedule.BranchSchedules.Count > 0) throw new BaseReservationException("Horario asignado en sucursales.");
 
         coreService.UnitOfWork.Repository<Schedule>().Update(schedule);
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-
-        if (rowsAffected == 0) throw new NotFoundException("Horario no eliminado.");
+        await coreService.UnitOfWork.SaveChangesAsync();
 
         return true;
     }
