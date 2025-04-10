@@ -16,7 +16,7 @@ namespace BaseReservation.WebAPI.Controllers;
 [ApiVersion("1.0")]
 [Route("api/[controller]")]
 [Authorize(Policy = "BaseReservation")]
-public class UserController(IServiceUser serviceUser, IServiceUserBranch serviceUserBranch) : ControllerBase
+public class UserController(IServiceUser serviceUser) : ControllerBase
 {
     /// <summary>
     /// Get list of all users
