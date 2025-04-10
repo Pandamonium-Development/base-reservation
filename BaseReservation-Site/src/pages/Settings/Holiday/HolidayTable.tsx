@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import DataTableWrapper from "components/Table/DataTableWrapper";
 import { GridColDef, GridEventListener, GridRowParams } from "@mui/x-data-grid";
 import { UseGetHolidays } from "hooks/api-basereservation/holiday/UseGetHolidays";
-import DataTableWrapper from "components/Table/DataTableWrapper"; // Importar el componente genérico
 
 export const HolidayTable = () => {
     const { data, isLoading, isError } = UseGetHolidays();
