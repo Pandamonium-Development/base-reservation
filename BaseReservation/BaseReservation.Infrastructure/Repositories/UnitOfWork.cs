@@ -51,7 +51,7 @@ public class UnitOfWork(ILoggerFactory loggerFactory, BaseReservationContext dbC
         FormattableString sqlExclude;
         sqlExclude = $"1=1";
 
-        if (!Regex.IsMatch(tableName, @"^[a-zA-Z0-9_]+$"))
+        if (!Regex.IsMatch(tableName, @"^[a-zA-Z0-9_]+$", RegexOptions.None, TimeSpan.FromMilliseconds(100)))
         {
             throw new ArgumentException("El nombre de la tabla contiene caracteres no permitidos.");
         }
