@@ -5170,8 +5170,243 @@ export interface paths {
             };
         };
         put?: never;
-        post?: never;
+        /** Creates a new tax. */
+        post: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path?: never;
+                cookie?: never;
+            };
+            /** @description Tax request model to be added */
+            requestBody?: {
+                content: {
+                    "application/json-patch+json": components["schemas"]["RequestTaxDto"];
+                    "application/json": components["schemas"]["RequestTaxDto"];
+                    "text/json": components["schemas"]["RequestTaxDto"];
+                    "application/*+json": components["schemas"]["RequestTaxDto"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseTaxDto"];
+                        "application/json": components["schemas"]["ResponseTaxDto"];
+                        "text/json": components["schemas"]["ResponseTaxDto"];
+                    };
+                };
+                /** @description Unprocessable Content */
+                422: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/Tax/{taxId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get the exact tax by id. */
+        get: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    taxId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseTaxDto"];
+                        "application/json": components["schemas"]["ResponseTaxDto"];
+                        "text/json": components["schemas"]["ResponseTaxDto"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
+        /** Updates a tax by its ID. */
+        put: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Id to look for */
+                    taxId: number;
+                };
+                cookie?: never;
+            };
+            /** @description Tax request model to be updated */
+            requestBody?: {
+                content: {
+                    "application/json-patch+json": components["schemas"]["RequestTaxDto"];
+                    "application/json": components["schemas"]["RequestTaxDto"];
+                    "text/json": components["schemas"]["RequestTaxDto"];
+                    "application/*+json": components["schemas"]["RequestTaxDto"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseTaxDto"];
+                        "application/json": components["schemas"]["ResponseTaxDto"];
+                        "text/json": components["schemas"]["ResponseTaxDto"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Unprocessable Content */
+                422: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        /** Deletes a tax by its ID. */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Id to look for */
+                    taxId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": boolean;
+                        "application/json": boolean;
+                        "text/json": boolean;
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -5386,73 +5621,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/User/{id}/Branch/{branchId}/availability": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Check if user is availably to assign to a branch */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "x-api-version"?: string;
-                };
-                path: {
-                    /** @description User id */
-                    id: number;
-                    /** @description Branch id */
-                    branchId: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": boolean;
-                        "application/json": boolean;
-                        "text/json": boolean;
-                    };
-                };
-                /** @description Not Found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-                /** @description Internal Server Error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/Branch/{branchId}/Users": {
         parameters: {
             query?: never;
@@ -5520,6 +5688,73 @@ export interface paths {
                 };
             };
         };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/Branch/{id}/Branch/{branchId}/availability": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Check if user is available to assign to a branch */
+        get: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description User id */
+                    id: number;
+                    /** @description Branch id */
+                    branchId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": boolean;
+                        "application/json": boolean;
+                        "text/json": boolean;
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -6087,6 +6322,13 @@ export interface components {
             /** Format: double */
             price?: number;
             observation?: string | null;
+            /** Format: int64 */
+            id?: number;
+        };
+        RequestTaxDto: {
+            name?: string | null;
+            /** Format: double */
+            rate?: number;
             /** Format: int64 */
             id?: number;
         };

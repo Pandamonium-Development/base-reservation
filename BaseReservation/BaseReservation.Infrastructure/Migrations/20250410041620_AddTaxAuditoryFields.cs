@@ -6,28 +6,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BaseReservation.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class TokenMasterUpdate : Migration
+    public partial class AddTaxAuditoryFields : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
                 name: "Active",
-                table: "TokenMaster",
+                table: "Tax",
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "Created",
-                table: "TokenMaster",
+                table: "Tax",
                 type: "datetime",
                 nullable: false,
-                defaultValue: new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValue: DateTime.Now);
 
             migrationBuilder.AddColumn<string>(
                 name: "CreatedBy",
-                table: "TokenMaster",
+                table: "Tax",
                 type: "nvarchar(70)",
                 maxLength: 70,
                 nullable: false,
@@ -35,13 +35,13 @@ namespace BaseReservation.Infrastructure.Migrations
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "Updated",
-                table: "TokenMaster",
+                table: "Tax",
                 type: "datetime",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "UpdatedBy",
-                table: "TokenMaster",
+                table: "Tax",
                 type: "nvarchar(70)",
                 maxLength: 70,
                 nullable: true);
@@ -52,23 +52,23 @@ namespace BaseReservation.Infrastructure.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Active",
-                table: "TokenMaster");
+                table: "Tax");
 
             migrationBuilder.DropColumn(
                 name: "Created",
-                table: "TokenMaster");
+                table: "Tax");
 
             migrationBuilder.DropColumn(
                 name: "CreatedBy",
-                table: "TokenMaster");
+                table: "Tax");
 
             migrationBuilder.DropColumn(
                 name: "Updated",
-                table: "TokenMaster");
+                table: "Tax");
 
             migrationBuilder.DropColumn(
                 name: "UpdatedBy",
-                table: "TokenMaster");
+                table: "Tax");
         }
     }
 }

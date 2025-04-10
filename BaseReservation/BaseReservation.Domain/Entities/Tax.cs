@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BaseReservation.Infrastructure;
 
 [Table("Tax")]
-public partial class Tax : BaseSimpleDto
+public partial class Tax : BaseEntity
 {
     [StringLength(40)]
     public string Name { get; set; } = null!;

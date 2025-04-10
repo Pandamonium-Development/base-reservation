@@ -35,7 +35,7 @@ export const NavBarRoutes: Record<string, NavBarRouteDef> = {
                 icon: null,
                 associatedPageUrls: [
                     '/General/Horario/Nuevo',
-                    '/General/Horario/:id',
+                    '/General/Horario/:ScheduleId',
                 ]
             },
             {
@@ -44,7 +44,16 @@ export const NavBarRoutes: Record<string, NavBarRouteDef> = {
                 icon: null,
                 associatedPageUrls: [
                     '/General/Feriado/Nuevo',
-                    '/General/Feriado/:id',
+                    '/General/Feriado/:HolidayId',
+                ]
+            },
+            {
+                title: 'Impuesto',
+                path: '/General/Impuesto',
+                icon: null,
+                associatedPageUrls: [
+                    '/General/Impuesto/Nuevo',
+                    '/General/Impuesto/:taxId',
                 ]
             }
         ]
