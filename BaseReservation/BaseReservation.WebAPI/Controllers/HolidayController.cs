@@ -88,7 +88,7 @@ public class HolidayController(IServiceHoliday serviceHoliday) : ControllerBase
     /// <param name="holidayId">The ID of the holiday to delete.</param>
     /// <returns>The deleted holiday.</returns>
     [HttpDelete("{holidayId}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseHolidayDto))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
     public async Task<IActionResult> DeleteHolidayAsync(byte holidayId)

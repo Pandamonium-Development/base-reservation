@@ -19,12 +19,6 @@ export const BlockTable = (
 
     const columns: GridColDef[] = [
         {
-            field: 'id',
-            headerName: 'Id',
-            minWidth: 20,
-            flex: 1
-        },
-        {
             field: 'startHour',
             headerName: 'Hora de inicio',
             minWidth: 200,

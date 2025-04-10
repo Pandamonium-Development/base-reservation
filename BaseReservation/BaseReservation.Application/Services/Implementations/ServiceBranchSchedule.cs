@@ -9,21 +9,77 @@ using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Domain.Core.Specifications;
 using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
+using KeyedSemaphores;
+using Microsoft.EntityFrameworkCore;
+using System.IO.Compression;
 
 namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceBranchSchedule(ICoreService<BranchSchedule> coreService, IMapper mapper,
                                     IValidator<BranchSchedule> branchScheduleValidator) : IServiceBranchSchedule
 {
+    private readonly string[] BranchScheduleWithBranch = ["BranchIdNavigation"];
+    private readonly string[] BranchScheduleWithBranchScheduleAndBlocks = ["BranchIdNavigation", "ScheduleIdNavigation", "BranchScheduleBlocks"];
+    private readonly string[] BranchScheduleWithScheduleAndBlocks = ["ScheduleIdNavigation", "BranchScheduleBlocks"];
+
     /// <inheritdoc />
     public async Task<bool> CreateBranchScheduleAsync(long branchId, IEnumerable<RequestBranchScheduleDto> branchSchedules)
     {
         var schedules = await ValidateHorarios(branchId, branchSchedules);
 
-        await coreService.UnitOfWork.Repository<BranchSchedule>().AddRangeAsync(schedules.ToList());
+        var spec = new BaseSpecification<BranchSchedule>(x => x.BranchId == branchId);
+        var existingBranchSchedules = await coreService.UnitOfWork.Repository<BranchSchedule>().ListAsync(spec, BranchScheduleWithBranch);
 
-        int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
-        if (rowsAffected == 0) throw new ListNotAddedException("Error al guardar horarios.");
+        using var keyedSemaphore = await KeyedSemaphore.LockAsync($"AssignSchedules-{branchId}");
+
+        var executionStrategy = coreService.UnitOfWork.CreateExecutionStrategy();
+        await executionStrategy.ExecuteAsync(async () =>
+        {
+            using var transaction = await coreService.UnitOfWork.BeginTransactionAsync();
+            try
+            {
+                schedules.ForEach(m =>
+                {
+                    var existing = existingBranchSchedules.FirstOrDefault(x => x.ScheduleId == m.ScheduleId && x.BranchId == m.BranchId);
+
+                    if (existing != null)
+                    {
+                        foreach (var block in existing.BranchScheduleBlocks.ToList())
+                        {
+                            coreService.UnitOfWork.Repository<BranchScheduleBlock>().Delete(block);
+                        }
+
+                        var blocksToAssign = existing.BranchScheduleBlocks
+                            .Select(x => new BranchScheduleBlock
+                            {
+                                StartHour = x.StartHour,
+                                EndHour = x.EndHour,
+                                Active = x.Active
+                            }).ToList();
+
+                        m.BranchScheduleBlocks = blocksToAssign;
+                    }
+                });
+
+                coreService.UnitOfWork.Repository<BranchSchedule>().Delete(existingBranchSchedules);
+                await coreService.UnitOfWork.Repository<BranchSchedule>().AddRangeAsync(schedules);
+                int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();
+
+                if (rowsAffected == 0)
+                {
+                    await transaction.RollbackAsync();
+                    throw new NotFoundException("No se han creado horarios en la sucursal.");
+                }
+
+                await transaction.CommitAsync();
+                return true;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw new BaseReservationException("Se ha presentado un error al momento de asignar los horarios en la sucursal.");
+            }
+        });
 
         return true;
     }
@@ -32,7 +88,7 @@ public class ServiceBranchSchedule(ICoreService<BranchSchedule> coreService, IMa
     public async Task<ResponseBranchScheduleDto?> FindByIdAsync(long id)
     {
         var spec = new BaseSpecification<BranchSchedule>(x => x.Id == id);
-        var branchSchedule = await coreService.UnitOfWork.Repository<BranchSchedule>().FirstOrDefaultAsync(spec);
+        var branchSchedule = await coreService.UnitOfWork.Repository<BranchSchedule>().FirstOrDefaultAsync(spec, BranchScheduleWithBranchScheduleAndBlocks);
         if (branchSchedule == null) throw new NotFoundException("Horario en sucursal no encontrado.");
 
         return mapper.Map<ResponseBranchScheduleDto>(branchSchedule);
@@ -51,9 +107,9 @@ public class ServiceBranchSchedule(ICoreService<BranchSchedule> coreService, IMa
     public async Task<ResponseBranchScheduleDto> FindByWeekDayAsync(long branchId, WeekDayApplication weekDay)
     {
         var spec = new BaseSpecification<BranchSchedule>(x => x.BranchId == branchId && x.ScheduleIdNavigation.Day == mapper.Map<WeekDay>(weekDay));
-        var branchSchedule = await coreService.UnitOfWork.Repository<BranchSchedule>().FirstOrDefaultAsync(spec, ["ScheduleIdNavigation", "BranchScheduleBlocks"]);
+        var branchSchedule = await coreService.UnitOfWork.Repository<BranchSchedule>().FirstOrDefaultAsync(spec, BranchScheduleWithScheduleAndBlocks);
 
-        if (branchSchedule == null) throw new NotFoundException("No se encontro horario en la sucursal.");
+        if (branchSchedule == null) throw new NotFoundException("No se encontró horario en la sucursal.");
 
         return mapper.Map<ResponseBranchScheduleDto>(branchSchedule);
     }
@@ -61,10 +117,10 @@ public class ServiceBranchSchedule(ICoreService<BranchSchedule> coreService, IMa
     /// <summary>
     /// Validate schedules
     /// </summary>
-    /// <param name="branchId">Branch id to recevice schedules that need to be validated</param>
+    /// <param name="branchId">Branch id to receiVe schedules that need to be validated</param>
     /// <param name="branchSchedules">List of Branch's schedules request that need validation</param>
     /// <returns>IEnumerable of BranchSchedule</returns>
-    private async Task<IEnumerable<BranchSchedule>> ValidateHorarios(long branchId, IEnumerable<RequestBranchScheduleDto> branchSchedules)
+    private async Task<List<BranchSchedule>> ValidateHorarios(long branchId, IEnumerable<RequestBranchScheduleDto> branchSchedules)
     {
         var existingSchedules = mapper.Map<List<BranchSchedule>>(branchSchedules);
         foreach (var item in existingSchedules)

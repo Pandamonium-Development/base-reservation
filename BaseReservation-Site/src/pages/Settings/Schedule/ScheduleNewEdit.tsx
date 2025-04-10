@@ -5,7 +5,7 @@ import { getDayInSpanish } from 'utils/util';
 import { Page } from "components/Shared/Page";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "stores/useSnackbar";
-import { DiaSelect } from "components/Misc/DiaSelect";
+import { DaySelect } from "components/Misc/DaySelect";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PageHeader } from "components/Shared/PageHeader";
 import { Alert, Box, Button, Stack } from "@mui/material";
@@ -33,8 +33,6 @@ export const ScheduleNewEdit = ({ scheduleData }: { scheduleData: ScheduleReques
     const fullScheduleDescription = `${getDayInSpanish(scheduleData?.day)}, ${scheduleData?.startHour ?? ''} - ${scheduleData?.endHour ?? ''}`
 
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
-
-    console.log('day', day);
 
     const formMethods = useForm({
         resolver: yupResolver(ScheduleSchema),
@@ -88,7 +86,6 @@ export const ScheduleNewEdit = ({ scheduleData }: { scheduleData: ScheduleReques
             day: data.day,
             startHour: data.startHour,
             endHour: data.endHour,
-            active: true,
         }
         if (!isExisting) {
             postSchedule({ ...formatedData });
@@ -131,7 +128,7 @@ export const ScheduleNewEdit = ({ scheduleData }: { scheduleData: ScheduleReques
                                 control={control}
                                 defaultValue={day}
                                 render={({ field }) => (
-                                    <DiaSelect
+                                    <DaySelect
                                         selectedDay={day}
                                         onDayChange={(newDay: WeeklyDay) => {
                                             field.onChange(newDay);

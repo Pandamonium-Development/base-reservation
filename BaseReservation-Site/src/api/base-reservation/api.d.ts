@@ -1999,9 +1999,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["ResponseHolidayDto"];
-                        "application/json": components["schemas"]["ResponseHolidayDto"];
-                        "text/json": components["schemas"]["ResponseHolidayDto"];
+                        "text/plain": boolean;
+                        "application/json": boolean;
+                        "text/json": boolean;
                     };
                 };
                 /** @description Not Found */

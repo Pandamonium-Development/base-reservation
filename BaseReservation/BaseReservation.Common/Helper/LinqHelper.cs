@@ -5,7 +5,7 @@ namespace BaseReservation.Common.Helper;
 /// <summary>
 /// Helper class for LINQ expressions.
 /// </summary>
-public class LinqHelper
+public static class LinqHelper
 {
     /// <summary>
     /// Gets the name of the member from a LINQ expression.

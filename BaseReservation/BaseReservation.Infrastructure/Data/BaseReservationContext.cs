@@ -529,7 +529,7 @@ public partial class BaseReservationContext(DbContextOptions<BaseReservationCont
             if (entry.Entity.GetType().GetProperty(CREATEDNAME) != null) entry.Property(CREATEDNAME).IsModified = false;
             if (entry.Entity.GetType().GetProperty(createdByName) != null) entry.Property(createdByName).IsModified = false;
 
-            if (entry.Entity.GetType().GetProperty(activeName) == null) entry.Property(activeName).CurrentValue = entry.Property(activeName).CurrentValue;
+            //if (entry.Entity.GetType().GetProperty(activeName) == null) entry.Property(activeName).CurrentValue = entry.Property(activeName).CurrentValue;
         }
     }
 }

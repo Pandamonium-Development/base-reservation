@@ -44,20 +44,4 @@ public class UserController(IServiceUser serviceUser, IServiceUserBranch service
         var users = await serviceUser.ListAllAsync(role);
         return StatusCode(StatusCodes.Status200OK, users);
     }
-
-    /// <summary>
-    /// Check if user is availably to assign to a branch
-    /// </summary>
-    /// <param name="id">User id</param>
-    /// <param name="branchId">Branch id</param>
-    /// <returns>IActionResult</returns>
-    [HttpGet("~/api/[controller]/{id}/Branch/{branchId}/availability")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetailsBaseReservation))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorDetailsBaseReservation))]
-    public async Task<IActionResult> IsAvailableAsync(short id, byte branchId)
-    {
-        var available = await serviceUserBranch.IsAvailableAsync(id, branchId);
-        return StatusCode(StatusCodes.Status200OK, available);
-    }
 }

@@ -13,6 +13,8 @@ namespace BaseReservation.Application.Services.Implementations;
 public class ServiceSchedule(ICoreService<Schedule> coreService, IMapper mapper,
                             IValidator<Schedule> scheduleValidator) : IServiceSchedule
 {
+    private readonly string[] ScheduleWithBranchSchedules = ["BranchSchedules"];
+
     /// <inheritdoc />
     public async Task<ResponseScheduleDto> CreateScheduleAsync(RequestScheduleDto scheduleDto)
     {
@@ -53,8 +55,7 @@ public class ServiceSchedule(ICoreService<Schedule> coreService, IMapper mapper,
     /// <inheritdoc />
     public async Task<ICollection<ResponseScheduleDto>> ListAllAsync()
     {
-        var spec = new BaseSpecification<Schedule>(x => x.Active);
-        var schedules = await coreService.UnitOfWork.Repository<Schedule>().ListAsync(spec);
+        var schedules = await coreService.UnitOfWork.Repository<Schedule>().ListAllAsync();
 
         return mapper.Map<ICollection<ResponseScheduleDto>>(schedules);
     }
@@ -65,7 +66,7 @@ public class ServiceSchedule(ICoreService<Schedule> coreService, IMapper mapper,
         if (!await coreService.UnitOfWork.Repository<Schedule>().ExistsAsync(id)) throw new NotFoundException("Horario no encontrado.");
 
         var spec = new BaseSpecification<Schedule>(x => x.Id == id);
-        var schedule = await coreService.UnitOfWork.Repository<Schedule>().FirstOrDefaultAsync(spec, ["BranchSchedules"]);
+        var schedule = await coreService.UnitOfWork.Repository<Schedule>().FirstOrDefaultAsync(spec, ScheduleWithBranchSchedules);
         schedule!.Active = false;
 
         if (schedule.BranchSchedules.Count > 0) throw new BaseReservationException("Horario asignado en sucursales.");

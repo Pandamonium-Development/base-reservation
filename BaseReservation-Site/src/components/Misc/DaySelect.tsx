@@ -2,15 +2,15 @@ import { weekDays, weekDaysSpanish } from "utils/util";
 import { WeeklyDay } from "types/api-basereservation"
 import { FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 
-interface DiaSelectProps {
+interface DaySelectProps {
     selectedDay: string,
     onDayChange: (dia: WeeklyDay) => void
     errorForm?: boolean;
 }
 
-export const DiaSelect = ({ selectedDay, onDayChange, errorForm }: DiaSelectProps) => {
-    const isValidProvince = weekDays.some(dia => dia === selectedDay)
-    const valueToShow = isValidProvince ? selectedDay : ''
+export const DaySelect = ({ selectedDay, onDayChange, errorForm }: DaySelectProps) => {
+    const isValidDay= weekDays.some(dia => dia === selectedDay)
+    const valueToShow = isValidDay ? selectedDay : ''
 
     return (
         <Stack direction='column' gap={1}>

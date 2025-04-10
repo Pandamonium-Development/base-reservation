@@ -18,6 +18,8 @@ public class ServiceReservation(ICoreService<Reservation> coreService, IServiceB
                             IServiceBranchHoliday serviceBranchHoliday, IServiceBranchSchedule serviceBranchSchedule,
                             IMapper mapper, IValidator<Reservation> reservationValidator) : IServiceReservation
 {
+    private readonly string[] ReservationWithBranchAndCustomer = ["BranchIdNavigation", "CustomerIdNavigation"];
+
     const string dateFormat = "yyyy-MM-dd";
 
     /// <inheritdoc />
@@ -74,7 +76,7 @@ public class ServiceReservation(ICoreService<Reservation> coreService, IServiceB
         {
             spec = new BaseSpecification<Reservation>(x => x.BranchId == branchId && x.Date >= startDate && x.Date <= endDate);
         }
-        var list = await coreService.UnitOfWork.Repository<Reservation>().ListAsync(spec, ["BranchIdNavigation", "CustomerIdNavigation"]);
+        var list = await coreService.UnitOfWork.Repository<Reservation>().ListAsync(spec, ReservationWithBranchAndCustomer);
 
         var calendarAgenda = (from a in list
                               select new ResponseReservationCalendarAgendaDto
@@ -114,7 +116,7 @@ public class ServiceReservation(ICoreService<Reservation> coreService, IServiceB
         WeekDayApplication weekDay = (WeekDayApplication)Enum.Parse(typeof(WeekDayApplication), weekDayName);
 
         var branchSchedule = await serviceBranchSchedule.FindByWeekDayAsync(branchId, weekDay);
-        
+
         var scheduleRange = DateHourManipulation.GetHoursAsync(branchSchedule.Schedule.StartHour, branchSchedule.Schedule.EndHour.AddHours(-1));
 
         foreach (var item in branchSchedule.BranchScheduleBlocks)

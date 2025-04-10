@@ -76,7 +76,7 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
     /// </summary>
     /// <param name="user">User information</param>
     /// <returns>ClaimsIdentity</returns>
-    private ClaimsIdentity GenerateClaims(ResponseUserDto user)
+    private static ClaimsIdentity GenerateClaims(ResponseUserDto user)
     {
         return new ClaimsIdentity(new Claim[]
         {
@@ -136,10 +136,9 @@ public class ServiceIdentity(AuthenticationConfiguration authenticationConfigura
 
         if (expiryDateTimeUtc > DateTime.UtcNow) return new AuthenticationResult { Errors = new[] { "Token aun no ha expirado" } };
 
-        var spec = new BaseSpecification<TokenMaster>(x => x.Token == token);
+        var spec = new BaseSpecification<TokenMaster>(x => x.Token == refreshToken);
         if (await coreService.UnitOfWork.Repository<TokenMaster>().FirstOrDefaultAsync(spec) == null) throw new NotFoundException("Token no encontrado.");
 
-        spec = new BaseSpecification<TokenMaster>(x => x.Token == refreshToken);
         var existingRefreshToken = await coreService.UnitOfWork.Repository<TokenMaster>().FirstOrDefaultAsync(spec);
 
         if (existingRefreshToken == null) return new AuthenticationResult { Errors = new[] { "Token no existe" } };

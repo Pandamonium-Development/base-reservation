@@ -29,10 +29,11 @@ public class ServiceHoliday(ICoreService<Holiday> coreService, IMapper mapper,
     /// <inheritdoc />
     public async Task<ResponseHolidayDto> UpdateHolidayAsync(long id, RequestHolidayDto holidayDto)
     {
-        if (!await coreService.UnitOfWork.Repository<Holiday>().ExistsAsync(id)) throw new NotFoundException("Feriado no encontrada.");
+        if (!await coreService.UnitOfWork.Repository<Holiday>().ExistsAsync(id)) throw new NotFoundException("Feriado no encontrado.");
 
         var holiday = await ValidarHoliday(holidayDto);
         holiday.Id = id;
+        holiday.Active = true;
         coreService.UnitOfWork.Repository<Holiday>().Update(holiday);
 
         int rowsAffected = await coreService.UnitOfWork.SaveChangesAsync();

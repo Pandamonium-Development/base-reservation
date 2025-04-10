@@ -67,6 +67,7 @@ export const BlockNewEdit = ({ branchScheduleBlockData }: { branchScheduleBlockD
     })
 
     const { mutate: putBranchScheduleBlock } = usePutScheduleBlock({
+        blockId: Number(blockId),
         onSuccess() {
             setSnackbarMessage('Bloqueo actualizado correctamente');
             navigate(`/Sucursal/${branchId}/Horario/${scheduleId}/Bloqueo`);
@@ -93,7 +94,6 @@ export const BlockNewEdit = ({ branchScheduleBlockData }: { branchScheduleBlockD
         }
 
         putBranchScheduleBlock({
-            id: Number(blockId),
             ...formatedData,
         })
     })

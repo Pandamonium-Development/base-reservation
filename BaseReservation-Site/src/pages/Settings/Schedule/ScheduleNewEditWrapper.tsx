@@ -16,10 +16,10 @@ export const ScheduleNewEditWrapper = () => {
 
     const [loading, setLoading] = useState<boolean>(true);
 
-    const isValidBranchId = isNil(scheduleId) || !isNil(scheduleId) && !isNaN(Number(scheduleId));
+    const isValidScheduleId = isNil(scheduleId) || !isNil(scheduleId) && !isNaN(Number(scheduleId));
 
     useEffect(() => {
-        if (!isValidBranchId) {
+        if (!isValidScheduleId) {
             navigate('/General/Horario');
             return;
         }
@@ -29,7 +29,7 @@ export const ScheduleNewEditWrapper = () => {
             return;
         }
         setLoading(false)
-    }, [isError, navigate, setSnackbarMessage, isValidBranchId, error]);
+    }, [isError, navigate, setSnackbarMessage, isValidScheduleId, error]);
 
     if (isLoading || loading) {
         return <CircularLoadingProgress />

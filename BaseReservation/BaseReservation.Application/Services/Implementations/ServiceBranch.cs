@@ -16,6 +16,17 @@ public class ServiceBranch(ICoreService<Branch> coreService, IMapper mapper,
                             IValidator<Branch> branchValidator,
                             IServiceUserAuthorization serviceUserAuthorization) : IServiceBranch
 {
+    private readonly string[] BranchWithAddress = ["DistrictIdNavigation", "CantonIdNavigation", "ProvinceIdNavigation"];
+    private readonly string[] BranchDefaults = [
+        "DistrictIdNavigation",
+        "DistrictIdNavigation.CantonIdNavigation",
+        "DistrictIdNavigation.CantonIdNavigation.ProvinceIdNavigation",
+        "BranchSchedules",
+        "BranchSchedules.ScheduleIdNavigation",
+        "BranchSchedules.BranchScheduleBlocks",
+    ];
+
+
     /// <inheritdoc />
     public async Task<ResponseBranchDto> CreateBranchAsync(RequestBranchDto branchDTO)
     {
@@ -36,6 +47,7 @@ public class ServiceBranch(ICoreService<Branch> coreService, IMapper mapper,
 
         var branch = await ValidateBranch(branchDTO);
         branch.Id = id;
+        branch.Active = true;
 
         coreService.UnitOfWork.Repository<Branch>().Update(branch);
         await coreService.UnitOfWork.SaveChangesAsync();
@@ -47,7 +59,7 @@ public class ServiceBranch(ICoreService<Branch> coreService, IMapper mapper,
     public async Task<ResponseBranchDto> FindByIdAsync(long id)
     {
         var spec = new BaseSpecification<Branch>(x => x.Id == id);
-        var branch = await coreService.UnitOfWork.Repository<Branch>().FirstOrDefaultAsync(spec, ["DistrictIdNavigation", "DistrictIdNavigation.CantonIdNavigation", "DistrictIdNavigation.CantonIdNavigation.ProvinceIdNavigation"]);
+        var branch = await coreService.UnitOfWork.Repository<Branch>().FirstOrDefaultAsync(spec, BranchDefaults);
         if (branch == null) throw new NotFoundException("Sucursal no encontrada.");
 
         return mapper.Map<ResponseBranchDto>(branch);
@@ -84,7 +96,7 @@ public class ServiceBranch(ICoreService<Branch> coreService, IMapper mapper,
                     where existingBranches.Contains(a.Id)
                     select a;
 
-        var branches = await coreService.UnitOfWork.Repository<Branch>().ListAsync(query, ["DistrictIdNavigation", "CantonIdNavigation", "ProvinceIdNavigation"]);
+        var branches = await coreService.UnitOfWork.Repository<Branch>().ListAsync(query, BranchWithAddress);
 
         return mapper.Map<ICollection<ResponseBranchDto>>(branches);
     }

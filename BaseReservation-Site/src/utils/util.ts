@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { isNil } from "lodash";
 import { ApiError } from "openapi-typescript-fetch";
-import { BaseReservationErrorDetails, WeeklyDay } from "types/api-basereservation";
+import { BaseReservationErrorDetails, MonthName, WeeklyDay } from "types/api-basereservation";
 
 export const timeRegex = /^([01]?\d|2[0-3]):([0-5]?\d)$/;
 
 export const telephoneMaskRegex = /^\d{4}-\d{4}$/;
 export const weekDays: WeeklyDay[] = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
 export const weekDaysSpanish: string[] = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+
+export const months: MonthName[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
 export const isPresent = <T>(t: T): t is NonNullable<T> => {
     return t !== null && t !== undefined;

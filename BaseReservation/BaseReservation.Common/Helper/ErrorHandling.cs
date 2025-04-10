@@ -5,7 +5,7 @@ namespace BaseReservation.Common.Helper;
 /// <summary>
 /// Error handling helper class.
 /// </summary>
-public class ErrorHandling
+public static class ErrorHandling
 {
     /// <summary>
     /// Gets the error message from an exception.

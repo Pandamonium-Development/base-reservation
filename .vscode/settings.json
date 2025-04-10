@@ -1,4 +1,5 @@
 {
+    "dotnetAcquisitionExtension.installTimeoutValue": 180,
     "dotnet.preferCSharpExtension": false,
     "editor.formatOnSave": true,
     "emmet.includeLanguages": {

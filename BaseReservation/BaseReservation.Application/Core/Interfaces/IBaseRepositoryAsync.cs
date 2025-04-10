@@ -86,7 +86,7 @@ public interface IBaseRepositoryAsync<T> where T : BaseSimpleDto
 
     PageResultDto<T> GetPageResult(IEnumerable<T> data, PagingDetails pagingDetails);
 
-    Task<int> CountAsync(ISpecification<T> spect);
+    Task<int> CountAsync(ISpecification<T> spec);
 
     void IgnoreField(T entity, Expression<Func<T, object>> field);
 }

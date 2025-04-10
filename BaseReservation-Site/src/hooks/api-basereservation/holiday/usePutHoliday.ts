@@ -2,44 +2,44 @@ import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
-import { BaseReservationErrorDetails, Schedule, ScheduleRequest } from "types/api-basereservation";
+import { BaseReservationErrorDetails, Holiday, HolidayRequest } from "types/api-basereservation";
 
-interface usePostScheduleProps {
+interface usePutHolidayProps {
     onSuccess?: (
-        data: Schedule,
-        variables: ScheduleRequest
+        data: Holiday,
+        variables: HolidayRequest
     ) => void,
     onError?: (
         data: BaseReservationErrorDetails,
-        variables: ScheduleRequest
+        variables: HolidayRequest
     ) => void,
     onSettled?: (
-        data: Schedule | undefined,
+        data: Holiday | undefined,
         error: BaseReservationErrorDetails | null,
-        variables: ScheduleRequest
+        variables: HolidayRequest
     ) => void
 }
 
-export const usePostSchedule = ({
+export const usePutHoliday = ({
     onSuccess,
     onError,
     onSettled
-}: usePostScheduleProps) => {
-    const path = '/api/Schedule';
-    const method = 'post';
+}: usePutHolidayProps) => {
+    const path = '/api/Holiday/{holidayId}';
+    const method = 'put';
 
-    const postSchedule = useTypedApiClientBS({ path, method })
+    const putHoliday = useTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
-    const createScheduleMutation = useMutation({
-        mutationKey: ['PostSchedule'],
-        mutationFn: async (schedule: ScheduleRequest) => {
-            const { data } = await postSchedule(castRequestBody(schedule, path, method))
+    const updateHolidayMutation = useMutation({
+        mutationKey: ['PutHoliday'],
+        mutationFn: async (holiday: HolidayRequest) => {
+            const { data } = await putHoliday(castRequestBody({ holidayId: Number(holiday.id), ...holiday }, path, method));
             return data;
         },
-        onSuccess: async (data: Schedule, variables: ScheduleRequest) => {
+        onSuccess: async (data: Holiday, variables: HolidayRequest) => {
             await queryClient.invalidateQueries({
-                queryKey: ['GetSchedule']
+                queryKey: ['GetHoliday']
             })
             onSuccess?.(data, variables)
         },
@@ -51,5 +51,5 @@ export const usePostSchedule = ({
         }
     })
 
-    return createScheduleMutation;
+    return updateHolidayMutation;
 }

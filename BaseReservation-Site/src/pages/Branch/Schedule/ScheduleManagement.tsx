@@ -57,7 +57,7 @@ export const ScheduleManagement = () => {
         setLoadingSubmit(true);
         postBranchSchedules(existingSchedules.length > 0
             ? existingSchedules.map((schedule): BranchScheduleRequest => {
-                return { id: 0, branchId: schedule.branchId, scheduleId: schedule.scheduleId }
+                return { branchId: schedule.branchId, scheduleId: schedule.scheduleId }
             })
             : [] as BranchScheduleRequest[]
         );

@@ -37,6 +37,15 @@ export const NavBarRoutes: Record<string, NavBarRouteDef> = {
                     '/General/Horario/Nuevo',
                     '/General/Horario/:id',
                 ]
+            },
+            {
+                title: 'Feriado',
+                path: '/General/Feriado',
+                icon: null,
+                associatedPageUrls: [
+                    '/General/Feriado/Nuevo',
+                    '/General/Feriado/:id',
+                ]
             }
         ]
     }

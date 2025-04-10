@@ -4,7 +4,8 @@ export type NavRoutes =
     '/Inicio' |
     '/Sucursal' |
     '/General' |
-    '/General/Horario';
+    '/General/Horario' |
+    '/General/Feriado';
 
 export interface NavBarDef {
     path: NavRoutes

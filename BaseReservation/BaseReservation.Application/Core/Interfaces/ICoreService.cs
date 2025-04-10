@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BaseReservation.Application.Core.Interfaces;
 
-public interface ICoreService<T>
+public interface ICoreService<out T>
 {
     ILogger<T> Logger { get; }
 

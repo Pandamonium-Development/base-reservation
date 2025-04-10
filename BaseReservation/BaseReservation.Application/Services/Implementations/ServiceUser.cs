@@ -11,11 +11,13 @@ namespace BaseReservation.Application.Services.Implementations;
 
 public class ServiceUser(ICoreService<User> coreService, IMapper mapper) : IServiceUser
 {
+    private readonly string[] UserWithRole = ["RoleIdNavigation"];
+
     /// <inheritdoc />
     public async Task<ResponseUserDto> FindByIdAsync(long id)
     {
         var spec = new BaseSpecification<User>(x => x.Id == id);
-        var user = await coreService.UnitOfWork.Repository<User>().FirstOrDefaultAsync(spec);
+        var user = await coreService.UnitOfWork.Repository<User>().FirstOrDefaultAsync(spec, UserWithRole);
         if (user == null) throw new NotFoundException("Usuario no encontrado.");
 
         return mapper.Map<ResponseUserDto>(user);
@@ -60,7 +62,7 @@ public class ServiceUser(ICoreService<User> coreService, IMapper mapper) : IServ
     public async Task<ResponseUserDto> LoginAsync(string email, string password)
     {
         var spec = new BaseSpecification<User>(x => x.Email == email && x.Password == password && x.Active);
-        var user = await coreService.UnitOfWork.Repository<User>().FirstOrDefaultAsync(spec, ["RoleIdNavigation"]);
+        var user = await coreService.UnitOfWork.Repository<User>().FirstOrDefaultAsync(spec, UserWithRole);
         if (user == null) throw new NotFoundException("Email o contraseña incorrecta.");
 
         return mapper.Map<ResponseUserDto>(user);

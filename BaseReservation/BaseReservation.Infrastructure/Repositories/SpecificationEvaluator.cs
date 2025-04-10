@@ -11,13 +11,32 @@ public static class SpecificationEvaluator<T> where T : BaseSimpleDto
     {
         var query = inputQuery;
 
-        if (specification.Criteria != null) query = query.Where(specification.Criteria);
+        query = ApplyCriteria(query, specification);
+        query = ApplyIncludes(query, specification);
+        query = ApplyOrdering(query, specification);
+        query = ApplyPaging(query, specification);
+        query = ApplyTracking(query, specification);
 
+        return query;
+    }
+
+    private static IQueryable<T> ApplyCriteria(IQueryable<T> query, ISpecification<T> specification)
+    {
+        return specification.Criteria != null ? query.Where(specification.Criteria) : query;
+    }
+
+    private static IQueryable<T> ApplyIncludes(IQueryable<T> query, ISpecification<T> specification)
+    {
         query = specification.Includes.Aggregate(query, (current, include) => current.Include(include));
         query = specification.IncludeString.Aggregate(query, (current, include) => current.Include(include));
+        return query;
+    }
 
-        IOrderedQueryable<T> orderedQuery = null!;
-        if (specification.OrderBy != null && specification.OrderBy.HasItems())
+    private static IQueryable<T> ApplyOrdering(IQueryable<T> query, ISpecification<T> specification)
+    {
+        IOrderedQueryable<T>? orderedQuery = null;
+
+        if (specification.OrderBy?.Any() == true)
         {
             foreach (var item in specification.OrderBy)
             {
@@ -25,7 +44,7 @@ public static class SpecificationEvaluator<T> where T : BaseSimpleDto
             }
         }
 
-        if (specification.OrderByDescending != null && specification.OrderByDescending.HasItems())
+        if (specification.OrderByDescending?.Any() == true)
         {
             foreach (var item in specification.OrderByDescending)
             {
@@ -33,29 +52,23 @@ public static class SpecificationEvaluator<T> where T : BaseSimpleDto
             }
         }
 
-        if (orderedQuery != null)
-        {
-            query = orderedQuery;
-        }
+        return orderedQuery ?? query;
+    }
 
-        if (specification.IsPagingEnabled)
-        {
-            query = query.Skip(specification.Skip)
-                            .Take(specification.Take);
-        }
+    private static IQueryable<T> ApplyPaging(IQueryable<T> query, ISpecification<T> specification)
+    {
+        return specification.IsPagingEnabled
+            ? query.Skip(specification.Skip).Take(specification.Take)
+            : query;
+    }
 
+    private static IQueryable<T> ApplyTracking(IQueryable<T> query, ISpecification<T> specification)
+    {
         if (specification.NoTracking)
-        {
-            query = query.AsNoTracking();
-        }
-        else
-        {
-            if (specification.NoTrackingWithIdentityResolution)
-            {
-                query = query.AsNoTrackingWithIdentityResolution();
-            }
-        }
+            return query.AsNoTracking();
 
-        return query;
+        return specification.NoTrackingWithIdentityResolution
+            ? query.AsNoTrackingWithIdentityResolution()
+            : query;
     }
 }

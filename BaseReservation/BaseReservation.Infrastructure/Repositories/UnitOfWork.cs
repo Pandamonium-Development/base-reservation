@@ -35,7 +35,7 @@ public class UnitOfWork(ILoggerFactory loggerFactory, BaseReservationContext dbC
     public async Task<IList<T>?> FromSqlAsync<T>(FormattableString sql, params Expression<Func<T, object>>[]? includes)
     {
         using var connection = new SqlConnection(_dbContext.Database.GetConnectionString());
-        connection.Open();
+        await connection.OpenAsync();
         var result = await connection.QueryAsync<T>(sql.GetSQL(), new { });
         return result.ToList();
     }
@@ -64,7 +64,7 @@ public class UnitOfWork(ILoggerFactory loggerFactory, BaseReservationContext dbC
     public async Task<int> GetTotalRowCountAsync(FormattableString sql)
     {
         using var connection = new SqlConnection(_dbContext.Database.GetConnectionString());
-        connection.Open();
+        await connection.OpenAsync();
         var result = await connection.QueryFirstAsync<int>(sql.GetSQL(), new { });
         return result;
     }

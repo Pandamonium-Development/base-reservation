@@ -1,11 +1,11 @@
-import { GridColDef, GridEventListener, GridRenderCellParams, GridRowParams } from "@mui/x-data-grid"
+import { getDayInSpanish } from "utils/util"
+import { useNavigate } from "react-router-dom"
+import { Schedule } from "types/api-basereservation"
 import { DataTable } from "components/Table/DataTable"
 import { ErrorProcess } from "components/Error/ErrorProcess"
 import { useGetSchedules } from "hooks/api-basereservation/schedule/useGetSchedules"
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
-import { Schedule } from "types/api-basereservation"
-import { getDayInSpanish } from "utils/util"
-import { useNavigate } from "react-router-dom"
+import { GridColDef, GridEventListener, GridRenderCellParams, GridRowParams } from "@mui/x-data-grid"
 
 export const ScheduleTable = () => {
     const { data, isLoading, isError } = useGetSchedules()

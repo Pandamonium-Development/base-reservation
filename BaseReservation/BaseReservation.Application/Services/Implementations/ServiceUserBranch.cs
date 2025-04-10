@@ -13,9 +13,9 @@ public class ServiceUserBranch(ICoreService<UserBranch> coreService, IServiceUse
                                 IMapper mapper, IValidator<UserBranch> usuarioSucursalValidator) : IServiceUserBranch
 {
     /// <inheritdoc />
-    public async Task<bool> CreateUserBranchAsync(long branchId, IEnumerable<RequestUserBranchDto> usersBranchDto)
+    public async Task<bool> CreateUserBranchAsync(long branchId, IEnumerable<RequestUserBranchDto> branchUsers)
     {
-        var usersBranch = await ValidateUsuariosSucursalAsync(branchId, usersBranchDto);
+        var usersBranch = await ValidateUsuariosSucursalAsync(branchId, branchUsers);
 
         var listSaved = await coreService.UnitOfWork.Repository<UserBranch>().AddRangeAsync(usersBranch.ToList());
         await coreService.UnitOfWork.SaveChangesAsync();

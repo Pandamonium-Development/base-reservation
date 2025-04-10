@@ -5,6 +5,7 @@ import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS"
 import { BaseReservationErrorDetails, BranchScheduleBlock, BranchScheduleBlockRequest } from "types/api-basereservation";
 
 interface usePutScheduleBlockProps {
+    blockId: number,
     onSuccess?: (
         data: BranchScheduleBlock,
         variables: BranchScheduleBlockRequest
@@ -21,6 +22,7 @@ interface usePutScheduleBlockProps {
 }
 
 export const usePutScheduleBlock = ({
+    blockId,
     onSuccess,
     onError,
     onSettled
@@ -34,7 +36,7 @@ export const usePutScheduleBlock = ({
     const updateBranchScheduleBlockMutation = useMutation({
         mutationKey: ['PutBranchScheduleBlock'],
         mutationFn: async (branchScheduleBlock: BranchScheduleBlockRequest) => {
-            const { data } = await putBranchScheduleBlock(castRequestBody({ blockId: Number(branchScheduleBlock.id), ...branchScheduleBlock }, path, method));
+            const { data } = await putBranchScheduleBlock(castRequestBody({ blockId: blockId, ...branchScheduleBlock }, path, method));
             return data;
         },
         onSuccess: async (data: BranchScheduleBlock, variables: BranchScheduleBlockRequest) => {

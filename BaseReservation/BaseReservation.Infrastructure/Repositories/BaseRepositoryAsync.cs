@@ -21,6 +21,8 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
 
     private readonly BaseReservationContext _dbContext = dbContext;
 
+    private readonly string[] basicIncludes = [];
+
     public virtual async Task<T> AddAsync(T entity, bool disableTracking = true)
     {
         if (disableTracking) DisableEntityTracking(entity);
@@ -185,7 +187,7 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
     public virtual async Task<IList<T>> FromSqlAsync(FormattableString sql)
     {
         using var connection = new SqlConnection(_dbContext.Database.GetConnectionString());
-        connection.Open();
+        await connection.OpenAsync();
         var result = (await connection.QueryAsync<T>(sql.GetSQL(), new { })).ToList();
 
         if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
@@ -196,7 +198,7 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         return result;
     }
 
-    public async Task<T?> GetByIdAsync(long id) => await GetByIdAsync(id, false, []);
+    public async Task<T?> GetByIdAsync(long id) => await GetByIdAsync(id, false, basicIncludes);
 
     public async Task<T?> GetByIdAsync(long id, params Expression<Func<T, object>>[]? includes)
     {
@@ -494,7 +496,7 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         return SpecificationEvaluator<T>.GetQuery(_dbContext.Set<T>().AsQueryable(), spec);
     }
 
-    private IQueryable<T> ApplySpecification(ISpecification<T> spec, IQueryable<T> query)
+    private static IQueryable<T> ApplySpecification(ISpecification<T> spec, IQueryable<T> query)
     {
         return SpecificationEvaluator<T>.GetQuery(query, spec);
     }

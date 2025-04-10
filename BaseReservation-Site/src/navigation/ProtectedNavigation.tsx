@@ -8,6 +8,8 @@ import { Block as BranchScheduleBlock } from "pages/Branch/Schedule/Block/Block"
 import { ScheduleNewEditWrapper } from "pages/Settings/Schedule/ScheduleNewEditWrapper";
 import { ScheduleManagement as BranchScheduleManagement } from "pages/Branch/Schedule/ScheduleManagement";
 import { BlockNewEditWrapper as BranchScheduleBlockNewEditWrapper } from "pages/Branch/Schedule/Block/BlockNewEditWrapper";
+import { Holiday } from "pages/Settings/Holiday/Holiday";
+import { HolidayNewEditWrapper } from "pages/Settings/Holiday/HolidayNewEditWrapper";
 
 export const routesProtected = [
     {
@@ -69,6 +71,21 @@ export const routesProtected = [
         name: 'EditarSucursalHorarioBloqueo',
         path: '/Sucursal/:branchId/Horario/:scheduleId/Bloqueo/:blockId',
         element: <BranchScheduleBlockNewEditWrapper />
+    },
+    {
+        name: 'Feriado',
+        path: '/General/Feriado',
+        element: <Holiday />
+    },
+    {
+        name: 'CrearFeriado',
+        path: '/General/Feriado/Nuevo',
+        element: <HolidayNewEditWrapper />
+    },
+    {
+        name: 'EditarFeriado',
+        path: '/General/Feriado/:holidayId',
+        element: <HolidayNewEditWrapper />
     }
 ]
 
