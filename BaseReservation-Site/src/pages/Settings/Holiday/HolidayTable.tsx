@@ -1,60 +1,30 @@
 import { useNavigate } from "react-router-dom";
-import { DataTable } from "components/Table/DataTable";
-import { ErrorProcess } from "components/Error/ErrorProcess";
 import { GridColDef, GridEventListener, GridRowParams } from "@mui/x-data-grid";
-import { UseGetHolidays } from "hooks/api-basereservation/holiday/UseGetHolidays"; 
-import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
+import { UseGetHolidays } from "hooks/api-basereservation/holiday/UseGetHolidays";
+import DataTableWrapper from "components/Table/DataTableWrapper"; // Importar el componente genérico
 
 export const HolidayTable = () => {
-    const { data, isLoading, isError } = UseGetHolidays()
+    const { data, isLoading, isError } = UseGetHolidays();
     const navigate = useNavigate();
 
     const columns: GridColDef[] = [
-        {
-            field: 'id',
-            headerName: 'Id',
-            minWidth: 20,
-            flex: 1
-        },
-        {
-            field: 'name',
-            headerName: 'Nombre',
-            minWidth: 130,
-            flex: 1,
-        },
-        {
-            field: 'month',
-            headerName: 'Mes',
-            minWidth: 100,
-            flex: 1
-        },
-        {
-            field: 'day',
-            headerName: 'Día base',
-            minWidth: 100,
-            flex: 1
-        },
-    ]
+        { field: 'id', headerName: 'Id', minWidth: 20, flex: 1 },
+        { field: 'name', headerName: 'Nombre', minWidth: 130, flex: 1 },
+        { field: 'month', headerName: 'Mes', minWidth: 100, flex: 1 },
+        { field: 'day', headerName: 'Día base', minWidth: 100, flex: 1 },
+    ];
 
     const selectRow: GridEventListener<'rowClick'> = (params: GridRowParams) => {
-        navigate(`/General/Feriado/${params.id}`)
-    }
-
-    if (isLoading) {
-        return <CircularLoadingProgress />
-    }
-
-    if (isError) {
-        return <ErrorProcess />
-    }
+        navigate(`/General/Feriado/${params.id}`);
+    };
 
     return (
-        <DataTable
-            sortFieldName="id"
-            sort="desc"
+        <DataTableWrapper
             columns={columns}
-            rows={data}
+            data={data ?? []}
+            loading={isLoading}
+            error={isError}
             onRowClick={selectRow}
         />
-    )
-}
+    );
+};

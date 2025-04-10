@@ -118,7 +118,7 @@ export const Content = () => {
                                                         }
                                                     }}
                                                     selected={
-                                                        startsWith(location.pathname, childRoute.path) ?? checkLocation(childRoute.associatedPageUrls)
+                                                        startsWith(location.pathname, childRoute.path) || (checkLocation(childRoute.associatedPageUrls) ?? false)
                                                     }
                                                 >
                                                     <ListItemIcon

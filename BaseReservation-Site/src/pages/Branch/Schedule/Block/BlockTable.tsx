@@ -1,7 +1,8 @@
-import { GridColDef, GridEventListener, GridRowParams } from "@mui/x-data-grid";
-import { DataTable } from "components/Table/DataTable";
+
 import { useNavigate } from "react-router-dom";
 import { BranchScheduleBlock } from "types/api-basereservation"
+import DataTableWrapper from "components/Table/DataTableWrapper";
+import { GridColDef, GridEventListener, GridRowParams } from "@mui/x-data-grid";
 
 interface BlockTableProps {
     branchId: number,
@@ -37,10 +38,10 @@ export const BlockTable = (
     }
 
     return (
-        <DataTable
+        <DataTableWrapper
             sort="asc"
             columns={columns}
-            rows={blocks}
+            data={blocks}
             onRowClick={selectRow}
         />
     )

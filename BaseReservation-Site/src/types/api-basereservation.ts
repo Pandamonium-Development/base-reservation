@@ -1,5 +1,8 @@
 import { type components } from "api/base-reservation/api";
 
+type SchemaTypes = keyof components['schemas'];
+export type SchemaData = components['schemas'][SchemaTypes];
+
 export type Branch = components['schemas']['ResponseBranchDto']
 export type BranchRequest = components['schemas']['RequestBranchDto']
 

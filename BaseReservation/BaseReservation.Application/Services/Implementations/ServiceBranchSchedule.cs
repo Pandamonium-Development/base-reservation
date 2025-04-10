@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using KeyedSemaphores;
+using Microsoft.EntityFrameworkCore;
 using BaseReservation.Infrastructure;
 using BaseReservation.Domain.Exceptions;
 using BaseReservation.Application.Enums;
@@ -9,9 +11,6 @@ using BaseReservation.Application.ResponseDTOs;
 using BaseReservation.Domain.Core.Specifications;
 using BaseReservation.Application.Core.Interfaces;
 using BaseReservation.Application.Services.Interfaces;
-using KeyedSemaphores;
-using Microsoft.EntityFrameworkCore;
-using System.IO.Compression;
 
 namespace BaseReservation.Application.Services.Implementations;
 
@@ -19,6 +18,7 @@ public class ServiceBranchSchedule(ICoreService<BranchSchedule> coreService, IMa
                                     IValidator<BranchSchedule> branchScheduleValidator) : IServiceBranchSchedule
 {
     private readonly string[] BranchScheduleWithBranch = ["BranchIdNavigation"];
+    private readonly string[] BranchScheduleWithBlocks = ["BranchScheduleBlocks"];
     private readonly string[] BranchScheduleWithBranchScheduleAndBlocks = ["BranchIdNavigation", "ScheduleIdNavigation", "BranchScheduleBlocks"];
     private readonly string[] BranchScheduleWithScheduleAndBlocks = ["ScheduleIdNavigation", "BranchScheduleBlocks"];
 
@@ -98,7 +98,7 @@ public class ServiceBranchSchedule(ICoreService<BranchSchedule> coreService, IMa
     public async Task<ICollection<ResponseBranchScheduleDto>> ListAllByBranchAsync(long branchId)
     {
         var spec = new BaseSpecification<BranchSchedule>(x => x.BranchId == branchId);
-        var branchSchedules = await coreService.UnitOfWork.Repository<BranchSchedule>().ListAsync(spec, ["BranchScheduleBlocks"]);
+        var branchSchedules = await coreService.UnitOfWork.Repository<BranchSchedule>().ListAsync(spec, BranchScheduleWithBlocks);
 
         return mapper.Map<ICollection<ResponseBranchScheduleDto>>(branchSchedules);
     }

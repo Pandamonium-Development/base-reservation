@@ -1,4 +1,3 @@
-import { isNil } from "lodash";
 import { useEffect, useState } from "react";
 import { getErrorMessage } from "utils/util";
 import { BranchNewEdit } from "./BranchNewEdit";
@@ -16,7 +15,7 @@ export const BranchNewEditWrapper = () => {
 
     const [loading, setLoading] = useState<boolean>(true);
 
-    const isValidBranchId = isNil(branchId) || !isNaN(Number(branchId));
+    const isValidBranchId = (branchId ?? '') !== '' && !isNaN(Number(branchId));
 
     useEffect(() => {
         if (!isValidBranchId) {

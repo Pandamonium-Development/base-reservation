@@ -20,9 +20,9 @@ public interface IBaseRepositoryAsync<T> where T : BaseSimpleDto
 
     Task<T?> GetByIdAsync(long id);
 
-    Task<T?> GetByIdAsync(long id, params Expression<Func<T, object>>[]? includes);
+    Task<T?> GetByIdWithExpressionsAsync(long id, params Expression<Func<T, object>>[]? includes);
 
-    Task<T?> GetByIdAsync(long id, params string[]? includes);
+    Task<T?> GetByIdWithStringIncludesAsync(long id, params string[]? includes);
 
     Task<T?> GetByIdAsync(long id, bool forceNoTracking = false, params string[] includes);
 

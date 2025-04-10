@@ -3,16 +3,14 @@ import { applyPhoneMask } from "utils/util"
 import { Menu, MenuItem } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import { Branch } from "types/api-basereservation"
-import { DataTable } from "components/Table/DataTable"
-import { ErrorProcess } from "components/Error/ErrorProcess"
+import DataTableWrapper from "components/Table/DataTableWrapper"
 import { OptionsBullet } from "components/Table/OptionsBullet"
 import { UseGetBranches } from "hooks/api-basereservation/branch/UseGetBranches"
-import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
 import { GridColDef, GridEventListener, GridRenderCellParams, GridRowParams } from "@mui/x-data-grid"
 
 export const BranchTable = () => {
     const navigate = useNavigate()
-    const branchItemsQuery = UseGetBranches()
+    const { data, isError, isLoading } = UseGetBranches()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
     const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
@@ -88,24 +86,18 @@ export const BranchTable = () => {
         }
     ]
 
-    if (branchItemsQuery.isPending) {
-        return <CircularLoadingProgress />
-    }
-
-    if (branchItemsQuery.isError) {
-        return <ErrorProcess />
-    }
-
     const selectRow: GridEventListener<'rowClick'> = (params: GridRowParams) => {
         navigate(`/Sucursal/${params.id}`)
     }
 
     return (
-        <DataTable
+        <DataTableWrapper
             sortFieldName="id"
             sort="desc"
             columns={columns}
-            rows={branchItemsQuery.data}
+            data={data ?? []}
+            loading={isLoading}
+            error={isError}
             onRowClick={selectRow}
         />
     )

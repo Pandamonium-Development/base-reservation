@@ -13,6 +13,7 @@ namespace BaseReservation.Application.Services.Implementations;
 public class ServiceBranchScheduleBlock(ICoreService<BranchScheduleBlock> coreService,
                                             IValidator<BranchScheduleBlock> blockValidator, IMapper mapper) : IServiceBranchScheduleBlock
 {
+    private readonly string[] BranchScheduleBlockWithBranchSchedule = ["BranchScheduleIdNavigation"];
     /// <inheritdoc />
     public async Task<ResponseBranchScheduleBlockDto> CreateBranchScheduleBlockAsync(RequestBranchScheduleBlockDto branchScheduleBlock)
     {
@@ -61,7 +62,7 @@ public class ServiceBranchScheduleBlock(ICoreService<BranchScheduleBlock> coreSe
     public async Task<ICollection<ResponseBranchScheduleBlockDto>> ListAllByBranchAsync(long branchId)
     {
         var spec = new BaseSpecification<BranchScheduleBlock>(x => x.BranchScheduleIdNavigation.BranchId == branchId);
-        var blocks = await coreService.UnitOfWork.Repository<BranchScheduleBlock>().ListAsync(spec, ["BranchScheduleIdNavigation"]);
+        var blocks = await coreService.UnitOfWork.Repository<BranchScheduleBlock>().ListAsync(spec, BranchScheduleBlockWithBranchSchedule);
 
         return mapper.Map<ICollection<ResponseBranchScheduleBlockDto>>(blocks);
     }
