@@ -198,7 +198,7 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         return result;
     }
 
-    public async Task<T?> GetByIdAsync(long id) => await GetByIdAsync(id, false, basicIncludes);
+    public async Task<T?> GetByIdAsync(long id) => await GetByIdWithNoTrackingAsync(id, false, basicIncludes);
 
     public async Task<T?> GetByIdWithExpressionsAsync(long id, params Expression<Func<T, object>>[]? includes)
     {
@@ -213,9 +213,9 @@ public class BaseRepositoryAsync<T>(ILoggerFactory loggerFactory, BaseReservatio
         return await query.FirstOrDefaultAsync(m => m.Id == id);
     }
 
-    public async Task<T?> GetByIdWithStringIncludesAsync(long id, params string[]? includes) => await GetByIdAsync(id, false, includes!);
+    public async Task<T?> GetByIdWithStringIncludesAsync(long id, params string[]? includes) => await GetByIdWithNoTrackingAsync(id, false, includes!);
 
-    public async Task<T?> GetByIdAsync(long id, bool forceNoTracking = false, params string[] includes)
+    public async Task<T?> GetByIdWithNoTrackingAsync(long id, bool forceNoTracking = false, params string[] includes)
     {
         var query = _dbContext.Set<T>().AsQueryable();
         if (includes != null && includes.HasItems())

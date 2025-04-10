@@ -24,7 +24,7 @@ public interface IBaseRepositoryAsync<T> where T : BaseSimpleDto
 
     Task<T?> GetByIdWithStringIncludesAsync(long id, params string[]? includes);
 
-    Task<T?> GetByIdAsync(long id, bool forceNoTracking = false, params string[] includes);
+    Task<T?> GetByIdWithNoTrackingAsync(long id, bool forceNoTracking = false, params string[] includes);
 
     Task<IList<T>> ListAllAsync();
 
