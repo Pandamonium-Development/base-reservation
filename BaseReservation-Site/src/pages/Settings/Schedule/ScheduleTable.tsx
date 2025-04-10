@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom"
 import { Schedule } from "types/api-basereservation"
 import { DataTable } from "components/Table/DataTable"
 import { ErrorProcess } from "components/Error/ErrorProcess"
-import { useGetSchedules } from "hooks/api-basereservation/schedule/useGetSchedules"
+import { UseGetSchedules } from "hooks/api-basereservation/schedule/UseGetSchedules"
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
 import { GridColDef, GridEventListener, GridRenderCellParams, GridRowParams } from "@mui/x-data-grid"
 
 export const ScheduleTable = () => {
-    const { data, isLoading, isError } = useGetSchedules()
+    const { data, isLoading, isError } = UseGetSchedules()
     const navigate = useNavigate();
 
     const columns: GridColDef[] = [

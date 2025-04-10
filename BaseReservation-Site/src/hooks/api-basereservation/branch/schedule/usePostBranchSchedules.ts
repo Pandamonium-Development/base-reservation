@@ -1,10 +1,10 @@
 import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 import { BaseReservationErrorDetails, BranchScheduleRequest } from "types/api-basereservation";
 
-interface usePostBranchSchedulesProps {
+interface UsePostBranchSchedulesProps {
     branchId: number,
     onSuccess?: (
         data: boolean,
@@ -21,16 +21,16 @@ interface usePostBranchSchedulesProps {
     ) => void
 }
 
-export const usePostBranchSchedules = ({
+export const UsePostBranchSchedules = ({
     branchId,
     onSuccess,
     onError,
     onSettled
-}: usePostBranchSchedulesProps) => {
+}: UsePostBranchSchedulesProps) => {
     const path = `/api/Branch/{branchId}/Schedule`;
     const method = 'post';
 
-    const postBranchSchedules = useTypedApiClientBS({ path, method })
+    const postBranchSchedules = UseTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const createBranchSchedulesMutation = useMutation({

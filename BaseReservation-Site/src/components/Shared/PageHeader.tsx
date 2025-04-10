@@ -1,6 +1,6 @@
 import { isNil } from "lodash"
 import { Link } from "react-router-dom"
-import { useLayout } from 'hooks/useLayout'
+import { UseLayout } from 'hooks/UseLayout'
 import { ArrowLeft } from "@mui/icons-material"
 import { Box, Typography } from "@mui/material"
 
@@ -21,7 +21,7 @@ export const PageHeader = ({
     backPath,
     actionButton
 }: PageHeaderProps) => {
-    const { isMobile } = useLayout()
+    const { isMobile } = UseLayout()
     return (
         <Box>
             <Box

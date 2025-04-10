@@ -2,13 +2,13 @@ import { isPresent } from "utils/util";
 import { Branch } from "types/api-basereservation";
 import { ApiError } from "openapi-typescript-fetch";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 
-export const useGetBranchById = (branchId: string | undefined): UseQueryResult<Branch, ApiError> => {
+export const UseGetBranchById = (branchId: string | undefined): UseQueryResult<Branch, ApiError> => {
     const path = '/api/Branch/{branchId}';
     const method = 'get';
 
-    const getBranch = useTypedApiClientBS({ path, method })
+    const getBranch = UseTypedApiClientBS({ path, method })
 
     return useQuery({
         queryKey: ["GetBranch", branchId],

@@ -1,18 +1,18 @@
-import { useSnackbar } from "stores/useSnackbar";
-import { useNavigate, useParams } from "react-router-dom";
-import { useGetScheduleById } from "hooks/api-basereservation/schedule/useGetScheduleById";
-import { useEffect, useState } from "react";
 import { isNil } from "lodash";
+import { useEffect, useState } from "react";
 import { getErrorMessage } from "utils/util";
-import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
+import { useSnackbar } from "stores/useSnackbar";
 import { ScheduleNewEdit } from "./ScheduleNewEdit";
+import { useNavigate, useParams } from "react-router-dom";
+import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
+import { UseGetScheduleById } from "hooks/api-basereservation/schedule/UseGetScheduleById";
 
 export const ScheduleNewEditWrapper = () => {
     const { scheduleId } = useParams<{ scheduleId?: string }>();
     const navigate = useNavigate();
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
-    const { data, isLoading, isError, error } = useGetScheduleById(scheduleId);
+    const { data, isLoading, isError, error } = UseGetScheduleById(scheduleId);
 
     const [loading, setLoading] = useState<boolean>(true);
 

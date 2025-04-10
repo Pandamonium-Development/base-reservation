@@ -1,13 +1,13 @@
 import { Canton } from "types/api-basereservation";
 import { ApiError } from "openapi-typescript-fetch";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "../useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "../UseTypedApiClientBS";
 
-export const useGetCantons = (provinceId: number): UseQueryResult<Array<Canton>, ApiError> => {
+export const UseGetCantons = (provinceId: number): UseQueryResult<Array<Canton>, ApiError> => {
     const path = '/api/Province/{provinceId}/Canton';
     const method = 'get';
 
-    const getCantons = useTypedApiClientBS({ path, method })
+    const getCantons = UseTypedApiClientBS({ path, method })
 
     return useQuery({
         queryKey: ["Cantons"],

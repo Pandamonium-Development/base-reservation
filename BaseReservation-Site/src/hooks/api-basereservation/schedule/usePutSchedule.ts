@@ -1,10 +1,10 @@
 import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 import { BaseReservationErrorDetails, Schedule, ScheduleRequest } from "types/api-basereservation";
 
-interface usePutScheduleProps {
+interface UsePutScheduleProps {
     onSuccess?: (
         data: Schedule,
         variables: ScheduleRequest
@@ -20,15 +20,15 @@ interface usePutScheduleProps {
     ) => void
 }
 
-export const usePutSchedule = ({
+export const UsePutSchedule = ({
     onSuccess,
     onError,
     onSettled
-}: usePutScheduleProps) => {
+}: UsePutScheduleProps) => {
     const path = '/api/Schedule/{scheduleId}';
     const method = 'put';
 
-    const putSchedule = useTypedApiClientBS({ path, method })
+    const putSchedule = UseTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const updateScheduleMutation = useMutation({

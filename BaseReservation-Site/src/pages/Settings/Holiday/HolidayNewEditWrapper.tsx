@@ -4,7 +4,7 @@ import { getErrorMessage } from "utils/util";
 import { useSnackbar } from "stores/useSnackbar";
 import { HolidayNewEdit } from "./HolidayNewEdit";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetHolidayById } from "hooks/api-basereservation/holiday/useGetHolidayById";
+import { UseGetHolidayById } from "hooks/api-basereservation/holiday/UseGetHolidayById";
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
 
 export const HolidayNewEditWrapper = () => {
@@ -12,7 +12,7 @@ export const HolidayNewEditWrapper = () => {
     const navigate = useNavigate();
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
-    const { data, isLoading, isError, error } = useGetHolidayById(holidayId);
+    const { data, isLoading, isError, error } = UseGetHolidayById(holidayId);
 
     const [loading, setLoading] = useState<boolean>(true);
 

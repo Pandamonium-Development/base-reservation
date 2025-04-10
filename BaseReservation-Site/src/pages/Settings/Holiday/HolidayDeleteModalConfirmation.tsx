@@ -7,7 +7,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { ModalFooter } from "components/Modal/ModalFooter";
 import { ModalHeader } from "components/Modal/ModalHeader";
 import { BaseReservationErrorDetails } from "types/api-basereservation";
-import { useDeleteHoliday } from "hooks/api-basereservation/holiday/useDeleteHolidayById";
+import { UseDeleteHoliday } from "hooks/api-basereservation/holiday/UseDeleteHolidayById";
 
 interface HolidayDeleteModalConfirmationProps {
     isModalOpen: boolean
@@ -25,7 +25,7 @@ export const HolidayDeleteModalConfirmation = ({
     const [loading, setLoading] = useState(false);
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
-    const { mutate: deleteHoliday } = useDeleteHoliday({
+    const { mutate: deleteHoliday } = UseDeleteHoliday({
         onSuccess: (data: boolean) => {
             setSnackbarMessage(data ? "Feriado eliminado correctamente" : "Error al eliminar feriado", data ? "success" : "error");
             toggleIsOpen();

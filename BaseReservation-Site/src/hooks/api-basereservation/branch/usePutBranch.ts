@@ -1,10 +1,10 @@
 import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 import { BaseReservationErrorDetails, Branch, BranchRequest } from "types/api-basereservation";
 
-interface usePutBranchProps {
+interface UsePutBranchProps {
     onSuccess?: (
         data: Branch,
         variables: BranchRequest
@@ -20,15 +20,15 @@ interface usePutBranchProps {
     ) => void
 }
 
-export const usePutBranch = ({
+export const UsePutBranch = ({
     onSuccess,
     onError,
     onSettled
-}: usePutBranchProps) => {
+}: UsePutBranchProps) => {
     const path = '/api/Branch/{branchId}';
     const method = 'put';
 
-    const putBranch = useTypedApiClientBS({ path, method })
+    const putBranch = UseTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const updateBranchMutation = useMutation({

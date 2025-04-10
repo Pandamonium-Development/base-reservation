@@ -7,7 +7,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { ModalFooter } from "components/Modal/ModalFooter";
 import { ModalHeader } from "components/Modal/ModalHeader";
 import { BaseReservationErrorDetails } from "types/api-basereservation";
-import { useDeleteScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/useDeleteScheduleBlockById";
+import { UseDeleteScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/UseDeleteScheduleBlockById";
 
 interface BlockDeleteModalConfirmationProps {
     isModalOpen: boolean
@@ -29,7 +29,7 @@ export const BlockDeleteModalConfirmation = ({
     const [loading, setLoading] = useState(false);
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
-    const { mutate: deleteBranchScheduleBlock } = useDeleteScheduleBlock({
+    const { mutate: deleteBranchScheduleBlock } = UseDeleteScheduleBlock({
         onSuccess: (data: boolean) => {
             setSnackbarMessage(data ? "Bloqueo eliminado correctamente" : "Error al eliminar bloqueo", data ? "success" : "error");
             toggleIsOpen();

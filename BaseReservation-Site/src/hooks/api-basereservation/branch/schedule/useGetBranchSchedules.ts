@@ -2,13 +2,13 @@ import { isPresent } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { BranchSchedule } from "types/api-basereservation";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 
-export const useGetBranchSchedules = (branchId: string | undefined): UseQueryResult<Array<BranchSchedule>, ApiError> => {
+export const UseGetBranchSchedules = (branchId: string | undefined): UseQueryResult<Array<BranchSchedule>, ApiError> => {
     const path = '/api/Branch/{branchId}/Schedule';
     const method = 'get';
 
-    const getBranchSchedules = useTypedApiClientBS({ path, method })
+    const getBranchSchedules = UseTypedApiClientBS({ path, method })
 
     return useQuery({
         queryKey: ["GetBranchSchedules"],

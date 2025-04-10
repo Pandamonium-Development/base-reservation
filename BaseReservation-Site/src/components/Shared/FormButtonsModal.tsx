@@ -1,4 +1,4 @@
-import { useLayout } from "hooks/useLayout"
+import { UseLayout } from "hooks/UseLayout"
 import { Box, Button, Stack } from "@mui/material";
 
 interface FormButtonsProps {
@@ -6,7 +6,7 @@ interface FormButtonsProps {
 }
 
 export const FormButtonsModal = ({ onCloseModal }: FormButtonsProps) => {
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
 
     if (isMobile) {
         return (

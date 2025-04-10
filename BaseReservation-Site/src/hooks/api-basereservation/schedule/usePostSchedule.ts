@@ -1,10 +1,10 @@
 import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 import { BaseReservationErrorDetails, Schedule, ScheduleRequest } from "types/api-basereservation";
 
-interface usePostScheduleProps {
+interface UsePostScheduleProps {
     onSuccess?: (
         data: Schedule,
         variables: ScheduleRequest
@@ -20,15 +20,15 @@ interface usePostScheduleProps {
     ) => void
 }
 
-export const usePostSchedule = ({
+export const UsePostSchedule = ({
     onSuccess,
     onError,
     onSettled
-}: usePostScheduleProps) => {
+}: UsePostScheduleProps) => {
     const path = '/api/Schedule';
     const method = 'post';
 
-    const postSchedule = useTypedApiClientBS({ path, method })
+    const postSchedule = UseTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const createScheduleMutation = useMutation({

@@ -2,9 +2,9 @@ import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BaseReservationErrorDetails } from "types/api-basereservation";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 
-interface useDeleteHolidayProps {
+interface UseDeleteHolidayProps {
     onSuccess?: (
         data: boolean,
         variables: number
@@ -20,15 +20,15 @@ interface useDeleteHolidayProps {
     ) => void
 }
 
-export const useDeleteHoliday = ({
+export const UseDeleteHoliday = ({
     onSuccess,
     onError,
     onSettled
-}: useDeleteHolidayProps) => {
+}: UseDeleteHolidayProps) => {
     const path = '/api/Holiday/{holidayId}';
     const method = 'delete';
 
-    const deleteHoliday = useTypedApiClientBS({ path, method })
+    const deleteHoliday = UseTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const deleteHolidayMutation = useMutation({

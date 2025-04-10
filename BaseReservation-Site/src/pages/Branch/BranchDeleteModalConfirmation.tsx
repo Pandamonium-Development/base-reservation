@@ -7,7 +7,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { ModalFooter } from "components/Modal/ModalFooter";
 import { ModalHeader } from "components/Modal/ModalHeader";
 import { BaseReservationErrorDetails } from "types/api-basereservation";
-import { useDeleteBranch } from "hooks/api-basereservation/branch/useDeleteBranchById";
+import { UseDeleteBranch } from "hooks/api-basereservation/branch/UseDeleteBranchById";
 
 interface BranchDeleteModalConfirmationProps {
     isModalOpen: boolean
@@ -25,7 +25,7 @@ export const BranchDeleteModalConfirmation = ({
     const [loading, setLoading] = useState(false);
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
-    const { mutate: deleteBranch } = useDeleteBranch({
+    const { mutate: deleteBranch } = UseDeleteBranch({
         onSuccess: (data: boolean) => {
             setSnackbarMessage(data ? "Sucursal eliminada correctamente" : "Error al eliminar sucursal", data ? "success" : "error");
             toggleIsOpen();

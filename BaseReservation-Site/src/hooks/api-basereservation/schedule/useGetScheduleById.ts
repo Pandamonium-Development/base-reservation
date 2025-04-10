@@ -2,13 +2,13 @@ import { isPresent } from "utils/util";
 import { Schedule } from "types/api-basereservation";
 import { ApiError } from "openapi-typescript-fetch";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 
-export const useGetScheduleById = (scheduleId: string | undefined): UseQueryResult<Schedule, ApiError> => {
+export const UseGetScheduleById = (scheduleId: string | undefined): UseQueryResult<Schedule, ApiError> => {
     const path = '/api/Schedule/{scheduleId}';
     const method = 'get';
 
-    const getSchedule = useTypedApiClientBS({ path, method })
+    const getSchedule = UseTypedApiClientBS({ path, method })
 
     return useQuery({
         queryKey: ["GetSchedule", scheduleId],

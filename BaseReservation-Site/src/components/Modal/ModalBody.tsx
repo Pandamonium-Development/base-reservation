@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from "@mui/material";
-import { useLayout } from "hooks/useLayout"
+import { UseLayout } from "hooks/UseLayout"
 import { useEffect, useState } from "react";
 import { useHeightActiveModalHeader } from "stores/useHeightActiveModalHeader";
 
@@ -15,7 +15,7 @@ export const ModalBody = ({
     heightModal,
     sx
 }: ModalBodyProps) => {
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
     const heightActiveModalHeader = useHeightActiveModalHeader((state) => state.height)
 
     const footerHeight = 80;

@@ -5,9 +5,9 @@ import { jwtDecode } from 'jwt-decode';
 import { useSnackbar } from 'stores/useSnackbar';
 import { LoginTypeForm } from 'pages/Login/LoginSchema';
 import { Authentication, BaseReservationErrorDetails } from 'types/api-basereservation';
-import { usePostAuthentication } from 'hooks/api-basereservation/authentication/usePostAuthentication';
+import { UsePostAuthentication } from 'hooks/api-basereservation/authentication/UsePostAuthentication';
 import { createContext, ReactNode, useCallback, useState, useContext, useEffect, useMemo } from 'react';
-import { usePostRefreshAuthentication } from 'hooks/api-basereservation/authentication/usePostRefreshAuthentication';
+import { UsePostRefreshAuthentication } from 'hooks/api-basereservation/authentication/UsePostRefreshAuthentication';
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -37,7 +37,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         Cookies.set('user_name', decodedToken.FullName)
     }
 
-    const { mutate: postAuthenticationUser } = usePostAuthentication({
+    const { mutate: postAuthenticationUser } = UsePostAuthentication({
         onSuccess: (data: Authentication) => {
             setSnackbarMessage('Inicio de sesión válido');
             Cookies.set('access_token', String(data.token), { expires: 1 / 24 });
@@ -66,7 +66,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setIsAuthenticated(false);
     }, []);
 
-    const { mutate: refreshTokenMutation } = usePostRefreshAuthentication({
+    const { mutate: refreshTokenMutation } = UsePostRefreshAuthentication({
         onSuccess: (data: Authentication) => {
             Cookies.set('access_token', String(data.token), { expires: 1 / 24 });
             Cookies.set('refresh_token', String(data.refreshToken), { expires: 30 });
@@ -98,7 +98,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setSnackbarMessage('El token ha expirado. Refrescando...', 'info');
                 refreshTokenMutation({ token, refreshToken });
             }
-        } catch (error) {
+        } catch {
             setSnackbarMessage('Error al intentar verificar el token', 'error');
         }
     }, [getToken, getRefreshToken, setSnackbarMessage, refreshTokenMutation, logout]);
@@ -123,7 +123,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
                 } else {
                     setIsAuthenticated(true);
                 }
-            } catch (error) {
+            } catch {
                 setSnackbarMessage('Error al intentar verificar el token', 'error');
                 logout();
             }

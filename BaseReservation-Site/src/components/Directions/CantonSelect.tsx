@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { Canton } from "types/api-basereservation"
 import { ErrorProcess } from "components/Error/ErrorProcess"
 import { InputLabel, MenuItem, Select, Stack } from "@mui/material"
-import { useGetCantons } from "hooks/api-basereservation/useGetCantons"
+import { UseGetCantons } from "hooks/api-basereservation/UseGetCantons"
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
 import { useSnackbar } from "stores/useSnackbar"
 
@@ -13,7 +13,7 @@ interface CantonSelectProps {
 }
 
 export const CantonSelect = ({ selectedProvince, selectedCanton, onCantonChange }: CantonSelectProps) => {
-    const { data: cantons, isLoading, isError, refetch, error } = useGetCantons(selectedProvince)
+    const { data: cantons, isLoading, isError, refetch, error } = UseGetCantons(selectedProvince)
     const [localSelectedCanton, setLocalSelectedCanton] = useState<number>(selectedCanton);
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 

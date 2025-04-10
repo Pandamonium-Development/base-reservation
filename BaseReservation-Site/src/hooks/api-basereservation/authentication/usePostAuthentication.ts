@@ -1,10 +1,10 @@
 import { transformErrorKeys } from "utils/util"
 import { useMutation } from "@tanstack/react-query"
 import { ApiError } from "openapi-typescript-fetch"
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS"
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS"
 import { Authentication, BaseReservationErrorDetails, LoginUserRequest } from "types/api-basereservation"
 
-interface usePostAuthenticationProps {
+interface UsePostAuthenticationProps {
     onSuccess?: (
         data: Authentication,
         variables: LoginUserRequest
@@ -15,14 +15,14 @@ interface usePostAuthenticationProps {
     ) => void
 }
 
-export const usePostAuthentication = ({
+export const UsePostAuthentication = ({
     onSuccess,
     onError
-}: usePostAuthenticationProps) => {
+}: UsePostAuthenticationProps) => {
     const path = '/api/Authentication';
     const method = 'post';
 
-    const postAuthentication = useTypedApiClientBS({ path, method })
+    const postAuthentication = UseTypedApiClientBS({ path, method })
 
     return useMutation({
         mutationFn: async (

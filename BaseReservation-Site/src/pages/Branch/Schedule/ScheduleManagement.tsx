@@ -10,9 +10,9 @@ import { PageHeader } from "components/Shared/PageHeader";
 import { FormButtons } from "components/Shared/FormButtons";
 import { getDayInSpanish, getErrorMessage } from "utils/util";
 import { ListViewWithDelete } from "components/ListView/ListViewWithDelete";
-import { useGetBranchById } from "hooks/api-basereservation/branch/useGetBranchById";
+import { UseGetBranchById } from "hooks/api-basereservation/branch/UseGetBranchById";
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
-import { usePostBranchSchedules } from "hooks/api-basereservation/branch/schedule/usePostBranchSchedules";
+import { UsePostBranchSchedules } from "hooks/api-basereservation/branch/schedule/UsePostBranchSchedules";
 import { BaseReservationErrorDetails, BranchSchedule, BranchScheduleRequest } from "types/api-basereservation";
 
 export const ScheduleManagement = () => {
@@ -24,7 +24,7 @@ export const ScheduleManagement = () => {
     const [existingSchedules, setExistingSchedules] = useState<Array<BranchSchedule>>([]);
     const [isOpenModalSchedule, setIsOpenModalSchedule] = useState(false);
 
-    const { data: branch, isLoading, isError, error } = useGetBranchById(branchId);
+    const { data: branch, isLoading, isError, error } = UseGetBranchById(branchId);
 
     const isValidBranchId = isNil(branchId) || !isNil(branchId) && !isNaN(Number(branchId));
 
@@ -37,7 +37,7 @@ export const ScheduleManagement = () => {
         setIsOpenModalSchedule(false)
     }
 
-    const { mutate: postBranchSchedules } = usePostBranchSchedules({
+    const { mutate: postBranchSchedules } = UsePostBranchSchedules({
         branchId: Number(branchId),
         onSuccess() {
             setSnackbarMessage('Horarios asignados a la sucursal');

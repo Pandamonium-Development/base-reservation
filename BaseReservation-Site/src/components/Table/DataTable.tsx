@@ -1,6 +1,6 @@
 import { isEmpty } from "lodash"
 import { useState } from "react"
-import { useLayout } from "hooks/useLayout"
+import { UseLayout } from "hooks/UseLayout"
 import { getNestedField } from "utils/util"
 import { MobileDataTable } from "./MobileDataTable"
 import { NoDataIndicador } from "components/NoDataIndicator/NoDataIndicador"
@@ -20,7 +20,7 @@ export const DataTable = <RowModelT extends GridValidRowModel>({
     forceDesktopTableInMobile?: boolean
     emptyDataImageSource?: string
 }) => {
-    const { isMobile } = useLayout()
+    const { isMobile } = UseLayout()
     const {
         rows,
         columns,

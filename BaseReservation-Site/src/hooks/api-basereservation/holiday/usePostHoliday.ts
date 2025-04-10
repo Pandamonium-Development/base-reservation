@@ -1,10 +1,10 @@
 import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 import { BaseReservationErrorDetails, Holiday, HolidayRequest } from "types/api-basereservation";
 
-interface usePostHolidayProps {
+interface UsePostHolidayProps {
     onSuccess?: (
         data: Holiday,
         variables: HolidayRequest
@@ -20,15 +20,15 @@ interface usePostHolidayProps {
     ) => void
 }
 
-export const usePostHoliday = ({
+export const UsePostHoliday = ({
     onSuccess,
     onError,
     onSettled
-}: usePostHolidayProps) => {
+}: UsePostHolidayProps) => {
     const path = '/api/Holiday';
     const method = 'post';
 
-    const postHoliday = useTypedApiClientBS({ path, method })
+    const postHoliday = UseTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const createHolidayMutation = useMutation({

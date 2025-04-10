@@ -10,7 +10,7 @@ import { BranchSchedule, Schedule } from "types/api-basereservation";
 import { FormButtonsModal } from "components/Shared/FormButtonsModal";
 import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
 import { ScheduleDefaultValues, ScheduleSchema } from "./ScheduleSchema";
-import { useGetSchedules } from "hooks/api-basereservation/schedule/useGetSchedules";
+import { UseGetSchedules } from "hooks/api-basereservation/schedule/UseGetSchedules";
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
 import { Alert, Box, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
 
@@ -31,7 +31,7 @@ export const ScheduleAddModal = ({
 }: ScheduleAddModalProps) => {
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
-    const { data, isLoading, isError } = useGetSchedules()
+    const { data, isLoading, isError } = UseGetSchedules()
 
     const formMethods = useForm({
         resolver: yupResolver(ScheduleSchema),

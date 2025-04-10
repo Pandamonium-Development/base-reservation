@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { District } from "types/api-basereservation"
 import { ErrorProcess } from "components/Error/ErrorProcess"
-import { useGetDistricts } from "hooks/api-basereservation/useGetDistricts"
+import { UseGetDistricts } from "hooks/api-basereservation/UseGetDistricts"
 import { FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material"
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
 import { useSnackbar } from "stores/useSnackbar"
@@ -15,7 +15,7 @@ interface DistrictSelectProps {
 }
 
 export const DistrictSelect = ({ selectedProvince, selectedCanton, selectedDistrict, onDistrictChange, errorForm }: DistrictSelectProps) => {
-    const { data: districts, isLoading, isError, refetch, error } = useGetDistricts(selectedCanton)
+    const { data: districts, isLoading, isError, refetch, error } = UseGetDistricts(selectedCanton)
     const [localSelectedDistrict, setLocalSelectedDistrict] = useState<number>(selectedDistrict);
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 

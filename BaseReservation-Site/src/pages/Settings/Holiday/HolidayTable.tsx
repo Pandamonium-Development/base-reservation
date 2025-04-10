@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { DataTable } from "components/Table/DataTable";
 import { ErrorProcess } from "components/Error/ErrorProcess";
 import { GridColDef, GridEventListener, GridRowParams } from "@mui/x-data-grid";
-import { useGetHolidays } from "hooks/api-basereservation/holiday/useGetHolidays"; 
+import { UseGetHolidays } from "hooks/api-basereservation/holiday/UseGetHolidays"; 
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
 
 export const HolidayTable = () => {
-    const { data, isLoading, isError } = useGetHolidays()
+    const { data, isLoading, isError } = UseGetHolidays()
     const navigate = useNavigate();
 
     const columns: GridColDef[] = [

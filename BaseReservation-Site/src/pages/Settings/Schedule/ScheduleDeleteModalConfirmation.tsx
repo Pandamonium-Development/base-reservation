@@ -7,7 +7,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { ModalFooter } from "components/Modal/ModalFooter";
 import { ModalHeader } from "components/Modal/ModalHeader";
 import { BaseReservationErrorDetails } from "types/api-basereservation";
-import { useDeleteSchedule } from "hooks/api-basereservation/schedule/useDeleteScheduleById";
+import { UseDeleteSchedule } from "hooks/api-basereservation/schedule/UseDeleteScheduleById";
 
 interface ScheduleDeleteModalConfirmationProps {
     isModalOpen: boolean
@@ -25,7 +25,7 @@ export const ScheduleDeleteModalConfirmation = ({
     const [loading, setLoading] = useState(false);
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
-    const { mutate: deleteSchedule } = useDeleteSchedule({
+    const { mutate: deleteSchedule } = UseDeleteSchedule({
         onSuccess: (data: boolean) => {
             setSnackbarMessage(data ? "Horario eliminado correctamente" : "Error al eliminar horario", data ? "success" : "error");
             toggleIsOpen();

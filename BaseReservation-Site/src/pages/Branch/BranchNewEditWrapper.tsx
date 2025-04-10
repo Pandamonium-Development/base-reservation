@@ -4,7 +4,7 @@ import { getErrorMessage } from "utils/util";
 import { BranchNewEdit } from "./BranchNewEdit";
 import { useSnackbar } from "stores/useSnackbar";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetBranchById } from "hooks/api-basereservation/branch/useGetBranchById";
+import { UseGetBranchById } from "hooks/api-basereservation/branch/UseGetBranchById";
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
 
 export const BranchNewEditWrapper = () => {
@@ -12,7 +12,7 @@ export const BranchNewEditWrapper = () => {
     const navigate = useNavigate();
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
-    const { data, isLoading, isError, error } = useGetBranchById(branchId);
+    const { data, isLoading, isError, error } = UseGetBranchById(branchId);
 
     const [loading, setLoading] = useState<boolean>(true);
 

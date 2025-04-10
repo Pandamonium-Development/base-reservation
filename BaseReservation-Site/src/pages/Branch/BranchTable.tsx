@@ -6,13 +6,13 @@ import { Branch } from "types/api-basereservation"
 import { DataTable } from "components/Table/DataTable"
 import { ErrorProcess } from "components/Error/ErrorProcess"
 import { OptionsBullet } from "components/Table/OptionsBullet"
-import { useGetBranches } from "hooks/api-basereservation/branch/useGetBranches"
+import { UseGetBranches } from "hooks/api-basereservation/branch/UseGetBranches"
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
 import { GridColDef, GridEventListener, GridRenderCellParams, GridRowParams } from "@mui/x-data-grid"
 
 export const BranchTable = () => {
     const navigate = useNavigate()
-    const branchItemsQuery = useGetBranches()
+    const branchItemsQuery = UseGetBranches()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
     const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 

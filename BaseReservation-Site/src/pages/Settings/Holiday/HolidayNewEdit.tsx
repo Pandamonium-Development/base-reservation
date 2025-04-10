@@ -1,27 +1,27 @@
 import { isNil } from "lodash";
 import { useState } from "react";
-import { useLayout } from "hooks/useLayout";
+import { isPresent } from "utils/util";
+import { UseLayout } from "hooks/UseLayout";
+import { Page } from "components/Shared/Page";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "stores/useSnackbar";
-import { HolidayRequest, MonthName } from "types/api-basereservation";
-import { HolidayDefaultValues, HolidaySchema } from "./HolidaySchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Controller, FormProvider, useForm } from "react-hook-form";
-import { usePostHoliday } from "hooks/api-basereservation/holiday/usePostHoliday";
-import { usePutHoliday } from "hooks/api-basereservation/holiday/usePutHoliday";
-import { Page } from "components/Shared/Page";
 import { PageHeader } from "components/Shared/PageHeader";
-import { Alert, Box, Button, Stack, TextField } from "@mui/material";
-import { isPresent } from "utils/util";
-import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
 import { MonthSelect } from "components/Misc/MonthSelect";
 import { FormButtons } from "components/Shared/FormButtons";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import { DayOfMonthPicker } from "components/Misc/DayOfMonthPicker";
+import { Alert, Box, Button, Stack, TextField } from "@mui/material";
+import { HolidayDefaultValues, HolidaySchema } from "./HolidaySchema";
+import { HolidayRequest, MonthName } from "types/api-basereservation";
+import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
+import { UsePutHoliday } from "hooks/api-basereservation/holiday/usePutHoliday";
+import { UsePostHoliday } from "hooks/api-basereservation/holiday/usePostHoliday";
 import { HolidayDeleteModalConfirmation } from "./HolidayDeleteModalConfirmation";
 
 export const HolidayNewEdit = ({ holidayData }: { holidayData: HolidayRequest | undefined }) => {
     const navigate = useNavigate();
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
     const [loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ export const HolidayNewEdit = ({ holidayData }: { holidayData: HolidayRequest | 
         formState: { errors },
     } = formMethods;
 
-    const { mutate: postHoliday } = usePostHoliday({
+    const { mutate: postHoliday } = UsePostHoliday({
         onSuccess() {
             setSnackbarMessage('Feriado creado correctamente');
             navigate('/General/Feriado');
@@ -67,7 +67,7 @@ export const HolidayNewEdit = ({ holidayData }: { holidayData: HolidayRequest | 
         }
     })
 
-    const { mutate: putHoliday } = usePutHoliday({
+    const { mutate: putHoliday } = UsePutHoliday({
         onSuccess() {
             setSnackbarMessage('Feriado actualizado correctamente');
             navigate('/General/Feriado');

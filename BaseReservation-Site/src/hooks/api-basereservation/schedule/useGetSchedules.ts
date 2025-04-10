@@ -1,13 +1,13 @@
 import { ApiError } from "openapi-typescript-fetch";
 import { Schedule } from "types/api-basereservation";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 
-export const useGetSchedules = (): UseQueryResult<Array<Schedule>, ApiError> => {
+export const UseGetSchedules = (): UseQueryResult<Array<Schedule>, ApiError> => {
     const path = '/api/Schedule';
     const method = 'get';
 
-    const getSchedules = useTypedApiClientBS({ path, method })
+    const getSchedules = UseTypedApiClientBS({ path, method })
 
     return useQuery({
         queryKey: ["GetSchedules"],

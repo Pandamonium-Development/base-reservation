@@ -1,7 +1,7 @@
 
 import { isNil } from "lodash"
 import { useState } from "react"
-import { useLayout } from "hooks/useLayout"
+import { UseLayout } from "hooks/UseLayout"
 import { getDayInSpanish } from "utils/util"
 import { Page } from "components/Shared/Page"
 import { useSnackbar } from "stores/useSnackbar"
@@ -17,14 +17,14 @@ import { BlockDefaultValues, BlockSchema } from "./BlockSchema"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { TimePickerField } from "components/DateTimePickers/TimePickerField"
 import { BlockDeleteModalConfirmation } from "./BlockDeleteModalConfirmation"
-import { usePutScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/usePutScheduleBlock"
-import { usePostScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/usePostScheduleBlock"
+import { UsePutScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/UsePutScheduleBlock"
+import { UsePostScheduleBlock } from "hooks/api-basereservation/branch/schedule/block/UsePostScheduleBlock"
 
 export const BlockNewEdit = ({ branchScheduleBlockData }: { branchScheduleBlockData: BranchScheduleBlock | undefined | null }) => {
     const { branchId, scheduleId, blockId } = useParams<{ branchId?: string, scheduleId?: string, blockId?: string }>();
 
     const navigate = useNavigate();
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false);
 
@@ -53,7 +53,7 @@ export const BlockNewEdit = ({ branchScheduleBlockData }: { branchScheduleBlockD
         formState: { errors },
     } = formMethods;
 
-    const { mutate: postBranchScheduleBlock } = usePostScheduleBlock({
+    const { mutate: postBranchScheduleBlock } = UsePostScheduleBlock({
         onSuccess() {
             setSnackbarMessage('Bloqueo creado correctamente');
             navigate(`/Sucursal/${branchId}/Horario/${scheduleId}/Bloqueo`);
@@ -66,7 +66,7 @@ export const BlockNewEdit = ({ branchScheduleBlockData }: { branchScheduleBlockD
         }
     })
 
-    const { mutate: putBranchScheduleBlock } = usePutScheduleBlock({
+    const { mutate: putBranchScheduleBlock } = UsePutScheduleBlock({
         blockId: Number(blockId),
         onSuccess() {
             setSnackbarMessage('Bloqueo actualizado correctamente');

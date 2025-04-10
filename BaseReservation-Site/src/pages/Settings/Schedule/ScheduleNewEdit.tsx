@@ -1,6 +1,6 @@
 import { isNil } from "lodash";
 import { useState } from "react";
-import { useLayout } from "hooks/useLayout";
+import { UseLayout } from "hooks/UseLayout";
 import { getDayInSpanish } from 'utils/util';
 import { Page } from "components/Shared/Page";
 import { useNavigate } from "react-router-dom";
@@ -17,13 +17,13 @@ import { ScheduleDefaultValues, ScheduleSchema } from "./ScheduleSchema";
 import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
 import { TimePickerField } from 'components/DateTimePickers/TimePickerField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { usePutSchedule } from "hooks/api-basereservation/schedule/usePutSchedule";
+import { UsePutSchedule } from "hooks/api-basereservation/schedule/UsePutSchedule";
 import { ScheduleDeleteModalConfirmation } from './ScheduleDeleteModalConfirmation';
-import { usePostSchedule } from "hooks/api-basereservation/schedule/usePostSchedule";
+import { UsePostSchedule } from "hooks/api-basereservation/schedule/UsePostSchedule";
 
 export const ScheduleNewEdit = ({ scheduleData }: { scheduleData: ScheduleRequest | undefined }) => {
     const navigate = useNavigate();
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
     const [loading, setLoading] = useState(false);
@@ -55,7 +55,7 @@ export const ScheduleNewEdit = ({ scheduleData }: { scheduleData: ScheduleReques
         formState: { errors },
     } = formMethods;
 
-    const { mutate: postSchedule } = usePostSchedule({
+    const { mutate: postSchedule } = UsePostSchedule({
         onSuccess() {
             setSnackbarMessage('Horario creado correctamente');
             navigate('/General/Horario');
@@ -68,7 +68,7 @@ export const ScheduleNewEdit = ({ scheduleData }: { scheduleData: ScheduleReques
         }
     })
 
-    const { mutate: putSchedule } = usePutSchedule({
+    const { mutate: putSchedule } = UsePutSchedule({
         onSuccess() {
             setSnackbarMessage('Horario actualizado correctamente');
             navigate('/General/Horario');

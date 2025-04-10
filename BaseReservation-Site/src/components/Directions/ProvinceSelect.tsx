@@ -3,7 +3,7 @@ import { useSnackbar } from "stores/useSnackbar"
 import { Province } from "types/api-basereservation"
 import { ErrorProcess } from "components/Error/ErrorProcess"
 import { InputLabel, MenuItem, Select, Stack } from "@mui/material"
-import { useGetProvinces } from "hooks/api-basereservation/useGetProvinces"
+import { UseGetProvinces } from "hooks/api-basereservation/UseGetProvinces"
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess"
 
 interface ProvinceSelectProps {
@@ -14,7 +14,7 @@ interface ProvinceSelectProps {
 export const ProvinceSelect = ({ selectedProvince, onProvinceChange }: ProvinceSelectProps) => {
     const [provinces, setProvinces] = useState<Array<Province>>([])
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
-    const { data: provinceItemsQuery, isError, isPending, error } = useGetProvinces()
+    const { data: provinceItemsQuery, isError, isPending, error } = UseGetProvinces()
 
     useEffect(() => {
         if (provinceItemsQuery) {

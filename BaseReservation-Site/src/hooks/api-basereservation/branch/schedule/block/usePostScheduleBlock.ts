@@ -1,10 +1,10 @@
 import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 import { BaseReservationErrorDetails, BranchScheduleBlock, BranchScheduleBlockRequest } from "types/api-basereservation";
 
-interface usePostScheduleBlockProps {
+interface UsePostScheduleBlockProps {
     onSuccess?: (
         data: BranchScheduleBlock,
         variables: BranchScheduleBlockRequest
@@ -20,15 +20,15 @@ interface usePostScheduleBlockProps {
     ) => void
 }
 
-export const usePostScheduleBlock = ({
+export const UsePostScheduleBlock = ({
     onSuccess,
     onError,
     onSettled
-}: usePostScheduleBlockProps) => {
+}: UsePostScheduleBlockProps) => {
     const path = `/api/BranchScheduleBlock`;
     const method = 'post';
 
-    const postScheduleBlock = useTypedApiClientBS({ path, method })
+    const postScheduleBlock = UseTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const createScheduleBlocksMutation = useMutation({

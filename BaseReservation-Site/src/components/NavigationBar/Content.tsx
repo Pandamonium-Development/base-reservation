@@ -1,5 +1,5 @@
 import { map, startsWith } from "lodash";
-import { useLayout } from "hooks/useLayout"
+import { UseLayout } from "hooks/UseLayout"
 import { useNavigate } from "react-router-dom";
 import ChevronDown from 'assets/chevron-down.svg'
 import { NAVIGATION_BAR_WIDTH } from "./NavigationBar";
@@ -8,7 +8,7 @@ import { SnackbarState, useSideNavCollapseStore } from "stores/useSideNavCollaps
 import { Box, Collapse, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material"
 
 export const Content = () => {
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
     const navigate = useNavigate();
     const openCollapse = useSideNavCollapseStore((state) => state)
     const setOpenCollapse = useSideNavCollapseStore((state) => state.setOpen)
@@ -118,7 +118,7 @@ export const Content = () => {
                                                         }
                                                     }}
                                                     selected={
-                                                        startsWith(location.pathname, childRoute.path) || checkLocation(childRoute.associatedPageUrls)
+                                                        startsWith(location.pathname, childRoute.path) ?? checkLocation(childRoute.associatedPageUrls)
                                                     }
                                                 >
                                                     <ListItemIcon

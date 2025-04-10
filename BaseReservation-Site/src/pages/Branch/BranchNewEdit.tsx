@@ -1,5 +1,5 @@
 import { isEmpty, isNil } from "lodash";
-import { useLayout } from "hooks/useLayout";
+import { UseLayout } from "hooks/UseLayout";
 import { Page } from "components/Shared/Page";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "stores/useSnackbar";
@@ -15,14 +15,14 @@ import { DistrictSelect } from "components/Directions/DistrictSelect";
 import { ProvinceSelect } from "components/Directions/ProvinceSelect";
 import { applyPhoneMask, isPresent, removePhoneMask } from "utils/util";
 import { FormFieldErrorMessage } from "components/FormFieldErrorMessage";
-import { usePutBranch } from "hooks/api-basereservation/branch/usePutBranch";
-import { usePostBranch } from "hooks/api-basereservation/branch/usePostBranch";
+import { UsePutBranch } from "hooks/api-basereservation/branch/UsePutBranch";
+import { UsePostBranch } from "hooks/api-basereservation/branch/UsePostBranch";
 import { BaseReservationErrorDetails, Branch } from "types/api-basereservation";
 import { BranchDeleteModalConfirmation } from "./BranchDeleteModalConfirmation";
 
 export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined | null }) => {
     const navigate = useNavigate();
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
     const [loading, setLoading] = useState(false);
@@ -61,7 +61,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
         formState: { errors },
     } = formMethods;
 
-    const { mutate: postBranch } = usePostBranch({
+    const { mutate: postBranch } = UsePostBranch({
         onSuccess() {
             setSnackbarMessage('Sucursal creada correctamente');
             navigate('/Sucursal');
@@ -74,7 +74,7 @@ export const BranchNewEdit = ({ branchData }: { branchData: Branch | undefined |
         }
     })
 
-    const { mutate: putBranch } = usePutBranch({
+    const { mutate: putBranch } = UsePutBranch({
         onSuccess() {
             setSnackbarMessage('Sucursal actualizada correctamente');
             navigate('/Sucursal');

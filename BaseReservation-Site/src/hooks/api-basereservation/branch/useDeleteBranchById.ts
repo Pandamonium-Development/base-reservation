@@ -2,9 +2,9 @@ import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BaseReservationErrorDetails } from "types/api-basereservation";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 
-interface useDeleteBranchProps {
+interface UseDeleteBranchProps {
     onSuccess?: (
         data: boolean,
         variables: number
@@ -20,15 +20,15 @@ interface useDeleteBranchProps {
     ) => void
 }
 
-export const useDeleteBranch = ({
+export const UseDeleteBranch = ({
     onSuccess,
     onError,
     onSettled
-}: useDeleteBranchProps) => {
+}: UseDeleteBranchProps) => {
     const path = '/api/Branch/{branchId}';
     const method = 'delete';
 
-    const deleteBranch = useTypedApiClientBS({ path, method })
+    const deleteBranch = UseTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const deleteBranchMutation = useMutation({

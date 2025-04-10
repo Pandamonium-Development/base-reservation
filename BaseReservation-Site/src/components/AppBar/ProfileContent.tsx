@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { useLayout } from "hooks/useLayout";
+import { UseLayout } from "hooks/UseLayout";
 import { useState, MouseEvent } from "react";
 import { useAuth } from "contexts/AuthContext";
 import { Avatar, Box, Divider, Menu, MenuItem, SxProps, Theme, Typography } from "@mui/material";
@@ -11,7 +11,7 @@ const commonSxMenuItemProps: SxProps<Theme> = {
 }
 
 export const ProfileContent = () => {
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
     const { logout } = useAuth();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [openMenu, setOpenMenu] = useState(false);

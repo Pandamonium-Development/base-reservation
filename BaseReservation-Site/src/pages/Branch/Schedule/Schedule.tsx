@@ -8,7 +8,7 @@ import { ScheduleTable } from "./ScheduleTable";
 import { useSnackbar } from "stores/useSnackbar";
 import { PageHeader } from "components/Shared/PageHeader";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useGetBranchById } from "hooks/api-basereservation/branch/useGetBranchById";
+import { UseGetBranchById } from "hooks/api-basereservation/branch/UseGetBranchById";
 import { CircularLoadingProgress } from "components/LoadingProgress/CircularLoadingProcess";
 import { ErrorProcess } from "components/Error/ErrorProcess";
 
@@ -18,7 +18,7 @@ export const Schedule = () => {
 
     const setSnackbarMessage = useSnackbar((state) => state.setMessage);
 
-    const { data, isLoading, isError, error } = useGetBranchById(branchId);
+    const { data, isLoading, isError, error } = UseGetBranchById(branchId);
     const [loading, setLoading] = useState<boolean>(true);
     const isValidBranchId = isNil(branchId) || !isNil(branchId) && !isNaN(Number(branchId));
 

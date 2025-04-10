@@ -1,4 +1,4 @@
-import { useLayout } from "hooks/useLayout"
+import { UseLayout } from "hooks/UseLayout"
 import { Box, Button, Stack } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -8,7 +8,7 @@ interface FormButtonsProps {
 }
 
 export const FormButtons = ({ backPath, loadingIndicator }: FormButtonsProps) => {
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
 
     if (isMobile) {
         return (

@@ -2,9 +2,9 @@ import { transformErrorKeys } from "utils/util";
 import { ApiError } from "openapi-typescript-fetch";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BaseReservationErrorDetails } from "types/api-basereservation";
-import { castRequestBody, useTypedApiClientBS } from "hooks/useTypedApiClientBS";
+import { castRequestBody, UseTypedApiClientBS } from "hooks/UseTypedApiClientBS";
 
-interface useDeleteScheduleBlockProps {
+interface UseDeleteScheduleBlockProps {
     onSuccess?: (
         data: boolean,
         variables: number
@@ -20,15 +20,15 @@ interface useDeleteScheduleBlockProps {
     ) => void
 }
 
-export const useDeleteScheduleBlock = ({
+export const UseDeleteScheduleBlock = ({
     onSuccess,
     onError,
     onSettled
-}: useDeleteScheduleBlockProps) => {
+}: UseDeleteScheduleBlockProps) => {
     const path = '/api/BranchScheduleBlock/{blockId}';
     const method = 'delete';
 
-    const deleteBranchScheduleBlcok = useTypedApiClientBS({ path, method })
+    const deleteBranchScheduleBlcok = UseTypedApiClientBS({ path, method })
     const queryClient = useQueryClient();
 
     const deleteBranchScheduleBlockMutation = useMutation({

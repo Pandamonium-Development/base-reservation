@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react"
 import { Content } from "./Content"
-import { useLayout } from "hooks/useLayout"
+import { UseLayout } from "hooks/UseLayout"
 import { useNavBar } from "stores/useNavBar"
 import { APP_BAR_HEIGHT } from "../AppBar/AppBar"
 import { Box, Divider, Drawer } from "@mui/material"
@@ -12,7 +12,7 @@ export const NAVIGATION_BAR_WIDTH = 265
 export const NavigationBar = () => {
     const isOpen = useNavBar((state) => state.isOpen);
     const close = useNavBar((state) => state.close);
-    const { isMobile } = useLayout();
+    const { isMobile } = UseLayout();
 
     const setActiveTab = useSideNavCollapseStore((state) => state.setActiveTab);
 
