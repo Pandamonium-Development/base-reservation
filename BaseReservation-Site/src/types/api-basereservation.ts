@@ -29,3 +29,6 @@ export type BaseReservationErrorDetails = components['schemas']['ErrorDetailsBas
 export type Holiday = components['schemas']['ResponseHolidayDto']
 export type HolidayRequest = components['schemas']['RequestHolidayDto']
 export type MonthName = components['schemas']['MonthApplication']
+
+export type Tax = components['schemas']['ResponseTaxDto']
+export type TaxRequest = components['schemas']['RequestTaxDto']

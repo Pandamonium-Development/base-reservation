@@ -28,9 +28,9 @@ SET IDENTITY_INSERT [Role] OFF;
 SET IDENTITY_INSERT [Tax] ON;
 
 INSERT INTO [Tax]
-(Id, [Name], Rate)
+(Id, [Name], Rate, Created, CreatedBy)
 VALUES
-(1, 'IVA general 13%', 13)
+(1, 'IVA general 13%', 13, GETDATE(), 'admin')
 
 SET IDENTITY_INSERT [Tax] OFF;
 
@@ -746,3 +746,13 @@ INSERT INTO District (Id, CantonId, Name) VALUES
 (488, 83, 'Pocora');
 
 SET IDENTITY_INSERT District OFF;
+
+-- User
+SET IDENTITY_INSERT [User] ON;
+
+INSERT INTO [User]
+(Id, [Name], [LastName], [Email], [Password], [Telephone], [GenderId], [DistrictId], [Birthday], [RoleId], Created, CreatedBy)
+VALUES
+(1, 'Admin', 'Admin', 'adminadmin@reservations.com', '086E6A0FEE982ACF6E44948032FCD362', '88888888', 1, 1, '1990-12-12', 1, '2025-01-01 00:00:00.000', 'admin')
+
+SET IDENTITY_INSERT [User] OFF;

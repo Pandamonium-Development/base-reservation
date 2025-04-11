@@ -58,7 +58,9 @@ public class DtoToModelApplicationProfile : Profile
         CreateMap<RequestVendorDto, Vendor>()
             .IncludeBase<RequestBaseDto, BaseEntity>();
 
-        
+        CreateMap<RequestTaxDto, Tax>()
+            .IncludeBase<RequestBaseDto, BaseEntity>();
+
         CreateMap<RequestTypeServiceDto, TypeService>();
         CreateMap<RequestBranchScheduleDto, BranchSchedule>();
         CreateMap<RequestBranchScheduleBlockDto, BranchScheduleBlock>();
