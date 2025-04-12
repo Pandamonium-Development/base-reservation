@@ -32,3 +32,6 @@ export type MonthName = components['schemas']['MonthApplication']
 
 export type Tax = components['schemas']['ResponseTaxDto']
 export type TaxRequest = components['schemas']['RequestTaxDto']
+
+export type UnitMeasure = components['schemas']['ResponseUnitMeasureDto']
+export type UnitMeasureRequest = components['schemas']['RequestUnitMeasureDto']

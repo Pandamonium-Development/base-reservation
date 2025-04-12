@@ -55,6 +55,15 @@ export const NavBarRoutes: Record<string, NavBarRouteDef> = {
                     '/General/Impuesto/Nuevo',
                     '/General/Impuesto/:taxId',
                 ]
+            },
+            {
+                title: 'Unidad medida',
+                path: '/General/UnidadMedida',
+                icon: null,
+                associatedPageUrls: [
+                    '/General/UnidadMedida/Nuevo',
+                    '/General/UnidadMedida/:unitMeasureId',
+                ]
             }
         ]
     }

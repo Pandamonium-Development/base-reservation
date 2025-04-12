@@ -42,10 +42,10 @@ public class DtoToModelApplicationProfile : Profile
 
         CreateMap<RequestInvoiceDto, Invoice>()
             .IncludeBase<RequestBaseDto, BaseEntity>();
-        
+
         CreateMap<RequestOrderDto, Order>()
             .IncludeBase<RequestBaseDto, BaseEntity>();
-        
+
         CreateMap<RequestReservationDto, Reservation>()
             .IncludeBase<RequestBaseDto, BaseEntity>();
 
@@ -61,11 +61,14 @@ public class DtoToModelApplicationProfile : Profile
         CreateMap<RequestTaxDto, Tax>()
             .IncludeBase<RequestBaseDto, BaseEntity>();
 
+        CreateMap<RequestUnitMeasureDto, UnitMeasure>()
+            .IncludeBase<RequestBaseDto, BaseEntity>();
+
         CreateMap<RequestTypeServiceDto, TypeService>();
         CreateMap<RequestBranchScheduleDto, BranchSchedule>();
         CreateMap<RequestBranchScheduleBlockDto, BranchScheduleBlock>();
         CreateMap<RequestBranchHolidayDto, BranchHoliday>();
-        CreateMap<RequestInvoiceDetailDto,  InvoiceDetail>();
+        CreateMap<RequestInvoiceDetailDto, InvoiceDetail>();
         CreateMap<RequestOrderDetailDto, OrderDetail>();
         CreateMap<RequestReservationDetailDto, ReservationDetail>();
         CreateMap<RequestUserBranchDto, UserBranch>();

@@ -5507,8 +5507,244 @@ export interface paths {
             };
         };
         put?: never;
-        post?: never;
+        /** Create a new unit of measure */
+        post: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path?: never;
+                cookie?: never;
+            };
+            /** @description Unit of measure data transfer object */
+            requestBody?: {
+                content: {
+                    "application/json-patch+json": components["schemas"]["RequestUnitMeasureDto"];
+                    "application/json": components["schemas"]["RequestUnitMeasureDto"];
+                    "text/json": components["schemas"]["RequestUnitMeasureDto"];
+                    "application/*+json": components["schemas"]["RequestUnitMeasureDto"];
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseUnitMeasureDto"];
+                        "application/json": components["schemas"]["ResponseUnitMeasureDto"];
+                        "text/json": components["schemas"]["ResponseUnitMeasureDto"];
+                    };
+                };
+                /** @description Unprocessable Content */
+                422: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/UnitMeasure/{unitMeasureId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get unit of measure by id */
+        get: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Unit of measure id */
+                    unitMeasureId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseUnitMeasureDto"];
+                        "application/json": components["schemas"]["ResponseUnitMeasureDto"];
+                        "text/json": components["schemas"]["ResponseUnitMeasureDto"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
+        /** Update an existing unit of measure */
+        put: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Unit of measure id */
+                    unitMeasureId: number;
+                };
+                cookie?: never;
+            };
+            /** @description Unit of measure data transfer object */
+            requestBody?: {
+                content: {
+                    "application/json-patch+json": components["schemas"]["RequestUnitMeasureDto"];
+                    "application/json": components["schemas"]["RequestUnitMeasureDto"];
+                    "text/json": components["schemas"]["RequestUnitMeasureDto"];
+                    "application/*+json": components["schemas"]["RequestUnitMeasureDto"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ResponseUnitMeasureDto"];
+                        "application/json": components["schemas"]["ResponseUnitMeasureDto"];
+                        "text/json": components["schemas"]["ResponseUnitMeasureDto"];
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Unprocessable Content */
+                422: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        /** Delete an existing unit of measure */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "x-api-version"?: string;
+                };
+                path: {
+                    /** @description Unit of measure id */
+                    unitMeasureId: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": boolean;
+                        "application/json": boolean;
+                        "text/json": boolean;
+                    };
+                };
+                /** @description Not Found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "application/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                        "text/json": components["schemas"]["ErrorDetailsBaseReservation"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -6329,6 +6565,12 @@ export interface components {
             name?: string | null;
             /** Format: double */
             rate?: number;
+            /** Format: int64 */
+            id?: number;
+        };
+        RequestUnitMeasureDto: {
+            name?: string | null;
+            symbol?: string | null;
             /** Format: int64 */
             id?: number;
         };
