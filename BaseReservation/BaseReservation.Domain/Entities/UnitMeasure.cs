@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BaseReservation.Infrastructure;
 
 [Table("UnitMeasure")]
-public partial class UnitMeasure : BaseSimpleDto
+public partial class UnitMeasure : BaseEntity
 {
     [StringLength(25)]
     public string Name { get; set; } = null!;

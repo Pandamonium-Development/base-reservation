@@ -6,7 +6,8 @@ export type NavRoutes =
     '/General' |
     '/General/Horario' |
     '/General/Feriado' |
-    '/General/Impuesto';
+    '/General/Impuesto' |
+    '/General/UnidadMedida';
 
 export interface NavBarDef {
     path: NavRoutes

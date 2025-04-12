@@ -4,12 +4,14 @@ import { Branch } from "pages/Branch/Branch";
 import { Tax } from "pages/Settings/Tax/Tax";
 import { Holiday } from "pages/Settings/Holiday/Holiday";
 import { Schedule } from "pages/Settings/Schedule/Schedule";
+import { UnitMeasure } from "pages/Settings/UnitMeasure/UnitMeasure";
 import { BranchNewEditWrapper } from "pages/Branch/BranchNewEditWrapper";
 import { TaxNewEditWrapper } from "pages/Settings/Tax/TaxNewEditWrapper";
 import { Schedule as BranchSchedule } from "pages/Branch/Schedule/Schedule";
 import { Block as BranchScheduleBlock } from "pages/Branch/Schedule/Block/Block";
 import { HolidayNewEditWrapper } from "pages/Settings/Holiday/HolidayNewEditWrapper";
 import { ScheduleNewEditWrapper } from "pages/Settings/Schedule/ScheduleNewEditWrapper";
+import { UnitMeasureNewEditWrapper } from "pages/Settings/UnitMeasure/UnitMeasureNewEditWrapper";
 import { ScheduleManagement as BranchScheduleManagement } from "pages/Branch/Schedule/ScheduleManagement";
 import { BlockNewEditWrapper as BranchScheduleBlockNewEditWrapper } from "pages/Branch/Schedule/Block/BlockNewEditWrapper";
 
@@ -103,6 +105,21 @@ export const routesProtected = [
         name: 'EditarImpuesto',
         path: '/General/Impuesto/:taxId',
         element: <TaxNewEditWrapper />
+    },
+    {
+        name: 'UnidadMedida',
+        path: '/General/UnidadMedida',
+        element: <UnitMeasure />
+    },
+    {
+        name: 'CrearUnidadMedida',
+        path: '/General/UnidadMedida/Nuevo',
+        element: <UnitMeasureNewEditWrapper />
+    },
+    {
+        name: 'EditarUnidadMedida',
+        path: '/General/UnidadMedida/:unitMeasureId',
+        element: <UnitMeasureNewEditWrapper />
     }
 ]
 
