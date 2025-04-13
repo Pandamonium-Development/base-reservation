@@ -1,0 +1,9 @@
+{
+    "projectBindings": [
+        {
+            "projectKey": "Pandamonium-Development_base-reservation",
+            "organizationKey": "Pandamonium-Development",
+            "serverId": "SonarCloud"
+        }
+    ]
+}
