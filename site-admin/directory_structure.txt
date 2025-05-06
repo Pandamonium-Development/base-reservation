@@ -1,0 +1,71 @@
+.
+├── public
+│   └── vite.svg
+├── src
+│   ├── api
+│   │   └── base-reservation
+│   ├── assets
+│   │   ├── chevron-down.svg
+│   │   ├── format_list_bulleted.svg
+│   │   ├── NoDataFound.svg
+│   │   ├── painted-wall-background.webp
+│   │   └── react.svg
+│   ├── components
+│   │   ├── AppBar
+│   │   ├── ConfirmModal
+│   │   ├── DateTimePickers
+│   │   ├── Directions
+│   │   ├── Error
+│   │   ├── FormFieldErrorMessage
+│   │   ├── ListView
+│   │   ├── LoadingProgress
+│   │   ├── Misc
+│   │   ├── Modal
+│   │   ├── NavigationBar
+│   │   ├── NoDataIndicator
+│   │   ├── Shared
+│   │   └── Table
+│   ├── contexts
+│   │   └── AuthContext.tsx
+│   ├── hooks
+│   │   ├── api-basereservation
+│   │   ├── UseLayout.ts
+│   │   ├── UseMutationCallbacks.ts
+│   │   └── UseTypedApiClientBS.ts
+│   ├── navigation
+│   │   ├── Navigation.tsx
+│   │   ├── ProtectedLayout.tsx
+│   │   └── ProtectedNavigation.tsx
+│   ├── pages
+│   │   ├── Branch
+│   │   ├── Home
+│   │   ├── Login
+│   │   └── Settings
+│   ├── stores
+│   │   ├── useHeightActiveModalHeader.ts
+│   │   ├── useNavBar.tsx
+│   │   ├── useSideNavCollapseStore.ts
+│   │   ├── useSnackbar.ts
+│   │   └── useToken.ts
+│   ├── types
+│   │   ├── api-basereservation.ts
+│   │   └── nav.ts
+│   ├── utils
+│   │   └── util.ts
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   ├── theme.ts
+│   └── vite-env.d.ts
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+├── structure.txt
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+33 directories, 36 files

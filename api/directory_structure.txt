@@ -1,0 +1,55 @@
+.
+├── BaseReservation.Application
+│   ├── Configuration
+│   ├── Core
+│   ├── Dtos
+│   ├── Enums
+│   ├── Services
+│   ├── Validations
+│   └── BaseReservation.Application.csproj
+├── BaseReservation.Common
+│   ├── Extensions
+│   ├── Helper
+│   └── BaseReservation.Common.csproj
+├── BaseReservation.Database
+│   ├── 01.CLEAN_DATABASE.sql
+│   ├── 02.DEFAULT_INSERTS.sql
+│   └── BaseReservation.Database.csproj
+├── BaseReservation.Domain
+│   ├── Core
+│   ├── Entities
+│   ├── Enums
+│   ├── Exceptions
+│   └── BaseReservation.Domain.csproj
+├── BaseReservation.Infrastructure
+│   ├── Data
+│   ├── Mappings
+│   ├── Migrations
+│   ├── Repositories
+│   └── BaseReservation.Infrastructure.csproj
+├── BaseReservation.Utils
+│   ├── Converter
+│   ├── BaseReservation.Utils.csproj
+│   ├── DateHourManipulation.cs
+│   ├── Hashing.cs
+│   ├── JwtToken.cs
+│   ├── Serialization.cs
+│   └── StringExtension.cs
+├── BaseReservation.WebAPI
+│   ├── Authorization
+│   ├── Configuration
+│   ├── Controllers
+│   ├── Converter
+│   ├── Properties
+│   ├── Swagger
+│   ├── appsettings.Development.json
+│   ├── appsettings.json
+│   ├── BaseReservation.WebAPI.csproj
+│   ├── BaseReservation.WebAPI.http
+│   ├── ErrorDetailsBaseReservation.cs
+│   └── Program.cs
+├── BaseReservation.sln
+├── README.md
+└── structure.txt
+
+31 directories, 22 files

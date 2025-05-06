@@ -1,0 +1,37 @@
+.
+├── api
+│   ├── BaseReservation.Application
+│   ├── BaseReservation.Common
+│   ├── BaseReservation.Database
+│   ├── BaseReservation.Domain
+│   ├── BaseReservation.Infrastructure
+│   ├── BaseReservation.Utils
+│   ├── BaseReservation.WebAPI
+│   ├── BaseReservation.sln
+│   ├── directory_structure.txt
+│   └── README.md
+├── infra
+│   ├── docker-compose.sqlserver.yml
+│   ├── docker-installation-guide.md
+│   └── dokcer-compose-installation-guide.md
+├── site-admin
+│   ├── node_modules
+│   ├── public
+│   ├── src
+│   ├── directory_structure.txt
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.md
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+├── snippets
+│   ├── ConnectionString.txt
+│   └── Database Scaffold.txt
+├── directory_structure.txt
+└── README.md
+
+15 directories, 20 files
