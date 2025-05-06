@@ -11,11 +11,23 @@
 			},
 			"args": [
 				"build",
-				"${workspaceFolder}/BaseReservation/BaseReservation.sln",
+				"${workspaceFolder}/api/BaseReservation.sln",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
 			"problemMatcher": []
 		},
+		{
+			"label": "open-browser",
+			"command": "open",
+			"args": [
+				"http://localhost:5191/swagger"
+			],
+			"type": "process",
+			"dependsOn": [
+				"build"
+			],
+			"problemMatcher": []
+		}
 	]
 }

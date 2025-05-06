@@ -9,8 +9,8 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/BaseReservation/BaseReservation.WebAPI/bin/Debug/net8.0/BaseReservation.WebAPI.dll",
-      "args": ["--urls", "http://localhost:5001"],
+      "program": "${workspaceFolder}/api/BaseReservation.WebAPI/bin/Debug/net9.0/BaseReservation.WebAPI.dll",
+      "args": [],
       "cwd": "${workspaceFolder}",
       "stopAtEntry": false,
       "serverReadyAction": {
@@ -19,8 +19,7 @@
         "uriFormat": "%s/swagger"
       },
       "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://localhost:5191"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"

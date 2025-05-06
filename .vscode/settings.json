@@ -8,17 +8,8 @@
     "files.associations": {
         "*.cshtml": "html"
     },
-    "sonarlint.connectedMode.connections.sonarcloud": [
-        {
-            "organizationKey": "Pandamonium-Development",
-            "token": "d36928aa5623c706192b6050496520d9ce902fef"
-        }
-    ],
     "sonarlint.connectedMode.project": {
         "connectionId": "pandamonium-development",
         "projectKey": "Pandamonium-Development_base-reservation"
     },
-    "sonarlint.ls.analyzeOnSave": true,
-    "sonarlint.ls.java.enabled": true,
-    "sonarlint.ls.enabled": true,
 }
