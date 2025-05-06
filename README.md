@@ -55,16 +55,18 @@ Key architectural patterns:
 
 - [.NET SDK 9](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - [Node.js 22+](https://nodejs.org/)
+- Visual Studio 2022 or Vs Code 
+- SQL Server 2022 or Docker
 - [Yarn](https://yarnpkg.com/) or [Npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (optional)
 - [Docker](https://www.docker.com/) (optional, for DB)
 
 ### API Setup
 
-- [Go to instructions for API]()
+- [Go to instructions for API](https://github.com/Pandamonium-Development/base-reservation/blob/principal/api/README.md)
 
 ### Admin Site Setup
 
-- [Go to instructions for Admin Site]()
+- [Go to instructions for Admin Site](https://github.com/Pandamonium-Development/base-reservation/blob/principal/site-admin/README.md)
 
 ---
 
