@@ -753,6 +753,6 @@ SET IDENTITY_INSERT [User] ON;
 INSERT INTO [User]
 (Id, CardId, [FirstName], [LastName], [Email], [Password], [Telephone], [GenderId], [DistrictId], [Birthday], [RoleId], Created, CreatedBy)
 VALUES
-(1, '123456789' ,'Admin', 'Admin', 'adminadmin@reservations.com', '086E6A0FEE982ACF6E44948032FCD362', '88888888', 1, 1, '1990-12-12', 1, '2025-01-01 00:00:00.000', 'admin')
+(1, '123456789' ,'Admin', 'Admin', 'admin@reservations.com', '086E6A0FEE982ACF6E44948032FCD362', '88888888', 1, 1, '1990-12-12', 1, '2025-01-01 00:00:00.000', 'admin')
 
 SET IDENTITY_INSERT [User] OFF;

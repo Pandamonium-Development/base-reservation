@@ -1,4 +1,4 @@
-import Cookies from 'node_modules/@types/js-cookie';
+import Cookies from 'js-cookie';
 import { UseLayout } from "hooks/UseLayout";
 import { useState, MouseEvent } from "react";
 import { useAuth } from "contexts/AuthContext";

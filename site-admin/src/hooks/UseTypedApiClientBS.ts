@@ -1,4 +1,4 @@
-import Cookies from 'node_modules/@types/js-cookie';
+import Cookies from 'js-cookie';
 import { paths } from "../api/base-reservation/api";
 import { Fetcher, Middleware, type TypedFetch } from "openapi-typescript-fetch";
 

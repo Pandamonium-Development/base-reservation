@@ -1,4 +1,4 @@
-import Cookies from 'node_modules/@types/js-cookie';
+import Cookies from 'js-cookie';
 import { useEffect } from "react";
 import { useAuth } from "contexts/AuthContext"
 import { useSnackbar } from "stores/useSnackbar"

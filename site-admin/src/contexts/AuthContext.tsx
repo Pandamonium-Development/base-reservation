@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
-import Cookies from 'node_modules/@types/js-cookie';
+import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { useSnackbar } from 'stores/useSnackbar';
 import { LoginTypeForm } from 'pages/Login/LoginSchema';
